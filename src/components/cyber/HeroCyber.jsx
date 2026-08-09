@@ -1,6 +1,6 @@
-import { useRef, useState } from "react";
-import { motion, useMotionValue, useSpring, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, FileDown, Code2, Star, Sparkles } from "lucide-react";
+import { useRef, useState, useEffect } from "react";
+import { motion, AnimatePresence, useMotionValue, useSpring, useScroll, useTransform } from "framer-motion";
+import { ArrowRight, FileDown, Code2, Star, Sparkles, Terminal, Atom, Zap, Layers } from "lucide-react";
 import CulturalPatternCanvas from "../CulturalPatternCanvas";
 
 function MagneticButton({ children, className = "", ...props }) {
@@ -79,6 +79,53 @@ function TiltCard({ children, className = "" }) {
   );
 }
 
+const TECH_STACK = [
+  { label: "React 19", icon: Atom },
+  { label: "Vite 8", icon: Zap },
+  { label: "Tailwind v4", icon: Layers },
+  { label: "Framer Motion", icon: Sparkles },
+  { label: "Node.js", icon: Terminal },
+];
+
+function CyclingTechBadge() {
+  const [index, setIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  useEffect(() => {
+    if (isPaused) return;
+    const timer = setInterval(() => {
+      setIndex((prev) => (prev + 1) % TECH_STACK.length);
+    }, 2500);
+    return () => clearInterval(timer);
+  }, [isPaused]);
+
+  const CurrentIcon = TECH_STACK[index].icon;
+
+  return (
+    <div
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      className="glass-panel noise-overlay absolute -top-3 -left-3 flex items-center gap-1.5 px-3.5 py-2 rounded-2xl shadow-xl border border-cyan-400/30 bg-[#0b0f17]/90 backdrop-blur-md animate-float-chip cursor-pointer select-none"
+    >
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={TECH_STACK[index].label}
+          initial={{ y: 8, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: -8, opacity: 0 }}
+          transition={{ duration: 0.35, ease: "easeInOut" }}
+          className="flex items-center gap-1.5"
+        >
+          <CurrentIcon className="h-4 w-4 text-cyan-300 fill-cyan-300/30" />
+          <span className="font-mono text-xs text-white/90 font-medium whitespace-nowrap">
+            {TECH_STACK[index].label}
+          </span>
+        </motion.div>
+      </AnimatePresence>
+    </div>
+  );
+}
+
 export default function HeroCyber({ culturalTheme = "dumbara" }) {
   const { scrollY } = useScroll();
 
@@ -92,12 +139,6 @@ export default function HeroCyber({ culturalTheme = "dumbara" }) {
   const heroTextY = useTransform(scrollY, [0, 500], [0, 40]);
   const heroTextOpacity = useTransform(scrollY, [0, 500], [1, 0.75]);
 
-  const badges = [
-    { icon: Star, label: "SLIIT '26", position: "-top-3 -left-3", delay: 0 },
-    { icon: Code2, label: "Full-Stack Engineer", position: "-bottom-3 -right-3", delay: 0.15 },
-    { icon: Sparkles, label: "IT Architect", position: "top-1/2 -left-6", delay: 0.3 },
-  ];
-
   return (
     <section
       id="home"
@@ -105,6 +146,9 @@ export default function HeroCyber({ culturalTheme = "dumbara" }) {
     >
       {/* Real-time Procedural HTML5 Canvas Cultural Motif Engine */}
       <CulturalPatternCanvas theme={culturalTheme} />
+
+      {/* Pattern dimming mask overlay behind text column */}
+      <div className="absolute top-0 left-0 bottom-0 w-full max-w-2xl bg-gradient-to-r from-[#0b0f17]/60 via-[#0b0f17]/30 to-transparent dark:from-[#0b0f17]/60 dark:via-[#0b0f17]/30 pointer-events-none z-[1]" />
 
       <div className="absolute -top-40 -left-32 h-96 w-96 rounded-full bg-indigo-500/20 blur-[120px] float-slow pointer-events-none" />
       <div className="absolute bottom-0 right-0 h-[28rem] w-[28rem] rounded-full bg-violet-500/15 blur-[130px] pointer-events-none" />
@@ -127,7 +171,7 @@ export default function HeroCyber({ culturalTheme = "dumbara" }) {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.15 }}
-            className="mt-6 max-w-lg text-lg leading-relaxed text-slate-300"
+            className="mt-8 max-w-lg text-lg leading-relaxed text-slate-300"
           >
             Full-stack engineer crafting fast, precise, and quietly futuristic
             products — fusing modern WebGL architecture with Sri Lankan cultural motifs.
@@ -137,9 +181,9 @@ export default function HeroCyber({ culturalTheme = "dumbara" }) {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3 }}
-            className="mt-10 flex flex-wrap items-center gap-4"
+            className="mt-12 flex flex-wrap items-center gap-4"
           >
-            {/* Primary CTA with Sheen Sweep Animation */}
+            {/* Primary CTA (Gradient Sheen Sweep) */}
             <MagneticButton className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-indigo-500 via-violet-500 to-cyan-500 px-7 py-3.5 text-sm font-medium text-white shadow-[0_0_30px_rgba(99,102,241,0.35)] transition-shadow hover:shadow-[0_0_45px_rgba(99,102,241,0.55)] cursor-pointer">
               <span className="relative z-10 flex items-center gap-2">
                 View My Work
@@ -148,7 +192,8 @@ export default function HeroCyber({ culturalTheme = "dumbara" }) {
               <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out bg-gradient-to-r from-transparent via-white/25 to-transparent pointer-events-none" />
             </MagneticButton>
 
-            <MagneticButton className="glass-panel inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-medium text-slate-200 cursor-pointer">
+            {/* Secondary CTA (Ghost/Outline Style) */}
+            <MagneticButton className="glass-panel inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-medium text-slate-200 border border-slate-300/30 dark:border-white/20 hover:bg-indigo-500/10 hover:border-indigo-500/40 hover:text-cyan-300 transition-all cursor-pointer bg-transparent">
               Get in Touch
             </MagneticButton>
 
@@ -188,20 +233,13 @@ export default function HeroCyber({ culturalTheme = "dumbara" }) {
               <div className="absolute inset-0 bg-gradient-to-t from-[#0b0f17] via-transparent to-transparent opacity-40 group-hover:opacity-10 transition-opacity duration-700" />
             </div>
 
-            {/* Orbiting Glass Chips Around Portrait Frame */}
-            {badges.map(({ icon: Icon, label, position, delay }) => (
-              <motion.div
-                key={label}
-                initial={{ opacity: 0, scale: 0.6, y: 20 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                transition={{ delay: 0.4 + delay, type: "spring", stiffness: 200 }}
-                className={`glass-panel noise-overlay absolute ${position} flex items-center gap-1.5 px-3.5 py-2 rounded-2xl shadow-xl border border-cyan-400/30 bg-[#0b0f17]/90 backdrop-blur-md animate-float-chip`}
-                style={{ animationDelay: `${delay}s` }}
-              >
-                <Icon className="h-4 w-4 text-cyan-300 fill-cyan-300/30" />
-                <span className="font-mono text-xs text-white/90 font-medium">{label}</span>
-              </motion.div>
-            ))}
+            {/* Cycling Tech Stack Badge (Replaces Static SLIIT '26) */}
+            <CyclingTechBadge />
+
+            {/* Orbiting Glass Chip Badge 2 */}
+            <div className="glass-panel noise-overlay absolute -bottom-3 -right-3 p-3.5 rounded-2xl shadow-xl border border-indigo-400/30 bg-[#0b0f17]/90 backdrop-blur-md">
+              <Code2 className="h-5 w-5 text-indigo-300" />
+            </div>
           </TiltCard>
         </motion.div>
       </div>

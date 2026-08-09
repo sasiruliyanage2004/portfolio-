@@ -23,7 +23,7 @@ export default function CulturalPatternCanvas({ theme = "dumbara" }) {
 }
 
 // ------------------------------------------------------------------
-// 1. DUMBARA GEOMETRIC MAT WEAVING CANVAS (ඩම්බර රටා - TAB 1)
+// 1. CURSOR-REACTIVE DUMBARA GEOMETRIC MAT CANVAS (ඩම්බර රටා - TAB 1)
 // ------------------------------------------------------------------
 function DumbaraCanvas() {
   const canvasRef = useRef(null);
@@ -35,12 +35,24 @@ function DumbaraCanvas() {
     let animationFrameId;
     let time = 0;
 
+    // Mouse Tracking with Smooth Lerp
+    let mouse = { x: -1000, y: -1000, targetX: -1000, targetY: -1000 };
+    const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
+
+    const handlePointerMove = (e) => {
+      if (isTouchDevice) return;
+      mouse.targetX = e.clientX;
+      mouse.targetY = e.clientY;
+    };
+
     const handleResize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     };
+
     handleResize();
     window.addEventListener("resize", handleResize);
+    window.addEventListener("pointermove", handlePointerMove, { passive: true });
 
     const render = () => {
       time += 1;
@@ -48,11 +60,31 @@ function DumbaraCanvas() {
       const h = canvas.height;
       ctx.clearRect(0, 0, w, h);
 
-      const isLight = document.documentElement.classList.contains("light-theme");
+      // Lerp mouse position for silky smooth movement
+      mouse.x += (mouse.targetX - mouse.x) * 0.1;
+      mouse.y += (mouse.targetY - mouse.y) * 0.1;
 
+      const isLight = document.documentElement.classList.contains("light-theme");
       const size = 90;
       const cols = Math.ceil(w / size) + 2;
       const rows = Math.ceil(h / size) + 2;
+      const maxDist = 260;
+
+      // Draw Cursor Spotlight Glow Aura
+      if (mouse.x > 0 && mouse.y > 0 && !isTouchDevice) {
+        const glowGrad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, maxDist);
+        if (isLight) {
+          glowGrad.addColorStop(0, "rgba(67, 56, 202, 0.08)");
+          glowGrad.addColorStop(1, "rgba(67, 56, 202, 0)");
+        } else {
+          glowGrad.addColorStop(0, "rgba(6, 182, 212, 0.12)");
+          glowGrad.addColorStop(1, "rgba(6, 182, 212, 0)");
+        }
+        ctx.fillStyle = glowGrad;
+        ctx.beginPath();
+        ctx.arc(mouse.x, mouse.y, maxDist, 0, Math.PI * 2);
+        ctx.fill();
+      }
 
       for (let r = -1; r < rows; r++) {
         for (let c = -1; c < cols; c++) {
@@ -60,33 +92,50 @@ function DumbaraCanvas() {
           const y = r * (size * 0.6);
           const wave = Math.sin(time * 0.02 + (c + r) * 0.5) * 4;
 
+          // Distance-based Cursor Glow & Scale Interpolation
+          const dist = Math.hypot(x - mouse.x, y + wave - mouse.y);
+          const glow = dist < maxDist ? Math.pow(1 - dist / maxDist, 2) : 0;
+          const scale = 1 + glow * 0.10;
+
+          const baseOuterOpacity = isLight ? 0.35 : 0.45;
+          const baseInnerOpacity = isLight ? 0.35 : 0.50;
+          const outerOpacity = Math.min(1, baseOuterOpacity + glow * 0.45);
+          const innerOpacity = Math.min(1, baseInnerOpacity + glow * 0.45);
+
           // Outer Diamond Border
-          ctx.strokeStyle = isLight ? "rgba(67, 56, 202, 0.35)" : "rgba(6, 182, 212, 0.45)";
-          ctx.lineWidth = 1.8;
+          ctx.strokeStyle = isLight
+            ? `rgba(67, 56, 202, ${outerOpacity})`
+            : `rgba(6, 182, 212, ${outerOpacity})`;
+          ctx.lineWidth = 1.8 + glow * 0.8;
           ctx.beginPath();
-          ctx.moveTo(x, y - size / 2 + wave);
-          ctx.lineTo(x + size / 2, y + wave);
-          ctx.lineTo(x, y + size / 2 + wave);
-          ctx.lineTo(x - size / 2, y + wave);
+          ctx.moveTo(x, y - (size / 2) * scale + wave);
+          ctx.lineTo(x + (size / 2) * scale, y + wave);
+          ctx.lineTo(x, y + (size / 2) * scale + wave);
+          ctx.lineTo(x - (size / 2) * scale, y + wave);
           ctx.closePath();
           ctx.stroke();
 
           // Inner Concentric Diamond
-          ctx.strokeStyle = isLight ? "rgba(14, 116, 144, 0.35)" : "rgba(99, 102, 241, 0.50)";
-          ctx.lineWidth = 1.4;
+          ctx.strokeStyle = isLight
+            ? `rgba(14, 116, 144, ${innerOpacity})`
+            : `rgba(99, 102, 241, ${innerOpacity})`;
+          ctx.lineWidth = 1.4 + glow * 0.6;
           ctx.beginPath();
-          ctx.moveTo(x, y - size / 3.5 + wave);
-          ctx.lineTo(x + size / 3.5, y + wave);
-          ctx.lineTo(x, y + size / 3.5 + wave);
-          ctx.lineTo(x - size / 3.5, y + wave);
+          ctx.moveTo(x, y - (size / 3.5) * scale + wave);
+          ctx.lineTo(x + (size / 3.5) * scale, y + wave);
+          ctx.lineTo(x, y + (size / 3.5) * scale + wave);
+          ctx.lineTo(x - (size / 3.5) * scale, y + wave);
           ctx.closePath();
           ctx.stroke();
 
-          // Dumbara Center Dots
+          // Dumbara Center Lotus Dots
           if ((c + r) % 2 === 0) {
-            ctx.fillStyle = isLight ? "rgba(139, 39, 212, 0.50)" : "rgba(6, 182, 212, 0.60)";
+            const dotOpacity = Math.min(1, (isLight ? 0.50 : 0.60) + glow * 0.40);
+            ctx.fillStyle = isLight
+              ? `rgba(139, 39, 212, ${dotOpacity})`
+              : `rgba(6, 182, 212, ${dotOpacity})`;
             ctx.beginPath();
-            ctx.arc(x, y + wave, 4, 0, Math.PI * 2);
+            ctx.arc(x, y + wave, 4 + glow * 2.5, 0, Math.PI * 2);
             ctx.fill();
           }
         }
@@ -99,6 +148,7 @@ function DumbaraCanvas() {
 
     return () => {
       window.removeEventListener("resize", handleResize);
+      window.removeEventListener("pointermove", handlePointerMove);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
@@ -107,7 +157,7 @@ function DumbaraCanvas() {
 }
 
 // ------------------------------------------------------------------
-// 2. LIYAWELA ORGANIC BIO-FLOW VINE CANVAS (ලියවැල - TAB 2)
+// 2. CURSOR-REACTIVE LIYAWELA BIO-FLOW CANVAS (ලියවැල - TAB 2)
 // ------------------------------------------------------------------
 function LiyawelaCanvas() {
   const canvasRef = useRef(null);
@@ -119,12 +169,23 @@ function LiyawelaCanvas() {
     let animationFrameId;
     let time = 0;
 
+    let mouse = { x: -1000, y: -1000, targetX: -1000, targetY: -1000 };
+    const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
+
+    const handlePointerMove = (e) => {
+      if (isTouchDevice) return;
+      mouse.targetX = e.clientX;
+      mouse.targetY = e.clientY;
+    };
+
     const handleResize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     };
+
     handleResize();
     window.addEventListener("resize", handleResize);
+    window.addEventListener("pointermove", handlePointerMove, { passive: true });
 
     const render = () => {
       time += 1;
@@ -132,22 +193,52 @@ function LiyawelaCanvas() {
       const h = canvas.height;
       ctx.clearRect(0, 0, w, h);
 
+      mouse.x += (mouse.targetX - mouse.x) * 0.1;
+      mouse.y += (mouse.targetY - mouse.y) * 0.1;
+
       const isLight = document.documentElement.classList.contains("light-theme");
       const vineCount = 8;
+      const maxDist = 260;
+
+      // Draw Cursor Spotlight Glow Aura
+      if (mouse.x > 0 && mouse.y > 0 && !isTouchDevice) {
+        const glowGrad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, maxDist);
+        if (isLight) {
+          glowGrad.addColorStop(0, "rgba(139, 39, 212, 0.08)");
+          glowGrad.addColorStop(1, "rgba(139, 39, 212, 0)");
+        } else {
+          glowGrad.addColorStop(0, "rgba(168, 85, 247, 0.12)");
+          glowGrad.addColorStop(1, "rgba(168, 85, 247, 0)");
+        }
+        ctx.fillStyle = glowGrad;
+        ctx.beginPath();
+        ctx.arc(mouse.x, mouse.y, maxDist, 0, Math.PI * 2);
+        ctx.fill();
+      }
 
       for (let v = 0; v < vineCount; v++) {
         const baseY = (h / (vineCount + 1)) * (v + 1);
         const speed = 0.012 + v * 0.003;
         const amplitude = 65 + v * 10;
 
-        ctx.lineWidth = 2.5;
-        ctx.strokeStyle = isLight
-          ? v % 2 === 0 ? "rgba(139, 39, 212, 0.45)" : "rgba(14, 116, 144, 0.40)"
-          : v % 2 === 0 ? "rgba(168, 85, 247, 0.65)" : "rgba(6, 182, 212, 0.60)";
-
         ctx.beginPath();
         for (let x = -50; x < w + 50; x += 10) {
           const y = baseY + Math.sin(x * 0.007 + time * speed + v * 1.5) * amplitude;
+
+          // Distance to cursor
+          const dist = Math.hypot(x - mouse.x, y - mouse.y);
+          const glow = dist < maxDist ? Math.pow(1 - dist / maxDist, 2) : 0;
+
+          const baseOpacity = isLight
+            ? (v % 2 === 0 ? 0.45 : 0.40)
+            : (v % 2 === 0 ? 0.65 : 0.60);
+          const opacity = Math.min(1, baseOpacity + glow * 0.35);
+
+          ctx.lineWidth = 2.5 + glow * 2.0;
+          ctx.strokeStyle = isLight
+            ? v % 2 === 0 ? `rgba(139, 39, 212, ${opacity})` : `rgba(14, 116, 144, ${opacity})`
+            : v % 2 === 0 ? `rgba(168, 85, 247, ${opacity})` : `rgba(6, 182, 212, ${opacity})`;
+
           if (x === -50) ctx.moveTo(x, y);
           else ctx.lineTo(x, y);
         }
@@ -158,19 +249,27 @@ function LiyawelaCanvas() {
           const y = baseY + Math.sin(x * 0.007 + time * speed + v * 1.5) * amplitude;
           const leafAngle = Math.cos(x * 0.007 + time * speed) * 1.4;
 
-          const lx = x + Math.cos(leafAngle) * 35;
-          const ly = y + Math.sin(leafAngle) * 35;
+          const dist = Math.hypot(x - mouse.x, y - mouse.y);
+          const glow = dist < maxDist ? Math.pow(1 - dist / maxDist, 2) : 0;
 
-          ctx.strokeStyle = isLight ? "rgba(139, 39, 212, 0.50)" : "rgba(168, 85, 247, 0.70)";
-          ctx.lineWidth = 1.8;
+          const lx = x + Math.cos(leafAngle) * (35 + glow * 8);
+          const ly = y + Math.sin(leafAngle) * (35 + glow * 8);
+
+          const leafOpacity = Math.min(1, (isLight ? 0.50 : 0.70) + glow * 0.30);
+          ctx.strokeStyle = isLight
+            ? `rgba(139, 39, 212, ${leafOpacity})`
+            : `rgba(168, 85, 247, ${leafOpacity})`;
+          ctx.lineWidth = 1.8 + glow * 0.8;
           ctx.beginPath();
           ctx.moveTo(x, y);
           ctx.quadraticCurveTo(x + 20, y - 25, lx, ly);
           ctx.stroke();
 
-          ctx.fillStyle = isLight ? "rgba(14, 116, 144, 0.55)" : "rgba(6, 182, 212, 0.70)";
+          ctx.fillStyle = isLight
+            ? `rgba(14, 116, 144, ${leafOpacity})`
+            : `rgba(6, 182, 212, ${leafOpacity})`;
           ctx.beginPath();
-          ctx.ellipse(lx, ly, 7, 4, leafAngle, 0, Math.PI * 2);
+          ctx.ellipse(lx, ly, 7 + glow * 3, 4 + glow * 2, leafAngle, 0, Math.PI * 2);
           ctx.fill();
         }
       }
@@ -182,6 +281,7 @@ function LiyawelaCanvas() {
 
     return () => {
       window.removeEventListener("resize", handleResize);
+      window.removeEventListener("pointermove", handlePointerMove);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
@@ -190,7 +290,7 @@ function LiyawelaCanvas() {
 }
 
 // ------------------------------------------------------------------
-// 3. PALA PETHI FLORAL PETAL CANVAS (පළා පෙති - TAB 3)
+// 3. CURSOR-REACTIVE PALA PETHI FLORAL CANVAS (පළා පෙති - TAB 3)
 // ------------------------------------------------------------------
 function PalaPethiCanvas() {
   const canvasRef = useRef(null);
@@ -202,12 +302,23 @@ function PalaPethiCanvas() {
     let animationFrameId;
     let time = 0;
 
+    let mouse = { x: -1000, y: -1000, targetX: -1000, targetY: -1000 };
+    const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
+
+    const handlePointerMove = (e) => {
+      if (isTouchDevice) return;
+      mouse.targetX = e.clientX;
+      mouse.targetY = e.clientY;
+    };
+
     const handleResize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     };
+
     handleResize();
     window.addEventListener("resize", handleResize);
+    window.addEventListener("pointermove", handlePointerMove, { passive: true });
 
     const render = () => {
       time += 1;
@@ -215,10 +326,30 @@ function PalaPethiCanvas() {
       const h = canvas.height;
       ctx.clearRect(0, 0, w, h);
 
+      mouse.x += (mouse.targetX - mouse.x) * 0.1;
+      mouse.y += (mouse.targetY - mouse.y) * 0.1;
+
       const isLight = document.documentElement.classList.contains("light-theme");
       const spacing = 100;
       const cols = Math.ceil(w / spacing) + 2;
       const rows = Math.ceil(h / spacing) + 2;
+      const maxDist = 260;
+
+      // Draw Cursor Spotlight Glow Aura
+      if (mouse.x > 0 && mouse.y > 0 && !isTouchDevice) {
+        const glowGrad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, maxDist);
+        if (isLight) {
+          glowGrad.addColorStop(0, "rgba(14, 116, 144, 0.08)");
+          glowGrad.addColorStop(1, "rgba(14, 116, 144, 0)");
+        } else {
+          glowGrad.addColorStop(0, "rgba(20, 184, 166, 0.12)");
+          glowGrad.addColorStop(1, "rgba(20, 184, 166, 0)");
+        }
+        ctx.fillStyle = glowGrad;
+        ctx.beginPath();
+        ctx.arc(mouse.x, mouse.y, maxDist, 0, Math.PI * 2);
+        ctx.fill();
+      }
 
       for (let r = -1; r < rows; r++) {
         for (let c = -1; c < cols; c++) {
@@ -226,9 +357,18 @@ function PalaPethiCanvas() {
           const cy = r * spacing;
           const driftY = Math.sin(time * 0.015 + c * 0.5) * 8;
 
-          ctx.strokeStyle = isLight ? "rgba(14, 116, 144, 0.45)" : "rgba(20, 184, 166, 0.65)";
-          ctx.lineWidth = 2.2;
-          const R = 28;
+          const dist = Math.hypot(cx - mouse.x, cy + driftY - mouse.y);
+          const glow = dist < maxDist ? Math.pow(1 - dist / maxDist, 2) : 0;
+          const scale = 1 + glow * 0.12;
+
+          const basePetalOpacity = isLight ? 0.45 : 0.65;
+          const petalOpacity = Math.min(1, basePetalOpacity + glow * 0.35);
+
+          ctx.strokeStyle = isLight
+            ? `rgba(14, 116, 144, ${petalOpacity})`
+            : `rgba(20, 184, 166, ${petalOpacity})`;
+          ctx.lineWidth = 2.2 + glow * 0.8;
+          const R = 28 * scale;
 
           for (let angle = 0; angle < Math.PI * 2; angle += Math.PI / 2) {
             const px = cx + Math.cos(angle) * (R / 2);
@@ -238,18 +378,27 @@ function PalaPethiCanvas() {
             ctx.arc(px, py, R / 2, angle - Math.PI / 2, angle + Math.PI / 2);
             ctx.stroke();
 
-            ctx.strokeStyle = isLight ? "rgba(180, 83, 9, 0.45)" : "rgba(245, 158, 11, 0.55)";
-            ctx.lineWidth = 1.4;
+            // Inner Petal Layer
+            ctx.strokeStyle = isLight
+              ? `rgba(180, 83, 9, ${petalOpacity * 0.9})`
+              : `rgba(245, 158, 11, ${petalOpacity * 0.9})`;
+            ctx.lineWidth = 1.4 + glow * 0.5;
             ctx.beginPath();
             ctx.arc(px, py, R / 3.5, angle - Math.PI / 2, angle + Math.PI / 2);
             ctx.stroke();
-            ctx.strokeStyle = isLight ? "rgba(14, 116, 144, 0.45)" : "rgba(20, 184, 166, 0.65)";
-            ctx.lineWidth = 2.2;
+            ctx.strokeStyle = isLight
+              ? `rgba(14, 116, 144, ${petalOpacity})`
+              : `rgba(20, 184, 166, ${petalOpacity})`;
+            ctx.lineWidth = 2.2 + glow * 0.8;
           }
 
-          ctx.fillStyle = isLight ? "rgba(180, 83, 9, 0.70)" : "rgba(245, 158, 11, 0.85)";
+          // Center Lotus Seed
+          const seedOpacity = Math.min(1, (isLight ? 0.70 : 0.85) + glow * 0.25);
+          ctx.fillStyle = isLight
+            ? `rgba(180, 83, 9, ${seedOpacity})`
+            : `rgba(245, 158, 11, ${seedOpacity})`;
           ctx.beginPath();
-          ctx.arc(cx, cy + driftY, 4.5, 0, Math.PI * 2);
+          ctx.arc(cx, cy + driftY, 4.5 + glow * 2.5, 0, Math.PI * 2);
           ctx.fill();
         }
       }
@@ -261,6 +410,7 @@ function PalaPethiCanvas() {
 
     return () => {
       window.removeEventListener("resize", handleResize);
+      window.removeEventListener("pointermove", handlePointerMove);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);

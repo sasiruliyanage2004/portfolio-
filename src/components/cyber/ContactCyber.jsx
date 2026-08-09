@@ -121,9 +121,7 @@ export default function ContactCyber() {
   };
 
   return (
-    <section id="contact" className="relative overflow-hidden mesh-bg px-6 pt-36 pb-28 lg:px-10 scroll-mt-24">
-      <div className="absolute left-1/2 top-0 h-72 w-[36rem] -translate-x-1/2 rounded-full bg-indigo-500/15 blur-[120px] pointer-events-none" />
-
+    <section id="contact" className="relative overflow-hidden bg-transparent px-6 pt-36 pb-28 lg:px-10 scroll-mt-24">
       <div className="relative mx-auto max-w-3xl">
         <div className="mb-12 text-center">
           <p className="font-mono text-xs tracking-[0.3em] text-cyan-400/80">GET IN TOUCH</p>

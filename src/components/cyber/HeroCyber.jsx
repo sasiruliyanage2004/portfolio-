@@ -142,16 +142,13 @@ export default function HeroCyber({ culturalTheme = "dumbara" }) {
   return (
     <section
       id="home"
-      className="relative min-h-screen w-full overflow-hidden mesh-bg flex items-center pt-24 sm:pt-28 lg:pt-32 pb-16"
+      className="relative min-h-screen w-full overflow-hidden bg-transparent flex items-center pt-24 sm:pt-28 lg:pt-32 pb-16"
     >
       {/* Real-time Procedural HTML5 Canvas Cultural Motif Engine */}
       <CulturalPatternCanvas theme={culturalTheme} />
 
       {/* Theme-Aware Pattern dimming mask overlay behind text column */}
       <div className="pattern-mask-left absolute top-0 left-0 bottom-0 w-full max-w-2xl pointer-events-none z-[1]" />
-
-      <div className="absolute -top-40 -left-32 h-96 w-96 rounded-full bg-indigo-500/20 blur-[120px] float-slow pointer-events-none" />
-      <div className="absolute bottom-0 right-0 h-[28rem] w-[28rem] rounded-full bg-violet-500/15 blur-[130px] pointer-events-none" />
 
       <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 gap-8 px-6 py-4 sm:py-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:px-10">
         {/* Left Column — Text Intro */}
@@ -219,11 +216,11 @@ export default function HeroCyber({ culturalTheme = "dumbara" }) {
           {/* Soft Outer Embedded Halo Glow Aura */}
           <div className="absolute -inset-2 bg-gradient-to-r from-cyan-500/30 via-indigo-500/30 to-violet-500/30 rounded-[2.2rem] blur-2xl opacity-70 scale-105 pointer-events-none" />
 
-          {/* Main 3D Card Container — Opaque Theme Glass Backing prevents pattern bleeding */}
+          {/* Main 3D Card Container */}
           <TiltCard className="hero-portrait-card noise-overlay relative w-full max-w-[420px] rounded-[2rem] p-4 sm:p-5 shadow-2xl transition-all duration-500">
             <span className="border-beam" aria-hidden="true" />
 
-            {/* Profile Image Frame — Opaque Theme Background & Matching Corner Geometry */}
+            {/* Profile Image Frame */}
             <div className="hero-portrait-frame relative h-[380px] sm:h-[440px] lg:h-[480px] w-full overflow-hidden rounded-[1.5rem] shadow-inner">
               <img
                 src="/profile.png"
@@ -252,9 +249,6 @@ export default function HeroCyber({ culturalTheme = "dumbara" }) {
       >
         SCROLL
       </motion.div>
-
-      {/* Seamless Section Blend Transition into Projects Section */}
-      <div className="hero-bottom-blend" aria-hidden="true" />
     </section>
   );
 }

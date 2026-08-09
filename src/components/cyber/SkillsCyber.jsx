@@ -67,7 +67,7 @@ export default function SkillsCyber() {
   const activeData = GROUPS.find((g) => g.label === activeGroup) || GROUPS[0];
 
   return (
-    <section ref={sectionRef} id="skills" className="relative w-full mesh-bg overflow-hidden py-28 px-6 lg:px-10 scroll-mt-24">
+    <section ref={sectionRef} id="skills" className="relative w-full bg-transparent overflow-hidden py-28 px-6 lg:px-10 scroll-mt-24">
       <motion.div style={{ scale, opacity, y }} className="mx-auto max-w-7xl">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12 gap-6">
           <div>

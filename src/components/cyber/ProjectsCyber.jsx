@@ -173,7 +173,7 @@ export default function ProjectsCyber() {
   }, [cat]);
 
   return (
-    <section id="projects" className="relative overflow-hidden mesh-bg px-6 py-28 lg:px-10 scroll-mt-24">
+    <section id="projects" className="relative overflow-hidden bg-transparent px-6 py-28 lg:px-10 scroll-mt-24">
       <motion.div style={{ scale, opacity, y }} className="mx-auto max-w-7xl">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12 gap-6">
           <div>

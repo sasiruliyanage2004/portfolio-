@@ -10,7 +10,7 @@ import './index.css';
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-[#0b0f17] text-slate-200 font-body selection:bg-indigo-500/30 selection:text-white relative">
+    <div className="min-h-screen mesh-bg text-slate-200 font-body selection:bg-indigo-500/30 selection:text-white relative">
       {/* STITCH Particle Background & Custom Glow Cursor */}
       <ParticleBackground />
       <CustomCursor />
@@ -18,7 +18,7 @@ export default function App() {
       {/* Floating Apple macOS Navigation Dock */}
       <FloatingDockCyber />
 
-      {/* Main Portfolio Page Sections */}
+      {/* Main Portfolio Page Sections — Single Unified Seamless Canvas */}
       <main className="relative z-10 flex flex-col">
         <HeroCyber culturalTheme="dumbara" />
         <ProjectsCyber />

@@ -25,8 +25,8 @@ const TwitterIcon = (props) => (
 
 const SOCIALS = [
   { icon: GithubIcon, href: "https://github.com/sasiruliyanage2004", label: "GitHub" },
-  { icon: LinkedinIcon, href: "#", label: "LinkedIn" },
-  { icon: TwitterIcon, href: "#", label: "Twitter" },
+  { icon: LinkedinIcon, href: "https://www.linkedin.com/in/sasiruliyanage", label: "LinkedIn" },
+  { icon: TwitterIcon, href: "https://github.com/sasiruliyanage2004", label: "Twitter" },
 ];
 
 function MagneticIcon({ icon: Icon, href, label }) {

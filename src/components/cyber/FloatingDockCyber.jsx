@@ -125,14 +125,18 @@ export default function FloatingDockCyber() {
               <FileDown className="h-3.5 w-3.5" />
             </a>
             <a
-              href="#"
+              href="https://github.com/sasiruliyanage2004"
+              target="_blank"
+              rel="noopener noreferrer"
               aria-label="GitHub"
               className="flex h-8 w-8 items-center justify-center rounded-full text-slate-400 transition-colors hover:text-cyan-300 hover:bg-white/10"
             >
               <GithubIcon className="h-3.5 w-3.5" />
             </a>
             <a
-              href="#"
+              href="https://www.linkedin.com/in/sasiruliyanage"
+              target="_blank"
+              rel="noopener noreferrer"
               aria-label="LinkedIn"
               className="flex h-8 w-8 items-center justify-center rounded-full text-slate-400 transition-colors hover:text-cyan-300 hover:bg-white/10"
             >

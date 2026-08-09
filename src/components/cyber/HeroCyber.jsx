@@ -105,7 +105,7 @@ function CyclingTechBadge() {
     <div
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
-      className="glass-panel noise-overlay absolute -top-3 -left-3 flex items-center gap-1.5 px-3.5 py-2 rounded-2xl shadow-xl border border-cyan-400/30 bg-[#0b0f17]/95 dark:bg-[#0b0f17]/95 light-theme:bg-[#F7F5F1] backdrop-blur-md animate-float-chip cursor-pointer select-none z-20"
+      className="glass-panel noise-overlay absolute -top-3 -left-3 flex items-center gap-1.5 px-3.5 py-2 rounded-2xl shadow-xl animate-float-chip cursor-pointer select-none z-20"
     >
       <AnimatePresence mode="wait">
         <motion.div
@@ -117,7 +117,7 @@ function CyclingTechBadge() {
           className="flex items-center gap-1.5"
         >
           <CurrentIcon className="h-4 w-4 text-cyan-400 fill-cyan-400/20" />
-          <span className="font-mono text-xs text-white dark:text-white light-theme:text-slate-900 font-semibold whitespace-nowrap">
+          <span className="font-mono text-xs font-semibold whitespace-nowrap">
             {TECH_STACK[index].label}
           </span>
         </motion.div>
@@ -219,12 +219,12 @@ export default function HeroCyber({ culturalTheme = "dumbara" }) {
           {/* Soft Outer Embedded Halo Glow Aura */}
           <div className="absolute -inset-2 bg-gradient-to-r from-cyan-500/30 via-indigo-500/30 to-violet-500/30 rounded-[2.2rem] blur-2xl opacity-70 scale-105 pointer-events-none" />
 
-          {/* Main 3D Card Container — Opaque Glass Backing prevents pattern bleeding */}
-          <TiltCard className="noise-overlay relative w-full max-w-[420px] rounded-[2rem] p-4 sm:p-5 shadow-2xl border-2 border-white/20 bg-[#0b0f17]/95 dark:bg-[#0b0f17]/95 light-theme:bg-[#F7F5F1]/95 backdrop-blur-2xl transition-all duration-500">
+          {/* Main 3D Card Container — Opaque Theme Glass Backing prevents pattern bleeding */}
+          <TiltCard className="hero-portrait-card noise-overlay relative w-full max-w-[420px] rounded-[2rem] p-4 sm:p-5 shadow-2xl transition-all duration-500">
             <span className="border-beam" aria-hidden="true" />
 
-            {/* Profile Image Frame — Opaque Background & Matching Corner Geometry */}
-            <div className="relative h-[380px] sm:h-[440px] lg:h-[480px] w-full overflow-hidden rounded-[1.5rem] bg-[#0b0f17] dark:bg-[#0b0f17] light-theme:bg-[#F7F5F1] shadow-inner">
+            {/* Profile Image Frame — Opaque Theme Background & Matching Corner Geometry */}
+            <div className="hero-portrait-frame relative h-[380px] sm:h-[440px] lg:h-[480px] w-full overflow-hidden rounded-[1.5rem] shadow-inner">
               <img
                 src="/profile.png"
                 alt="Developer Portrait"
@@ -237,8 +237,8 @@ export default function HeroCyber({ culturalTheme = "dumbara" }) {
             <CyclingTechBadge />
 
             {/* Orbiting Glass Chip Badge 2 */}
-            <div className="glass-panel noise-overlay absolute -bottom-3 -right-3 p-3.5 rounded-2xl shadow-xl border border-indigo-400/30 bg-[#0b0f17]/95 dark:bg-[#0b0f17]/95 light-theme:bg-[#F7F5F1] backdrop-blur-md z-20">
-              <Code2 className="h-5 w-5 text-indigo-300 dark:text-indigo-300 light-theme:text-indigo-600" />
+            <div className="glass-panel noise-overlay absolute -bottom-3 -right-3 p-3.5 rounded-2xl shadow-xl z-20">
+              <Code2 className="h-5 w-5 text-indigo-300" />
             </div>
           </TiltCard>
         </motion.div>

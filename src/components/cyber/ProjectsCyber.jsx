@@ -129,37 +129,37 @@ function Card3D({ project }) {
             {project.blurb}
           </p>
 
-          {/* Featured Bento Hero UI Preview Frame (Rendered on any taller/featured card) */}
+          {/* Featured Bento Hero UI Preview Frame (Theme-Aware) */}
           {isFeatured && (
-            <div className="my-6 rounded-xl border border-white/15 bg-black/50 p-4 font-mono text-xs shadow-inner">
+            <div className="bento-ui-preview-frame my-6 rounded-xl p-4 font-mono text-xs shadow-inner">
               <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-3">
                 <div className="flex items-center gap-2 text-cyan-400 font-semibold">
                   <Activity className="h-4 w-4 animate-pulse text-cyan-300" />
                   <span>Ayurvedic Herbal Portal UI Engine</span>
                 </div>
-                <span className="text-slate-500 text-[10px]">v2.4.0 • ONLINE</span>
+                <span className="text-[10px] opacity-70">v2.4.0 • ONLINE</span>
               </div>
 
               <div className="grid grid-cols-3 gap-3 my-3 text-center">
                 <div className="rounded-lg bg-white/5 p-2.5 border border-white/10">
-                  <div className="text-cyan-300 font-bold text-sm">50+</div>
-                  <div className="text-slate-400 text-[10px] mt-0.5">Herbal Remedies</div>
+                  <div className="text-cyan-400 font-bold text-sm">50+</div>
+                  <div className="text-[10px] opacity-70 mt-0.5">Herbal Remedies</div>
                 </div>
                 <div className="rounded-lg bg-white/5 p-2.5 border border-white/10">
-                  <div className="text-emerald-400 font-bold text-sm">&lt;80ms</div>
-                  <div className="text-slate-400 text-[10px] mt-0.5">Query Latency</div>
+                  <div className="text-emerald-500 font-bold text-sm">&lt;80ms</div>
+                  <div className="text-[10px] opacity-70 mt-0.5">Query Latency</div>
                 </div>
                 <div className="rounded-lg bg-white/5 p-2.5 border border-white/10">
-                  <div className="text-indigo-400 font-bold text-sm">24/7</div>
-                  <div className="text-slate-400 text-[10px] mt-0.5">Doc Booking</div>
+                  <div className="text-indigo-500 font-bold text-sm">24/7</div>
+                  <div className="text-[10px] opacity-70 mt-0.5">Doc Booking</div>
                 </div>
               </div>
 
-              <div className="flex items-center justify-between text-[11px] text-slate-400 pt-1 border-t border-white/5">
+              <div className="flex items-center justify-between text-[11px] opacity-80 pt-1 border-t border-white/10">
                 <span className="flex items-center gap-1">
                   <Database className="h-3 w-3 text-indigo-400" /> MongoDB Atlas Sync
                 </span>
-                <span className="flex items-center gap-1 text-emerald-400">
+                <span className="flex items-center gap-1 text-emerald-500">
                   <ShieldCheck className="h-3 w-3" /> HIPAA Compliant
                 </span>
               </div>
@@ -183,7 +183,7 @@ function Card3D({ project }) {
           <div className="flex items-center gap-5">
             <a
               href={project.demo}
-              className="inline-flex items-center gap-1.5 font-mono text-xs font-bold text-cyan-300 hover:text-white transition-colors"
+              className="inline-flex items-center gap-1.5 font-mono text-xs font-bold text-cyan-400 hover:text-indigo-500 transition-colors"
             >
               Demo <ArrowUpRight className="h-4 w-4" />
             </a>
@@ -191,7 +191,7 @@ function Card3D({ project }) {
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 font-mono text-xs font-bold text-slate-300 hover:text-cyan-300 transition-colors"
+              className="inline-flex items-center gap-1.5 font-mono text-xs font-bold opacity-80 hover:text-cyan-400 transition-colors"
             >
               <GithubIcon className="h-4 w-4" /> Code
             </a>
@@ -222,22 +222,22 @@ export default function ProjectsCyber() {
   return (
     <section id="projects" className="relative overflow-hidden bg-transparent px-6 py-28 lg:px-10 scroll-mt-24">
       <motion.div style={{ scale, y }} className="mx-auto max-w-7xl relative">
-        {/* Section Header with 100% Full Opacity & Dark Aura Patch matching Skills Matrix */}
+        {/* Theme-Aware Section Header */}
         <div className="relative flex flex-col md:flex-row md:items-end md:justify-between mb-12 gap-6">
-          {/* Pitch Black Dark Absorber Aura directly behind section heading to absorb background lines */}
-          <div className="pointer-events-none absolute -top-10 -left-10 w-[550px] h-[180px] bg-[#05080f] rounded-full blur-2xl opacity-100 z-0" />
+          {/* Theme-Aware Absorber Aura directly behind text */}
+          <div className="heading-absorber-aura pointer-events-none absolute -top-10 -left-10 w-[550px] h-[180px] rounded-full blur-2xl z-0" />
 
           <div className="relative z-10">
-            <p className="font-mono text-xs tracking-[0.3em] text-cyan-400 font-extrabold drop-shadow-[0_2px_10px_rgba(0,0,0,1)] uppercase">
+            <p className="font-mono text-xs tracking-[0.3em] text-cyan-400 font-extrabold drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)] uppercase">
               SELECTED WORK
             </p>
-            <h2 className="mt-2 text-5xl font-extrabold text-white sm:text-6xl drop-shadow-[0_4px_25px_rgba(0,0,0,1)]">
+            <h2 className="mt-2 text-5xl font-extrabold text-slate-900 dark:text-white sm:text-6xl drop-shadow-[0_4px_25px_rgba(0,0,0,0.5)]">
               Projects &amp; <span className="text-gradient">Builds</span>
             </h2>
           </div>
 
-          {/* Sliding Category Tab Switcher Indicator */}
-          <div className="relative z-10 flex flex-wrap gap-1 rounded-full border border-white/15 bg-[#0e1422] p-1.5 backdrop-blur-md shadow-lg">
+          {/* Theme-Aware Sliding Category Tab Switcher Indicator */}
+          <div className="theme-switcher-bar relative z-10 flex flex-wrap gap-1 rounded-full p-1.5 backdrop-blur-md shadow-lg border">
             {CATEGORIES.map((c) => (
               <button
                 key={c}
@@ -251,7 +251,7 @@ export default function ProjectsCyber() {
                     transition={{ type: "spring", stiffness: 400, damping: 30 }}
                   />
                 )}
-                <span className={`relative z-10 ${cat === c ? "text-white font-semibold" : "text-slate-400 hover:text-white"}`}>
+                <span className={`relative z-10 ${cat === c ? "text-white font-semibold" : "opacity-70 hover:opacity-100"}`}>
                   {c}
                 </span>
               </button>

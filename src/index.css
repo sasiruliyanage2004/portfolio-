@@ -90,6 +90,31 @@ body.light-theme,
 }
 
 /* ------------------------------------------------------------------
+   HEADING ABSORBER AURA (Theme-Aware)
+   ------------------------------------------------------------------ */
+.heading-absorber-aura {
+  background-color: #05080f;
+  opacity: 0.90;
+}
+.light-theme .heading-absorber-aura {
+  background-color: #F7F5F1 !important;
+  opacity: 0.95 !important;
+}
+
+/* ------------------------------------------------------------------
+   TAB SWITCHER BAR (Theme-Aware)
+   ------------------------------------------------------------------ */
+.theme-switcher-bar {
+  background-color: #0e1422;
+  border-color: rgba(255, 255, 255, 0.15);
+}
+.light-theme .theme-switcher-bar {
+  background-color: #ffffff !important;
+  border-color: rgba(30, 41, 59, 0.15) !important;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08) !important;
+}
+
+/* ------------------------------------------------------------------
    PROJECT CARD HIGH-CONTRAST SOLID BACKING
    ------------------------------------------------------------------ */
 .project-card-obsidian {
@@ -118,7 +143,7 @@ body.light-theme,
 .light-theme .project-card-obsidian {
   background-color: #ffffff !important;
   border: 2px solid rgba(30, 41, 59, 0.18) !important;
-  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.12) !important;
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.08) !important;
 }
 
 .light-theme .project-card-obsidian h3 {
@@ -133,6 +158,49 @@ body.light-theme,
   background-color: #ecfeff !important;
   border: 1px solid rgba(14, 116, 144, 0.3) !important;
   color: #0e7490 !important;
+}
+
+/* Bento Hero UI Preview Frame (Theme-Aware) */
+.bento-ui-preview-frame {
+  background-color: rgba(0, 0, 0, 0.50);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #cbd5e1;
+}
+
+.light-theme .bento-ui-preview-frame {
+  background-color: #f8fafc !important;
+  border: 1px solid rgba(30, 41, 59, 0.15) !important;
+  color: #334155 !important;
+}
+
+.light-theme .bento-ui-preview-frame .border-white\/10 {
+  border-color: rgba(30, 41, 59, 0.12) !important;
+}
+
+.light-theme .bento-ui-preview-frame .bg-white\/5 {
+  background-color: #ffffff !important;
+  border-color: rgba(30, 41, 59, 0.12) !important;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05) !important;
+}
+
+/* Skills Matrix Cards (Theme-Aware) */
+.skill-card-bg {
+  background-color: rgba(11, 15, 23, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.light-theme .skill-card-bg {
+  background-color: #ffffff !important;
+  border: 1px solid rgba(30, 41, 59, 0.15) !important;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08) !important;
+}
+
+.light-theme .skill-card-bg h3 {
+  color: #0f172a !important;
+}
+
+.light-theme .skill-card-bg span {
+  color: #475569 !important;
 }
 
 /* Hero Portrait Card & Frame Theme Overrides */

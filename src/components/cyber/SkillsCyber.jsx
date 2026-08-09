@@ -68,22 +68,22 @@ export default function SkillsCyber() {
   return (
     <section ref={sectionRef} id="skills" className="relative w-full bg-transparent overflow-hidden py-28 px-6 lg:px-10 scroll-mt-24">
       <motion.div style={{ scale, y }} className="mx-auto max-w-7xl relative">
-        {/* Section Header with 100% Full Opacity & Dark Aura Patch matching Projects & Builds */}
+        {/* Theme-Aware Section Header */}
         <div className="relative flex flex-col md:flex-row md:items-end md:justify-between mb-12 gap-6">
-          {/* Pitch Black Dark Absorber Aura directly behind section heading to absorb background lines */}
-          <div className="pointer-events-none absolute -top-10 -left-10 w-[550px] h-[180px] bg-[#05080f] rounded-full blur-2xl opacity-100 z-0" />
+          {/* Theme-Aware Absorber Aura directly behind section heading */}
+          <div className="heading-absorber-aura pointer-events-none absolute -top-10 -left-10 w-[550px] h-[180px] rounded-full blur-2xl z-0" />
 
           <div className="relative z-10">
-            <p className="font-mono text-xs tracking-[0.3em] text-cyan-400 font-extrabold drop-shadow-[0_2px_10px_rgba(0,0,0,1)] uppercase">
+            <p className="font-mono text-xs tracking-[0.3em] text-cyan-400 font-extrabold drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)] uppercase">
               TECHNICAL PROFICIENCY
             </p>
-            <h2 className="mt-2 text-5xl font-extrabold text-white sm:text-6xl drop-shadow-[0_4px_25px_rgba(0,0,0,1)]">
+            <h2 className="mt-2 text-5xl font-extrabold text-slate-900 dark:text-white sm:text-6xl drop-shadow-[0_4px_25px_rgba(0,0,0,0.5)]">
               Skills <span className="text-gradient">Matrix</span>
             </h2>
           </div>
 
-          {/* Sliding Domain Tab Switcher Indicator */}
-          <div className="relative z-10 flex flex-wrap gap-1 rounded-full border border-white/10 bg-[#0e1422] p-1.5 backdrop-blur-md shadow-lg">
+          {/* Theme-Aware Sliding Domain Tab Switcher Indicator */}
+          <div className="theme-switcher-bar relative z-10 flex flex-wrap gap-1 rounded-full p-1.5 backdrop-blur-md shadow-lg border">
             {GROUPS.map((g) => {
               const Icon = g.icon;
               const isActive = activeGroup === g.label;
@@ -100,8 +100,8 @@ export default function SkillsCyber() {
                       transition={{ type: "spring", stiffness: 400, damping: 30 }}
                     />
                   )}
-                  <Icon className={`relative z-10 h-3.5 w-3.5 ${isActive ? "text-white" : "text-slate-400"}`} />
-                  <span className={`relative z-10 ${isActive ? "text-white font-semibold" : "text-slate-400 hover:text-white"}`}>
+                  <Icon className={`relative z-10 h-3.5 w-3.5 ${isActive ? "text-white" : "opacity-70"}`} />
+                  <span className={`relative z-10 ${isActive ? "text-white font-semibold" : "opacity-70 hover:opacity-100"}`}>
                     {g.label}
                   </span>
                 </button>
@@ -110,7 +110,7 @@ export default function SkillsCyber() {
           </div>
         </div>
 
-        {/* Skill Pills with Animated Glowing Progress Bars */}
+        {/* Skill Pills with Animated Glowing Progress Bars (Theme-Aware) */}
         <AnimatePresence mode="wait">
           <motion.div
             key={activeGroup}
@@ -123,17 +123,17 @@ export default function SkillsCyber() {
             {activeData.skills.map((skill) => (
               <div
                 key={skill.name}
-                className="noise-overlay relative flex flex-col justify-between rounded-2xl p-5 border border-white/15 dark:border-white/15 light-theme:border-slate-300/40 bg-[#0b0f17]/92 dark:bg-[#0b0f17]/92 light-theme:bg-[#F7F5F1]/95 backdrop-blur-xl hover:border-cyan-400/50 transition-colors shadow-lg z-10"
+                className="skill-card-bg noise-overlay relative flex flex-col justify-between rounded-2xl p-5 backdrop-blur-xl hover:border-cyan-400/50 transition-colors shadow-lg z-10"
               >
                 <div>
                   <div className="flex items-center justify-between mb-2">
-                    <h3 className="font-semibold text-white text-base">{skill.name}</h3>
-                    <span className="font-mono text-[10px] text-cyan-300 font-medium">{skill.level}%</span>
+                    <h3 className="font-semibold text-base">{skill.name}</h3>
+                    <span className="font-mono text-[10px] text-cyan-500 font-bold">{skill.level}%</span>
                   </div>
-                  <span className="font-mono text-[10px] text-slate-400 block mb-4">{skill.exp}</span>
+                  <span className="font-mono text-[10px] opacity-70 block mb-4">{skill.exp}</span>
                 </div>
 
-                <div className="h-1.5 w-full rounded-full bg-white/10 overflow-hidden">
+                <div className="h-1.5 w-full rounded-full bg-black/10 dark:bg-white/10 overflow-hidden">
                   <motion.div
                     initial={{ width: 0 }}
                     whileInView={{ width: `${skill.level}%` }}

@@ -105,7 +105,7 @@ function CyclingTechBadge() {
     <div
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
-      className="glass-panel noise-overlay absolute -top-3 -left-3 flex items-center gap-1.5 px-3.5 py-2 rounded-2xl shadow-xl border border-cyan-400/30 bg-[#0b0f17]/90 backdrop-blur-md animate-float-chip cursor-pointer select-none"
+      className="glass-panel noise-overlay absolute -top-3 -left-3 flex items-center gap-1.5 px-3.5 py-2 rounded-2xl shadow-xl border border-cyan-400/30 bg-[#0b0f17]/95 dark:bg-[#0b0f17]/95 light-theme:bg-[#F7F5F1] backdrop-blur-md animate-float-chip cursor-pointer select-none z-20"
     >
       <AnimatePresence mode="wait">
         <motion.div
@@ -116,8 +116,8 @@ function CyclingTechBadge() {
           transition={{ duration: 0.35, ease: "easeInOut" }}
           className="flex items-center gap-1.5"
         >
-          <CurrentIcon className="h-4 w-4 text-cyan-300 fill-cyan-300/30" />
-          <span className="font-mono text-xs text-white/90 font-medium whitespace-nowrap">
+          <CurrentIcon className="h-4 w-4 text-cyan-400 fill-cyan-400/20" />
+          <span className="font-mono text-xs text-white dark:text-white light-theme:text-slate-900 font-semibold whitespace-nowrap">
             {TECH_STACK[index].label}
           </span>
         </motion.div>
@@ -216,29 +216,29 @@ export default function HeroCyber({ culturalTheme = "dumbara" }) {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="group relative flex justify-center [perspective:1000px] py-2 px-4"
         >
-          {/* Ambient Glow Aura */}
-          <div className="absolute inset-4 bg-gradient-to-r from-cyan-500/25 via-indigo-500/25 to-blue-500/25 rounded-3xl blur-3xl scale-105 pointer-events-none" />
+          {/* Soft Outer Embedded Halo Glow Aura */}
+          <div className="absolute -inset-2 bg-gradient-to-r from-cyan-500/30 via-indigo-500/30 to-violet-500/30 rounded-[2.2rem] blur-2xl opacity-70 scale-105 pointer-events-none" />
 
-          {/* Main 3D Card Container */}
-          <TiltCard className="glass-panel noise-overlay relative w-full max-w-[420px] rounded-3xl p-3 shadow-2xl border-2 border-white/20 transition-all duration-500">
+          {/* Main 3D Card Container — Opaque Glass Backing prevents pattern bleeding */}
+          <TiltCard className="noise-overlay relative w-full max-w-[420px] rounded-[2rem] p-4 sm:p-5 shadow-2xl border-2 border-white/20 bg-[#0b0f17]/95 dark:bg-[#0b0f17]/95 light-theme:bg-[#F7F5F1]/95 backdrop-blur-2xl transition-all duration-500">
             <span className="border-beam" aria-hidden="true" />
 
-            {/* Profile Image Frame */}
-            <div className="relative h-[380px] sm:h-[440px] lg:h-[480px] w-full overflow-hidden rounded-2xl bg-gradient-to-b from-indigo-950/20 via-cyan-950/20 to-[#0b0f17]">
+            {/* Profile Image Frame — Opaque Background & Matching Corner Geometry */}
+            <div className="relative h-[380px] sm:h-[440px] lg:h-[480px] w-full overflow-hidden rounded-[1.5rem] bg-[#0b0f17] dark:bg-[#0b0f17] light-theme:bg-[#F7F5F1] shadow-inner">
               <img
                 src="/profile.png"
                 alt="Developer Portrait"
                 className="h-full w-full object-cover object-top filter grayscale contrast-110 brightness-115 group-hover:grayscale-0 group-hover:brightness-110 group-hover:scale-105 transition-all duration-700 ease-out"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0b0f17] via-transparent to-transparent opacity-40 group-hover:opacity-10 transition-opacity duration-700" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0b0f17]/80 via-transparent to-transparent opacity-40 group-hover:opacity-10 transition-opacity duration-700" />
             </div>
 
-            {/* Cycling Tech Stack Badge (Replaces Static SLIIT '26) */}
+            {/* Cycling Tech Stack Badge */}
             <CyclingTechBadge />
 
             {/* Orbiting Glass Chip Badge 2 */}
-            <div className="glass-panel noise-overlay absolute -bottom-3 -right-3 p-3.5 rounded-2xl shadow-xl border border-indigo-400/30 bg-[#0b0f17]/90 backdrop-blur-md">
-              <Code2 className="h-5 w-5 text-indigo-300" />
+            <div className="glass-panel noise-overlay absolute -bottom-3 -right-3 p-3.5 rounded-2xl shadow-xl border border-indigo-400/30 bg-[#0b0f17]/95 dark:bg-[#0b0f17]/95 light-theme:bg-[#F7F5F1] backdrop-blur-md z-20">
+              <Code2 className="h-5 w-5 text-indigo-300 dark:text-indigo-300 light-theme:text-indigo-600" />
             </div>
           </TiltCard>
         </motion.div>

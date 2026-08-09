@@ -109,7 +109,7 @@ export default function ContactCyber() {
   };
 
   return (
-    <section id="contact" className="relative overflow-hidden bg-[#0b0f17] px-6 pt-36 pb-28 lg:px-10 scroll-mt-24">
+    <section id="contact" className="relative overflow-hidden mesh-bg px-6 pt-36 pb-28 lg:px-10 scroll-mt-24">
       <div className="absolute left-1/2 top-0 h-72 w-[36rem] -translate-x-1/2 rounded-full bg-indigo-500/15 blur-[120px] pointer-events-none" />
 
       <div className="relative mx-auto max-w-3xl">

@@ -94,7 +94,7 @@ export default function HeroCyber({ culturalTheme = "dumbara" }) {
   return (
     <section
       id="home"
-      className="relative min-h-screen w-full overflow-hidden mesh-bg flex items-center pt-16 sm:pt-20 lg:pt-24"
+      className="relative min-h-screen w-full overflow-hidden mesh-bg flex items-center pt-36 sm:pt-40 lg:pt-44 pb-16"
     >
       {/* Real-time Procedural HTML5 Canvas Cultural Motif Engine */}
       <CulturalPatternCanvas theme={culturalTheme} />
@@ -102,7 +102,7 @@ export default function HeroCyber({ culturalTheme = "dumbara" }) {
       <div className="absolute -top-40 -left-32 h-96 w-96 rounded-full bg-indigo-500/20 blur-[120px] float-slow pointer-events-none" />
       <div className="absolute bottom-0 right-0 h-[28rem] w-[28rem] rounded-full bg-violet-500/15 blur-[130px] pointer-events-none" />
 
-      <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 gap-10 px-6 py-16 sm:py-20 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:px-10">
+      <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 gap-10 px-6 py-8 sm:py-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:px-10">
         {/* Left Column — Text Intro */}
         <motion.div style={{ scale: heroTextScale, y: heroTextY, opacity: heroTextOpacity }}>
           <motion.h1

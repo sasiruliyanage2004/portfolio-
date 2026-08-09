@@ -63,10 +63,10 @@ export default function FloatingDockCyber() {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ type: "spring", stiffness: 300, damping: 26 }}
-      className={`fixed left-1/2 top-8 z-50 flex -translate-x-1/2 items-center gap-1.5 rounded-full border border-white/20 backdrop-blur-xl transition-all duration-500 ${
+      className={`fixed left-1/2 top-6 z-[60] flex -translate-x-1/2 items-center gap-1.5 rounded-full border border-white/20 backdrop-blur-2xl transition-all duration-500 ${
         isScrolled
-          ? "px-3 py-1.5 shadow-[0_12px_40px_rgba(0,0,0,0.85)] bg-[#0b0f17]/95 scale-95"
-          : "px-4 py-2.5 shadow-[0_20px_50px_rgba(0,0,0,0.6)] bg-[#0b0f17]/85 scale-100"
+          ? "px-3 py-1.5 shadow-[0_16px_50px_rgba(0,0,0,0.95)] bg-[#0b0f17]/95 scale-95 border-white/25"
+          : "px-4 py-2.5 shadow-[0_20px_60px_rgba(0,0,0,0.85)] bg-[#0b0f17]/90 scale-100 border-white/20"
       }`}
     >
       {NAV.map((item) => {

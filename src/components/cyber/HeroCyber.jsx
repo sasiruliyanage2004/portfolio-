@@ -104,7 +104,7 @@ function CyclingTechBadge() {
     <div
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
-      className="glass-panel noise-overlay absolute -top-3 -left-3 flex items-center gap-1.5 px-3.5 py-2 rounded-2xl shadow-xl animate-float-chip cursor-pointer select-none z-20"
+      className="glass-panel noise-overlay absolute -top-3 -left-3 flex items-center gap-1.5 px-3.5 py-2 rounded-2xl shadow-xl animate-float-chip cursor-pointer select-none z-20 border border-white/20"
     >
       <AnimatePresence mode="wait">
         <motion.div
@@ -120,6 +120,43 @@ function CyclingTechBadge() {
             {TECH_STACK[index].label}
           </span>
         </motion.div>
+      </AnimatePresence>
+    </div>
+  );
+}
+
+const HERO_STATUSES = [
+  { label: "Available for Hire", icon: "🟢", color: "text-emerald-300" },
+  { label: "Coding: React 19 + Node", icon: "⚡", color: "text-cyan-300" },
+  { label: "50+ Commits This Month", icon: "🚀", color: "text-indigo-300" },
+];
+
+function CyclingStatusBadge() {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((prev) => (prev + 1) % HERO_STATUSES.length);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const current = HERO_STATUSES[index];
+
+  return (
+    <div className="glass-panel noise-overlay absolute -bottom-3 -right-3 flex items-center gap-2 px-3.5 py-2 rounded-2xl shadow-xl z-20 border border-white/20 select-none">
+      <span className="text-xs">{current.icon}</span>
+      <AnimatePresence mode="wait">
+        <motion.span
+          key={current.label}
+          initial={{ y: 6, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: -6, opacity: 0 }}
+          transition={{ duration: 0.3 }}
+          className={`font-mono text-xs font-semibold whitespace-nowrap ${current.color}`}
+        >
+          {current.label}
+        </motion.span>
       </AnimatePresence>
     </div>
   );
@@ -226,10 +263,8 @@ export default function HeroCyber() {
             {/* Cycling Tech Stack Badge */}
             <CyclingTechBadge />
 
-            {/* Orbiting Glass Chip Badge 2 */}
-            <div className="glass-panel noise-overlay absolute -bottom-3 -right-3 p-3.5 rounded-2xl shadow-xl z-20">
-              <Code2 className="h-5 w-5 text-indigo-300" />
-            </div>
+            {/* Orbiting Glass Chip Badge 2 — Live Status Badge */}
+            <CyclingStatusBadge />
           </TiltCard>
         </motion.div>
       </div>

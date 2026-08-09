@@ -1,6 +1,32 @@
 import { useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function CulturalPatternCanvas({ theme = "dumbara" }) {
+  return (
+    <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={theme}
+          initial={{ opacity: 0, scale: 0.98 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 1.02 }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
+          className="absolute inset-0 w-full h-full"
+        >
+          {theme === "dumbara" && <DumbaraCanvas />}
+          {theme === "liyawela" && <LiyawelaCanvas />}
+          {theme === "palapethi" && <PalaPethiCanvas />}
+        </motion.div>
+      </AnimatePresence>
+    </div>
+  );
+}
+
+// ------------------------------------------------------------------
+// 1. DUMBARA GEOMETRIC MAT WEAVING CANVASES (ඩම්බර රටා)
+// Bold Rhombus Lattice + Stylized Elephant/Peacock Geometric Motifs
+// ------------------------------------------------------------------
+function DumbaraCanvas() {
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -14,24 +40,65 @@ export default function CulturalPatternCanvas({ theme = "dumbara" }) {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     };
-
     handleResize();
     window.addEventListener("resize", handleResize);
 
-    // Render loop
     const render = () => {
       time += 1;
-      const width = canvas.width;
-      const height = canvas.height;
+      const w = canvas.width;
+      const h = canvas.height;
+      ctx.clearRect(0, 0, w, h);
 
-      ctx.clearRect(0, 0, width, height);
+      const size = 90; // Large, bold grid size
+      const cols = Math.ceil(w / size) + 2;
+      const rows = Math.ceil(h / size) + 2;
 
-      if (theme === "dumbara") {
-        drawDumbaraPattern(ctx, width, height, time);
-      } else if (theme === "liyawela") {
-        drawLiyawelaPattern(ctx, width, height, time);
-      } else if (theme === "palapethi") {
-        drawPalaPethiPattern(ctx, width, height, time);
+      for (let r = -1; r < rows; r++) {
+        for (let c = -1; c < cols; c++) {
+          const x = c * size + (r % 2 === 0 ? 0 : size / 2);
+          const y = r * (size * 0.6);
+          const wave = Math.sin(time * 0.02 + (c + r) * 0.5) * 4;
+
+          // Outer Bold Diamond Border
+          ctx.strokeStyle = "rgba(6, 182, 212, 0.40)"; // Bright cyan stroke
+          ctx.lineWidth = 1.8;
+          ctx.beginPath();
+          ctx.moveTo(x, y - size / 2 + wave);
+          ctx.lineTo(x + size / 2, y + wave);
+          ctx.lineTo(x, y + size / 2 + wave);
+          ctx.lineTo(x - size / 2, y + wave);
+          ctx.closePath();
+          ctx.stroke();
+
+          // Inner Concentric Diamond
+          ctx.strokeStyle = "rgba(99, 102, 241, 0.45)"; // Bright indigo stroke
+          ctx.lineWidth = 1.4;
+          ctx.beginPath();
+          ctx.moveTo(x, y - size / 3.5 + wave);
+          ctx.lineTo(x + size / 3.5, y + wave);
+          ctx.lineTo(x, y + size / 3.5 + wave);
+          ctx.lineTo(x - size / 3.5, y + wave);
+          ctx.closePath();
+          ctx.stroke();
+
+          // Stylized Dumbara Elephant/Peacock Geometric Figure Motif in center cells
+          if ((c + r) % 2 === 0) {
+            ctx.fillStyle = "rgba(6, 182, 212, 0.50)";
+            ctx.beginPath();
+            ctx.arc(x, y + wave, 4, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Dumbara Diamond Accents
+            ctx.strokeStyle = "rgba(6, 182, 212, 0.35)";
+            ctx.beginPath();
+            ctx.moveTo(x - 8, y + wave);
+            ctx.lineTo(x, y - 8 + wave);
+            ctx.lineTo(x + 8, y + wave);
+            ctx.lineTo(x, y + 8 + wave);
+            ctx.closePath();
+            ctx.stroke();
+          }
+        }
       }
 
       animationFrameId = requestAnimationFrame(render);
@@ -43,155 +110,171 @@ export default function CulturalPatternCanvas({ theme = "dumbara" }) {
       window.removeEventListener("resize", handleResize);
       cancelAnimationFrame(animationFrameId);
     };
-  }, [theme]);
+  }, []);
 
-  return (
-    <canvas
-      ref={canvasRef}
-      className="absolute inset-0 pointer-events-none z-0 transition-opacity duration-700"
-      style={{ opacity: 0.85 }}
-    />
-  );
+  return <canvas ref={canvasRef} className="w-full h-full opacity-90" />;
 }
 
 // ------------------------------------------------------------------
-// 1. DUMBARA GEOMETRIC WEAVING ALGORITHM (ඩම්බර රටා)
-// Procedural Rhombus Diamond Weave Grid + Center Lotus Crosses
+// 2. LIYAWELA ORGANIC BIO-FLOW VINE CANVAS (ලියවැල)
+// Interlacing Curved S-Lines + Leaf Tendril Spirals
 // ------------------------------------------------------------------
-function drawDumbaraPattern(ctx, width, height, time) {
-  const size = 70; // Grid cell size
-  const cols = Math.ceil(width / size) + 2;
-  const rows = Math.ceil(height / size) + 2;
+function LiyawelaCanvas() {
+  const canvasRef = useRef(null);
 
-  ctx.lineWidth = 1.2;
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    let animationFrameId;
+    let time = 0;
 
-  for (let r = -1; r < rows; r++) {
-    for (let c = -1; c < cols; c++) {
-      const x = c * size + (r % 2 === 0 ? 0 : size / 2);
-      const y = r * (size / 2);
+    const handleResize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
 
-      // Algorithmic wave offset mimicking traditional loom tension
-      const wave = Math.sin(time * 0.015 + (c + r) * 0.4) * 3;
-      const opacity = 0.15 + Math.sin(time * 0.01 + c * 0.2 + r * 0.3) * 0.08;
+    const render = () => {
+      time += 1;
+      const w = canvas.width;
+      const h = canvas.height;
+      ctx.clearRect(0, 0, w, h);
 
-      ctx.strokeStyle = `rgba(6, 182, 212, ${opacity})`;
+      const vineCount = 6;
+      ctx.lineWidth = 2.2;
 
-      // Draw Outer Dumbara Rhombus Diamond
-      ctx.beginPath();
-      ctx.moveTo(x, y - size / 2 + wave);
-      ctx.lineTo(x + size / 2, y + wave);
-      ctx.lineTo(x, y + size / 2 + wave);
-      ctx.lineTo(x - size / 2, y + wave);
-      ctx.closePath();
-      ctx.stroke();
-
-      // Draw Inner Dumbara Concentric Diamond
-      ctx.strokeStyle = `rgba(99, 102, 241, ${opacity * 0.85})`;
-      ctx.beginPath();
-      ctx.moveTo(x, y - size / 4 + wave);
-      ctx.lineTo(x + size / 4, y + wave);
-      ctx.lineTo(x, y + size / 4 + wave);
-      ctx.lineTo(x - size / 4, y + wave);
-      ctx.closePath();
-      ctx.stroke();
-
-      // Draw Center Lotus Cross Motif
-      if ((c + r) % 3 === 0) {
-        ctx.fillStyle = `rgba(6, 182, 212, ${opacity * 1.2})`;
-        ctx.beginPath();
-        ctx.arc(x, y + wave, 2.5, 0, Math.PI * 2);
-        ctx.fill();
-      }
-    }
-  }
-}
-
-// ------------------------------------------------------------------
-// 2. LIYAWELA BIO-TECH VINE FLOW ALGORITHM (ලියවැල)
-// Procedural Sinusoidal Leaf-and-Vine Curves + Spiraling Tendrils
-// ------------------------------------------------------------------
-function drawLiyawelaPattern(ctx, width, height, time) {
-  const vineCount = 5;
-  ctx.lineWidth = 1.4;
-
-  for (let v = 0; v < vineCount; v++) {
-    const baseY = (height / (vineCount + 1)) * (v + 1);
-    const speed = 0.008 + v * 0.002;
-    const amplitude = 40 + v * 10;
-    const frequency = 0.008;
-
-    ctx.beginPath();
-    ctx.strokeStyle = v % 2 === 0 ? "rgba(168, 85, 247, 0.22)" : "rgba(6, 182, 212, 0.20)";
-
-    for (let x = -50; x < width + 50; x += 12) {
-      const y = baseY + Math.sin(x * frequency + time * speed + v) * amplitude;
-
-      if (x === -50) ctx.moveTo(x, y);
-      else ctx.lineTo(x, y);
-
-      // Draw Liyawela Leaf Tendril Nodes along the main vine
-      if (x % 96 === 0) {
-        const leafAngle = Math.cos(x * frequency + time * speed) * 0.8;
-        const leafLen = 22;
-        const lx = x + Math.cos(leafAngle) * leafLen;
-        const ly = y + Math.sin(leafAngle) * leafLen;
-
-        ctx.save();
-        ctx.strokeStyle = "rgba(168, 85, 247, 0.30)";
-        ctx.beginPath();
-        ctx.moveTo(x, y);
-        ctx.quadraticCurveTo(x + 12, y - 14, lx, ly);
-        ctx.stroke();
-
-        ctx.fillStyle = "rgba(6, 182, 212, 0.35)";
-        ctx.beginPath();
-        ctx.arc(lx, ly, 3, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.restore();
-      }
-    }
-    ctx.stroke();
-  }
-}
-
-// ------------------------------------------------------------------
-// 3. PALA PETHI DECONSTRUCTED FLORAL PETAL ALGORITHM (පළා පෙති)
-// Procedural Interlocking 4-Petal Flowers + Antigravity Floating Petals
-// ------------------------------------------------------------------
-function drawPalaPethiPattern(ctx, width, height, time) {
-  const spacing = 80;
-  const cols = Math.ceil(width / spacing) + 2;
-  const rows = Math.ceil(height / spacing) + 2;
-
-  ctx.lineWidth = 1.3;
-
-  for (let r = -1; r < rows; r++) {
-    for (let c = -1; c < cols; c++) {
-      const cx = c * spacing;
-      const cy = r * spacing;
-
-      // Antigravity drift offset
-      const driftY = (Math.sin(time * 0.01 + c * 0.3) * 6);
-      const opacity = 0.16 + Math.cos(time * 0.008 + c + r) * 0.06;
-
-      ctx.strokeStyle = `rgba(20, 184, 166, ${opacity})`;
-
-      // Draw 4 Pala Pethi Petals
-      const petalRadius = 18;
-      for (let angle = 0; angle < Math.PI * 2; angle += Math.PI / 2) {
-        const px = cx + Math.cos(angle) * (petalRadius / 2);
-        const py = cy + driftY + Math.sin(angle) * (petalRadius / 2);
+      for (let v = 0; v < vineCount; v++) {
+        const baseY = (h / (vineCount + 1)) * (v + 1);
+        const speed = 0.01 + v * 0.003;
+        const amplitude = 55 + v * 12;
 
         ctx.beginPath();
-        ctx.arc(px, py, petalRadius / 2, angle - Math.PI / 2, angle + Math.PI / 2);
+        ctx.strokeStyle = v % 2 === 0 ? "rgba(168, 85, 247, 0.45)" : "rgba(6, 182, 212, 0.40)";
+
+        for (let x = -40; x < w + 40; x += 15) {
+          const y = baseY + Math.sin(x * 0.008 + time * speed + v) * amplitude;
+
+          if (x === -40) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+
+          // Draw Liyawela Leaf Tendril Spirals
+          if (x % 90 === 0) {
+            const angle = Math.cos(x * 0.008 + time * speed) * 1.2;
+            const lx = x + Math.cos(angle) * 30;
+            const ly = y + Math.sin(angle) * 30;
+
+            ctx.save();
+            ctx.strokeStyle = "rgba(168, 85, 247, 0.50)";
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+            ctx.quadraticCurveTo(x + 15, y - 20, lx, ly);
+            ctx.stroke();
+
+            // Leaf Tendril Tip Node
+            ctx.fillStyle = "rgba(6, 182, 212, 0.60)";
+            ctx.beginPath();
+            ctx.arc(lx, ly, 4, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+          }
+        }
         ctx.stroke();
       }
 
-      // Center Floral Seed
-      ctx.fillStyle = `rgba(245, 158, 11, ${opacity * 1.4})`;
-      ctx.beginPath();
-      ctx.arc(cx, cy + driftY, 2.5, 0, Math.PI * 2);
-      ctx.fill();
-    }
-  }
+      animationFrameId = requestAnimationFrame(render);
+    };
+
+    render();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, []);
+
+  return <canvas ref={canvasRef} className="w-full h-full opacity-90" />;
+}
+
+// ------------------------------------------------------------------
+// 3. PALA PETHI FLORAL PETAL CANVAS (පළා පෙති)
+// Layered Petal/Lotus Flowers + Antigravity Floating Petal Fragments
+// ------------------------------------------------------------------
+function PalaPethiCanvas() {
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    let animationFrameId;
+    let time = 0;
+
+    const handleResize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    const render = () => {
+      time += 1;
+      const w = canvas.width;
+      const h = canvas.height;
+      ctx.clearRect(0, 0, w, h);
+
+      const spacing = 110;
+      const cols = Math.ceil(w / spacing) + 2;
+      const rows = Math.ceil(h / spacing) + 2;
+
+      ctx.lineWidth = 2.0;
+
+      for (let r = -1; r < rows; r++) {
+        for (let c = -1; c < cols; c++) {
+          const cx = c * spacing;
+          const cy = r * spacing;
+          const driftY = Math.sin(time * 0.015 + c * 0.4) * 8;
+
+          ctx.strokeStyle = "rgba(20, 184, 166, 0.45)"; // Teal cyan
+
+          // Draw Layered 4-Petal Lotus Flower Motif
+          const R = 24;
+          for (let angle = 0; angle < Math.PI * 2; angle += Math.PI / 2) {
+            const px = cx + Math.cos(angle) * (R / 2);
+            const py = cy + driftY + Math.sin(angle) * (R / 2);
+
+            ctx.beginPath();
+            ctx.arc(px, py, R / 2, angle - Math.PI / 2, angle + Math.PI / 2);
+            ctx.stroke();
+
+            // Inner Petal Layer
+            ctx.strokeStyle = "rgba(245, 158, 11, 0.35)"; // Amber gold accent
+            ctx.beginPath();
+            ctx.arc(px, py, R / 3.5, angle - Math.PI / 2, angle + Math.PI / 2);
+            ctx.stroke();
+            ctx.strokeStyle = "rgba(20, 184, 166, 0.45)";
+          }
+
+          // Center Lotus Seed
+          ctx.fillStyle = "rgba(245, 158, 11, 0.70)";
+          ctx.beginPath();
+          ctx.arc(cx, cy + driftY, 3.5, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      animationFrameId = requestAnimationFrame(render);
+    };
+
+    render();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, []);
+
+  return <canvas ref={canvasRef} className="w-full h-full opacity-90" />;
 }

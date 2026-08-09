@@ -92,35 +92,39 @@ export default function HeroCyber({ culturalTheme = "dumbara" }) {
   const heroTextY = useTransform(scrollY, [0, 500], [0, 40]);
   const heroTextOpacity = useTransform(scrollY, [0, 500], [1, 0.75]);
 
-  // Theme-specific motif configuration
+  // Dynamic Theme Case Study Configurations
   const themeConfig = {
     dumbara: {
       badge: "[SYSTEM_STATUS: DUMBARA_GEOMETRIC_BLUEPRINT]",
-      title: "Dumbara Geometric Weave",
-      description: "Generative Rhombus Mat Geometry",
+      title: "Dumbara Geometric Mat Weave Algorithm",
+      motif: "18th-Century Sri Lankan Dumbara Weaving Motif",
+      technique: "HTML5 Canvas 2D Procedural Lattice Rendering",
+      algorithmText: "This background pattern is procedurally generated in real-time using HTML5 Canvas 2D vector pathing. Trigonometric sine-wave functions simulate the physical mechanical tension of traditional Dumbara weaving looms at 60fps. Concentric rhombus diamonds and geometric lotus cross motifs are dynamically calculated with zero static image assets.",
       glowColor: "from-cyan-500/25 via-indigo-500/25 to-blue-500/25",
-      algorithmText: "HTML5 Canvas 2D procedural rendering of traditional 18th-century Sri Lankan Dumbara mat weaving geometry. Uses trigonometric sine-wave offsets to mimic algorithmic loom tension.",
     },
     liyawela: {
       badge: "[SYSTEM_STATUS: LIYAWELA_BIOTECH_FLOW]",
-      title: "Liyawela Bio-Tech Flow",
-      description: "Parametric Leaf-and-Vine Curves",
+      title: "Liyawela Bio-Organic Vine Flow Algorithm",
+      motif: "Traditional Sri Lankan Liyawel (Leaf & Vine) Carving",
+      technique: "Parametric Sinusoidal Bezier Curve Math",
+      algorithmText: "This background pattern is procedurally rendered in real-time using parametric sinusoidal Bezier curves and quadratic leaf-tendril node spirals. Employs 60fps fluid wave mathematics to simulate weightless organic energy forms drifting across the screen without scroll latency.",
       glowColor: "from-violet-500/25 via-purple-500/25 to-cyan-500/25",
-      algorithmText: "Procedural sinusoidal curve rendering of traditional Sri Lankan Liyawela (leaf-and-vine) motifs. Employs 60fps parametric wave math to simulate weightless organic energy forms.",
     },
     palapethi: {
       badge: "[SYSTEM_STATUS: PALA_PETHI_DECONSTRUCTED_UI]",
-      title: "Pala Pethi Floral Petals",
-      description: "Interlocking Petal Lattice",
+      title: "Pala Pethi Floral Petal Lattice Algorithm",
+      motif: "Traditional Sri Lankan Pala Pethi (Petal) Border Motif",
+      technique: "Polar Coordinate Dual-Arc Flower Parametrics",
+      algorithmText: "This background pattern is procedurally constructed using polar coordinate transformations and dual-concentric arc pathing. Interlocking 4-petal lotus flower lattices are rendered with an antigravity floating drift calculation at 60fps.",
       glowColor: "from-cyan-500/25 via-teal-500/25 to-indigo-500/25",
-      algorithmText: "Generative rendering of Sri Lankan Pala Pethi (petal) motifs. Interlocking 4-petal floral flowers constructed procedurally with antigravity drift animation.",
     },
   }[culturalTheme] || {
     badge: "[SYSTEM_STATUS: DUMBARA_GEOMETRIC_BLUEPRINT]",
-    title: "Dumbara Geometric Weave",
-    description: "Generative Rhombus Mat Geometry",
+    title: "Dumbara Geometric Mat Weave Algorithm",
+    motif: "Dumbara Mat Weave Motif",
+    technique: "HTML5 Canvas 2D Vector Geometry",
+    algorithmText: "Procedurally generated HTML5 Canvas 2D vector geometry.",
     glowColor: "from-cyan-500/25 via-indigo-500/25 to-violet-500/25",
-    algorithmText: "Procedural HTML5 Canvas 2D vector geometry.",
   };
 
   return (
@@ -155,7 +159,7 @@ export default function HeroCyber({ culturalTheme = "dumbara" }) {
             {/* "HOW IT'S MADE" Micro Case-Study Button */}
             <button
               onClick={() => setShowCaseStudy(true)}
-              className="glass-panel inline-flex items-center gap-1.5 rounded-full px-3 py-2 font-mono text-[10px] text-emerald-300 border border-emerald-400/40 bg-emerald-950/40 hover:bg-emerald-900/50 transition-colors shadow-lg"
+              className="glass-panel inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 font-mono text-[10px] text-emerald-300 border border-emerald-400/40 bg-emerald-950/40 hover:bg-emerald-900/50 transition-all shadow-lg hover:scale-105"
             >
               <Cpu className="h-3 w-3 text-emerald-400" />
               <span>⚡ How It's Made</span>
@@ -269,8 +273,8 @@ export default function HeroCyber({ culturalTheme = "dumbara" }) {
               <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-4">
                 <div className="flex items-center gap-2">
                   <Cpu className="h-5 w-5 text-cyan-400" />
-                  <h3 className="font-mono text-sm font-semibold text-white uppercase tracking-wider">
-                    How It's Made // Cultural Tech Math
+                  <h3 className="font-mono text-xs font-semibold text-white uppercase tracking-wider">
+                    Engineering Case Study // {culturalTheme.toUpperCase()}
                   </h3>
                 </div>
                 <button
@@ -282,22 +286,22 @@ export default function HeroCyber({ culturalTheme = "dumbara" }) {
               </div>
 
               <div className="space-y-4 font-mono text-xs text-slate-300 leading-relaxed">
-                <div className="rounded-xl border border-cyan-500/20 bg-cyan-950/30 p-3">
-                  <span className="text-cyan-300 font-semibold uppercase">{themeConfig.title}</span>
-                  <p className="mt-1 text-[11px] text-slate-300 leading-relaxed">
+                <div className="rounded-xl border border-cyan-500/20 bg-cyan-950/30 p-3.5">
+                  <span className="text-cyan-300 font-semibold uppercase block mb-1">{themeConfig.title}</span>
+                  <p className="text-[11px] text-slate-200 leading-relaxed">
                     {themeConfig.algorithmText}
                   </p>
                 </div>
 
                 <div>
-                  <h4 className="text-white font-semibold mb-1 text-[11px] uppercase tracking-wider text-cyan-400">
-                    // Technical Stack & Optimization
+                  <h4 className="text-white font-semibold mb-2 text-[11px] uppercase tracking-wider text-cyan-400">
+                    // Technical Specifications
                   </h4>
-                  <ul className="list-disc list-inside space-y-1 text-slate-400 text-[11px]">
-                    <li><strong className="text-slate-200">Engine:</strong> React 19 + HTML5 Canvas 2D Context API</li>
-                    <li><strong className="text-slate-200">Math:</strong> Parametric Sine & Cosine Wave Oscillations</li>
-                    <li><strong className="text-slate-200">FPS:</strong> 60fps GPU-accelerated requestAnimationFrame loop</li>
-                    <li><strong className="text-slate-200">Performance:</strong> Dynamic canvas resize handler with zero scroll lag</li>
+                  <ul className="list-disc list-inside space-y-1.5 text-slate-400 text-[11px]">
+                    <li><strong className="text-slate-200">Cultural Motif:</strong> {themeConfig.motif}</li>
+                    <li><strong className="text-slate-200">Technique:</strong> {themeConfig.technique}</li>
+                    <li><strong className="text-slate-200">Engine Stack:</strong> React 19 + HTML5 Canvas 2D Context API</li>
+                    <li><strong className="text-slate-200">Performance:</strong> 60fps GPU-accelerated requestAnimationFrame loop with zero scroll lag</li>
                   </ul>
                 </div>
               </div>
@@ -305,9 +309,9 @@ export default function HeroCyber({ culturalTheme = "dumbara" }) {
               <div className="mt-6 flex justify-end">
                 <button
                   onClick={() => setShowCaseStudy(false)}
-                  className="rounded-full bg-gradient-to-r from-indigo-500 to-cyan-500 px-5 py-2 text-xs font-medium text-white shadow-lg"
+                  className="rounded-full bg-gradient-to-r from-indigo-500 to-cyan-500 px-5 py-2 text-xs font-medium text-white shadow-lg hover:shadow-cyan-500/25 transition-shadow"
                 >
-                  Close Case Study
+                  Close Technical Briefing
                 </button>
               </div>
             </motion.div>

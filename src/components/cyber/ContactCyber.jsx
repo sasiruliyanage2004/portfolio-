@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { AnimatePresence, motion, useMotionValue, useSpring } from "framer-motion";
-import { CheckCircle2, Send, Mail, Phone, MapPin, AlertCircle } from "lucide-react";
+import { CheckCircle2, Send, Mail, Phone, MapPin, AlertCircle, Copy, Check } from "lucide-react";
 
 const GithubIcon = (props) => (
   <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" {...props}>
@@ -17,16 +17,9 @@ const LinkedinIcon = (props) => (
   </svg>
 );
 
-const TwitterIcon = (props) => (
-  <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" {...props}>
-    <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
-  </svg>
-);
-
 const SOCIALS = [
   { icon: GithubIcon, href: "https://github.com/sasiruliyanage2004", label: "GitHub" },
   { icon: LinkedinIcon, href: "https://www.linkedin.com/in/sasiruliyanage", label: "LinkedIn" },
-  { icon: TwitterIcon, href: "https://github.com/sasiruliyanage2004", label: "Twitter" },
 ];
 
 function MagneticIcon({ icon: Icon, href, label }) {
@@ -38,8 +31,8 @@ function MagneticIcon({ icon: Icon, href, label }) {
 
   const handleMove = (e) => {
     const r = ref.current.getBoundingClientRect();
-    x.set((e.clientX - (r.left + r.width / 2)) * 0.4);
-    y.set((e.clientY - (r.top + r.height / 2)) * 0.4);
+    x.set((e.clientX - (r.left + r.width / 2)) * 0.35);
+    y.set((e.clientY - (r.top + r.height / 2)) * 0.35);
   };
   const handleLeave = () => {
     x.set(0);
@@ -56,10 +49,29 @@ function MagneticIcon({ icon: Icon, href, label }) {
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
       style={{ x: sx, y: sy }}
-      className="glass-panel flex h-11 w-11 items-center justify-center rounded-full text-slate-400 transition-colors hover:text-cyan-300"
+      className="glass-panel flex h-11 w-11 items-center justify-center rounded-full text-slate-400 transition-colors hover:text-cyan-300 cursor-pointer"
     >
       <Icon className="h-4 w-4" />
     </motion.a>
+  );
+}
+
+function CopyBadge({ value, icon: Icon, label }) {
+  const [copied, setCopied] = useState(false);
+  const handleCopy = () => {
+    navigator.clipboard.writeText(value);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <button
+      onClick={handleCopy}
+      className="glass-panel inline-flex items-center gap-2 rounded-full px-4 py-2 hover:border-cyan-400/40 hover:text-cyan-300 transition-colors font-mono text-xs cursor-pointer"
+    >
+      {copied ? <Check className="h-3.5 w-3.5 text-emerald-400" /> : <Icon className="h-3.5 w-3.5 text-cyan-400" />}
+      <span>{copied ? "Copied!" : label}</span>
+    </button>
   );
 }
 
@@ -70,7 +82,7 @@ const FIELDS = [
 
 export default function ContactCyber() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [status, setStatus] = useState("idle"); // 'idle' | 'sending' | 'sent' | 'error'
+  const [status, setStatus] = useState("idle");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -119,16 +131,10 @@ export default function ContactCyber() {
             Let's build something <span className="text-gradient">worth shipping</span>
           </h2>
 
-          {/* Quick Direct Contact Badges */}
+          {/* Interactive Copy-to-Clipboard Badges */}
           <div className="mt-6 flex flex-wrap items-center justify-center gap-3 font-mono text-xs text-slate-300">
-            <a href="mailto:liyanagesasiru@gmail.com" className="glass-panel inline-flex items-center gap-2 rounded-full px-4 py-2 hover:border-cyan-400/40 hover:text-cyan-300 transition-colors">
-              <Mail className="h-3.5 w-3.5 text-cyan-400" />
-              liyanagesasiru@gmail.com
-            </a>
-            <a href="tel:+94715700953" className="glass-panel inline-flex items-center gap-2 rounded-full px-4 py-2 hover:border-emerald-400/40 hover:text-emerald-300 transition-colors">
-              <Phone className="h-3.5 w-3.5 text-emerald-400" />
-              +94 71 57 00 953
-            </a>
+            <CopyBadge value="liyanagesasiru@gmail.com" icon={Mail} label="liyanagesasiru@gmail.com" />
+            <CopyBadge value="+94715700953" icon={Phone} label="+94 71 57 00 953" />
             <span className="glass-panel inline-flex items-center gap-2 rounded-full px-4 py-2 text-slate-400">
               <MapPin className="h-3.5 w-3.5 text-indigo-400" />
               Western Province, Sri Lanka
@@ -139,11 +145,12 @@ export default function ContactCyber() {
         <div className="glass-panel noise-overlay relative overflow-hidden rounded-2xl">
           <span className="border-beam" aria-hidden="true" />
 
-          <div className="flex items-center gap-2 border-b border-white/[0.06] px-5 py-3.5">
-            <span className="h-2.5 w-2.5 rounded-full bg-red-400/70" />
-            <span className="h-2.5 w-2.5 rounded-full bg-yellow-400/70" />
-            <span className="h-2.5 w-2.5 rounded-full bg-emerald-400/70" />
-            <span className="ml-3 font-mono text-[11px] text-slate-500">~/contact --new</span>
+          {/* Terminal Window Header */}
+          <div className="flex items-center gap-2 border-b border-white/[0.06] px-5 py-3.5 bg-black/40">
+            <span className="h-2.5 w-2.5 rounded-full bg-red-500/70" />
+            <span className="h-2.5 w-2.5 rounded-full bg-yellow-500/70" />
+            <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/70" />
+            <span className="ml-3 font-mono text-[11px] text-slate-400">~/contact --new</span>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-5 px-6 py-8 sm:px-8">
@@ -151,9 +158,10 @@ export default function ContactCyber() {
               <div key={field.id}>
                 <label
                   htmlFor={field.id}
-                  className="mb-1.5 block font-mono text-xs text-slate-500"
+                  className="mb-1.5 block font-mono text-xs text-slate-400"
                 >
-                  <span className="text-cyan-400">&gt;</span> {field.label}:
+                  <span className="text-cyan-400">$</span> {field.label}:
+                  <span className="caret inline-block w-1.5 h-3 bg-cyan-400 ml-1 translate-y-0.5" />
                 </label>
                 <input
                   id={field.id}
@@ -168,8 +176,9 @@ export default function ContactCyber() {
             ))}
 
             <div>
-              <label htmlFor="message" className="mb-1.5 block font-mono text-xs text-slate-500">
-                <span className="text-cyan-400">&gt;</span> message:
+              <label htmlFor="message" className="mb-1.5 block font-mono text-xs text-slate-400">
+                <span className="text-cyan-400">$</span> message:
+                <span className="caret inline-block w-1.5 h-3 bg-cyan-400 ml-1 translate-y-0.5" />
               </label>
               <textarea
                 id="message"
@@ -185,7 +194,7 @@ export default function ContactCyber() {
             <button
               type="submit"
               disabled={status === "sending"}
-              className="group relative inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-lg bg-gradient-to-r from-indigo-500 via-violet-500 to-cyan-500 px-6 py-3.5 font-mono text-sm font-medium text-white shadow-[0_0_25px_rgba(99,102,241,0.3)] transition-shadow hover:shadow-[0_0_40px_rgba(99,102,241,0.5)] disabled:opacity-70"
+              className="group relative inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-lg bg-gradient-to-r from-indigo-500 via-violet-500 to-cyan-500 px-6 py-3.5 font-mono text-sm font-medium text-white shadow-[0_0_25px_rgba(99,102,241,0.3)] transition-shadow hover:shadow-[0_0_40px_rgba(99,102,241,0.5)] disabled:opacity-70 cursor-pointer"
             >
               {status === "sending" ? (
                 "sending()..."

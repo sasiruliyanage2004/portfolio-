@@ -1,52 +1,52 @@
-import { useRef, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import {
-  Boxes,
-  Cloud,
-  Code2,
-  Database,
-  GitBranch,
-  Layers,
-  Palette,
-  Server,
-  Terminal,
-  Wand2,
-} from "lucide-react";
+import { useState, useRef } from "react";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { Code2, Server, Cloud, Wrench } from "lucide-react";
 
 const GROUPS = [
   {
+    id: "frontend",
     label: "Frontend",
-    accent: "from-indigo-500 to-violet-500",
+    icon: Code2,
     skills: [
-      { name: "React / Next.js", level: 95, years: 5, icon: Code2 },
-      { name: "TypeScript", level: 90, years: 4, icon: Boxes },
-      { name: "Tailwind CSS", level: 92, years: 4, icon: Palette },
-      { name: "Framer Motion", level: 85, years: 3, icon: Wand2 },
+      { name: "React / Next.js", level: 95, exp: "3 yrs exp" },
+      { name: "TypeScript", level: 90, exp: "3 yrs exp" },
+      { name: "Tailwind CSS", level: 95, exp: "3 yrs exp" },
+      { name: "Framer Motion", level: 88, exp: "2 yrs exp" },
+      { name: "Three.js / WebGL", level: 80, exp: "1 yr exp" },
     ],
   },
   {
+    id: "backend",
     label: "Backend",
-    accent: "from-cyan-500 to-indigo-500",
+    icon: Server,
     skills: [
-      { name: "Node.js", level: 88, years: 5, icon: Server },
-      { name: "PostgreSQL", level: 82, years: 4, icon: Database },
-      { name: "GraphQL", level: 78, years: 3, icon: Layers },
+      { name: "Node.js / Express", level: 92, exp: "3 yrs exp" },
+      { name: "Python / FastAPI", level: 85, exp: "2 yrs exp" },
+      { name: "PostgreSQL / Prisma", level: 88, exp: "2 yrs exp" },
+      { name: "MongoDB", level: 90, exp: "3 yrs exp" },
+      { name: "REST & GraphQL APIs", level: 92, exp: "3 yrs exp" },
     ],
   },
   {
+    id: "ai-cloud",
     label: "AI / Cloud",
-    accent: "from-violet-500 to-cyan-500",
+    icon: Cloud,
     skills: [
-      { name: "AWS", level: 80, years: 3, icon: Cloud },
-      { name: "LLM Integration", level: 84, years: 2, icon: Wand2 },
+      { name: "PyTorch & ML Basics", level: 82, exp: "2 yrs exp" },
+      { name: "Firebase & Web3Forms", level: 90, exp: "2 yrs exp" },
+      { name: "Docker / Containers", level: 85, exp: "2 yrs exp" },
+      { name: "Vercel & Netlify CI/CD", level: 95, exp: "3 yrs exp" },
     ],
   },
   {
+    id: "tools",
     label: "Tools",
-    accent: "from-indigo-500 to-cyan-500",
+    icon: Wrench,
     skills: [
-      { name: "Git / CI-CD", level: 90, years: 5, icon: GitBranch },
-      { name: "Docker", level: 76, years: 3, icon: Terminal },
+      { name: "Git / GitHub CLI", level: 95, exp: "4 yrs exp" },
+      { name: "VS Code / Antigravity IDE", level: 98, exp: "4 yrs exp" },
+      { name: "Figma UI/UX", level: 88, exp: "3 yrs exp" },
+      { name: "Postman API Studio", level: 92, exp: "3 yrs exp" },
     ],
   },
 ];
@@ -71,74 +71,76 @@ export default function SkillsCyber() {
       <motion.div style={{ scale, opacity, y }} className="mx-auto max-w-7xl">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12 gap-6">
           <div>
-            <span className="font-mono text-[11px] tracking-widest text-cyan-400 uppercase">
-              // Capabilities
-            </span>
-            <h2 className="mt-2 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-              Skills Matrix
+            <p className="font-mono text-xs tracking-[0.3em] text-cyan-400/80">TECHNICAL PROFICIENCY</p>
+            <h2 className="mt-2 text-4xl font-semibold text-white sm:text-5xl">
+              Skills <span className="text-gradient">Matrix</span>
             </h2>
           </div>
 
-          <div className="flex flex-wrap gap-2">
-            {GROUPS.map((g) => (
-              <button
-                key={g.label}
-                onClick={() => setActiveGroup(g.label)}
-                className={`rounded-full px-4 py-1.5 text-xs font-medium transition-all ${
-                  activeGroup === g.label
-                    ? "bg-gradient-to-r from-indigo-500 to-cyan-500 text-white shadow-lg shadow-cyan-500/20"
-                    : "glass-panel text-slate-400 hover:text-white"
-                }`}
-              >
-                {g.label}
-              </button>
-            ))}
+          {/* Sliding Domain Tab Switcher Indicator */}
+          <div className="relative flex flex-wrap gap-1 rounded-full border border-white/10 bg-white/5 p-1.5 backdrop-blur-md">
+            {GROUPS.map((g) => {
+              const Icon = g.icon;
+              const isActive = activeGroup === g.label;
+              return (
+                <button
+                  key={g.label}
+                  onClick={() => setActiveGroup(g.label)}
+                  className="relative flex items-center gap-2 rounded-full px-4 py-2 font-mono text-xs font-medium transition-colors cursor-pointer"
+                >
+                  {isActive && (
+                    <motion.span
+                      layoutId="activeDomainPill"
+                      className="absolute inset-0 rounded-full bg-gradient-to-r from-indigo-500 to-cyan-500 shadow-md"
+                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                    />
+                  )}
+                  <Icon className={`relative z-10 h-3.5 w-3.5 ${isActive ? "text-white" : "text-slate-400"}`} />
+                  <span className={`relative z-10 ${isActive ? "text-white font-semibold" : "text-slate-400 hover:text-white"}`}>
+                    {g.label}
+                  </span>
+                </button>
+              );
+            })}
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {activeData.skills.map((s, idx) => {
-            const Icon = s.icon;
-            return (
-              <motion.div
-                key={s.name}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: idx * 0.08 }}
-                className="glass-panel noise-overlay relative flex flex-col justify-between rounded-2xl p-6"
+        {/* Skill Pills with Animated Glowing Progress Bars */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeGroup}
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -15 }}
+            transition={{ duration: 0.3 }}
+            className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4"
+          >
+            {activeData.skills.map((skill) => (
+              <div
+                key={skill.name}
+                className="glass-panel noise-overlay relative flex flex-col justify-between rounded-2xl p-5 border border-white/10 hover:border-cyan-400/40 transition-colors"
               >
-                <span className="border-beam" aria-hidden="true" />
                 <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 border border-white/10 text-cyan-300">
-                      <Icon className="h-5 w-5" />
-                    </div>
-                    <span className="font-mono text-[10px] text-slate-400">
-                      {s.years} yrs exp
-                    </span>
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="font-semibold text-white text-base">{skill.name}</h3>
+                    <span className="font-mono text-[10px] text-cyan-300 font-medium">{skill.level}%</span>
                   </div>
-
-                  <h3 className="text-base font-semibold text-white">{s.name}</h3>
+                  <span className="font-mono text-[10px] text-slate-400 block mb-4">{skill.exp}</span>
                 </div>
 
-                <div className="mt-6">
-                  <div className="flex justify-between font-mono text-[10px] text-slate-400 mb-1.5">
-                    <span>Proficiency</span>
-                    <span className="text-cyan-300 font-semibold">{s.level}%</span>
-                  </div>
-                  <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/10">
-                    <motion.div
-                      initial={{ width: 0 }}
-                      animate={{ width: `${s.level}%` }}
-                      transition={{ duration: 0.8, delay: 0.2 + idx * 0.08 }}
-                      className={`h-full rounded-full bg-gradient-to-r ${activeData.accent}`}
-                    />
-                  </div>
+                <div className="h-1.5 w-full rounded-full bg-white/10 overflow-hidden">
+                  <motion.div
+                    initial={{ width: 0 }}
+                    whileInView={{ width: `${skill.level}%` }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1, ease: "easeOut" }}
+                    className="h-full rounded-full bg-gradient-to-r from-indigo-500 via-cyan-400 to-violet-500 shadow-[0_0_10px_rgba(6,182,212,0.6)]"
+                  />
                 </div>
-              </motion.div>
-            );
-          })}
-        </div>
+              </div>
+            ))}
+          </motion.div>
+        </AnimatePresence>
       </motion.div>
     </section>
   );

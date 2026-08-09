@@ -1,21 +1,21 @@
 import { useRef, useState } from "react";
 import { motion, useMotionValue, useSpring, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, FileDown, Code2, Star } from "lucide-react";
+import { ArrowRight, FileDown, Code2, Star, Sparkles } from "lucide-react";
 import CulturalPatternCanvas from "../CulturalPatternCanvas";
 
 function MagneticButton({ children, className = "", ...props }) {
   const ref = useRef(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
-  const springX = useSpring(x, { stiffness: 200, damping: 15, mass: 0.3 });
-  const springY = useSpring(y, { stiffness: 200, damping: 15, mass: 0.3 });
+  const springX = useSpring(x, { stiffness: 300, damping: 20 });
+  const springY = useSpring(y, { stiffness: 300, damping: 20 });
 
   const handleMove = (e) => {
     const rect = ref.current.getBoundingClientRect();
     const relX = e.clientX - (rect.left + rect.width / 2);
     const relY = e.clientY - (rect.top + rect.height / 2);
-    x.set(relX * 0.35);
-    y.set(relY * 0.35);
+    x.set(relX * 0.25);
+    y.set(relY * 0.25);
   };
 
   const handleLeave = () => {
@@ -29,6 +29,7 @@ function MagneticButton({ children, className = "", ...props }) {
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
       style={{ x: springX, y: springY }}
+      whileTap={{ scale: 0.96 }}
       className={className}
       {...props}
     >
@@ -91,6 +92,12 @@ export default function HeroCyber({ culturalTheme = "dumbara" }) {
   const heroTextY = useTransform(scrollY, [0, 500], [0, 40]);
   const heroTextOpacity = useTransform(scrollY, [0, 500], [1, 0.75]);
 
+  const badges = [
+    { icon: Star, label: "SLIIT '26", position: "-top-3 -left-3", delay: 0 },
+    { icon: Code2, label: "Full-Stack Engineer", position: "-bottom-3 -right-3", delay: 0.15 },
+    { icon: Sparkles, label: "IT Architect", position: "top-1/2 -left-6", delay: 0.3 },
+  ];
+
   return (
     <section
       id="home"
@@ -132,12 +139,16 @@ export default function HeroCyber({ culturalTheme = "dumbara" }) {
             transition={{ duration: 0.7, delay: 0.3 }}
             className="mt-10 flex flex-wrap items-center gap-4"
           >
-            <MagneticButton className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-indigo-500 via-violet-500 to-cyan-500 px-7 py-3.5 text-sm font-medium text-white shadow-[0_0_30px_rgba(99,102,241,0.35)] transition-shadow hover:shadow-[0_0_45px_rgba(99,102,241,0.55)]">
-              View My Work
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            {/* Primary CTA with Sheen Sweep Animation */}
+            <MagneticButton className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-indigo-500 via-violet-500 to-cyan-500 px-7 py-3.5 text-sm font-medium text-white shadow-[0_0_30px_rgba(99,102,241,0.35)] transition-shadow hover:shadow-[0_0_45px_rgba(99,102,241,0.55)] cursor-pointer">
+              <span className="relative z-10 flex items-center gap-2">
+                View My Work
+                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1.5" />
+              </span>
+              <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out bg-gradient-to-r from-transparent via-white/25 to-transparent pointer-events-none" />
             </MagneticButton>
 
-            <MagneticButton className="glass-panel inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-medium text-slate-200">
+            <MagneticButton className="glass-panel inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-medium text-slate-200 cursor-pointer">
               Get in Touch
             </MagneticButton>
 
@@ -177,15 +188,20 @@ export default function HeroCyber({ culturalTheme = "dumbara" }) {
               <div className="absolute inset-0 bg-gradient-to-t from-[#0b0f17] via-transparent to-transparent opacity-40 group-hover:opacity-10 transition-opacity duration-700" />
             </div>
 
-            {/* Floating Badge 1 */}
-            <div className="glass-panel noise-overlay absolute -top-3 -right-3 p-3.5 rounded-2xl shadow-xl border border-cyan-400/30 bg-[#0b0f17]/90 backdrop-blur-md">
-              <Star className="h-5 w-5 text-cyan-300 fill-cyan-300/30" />
-            </div>
-
-            {/* Floating Badge 2 */}
-            <div className="glass-panel noise-overlay absolute -bottom-3 -left-3 p-3.5 rounded-2xl shadow-xl border border-indigo-400/30 bg-[#0b0f17]/90 backdrop-blur-md">
-              <Code2 className="h-5 w-5 text-indigo-300" />
-            </div>
+            {/* Orbiting Glass Chips Around Portrait Frame */}
+            {badges.map(({ icon: Icon, label, position, delay }) => (
+              <motion.div
+                key={label}
+                initial={{ opacity: 0, scale: 0.6, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ delay: 0.4 + delay, type: "spring", stiffness: 200 }}
+                className={`glass-panel noise-overlay absolute ${position} flex items-center gap-1.5 px-3.5 py-2 rounded-2xl shadow-xl border border-cyan-400/30 bg-[#0b0f17]/90 backdrop-blur-md animate-float-chip`}
+                style={{ animationDelay: `${delay}s` }}
+              >
+                <Icon className="h-4 w-4 text-cyan-300 fill-cyan-300/30" />
+                <span className="font-mono text-xs text-white/90 font-medium">{label}</span>
+              </motion.div>
+            ))}
           </TiltCard>
         </motion.div>
       </div>

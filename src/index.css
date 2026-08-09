@@ -168,7 +168,7 @@ body.light-theme,
   color: #fff;
 }
 
-/* Accessible focus ring — never remove outline without replacing it */
+/* Accessible focus ring */
 :focus-visible {
   outline: 2px solid var(--cyan);
   outline-offset: 3px;
@@ -209,7 +209,7 @@ body.light-theme,
 }
 
 /* ------------------------------------------------------------------
-   BORDER BEAM
+   BORDER BEAM LIGHTING
    ------------------------------------------------------------------ */
 .border-beam {
   position: absolute;
@@ -243,8 +243,13 @@ body.light-theme,
   100% { transform: rotate(360deg); }
 }
 
+@keyframes border-spin {
+  to { transform: rotate(360deg); }
+}
+.animate-border-spin { animation: border-spin 3.5s linear infinite; }
+
 /* ------------------------------------------------------------------
-   MESH GRADIENT BACKGROUND
+   MESH GRADIENT & ANIMATED TEXT GRADIENT
    ------------------------------------------------------------------ */
 .mesh-bg {
   background:
@@ -252,6 +257,21 @@ body.light-theme,
     radial-gradient(at 90% 20%, rgba(6, 182, 212, 0.12) 0px, transparent 50%),
     radial-gradient(at 50% 80%, rgba(168, 85, 247, 0.08) 0px, transparent 50%),
     var(--bg-obsidian);
+}
+
+@keyframes gradient-x {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+.animate-gradient-x { animation: gradient-x 6s ease infinite; }
+
+.text-gradient {
+  background: linear-gradient(100deg, var(--indigo) 0%, var(--cyan) 50%, var(--violet) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradient-x 6s ease infinite;
 }
 
 /* ------------------------------------------------------------------
@@ -269,12 +289,11 @@ body.light-theme,
 }
 .float-slow { animation: float-slow 6s ease-in-out infinite; }
 
-.text-gradient {
-  background: linear-gradient(100deg, var(--indigo) 0%, var(--cyan) 50%, var(--violet) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+@keyframes float-chip {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
 }
+.animate-float-chip { animation: float-chip 4s ease-in-out infinite; }
 
 /* Respect reduced-motion preference */
 @media (prefers-reduced-motion: reduce) {

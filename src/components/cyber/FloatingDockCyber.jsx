@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { FileDown, Home, Layers, Mail, User } from "lucide-react";
 
 const GithubIcon = (props) => (
@@ -26,16 +26,32 @@ const NAV = [
 
 export default function FloatingDockCyber() {
   const [active, setActive] = useState("home");
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 15);
+      // Ensure 'home' is active when near top of the page
+      if (window.scrollY < 300) {
+        setActive("home");
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     const sections = NAV.map((n) => document.getElementById(n.id)).filter(Boolean);
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) setActive(entry.target.id);
+          if (entry.isIntersecting && window.scrollY >= 300) {
+            setActive(entry.target.id);
+          }
         });
       },
-      { rootMargin: "-45% 0px -45% 0px" }
+      { rootMargin: "-30% 0px -30% 0px" }
     );
     sections.forEach((s) => observer.observe(s));
     return () => observer.disconnect();
@@ -43,10 +59,15 @@ export default function FloatingDockCyber() {
 
   return (
     <motion.nav
-      initial={{ opacity: 0, y: -16 }}
+      layout
+      initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-      className="glass-panel noise-overlay fixed left-1/2 top-14 z-50 flex -translate-x-1/2 items-center gap-1.5 rounded-full px-2.5 py-2 shadow-2xl"
+      transition={{ type: "spring", stiffness: 300, damping: 26 }}
+      className={`fixed left-1/2 top-8 z-50 flex -translate-x-1/2 items-center gap-1.5 rounded-full border border-white/20 backdrop-blur-xl transition-all duration-500 ${
+        isScrolled
+          ? "px-3 py-1.5 shadow-[0_12px_40px_rgba(0,0,0,0.85)] bg-[#0b0f17]/95 scale-95"
+          : "px-4 py-2.5 shadow-[0_20px_50px_rgba(0,0,0,0.6)] bg-[#0b0f17]/85 scale-100"
+      }`}
     >
       {NAV.map((item) => {
         const Icon = item.icon;
@@ -60,52 +81,66 @@ export default function FloatingDockCyber() {
             {isActive && (
               <motion.span
                 layoutId="dock-active"
-                className="absolute inset-0 rounded-full bg-gradient-to-r from-indigo-500/25 to-cyan-500/25 ring-1 ring-cyan-400/30"
-                transition={{ type: "spring", stiffness: 340, damping: 30 }}
+                className="absolute inset-0 rounded-full bg-gradient-to-r from-indigo-500/35 via-violet-500/35 to-cyan-500/35 ring-1 ring-cyan-400/50 shadow-[0_0_20px_rgba(6,182,212,0.3)]"
+                transition={{ type: "spring", stiffness: 380, damping: 28 }}
               />
             )}
             <Icon
-              className={`relative h-3.5 w-3.5 ${isActive ? "text-cyan-300" : "text-slate-500"}`}
+              className={`relative h-3.5 w-3.5 ${isActive ? "text-cyan-300" : "text-slate-400"}`}
             />
-            <span className={`relative hidden sm:inline ${isActive ? "text-white" : "text-slate-500"}`}>
+            <span className={`relative ${isActive ? "text-white font-semibold" : "text-slate-400"}`}>
               {item.label}
             </span>
           </a>
         );
       })}
 
-      <div className="mx-1 h-5 w-px bg-white/10" />
+      {/* Smoothly Collapsing Right Items on Scroll */}
+      <AnimatePresence mode="popLayout">
+        {!isScrolled && (
+          <motion.div
+            layout
+            initial={{ opacity: 0, width: 0, scale: 0.8 }}
+            animate={{ opacity: 1, width: "auto", scale: 1 }}
+            exit={{ opacity: 0, width: 0, scale: 0.8 }}
+            transition={{ type: "spring", stiffness: 320, damping: 28 }}
+            className="flex items-center gap-1.5 overflow-hidden"
+          >
+            <div className="mx-1 h-5 w-px bg-white/15" />
 
-      <span className="hidden items-center gap-1.5 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1.5 font-mono text-[10px] text-emerald-300 md:inline-flex">
-        <span className="relative flex h-1.5 w-1.5">
-          <span className="pulse-dot absolute inline-flex h-full w-full rounded-full bg-emerald-400" />
-          <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
-        </span>
-        Available for Hire
-      </span>
+            <span className="hidden items-center gap-1.5 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1.5 font-mono text-[10px] text-emerald-300 md:inline-flex whitespace-nowrap">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="pulse-dot absolute inline-flex h-full w-full rounded-full bg-emerald-400" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
+              </span>
+              Available for Hire
+            </span>
 
-      <a
-        href="/resume.pdf"
-        download
-        aria-label="Download resume"
-        className="ml-1 flex h-8 w-8 items-center justify-center rounded-full text-slate-400 transition-colors hover:text-cyan-300"
-      >
-        <FileDown className="h-3.5 w-3.5" />
-      </a>
-      <a
-        href="#"
-        aria-label="GitHub"
-        className="flex h-8 w-8 items-center justify-center rounded-full text-slate-400 transition-colors hover:text-cyan-300"
-      >
-        <GithubIcon className="h-3.5 w-3.5" />
-      </a>
-      <a
-        href="#"
-        aria-label="LinkedIn"
-        className="flex h-8 w-8 items-center justify-center rounded-full text-slate-400 transition-colors hover:text-cyan-300"
-      >
-        <LinkedinIcon className="h-3.5 w-3.5" />
-      </a>
+            <a
+              href="/resume.pdf"
+              download="Sasiru_Liyanage_CV.pdf"
+              aria-label="Download resume"
+              className="flex h-8 w-8 items-center justify-center rounded-full text-slate-400 transition-colors hover:text-cyan-300 hover:bg-white/10"
+            >
+              <FileDown className="h-3.5 w-3.5" />
+            </a>
+            <a
+              href="#"
+              aria-label="GitHub"
+              className="flex h-8 w-8 items-center justify-center rounded-full text-slate-400 transition-colors hover:text-cyan-300 hover:bg-white/10"
+            >
+              <GithubIcon className="h-3.5 w-3.5" />
+            </a>
+            <a
+              href="#"
+              aria-label="LinkedIn"
+              className="flex h-8 w-8 items-center justify-center rounded-full text-slate-400 transition-colors hover:text-cyan-300 hover:bg-white/10"
+            >
+              <LinkedinIcon className="h-3.5 w-3.5" />
+            </a>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.nav>
   );
 }

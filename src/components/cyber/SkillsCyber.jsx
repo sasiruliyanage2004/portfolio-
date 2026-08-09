@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useRef, useState } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import {
   Boxes,
   Cloud,
@@ -51,83 +51,95 @@ const GROUPS = [
   },
 ];
 
-function SkillCard({ skill }) {
-  const [hovered, setHovered] = useState(false);
-  const Icon = skill.icon;
-
-  return (
-    <motion.div
-      onHoverStart={() => setHovered(true)}
-      onHoverEnd={() => setHovered(false)}
-      initial={{ opacity: 0, y: 14 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.5 }}
-      className="glass-panel noise-overlay group relative overflow-hidden rounded-xl p-5"
-    >
-      <span className="border-beam opacity-0 transition-opacity duration-300 group-hover:opacity-100" aria-hidden="true" />
-
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <span className="rounded-lg border border-white/10 bg-white/[0.04] p-2">
-            <Icon className="h-4 w-4 text-cyan-300" />
-          </span>
-          <span className="text-sm font-medium text-slate-200">{skill.name}</span>
-        </div>
-        <span className="font-mono text-[11px] text-slate-500">{skill.level}%</span>
-      </div>
-
-      <div className="mt-4 h-1.5 w-full overflow-hidden rounded-full bg-white/[0.06]">
-        <motion.div
-          initial={{ width: 0 }}
-          whileInView={{ width: `${skill.level}%` }}
-          viewport={{ once: true }}
-          transition={{ duration: 1, ease: "easeOut", delay: 0.1 }}
-          className="h-full rounded-full bg-gradient-to-r from-indigo-400 via-cyan-400 to-violet-400 shadow-[0_0_10px_rgba(6,182,212,0.6)]"
-        />
-      </div>
-
-      <motion.p
-        initial={false}
-        animate={{ height: hovered ? "auto" : 0, opacity: hovered ? 1 : 0 }}
-        transition={{ duration: 0.25 }}
-        className="overflow-hidden font-mono text-[11px] text-slate-500"
-      >
-        <span className="mt-3 block">{skill.years}+ years hands-on experience</span>
-      </motion.p>
-    </motion.div>
-  );
-}
-
 export default function SkillsCyber() {
+  const [activeGroup, setActiveGroup] = useState("Frontend");
+  const sectionRef = useRef(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+
+  const scale = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.85, 1, 1, 0.85]);
+  const opacity = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [0.5, 1, 1, 0.5]);
+  const y = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [40, 0, 0, -40]);
+
+  const activeData = GROUPS.find((g) => g.label === activeGroup) || GROUPS[0];
+
   return (
-    <section id="skills" className="relative bg-[#0b0f17] px-6 py-28 lg:px-10">
-      <div className="mx-auto max-w-7xl">
-        <div className="mb-14">
-          <p className="font-mono text-xs tracking-[0.3em] text-cyan-400/80">CAPABILITIES</p>
-          <h2 className="mt-3 text-4xl font-semibold text-white sm:text-5xl">
-            Skills <span className="text-gradient">Matrix</span>
-          </h2>
+    <section ref={sectionRef} id="skills" className="relative w-full py-28 px-6 lg:px-10">
+      <motion.div style={{ scale, opacity, y }} className="mx-auto max-w-7xl">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12 gap-6">
+          <div>
+            <span className="font-mono text-[11px] tracking-widest text-cyan-400 uppercase">
+              // Capabilities
+            </span>
+            <h2 className="mt-2 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+              Skills Matrix
+            </h2>
+          </div>
+
+          <div className="flex flex-wrap gap-2">
+            {GROUPS.map((g) => (
+              <button
+                key={g.label}
+                onClick={() => setActiveGroup(g.label)}
+                className={`rounded-full px-4 py-1.5 text-xs font-medium transition-all ${
+                  activeGroup === g.label
+                    ? "bg-gradient-to-r from-indigo-500 to-cyan-500 text-white shadow-lg shadow-cyan-500/20"
+                    : "glass-panel text-slate-400 hover:text-white"
+                }`}
+              >
+                {g.label}
+              </button>
+            ))}
+          </div>
         </div>
 
-        <div className="space-y-14">
-          {GROUPS.map((group) => (
-            <div key={group.label}>
-              <div className="mb-5 flex items-center gap-3">
-                <span className={`h-1.5 w-8 rounded-full bg-gradient-to-r ${group.accent}`} />
-                <h3 className="font-mono text-xs uppercase tracking-[0.2em] text-slate-400">
-                  {group.label}
-                </h3>
-              </div>
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                {group.skills.map((skill) => (
-                  <SkillCard key={skill.name} skill={skill} />
-                ))}
-              </div>
-            </div>
-          ))}
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {activeData.skills.map((s, idx) => {
+            const Icon = s.icon;
+            return (
+              <motion.div
+                key={s.name}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: idx * 0.08 }}
+                className="glass-panel noise-overlay relative flex flex-col justify-between rounded-2xl p-6"
+              >
+                <span className="border-beam" aria-hidden="true" />
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 border border-white/10 text-cyan-300">
+                      <Icon className="h-5 w-5" />
+                    </div>
+                    <span className="font-mono text-[10px] text-slate-400">
+                      {s.years} yrs exp
+                    </span>
+                  </div>
+
+                  <h3 className="text-base font-semibold text-white">{s.name}</h3>
+                </div>
+
+                <div className="mt-6">
+                  <div className="flex justify-between font-mono text-[10px] text-slate-400 mb-1.5">
+                    <span>Proficiency</span>
+                    <span className="text-cyan-300 font-semibold">{s.level}%</span>
+                  </div>
+                  <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/10">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      animate={{ width: `${s.level}%` }}
+                      transition={{ duration: 0.8, delay: 0.2 + idx * 0.08 }}
+                      className={`h-full rounded-full bg-gradient-to-r ${activeData.accent}`}
+                    />
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

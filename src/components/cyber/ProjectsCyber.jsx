@@ -1,5 +1,5 @@
 import { useMemo, useRef, useState } from "react";
-import { AnimatePresence, motion, useMotionValue, useSpring } from "framer-motion";
+import { AnimatePresence, motion, useMotionValue, useSpring, useScroll, useTransform } from "framer-motion";
 import { ArrowUpRight, Radio } from "lucide-react";
 
 const GithubIcon = (props) => (
@@ -112,36 +112,36 @@ function ProjectCard({ project }) {
           )}
         </div>
 
-        <p className="mt-2.5 flex-1 text-sm leading-relaxed text-slate-400">
+        <p className="mt-2 text-sm leading-relaxed text-slate-400">
           {project.blurb}
         </p>
 
-        <div className="mt-5 flex flex-wrap gap-1.5">
-          {project.tech.map((t) => (
-            <span
-              key={t}
-              className="rounded-full border border-white/10 bg-white/[0.03] px-2.5 py-1 font-mono text-[10px] text-cyan-300/80"
-            >
-              {t}
-            </span>
-          ))}
-        </div>
+        <div className="mt-auto pt-6">
+          <div className="flex flex-wrap gap-1.5 mb-4">
+            {project.tech.map((t) => (
+              <span
+                key={t}
+                className="rounded-md border border-white/10 bg-white/5 px-2 py-0.5 font-mono text-[10px] text-slate-300"
+              >
+                {t}
+              </span>
+            ))}
+          </div>
 
-        <div className="mt-5 flex items-center gap-4 border-t border-white/[0.06] pt-4">
-          <a
-            href={project.github}
-            className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-400 transition-colors hover:text-white"
-          >
-            <GithubIcon className="h-3.5 w-3.5" />
-            Code
-          </a>
-          <a
-            href={project.demo}
-            className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-400 transition-colors hover:text-cyan-300"
-          >
-            Live Demo
-            <ArrowUpRight className="h-3.5 w-3.5" />
-          </a>
+          <div className="flex items-center gap-3">
+            <a
+              href={project.demo}
+              className="inline-flex items-center gap-1 text-xs font-medium text-cyan-300 transition-colors hover:text-white"
+            >
+              Demo <ArrowUpRight className="h-3 w-3" />
+            </a>
+            <a
+              href={project.github}
+              className="inline-flex items-center gap-1 text-xs font-medium text-slate-400 transition-colors hover:text-white"
+            >
+              <GithubIcon className="h-3 w-3" /> Code
+            </a>
+          </div>
         </div>
       </motion.div>
     </motion.div>
@@ -149,57 +149,61 @@ function ProjectCard({ project }) {
 }
 
 export default function ProjectsCyber() {
-  const [active, setActive] = useState("All");
+  const [cat, setCat] = useState("All");
+  const sectionRef = useRef(null);
 
-  const filtered = useMemo(
-    () => (active === "All" ? PROJECTS : PROJECTS.filter((p) => p.category === active)),
-    [active]
-  );
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+
+  const scale = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.85, 1, 1, 0.85]);
+  const opacity = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [0.5, 1, 1, 0.5]);
+  const y = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [40, 0, 0, -40]);
+
+  const filtered = useMemo(() => {
+    if (cat === "All") return PROJECTS;
+    return PROJECTS.filter((p) => p.category === cat);
+  }, [cat]);
 
   return (
-    <section id="projects" className="relative bg-[#0b0f17] px-6 py-28 lg:px-10">
-      <div className="mx-auto max-w-7xl">
-        <div className="mb-12 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+    <section ref={sectionRef} id="projects" className="relative w-full py-28 px-6 lg:px-10">
+      <motion.div style={{ scale, opacity, y }} className="mx-auto max-w-7xl">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12 gap-6">
           <div>
-            <p className="font-mono text-xs tracking-[0.3em] text-cyan-400/80">SELECTED WORK</p>
-            <h2 className="mt-3 text-4xl font-semibold text-white sm:text-5xl">
-              Projects & <span className="text-gradient">Builds</span>
+            <span className="font-mono text-[11px] tracking-widest text-cyan-400 uppercase">
+              // Selected Work
+            </span>
+            <h2 className="mt-2 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+              Projects & Builds
             </h2>
           </div>
 
-          <div className="glass-panel inline-flex w-fit gap-1 rounded-full p-1">
-            {CATEGORIES.map((cat) => (
+          <div className="flex flex-wrap gap-2">
+            {CATEGORIES.map((c) => (
               <button
-                key={cat}
-                onClick={() => setActive(cat)}
-                className={`relative rounded-full px-4 py-2 font-mono text-xs transition-colors ${
-                  active === cat ? "text-white" : "text-slate-500 hover:text-slate-300"
+                key={c}
+                onClick={() => setCat(c)}
+                className={`rounded-full px-4 py-1.5 text-xs font-medium transition-all ${
+                  cat === c
+                    ? "bg-gradient-to-r from-indigo-500 to-cyan-500 text-white shadow-lg shadow-cyan-500/20"
+                    : "glass-panel text-slate-400 hover:text-white"
                 }`}
               >
-                {active === cat && (
-                  <motion.span
-                    layoutId="filter-pill"
-                    className="absolute inset-0 rounded-full bg-gradient-to-r from-indigo-500 to-cyan-500"
-                    transition={{ type: "spring", stiffness: 300, damping: 28 }}
-                  />
-                )}
-                <span className="relative">{cat}</span>
+                {c}
               </button>
             ))}
           </div>
         </div>
 
-        <motion.div
-          layout
-          className="grid auto-rows-[minmax(220px,auto)] grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
-        >
+        <motion.div layout className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           <AnimatePresence mode="popLayout">
             {filtered.map((project) => (
               <ProjectCard key={project.title} project={project} />
             ))}
           </AnimatePresence>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 }

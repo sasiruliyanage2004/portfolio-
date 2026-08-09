@@ -79,7 +79,16 @@ function TiltCard({ children, className = "" }) {
 
 export default function HeroCyber() {
   const { scrollY } = useScroll();
-  const avatarScale = useTransform(scrollY, [0, 400], [1, 0.88]);
+
+  // Scroll-driven transforms for Portrait Image Card
+  const avatarScale = useTransform(scrollY, [0, 500], [1, 0.84]);
+  const avatarY = useTransform(scrollY, [0, 500], [0, 45]);
+  const avatarOpacity = useTransform(scrollY, [0, 500], [1, 0.8]);
+
+  // Scroll-driven transforms for Hero Text Column (Headline, Badge, Paragraph, Buttons)
+  const heroTextScale = useTransform(scrollY, [0, 500], [1, 0.88]);
+  const heroTextY = useTransform(scrollY, [0, 500], [0, 40]);
+  const heroTextOpacity = useTransform(scrollY, [0, 500], [1, 0.75]);
 
   return (
     <section
@@ -92,8 +101,8 @@ export default function HeroCyber() {
       <div className="absolute bottom-0 right-0 h-[28rem] w-[28rem] rounded-full bg-violet-500/15 blur-[130px] pointer-events-none" />
 
       <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 gap-12 px-6 py-28 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:px-10">
-        {/* Left Column — Text Intro */}
-        <div>
+        {/* Left Column — Text Intro with Scroll-Driven Scaling & Fading */}
+        <motion.div style={{ scale: heroTextScale, y: heroTextY, opacity: heroTextOpacity }}>
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
@@ -153,11 +162,11 @@ export default function HeroCyber() {
               Resume
             </a>
           </motion.div>
-        </div>
+        </motion.div>
 
-        {/* Right Column — Clean Cyber Glassmorphic Portrait Card */}
+        {/* Right Column — Portrait Image Card with Scroll-Driven Scaling & Depth */}
         <motion.div
-          style={{ scale: avatarScale }}
+          style={{ scale: avatarScale, y: avatarY, opacity: avatarOpacity }}
           initial={{ opacity: 0, y: 24, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
@@ -170,22 +179,22 @@ export default function HeroCyber() {
           <TiltCard className="glass-panel noise-overlay relative w-full max-w-[420px] rounded-3xl p-3 shadow-2xl border-2 border-white/20 transition-all duration-500">
             <span className="border-beam" aria-hidden="true" />
 
-            {/* Profile Image Frame with Dark Grayscale -> Vibrant Color Hover */}
-            <div className="relative h-[380px] sm:h-[440px] lg:h-[480px] w-full overflow-hidden rounded-2xl bg-gradient-to-b from-indigo-950/40 via-cyan-950/30 to-[#0b0f17]">
+            {/* Profile Image Frame — Bright Crystal Clear Black & White -> Vibrant Color Hover */}
+            <div className="relative h-[380px] sm:h-[440px] lg:h-[480px] w-full overflow-hidden rounded-2xl bg-gradient-to-b from-indigo-950/20 via-cyan-950/20 to-[#0b0f17]">
               <img
                 src="/profile.png"
                 alt="Developer Portrait"
-                className="h-full w-full object-cover object-top filter grayscale contrast-125 brightness-75 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-105 transition-all duration-700 ease-out"
+                className="h-full w-full object-cover object-top filter grayscale contrast-110 brightness-115 group-hover:grayscale-0 group-hover:brightness-110 group-hover:scale-105 transition-all duration-700 ease-out"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0b0f17] via-transparent to-transparent opacity-85 group-hover:opacity-30 transition-opacity duration-700" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0b0f17] via-transparent to-transparent opacity-40 group-hover:opacity-10 transition-opacity duration-700" />
             </div>
 
-            {/* Floating Badge 1 (Top-Right Star Badge - Seamless Glassmorphic Theme) */}
+            {/* Floating Badge 1 */}
             <div className="glass-panel noise-overlay absolute -top-3 -right-3 p-3.5 rounded-2xl shadow-xl border border-cyan-400/30 bg-[#0b0f17]/90 backdrop-blur-md">
               <Star className="h-5 w-5 text-cyan-300 fill-cyan-300/30" />
             </div>
 
-            {/* Floating Badge 2 (Bottom-Left Code Badge - Seamless Glassmorphic Theme) */}
+            {/* Floating Badge 2 */}
             <div className="glass-panel noise-overlay absolute -bottom-3 -left-3 p-3.5 rounded-2xl shadow-xl border border-indigo-400/30 bg-[#0b0f17]/90 backdrop-blur-md">
               <Code2 className="h-5 w-5 text-indigo-300" />
             </div>

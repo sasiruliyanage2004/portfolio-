@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { AnimatePresence, motion, useMotionValue, useSpring } from "framer-motion";
-import { CheckCircle2, Send } from "lucide-react";
+import { CheckCircle2, Send, Mail, Phone, MapPin, AlertCircle } from "lucide-react";
 
 const GithubIcon = (props) => (
   <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" {...props}>
@@ -24,7 +24,7 @@ const TwitterIcon = (props) => (
 );
 
 const SOCIALS = [
-  { icon: GithubIcon, href: "#", label: "GitHub" },
+  { icon: GithubIcon, href: "https://github.com/sasiruliyanage2004", label: "GitHub" },
   { icon: LinkedinIcon, href: "#", label: "LinkedIn" },
   { icon: TwitterIcon, href: "#", label: "Twitter" },
 ];
@@ -50,6 +50,8 @@ function MagneticIcon({ icon: Icon, href, label }) {
     <motion.a
       ref={ref}
       href={href}
+      target="_blank"
+      rel="noopener noreferrer"
       aria-label={label}
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
@@ -62,26 +64,52 @@ function MagneticIcon({ icon: Icon, href, label }) {
 }
 
 const FIELDS = [
-  { id: "name", label: "name", type: "text", placeholder: "Jane Doe" },
-  { id: "email", label: "email", type: "email", placeholder: "jane@company.com" },
+  { id: "name", label: "name", type: "text", placeholder: "Sasiru Nethvidu Liyanage" },
+  { id: "email", label: "email", type: "email", placeholder: "liyanagesasiru@gmail.com" },
 ];
 
 export default function ContactCyber() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [status, setStatus] = useState("idle");
+  const [status, setStatus] = useState("idle"); // 'idle' | 'sending' | 'sent' | 'error'
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus("sending");
-    setTimeout(() => {
-      setStatus("sent");
-      setForm({ name: "", email: "", message: "" });
-      setTimeout(() => setStatus("idle"), 3200);
-    }, 1100);
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: "6e01e3e1-e476-48bc-a687-c330d87209c5",
+          name: form.name,
+          email: form.email,
+          message: form.message,
+          subject: `New Portfolio Message from ${form.name}`,
+        }),
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        setStatus("sent");
+        setForm({ name: "", email: "", message: "" });
+        setTimeout(() => setStatus("idle"), 4000);
+      } else {
+        setStatus("error");
+        setTimeout(() => setStatus("idle"), 4000);
+      }
+    } catch (err) {
+      console.error("Web3Forms Submission Error:", err);
+      setStatus("error");
+      setTimeout(() => setStatus("idle"), 4000);
+    }
   };
 
   return (
-    <section id="contact" className="relative overflow-hidden bg-[#0b0f17] px-6 py-28 lg:px-10">
+    <section id="contact" className="relative overflow-hidden bg-[#0b0f17] px-6 pt-36 pb-28 lg:px-10 scroll-mt-24">
       <div className="absolute left-1/2 top-0 h-72 w-[36rem] -translate-x-1/2 rounded-full bg-indigo-500/15 blur-[120px] pointer-events-none" />
 
       <div className="relative mx-auto max-w-3xl">
@@ -90,6 +118,22 @@ export default function ContactCyber() {
           <h2 className="mt-3 text-4xl font-semibold text-white sm:text-5xl">
             Let's build something <span className="text-gradient">worth shipping</span>
           </h2>
+
+          {/* Quick Direct Contact Badges */}
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-3 font-mono text-xs text-slate-300">
+            <a href="mailto:liyanagesasiru@gmail.com" className="glass-panel inline-flex items-center gap-2 rounded-full px-4 py-2 hover:border-cyan-400/40 hover:text-cyan-300 transition-colors">
+              <Mail className="h-3.5 w-3.5 text-cyan-400" />
+              liyanagesasiru@gmail.com
+            </a>
+            <a href="tel:+94715700953" className="glass-panel inline-flex items-center gap-2 rounded-full px-4 py-2 hover:border-emerald-400/40 hover:text-emerald-300 transition-colors">
+              <Phone className="h-3.5 w-3.5 text-emerald-400" />
+              +94 71 57 00 953
+            </a>
+            <span className="glass-panel inline-flex items-center gap-2 rounded-full px-4 py-2 text-slate-400">
+              <MapPin className="h-3.5 w-3.5 text-indigo-400" />
+              Western Province, Sri Lanka
+            </span>
+          </div>
         </div>
 
         <div className="glass-panel noise-overlay relative overflow-hidden rounded-2xl">
@@ -140,7 +184,7 @@ export default function ContactCyber() {
 
             <button
               type="submit"
-              disabled={status !== "idle"}
+              disabled={status === "sending"}
               className="group relative inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-lg bg-gradient-to-r from-indigo-500 via-violet-500 to-cyan-500 px-6 py-3.5 font-mono text-sm font-medium text-white shadow-[0_0_25px_rgba(99,102,241,0.3)] transition-shadow hover:shadow-[0_0_40px_rgba(99,102,241,0.5)] disabled:opacity-70"
             >
               {status === "sending" ? (
@@ -162,17 +206,35 @@ export default function ContactCyber() {
         </div>
       </div>
 
+      {/* Success Toast */}
       <AnimatePresence>
         {status === "sent" && (
           <motion.div
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="glass-panel fixed bottom-8 left-1/2 z-50 flex -translate-x-1/2 items-center gap-2.5 rounded-full px-5 py-3 shadow-2xl"
+            className="glass-panel fixed bottom-8 left-1/2 z-50 flex -translate-x-1/2 items-center gap-2.5 rounded-full px-5 py-3 shadow-2xl border border-emerald-400/40 bg-[#0b0f17]/95"
           >
             <CheckCircle2 className="h-4 w-4 text-emerald-400" />
             <span className="font-mono text-xs text-slate-200">
-              Message sent — I'll reply within 24h.
+              Message sent successfully! Delivered to liyanagesasiru@gmail.com.
+            </span>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Error Toast */}
+      <AnimatePresence>
+        {status === "error" && (
+          <motion.div
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            className="glass-panel fixed bottom-8 left-1/2 z-50 flex -translate-x-1/2 items-center gap-2.5 rounded-full px-5 py-3 shadow-2xl border border-rose-400/40 bg-[#0b0f17]/95"
+          >
+            <AlertCircle className="h-4 w-4 text-rose-400" />
+            <span className="font-mono text-xs text-slate-200">
+              Failed to send. Please try again or email liyanagesasiru@gmail.com directly.
             </span>
           </motion.div>
         )}

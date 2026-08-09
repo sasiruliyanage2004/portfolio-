@@ -142,13 +142,13 @@ export default function HeroCyber({ culturalTheme = "dumbara" }) {
   return (
     <section
       id="home"
-      className="relative min-h-screen w-full overflow-hidden mesh-bg flex items-center pt-24 sm:pt-28 lg:pt-32 pb-12"
+      className="relative min-h-screen w-full overflow-hidden mesh-bg flex items-center pt-24 sm:pt-28 lg:pt-32 pb-16"
     >
       {/* Real-time Procedural HTML5 Canvas Cultural Motif Engine */}
       <CulturalPatternCanvas theme={culturalTheme} />
 
-      {/* Pattern dimming mask overlay behind text column */}
-      <div className="absolute top-0 left-0 bottom-0 w-full max-w-2xl bg-gradient-to-r from-[#0b0f17]/60 via-[#0b0f17]/30 to-transparent dark:from-[#0b0f17]/60 dark:via-[#0b0f17]/30 pointer-events-none z-[1]" />
+      {/* Theme-Aware Pattern dimming mask overlay behind text column */}
+      <div className="pattern-mask-left absolute top-0 left-0 bottom-0 w-full max-w-2xl pointer-events-none z-[1]" />
 
       <div className="absolute -top-40 -left-32 h-96 w-96 rounded-full bg-indigo-500/20 blur-[120px] float-slow pointer-events-none" />
       <div className="absolute bottom-0 right-0 h-[28rem] w-[28rem] rounded-full bg-violet-500/15 blur-[130px] pointer-events-none" />
@@ -252,6 +252,9 @@ export default function HeroCyber({ culturalTheme = "dumbara" }) {
       >
         SCROLL
       </motion.div>
+
+      {/* Seamless Section Blend Transition into Projects Section */}
+      <div className="hero-bottom-blend" aria-hidden="true" />
     </section>
   );
 }

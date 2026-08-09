@@ -73,9 +73,8 @@ body.light-theme,
 
 .light-theme .mesh-bg {
   background:
-    radial-gradient(at 10% 10%, rgba(67, 56, 202, 0.08) 0px, transparent 50%),
-    radial-gradient(at 90% 20%, rgba(14, 116, 144, 0.08) 0px, transparent 50%),
-    radial-gradient(at 50% 80%, rgba(139, 39, 212, 0.06) 0px, transparent 50%),
+    radial-gradient(at 10% 10%, rgba(67, 56, 202, 0.05) 0px, transparent 50%),
+    radial-gradient(at 90% 20%, rgba(14, 116, 144, 0.05) 0px, transparent 50%),
     #F7F5F1 !important;
 }
 
@@ -112,6 +111,25 @@ body.light-theme,
 
 .light-theme .hero-portrait-frame {
   background-color: #F7F5F1 !important;
+}
+
+/* Pattern Dimming Mask & Seamless Section Transition Overrides */
+.pattern-mask-left {
+  background: linear-gradient(to right, rgba(11, 15, 23, 0.6) 0%, rgba(11, 15, 23, 0.3) 60%, transparent 100%);
+}
+.light-theme .pattern-mask-left {
+  background: linear-gradient(to right, rgba(247, 245, 241, 0.75) 0%, rgba(247, 245, 241, 0.35) 60%, transparent 100%) !important;
+}
+
+.hero-bottom-blend {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 140px;
+  background: linear-gradient(to bottom, transparent, var(--bg-obsidian));
+  pointer-events: none;
+  z-index: 2;
 }
 
 .light-theme h1, 
@@ -275,9 +293,8 @@ body.light-theme,
    ------------------------------------------------------------------ */
 .mesh-bg {
   background:
-    radial-gradient(at 10% 10%, rgba(99, 102, 241, 0.12) 0px, transparent 50%),
-    radial-gradient(at 90% 20%, rgba(6, 182, 212, 0.12) 0px, transparent 50%),
-    radial-gradient(at 50% 80%, rgba(168, 85, 247, 0.08) 0px, transparent 50%),
+    radial-gradient(at 10% 10%, rgba(99, 102, 241, 0.08) 0px, transparent 50%),
+    radial-gradient(at 90% 20%, rgba(6, 182, 212, 0.08) 0px, transparent 50%),
     var(--bg-obsidian);
 }
 
@@ -301,7 +318,7 @@ body.light-theme,
    ------------------------------------------------------------------ */
 @keyframes pulse-dot {
   0%, 100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.55); }
-  50% { shadow: 0 0 0 6px rgba(52, 211, 153, 0); }
+  50% { box-shadow: 0 0 0 6px rgba(52, 211, 153, 0); }
 }
 .pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
 

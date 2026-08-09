@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
-import { motion, useMotionValue, useSpring, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, FileDown, Code2, Star, Sparkles, Compass } from "lucide-react";
+import { motion, AnimatePresence, useMotionValue, useSpring, useScroll, useTransform } from "framer-motion";
+import { ArrowRight, FileDown, Code2, Star, Sparkles, Cpu, X, Info } from "lucide-react";
+import CulturalPatternCanvas from "../CulturalPatternCanvas";
 
 function MagneticButton({ children, className = "", ...props }) {
   const ref = useRef(null);
@@ -78,6 +79,7 @@ function TiltCard({ children, className = "" }) {
 }
 
 export default function HeroCyber({ culturalTheme = "dumbara" }) {
+  const [showCaseStudy, setShowCaseStudy] = useState(false);
   const { scrollY } = useScroll();
 
   // Scroll-driven transforms for Portrait Image Card
@@ -94,27 +96,31 @@ export default function HeroCyber({ culturalTheme = "dumbara" }) {
   const themeConfig = {
     dumbara: {
       badge: "[SYSTEM_STATUS: DUMBARA_GEOMETRIC_BLUEPRINT]",
-      patternClass: "dumbara-pattern-bg",
-      accentTitle: "Dumbara Matrix",
+      title: "Dumbara Geometric Weave",
+      description: "Generative Rhombus Mat Geometry",
       glowColor: "from-cyan-500/25 via-indigo-500/25 to-blue-500/25",
+      algorithmText: "HTML5 Canvas 2D procedural rendering of traditional 18th-century Sri Lankan Dumbara mat weaving geometry. Uses trigonometric sine-wave offsets to mimic algorithmic loom tension.",
     },
     liyawela: {
       badge: "[SYSTEM_STATUS: LIYAWELA_BIOTECH_FLOW]",
-      patternClass: "liyawela-pattern-bg",
-      accentTitle: "Liyawela Bio-Flow",
+      title: "Liyawela Bio-Tech Flow",
+      description: "Parametric Leaf-and-Vine Curves",
       glowColor: "from-violet-500/25 via-purple-500/25 to-cyan-500/25",
+      algorithmText: "Procedural sinusoidal curve rendering of traditional Sri Lankan Liyawela (leaf-and-vine) motifs. Employs 60fps parametric wave math to simulate weightless organic energy forms.",
     },
     palapethi: {
       badge: "[SYSTEM_STATUS: PALA_PETHI_DECONSTRUCTED_UI]",
-      patternClass: "palapethi-pattern-bg",
-      accentTitle: "Pala Pethi Petals",
+      title: "Pala Pethi Floral Petals",
+      description: "Interlocking Petal Lattice",
       glowColor: "from-cyan-500/25 via-teal-500/25 to-indigo-500/25",
+      algorithmText: "Generative rendering of Sri Lankan Pala Pethi (petal) motifs. Interlocking 4-petal floral flowers constructed procedurally with antigravity drift animation.",
     },
   }[culturalTheme] || {
     badge: "[SYSTEM_STATUS: DUMBARA_GEOMETRIC_BLUEPRINT]",
-    patternClass: "dumbara-pattern-bg",
-    accentTitle: "Cultural Tech Blueprint",
+    title: "Dumbara Geometric Weave",
+    description: "Generative Rhombus Mat Geometry",
     glowColor: "from-cyan-500/25 via-indigo-500/25 to-violet-500/25",
+    algorithmText: "Procedural HTML5 Canvas 2D vector geometry.",
   };
 
   return (
@@ -122,26 +128,39 @@ export default function HeroCyber({ culturalTheme = "dumbara" }) {
       id="home"
       className="relative min-h-screen w-full overflow-hidden mesh-bg flex items-center pt-24 sm:pt-28"
     >
-      {/* Dynamic Sri Lankan Cultural Motif Background Overlay */}
-      <div className={`absolute inset-0 ${themeConfig.patternClass} pointer-events-none transition-all duration-700`} />
+      {/* Real-time Procedural HTML5 Canvas Cultural Motif Engine */}
+      <CulturalPatternCanvas theme={culturalTheme} />
+
       <div className="absolute -top-40 -left-32 h-96 w-96 rounded-full bg-indigo-500/20 blur-[120px] float-slow pointer-events-none" />
       <div className="absolute bottom-0 right-0 h-[28rem] w-[28rem] rounded-full bg-violet-500/15 blur-[130px] pointer-events-none" />
 
       <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 gap-12 px-6 py-24 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:px-10">
         {/* Left Column — Text Intro */}
         <motion.div style={{ scale: heroTextScale, y: heroTextY, opacity: heroTextOpacity }}>
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="glass-panel noise-overlay relative inline-flex items-center gap-2.5 rounded-full px-4 py-2 font-mono text-[11px] tracking-wide text-cyan-300/90 mb-6 border border-cyan-400/30"
-          >
-            <span className="relative flex h-2 w-2">
-              <span className="pulse-dot absolute inline-flex h-full w-full rounded-full bg-emerald-400" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
-            </span>
-            {themeConfig.badge}
-          </motion.div>
+          <div className="flex flex-wrap items-center gap-2 mb-6">
+            {/* Status Badge */}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="glass-panel noise-overlay relative inline-flex items-center gap-2.5 rounded-full px-4 py-2 font-mono text-[11px] tracking-wide text-cyan-300/90 border border-cyan-400/30"
+            >
+              <span className="relative flex h-2 w-2">
+                <span className="pulse-dot absolute inline-flex h-full w-full rounded-full bg-emerald-400" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+              </span>
+              {themeConfig.badge}
+            </motion.div>
+
+            {/* "HOW IT'S MADE" Micro Case-Study Button */}
+            <button
+              onClick={() => setShowCaseStudy(true)}
+              className="glass-panel inline-flex items-center gap-1.5 rounded-full px-3 py-2 font-mono text-[10px] text-emerald-300 border border-emerald-400/40 bg-emerald-950/40 hover:bg-emerald-900/50 transition-colors shadow-lg"
+            >
+              <Cpu className="h-3 w-3 text-emerald-400" />
+              <span>⚡ How It's Made</span>
+            </button>
+          </div>
 
           <motion.h1
             initial={{ opacity: 0, y: 18 }}
@@ -236,6 +255,65 @@ export default function HeroCyber({ culturalTheme = "dumbara" }) {
       >
         SCROLL
       </motion.div>
+
+      {/* "HOW IT'S MADE" Algorithmic Micro Case Study Modal */}
+      <AnimatePresence>
+        {showCaseStudy && (
+          <div className="fixed inset-0 z-[120] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="glass-panel noise-overlay relative w-full max-w-lg rounded-2xl p-6 border border-cyan-400/40 bg-[#0b0f17]/95 shadow-2xl text-left"
+            >
+              <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-4">
+                <div className="flex items-center gap-2">
+                  <Cpu className="h-5 w-5 text-cyan-400" />
+                  <h3 className="font-mono text-sm font-semibold text-white uppercase tracking-wider">
+                    How It's Made // Cultural Tech Math
+                  </h3>
+                </div>
+                <button
+                  onClick={() => setShowCaseStudy(false)}
+                  className="rounded-full p-1 text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+
+              <div className="space-y-4 font-mono text-xs text-slate-300 leading-relaxed">
+                <div className="rounded-xl border border-cyan-500/20 bg-cyan-950/30 p-3">
+                  <span className="text-cyan-300 font-semibold uppercase">{themeConfig.title}</span>
+                  <p className="mt-1 text-[11px] text-slate-300 leading-relaxed">
+                    {themeConfig.algorithmText}
+                  </p>
+                </div>
+
+                <div>
+                  <h4 className="text-white font-semibold mb-1 text-[11px] uppercase tracking-wider text-cyan-400">
+                    // Technical Stack & Optimization
+                  </h4>
+                  <ul className="list-disc list-inside space-y-1 text-slate-400 text-[11px]">
+                    <li><strong className="text-slate-200">Engine:</strong> React 19 + HTML5 Canvas 2D Context API</li>
+                    <li><strong className="text-slate-200">Math:</strong> Parametric Sine & Cosine Wave Oscillations</li>
+                    <li><strong className="text-slate-200">FPS:</strong> 60fps GPU-accelerated requestAnimationFrame loop</li>
+                    <li><strong className="text-slate-200">Performance:</strong> Dynamic canvas resize handler with zero scroll lag</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="mt-6 flex justify-end">
+                <button
+                  onClick={() => setShowCaseStudy(false)}
+                  className="rounded-full bg-gradient-to-r from-indigo-500 to-cyan-500 px-5 py-2 text-xs font-medium text-white shadow-lg"
+                >
+                  Close Case Study
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

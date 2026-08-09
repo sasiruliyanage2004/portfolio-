@@ -94,7 +94,7 @@ export default function HeroCyber({ culturalTheme = "dumbara" }) {
   return (
     <section
       id="home"
-      className="relative min-h-screen w-full overflow-hidden mesh-bg flex items-center pt-36 sm:pt-40 lg:pt-44 pb-16"
+      className="relative min-h-screen w-full overflow-hidden mesh-bg flex items-center pt-24 sm:pt-28 lg:pt-32 pb-12"
     >
       {/* Real-time Procedural HTML5 Canvas Cultural Motif Engine */}
       <CulturalPatternCanvas theme={culturalTheme} />
@@ -102,7 +102,7 @@ export default function HeroCyber({ culturalTheme = "dumbara" }) {
       <div className="absolute -top-40 -left-32 h-96 w-96 rounded-full bg-indigo-500/20 blur-[120px] float-slow pointer-events-none" />
       <div className="absolute bottom-0 right-0 h-[28rem] w-[28rem] rounded-full bg-violet-500/15 blur-[130px] pointer-events-none" />
 
-      <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 gap-10 px-6 py-8 sm:py-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:px-10">
+      <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 gap-8 px-6 py-4 sm:py-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:px-10">
         {/* Left Column — Text Intro */}
         <motion.div style={{ scale: heroTextScale, y: heroTextY, opacity: heroTextOpacity }}>
           <motion.h1
@@ -158,7 +158,7 @@ export default function HeroCyber({ culturalTheme = "dumbara" }) {
           initial={{ opacity: 0, y: 24, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="group relative flex justify-center [perspective:1000px] py-4 px-4"
+          className="group relative flex justify-center [perspective:1000px] py-2 px-4"
         >
           {/* Ambient Glow Aura */}
           <div className="absolute inset-4 bg-gradient-to-r from-cyan-500/25 via-indigo-500/25 to-blue-500/25 rounded-3xl blur-3xl scale-105 pointer-events-none" />

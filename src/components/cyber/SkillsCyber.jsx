@@ -118,7 +118,7 @@ export default function SkillsCyber() {
             {activeData.skills.map((skill) => (
               <div
                 key={skill.name}
-                className="glass-panel noise-overlay relative flex flex-col justify-between rounded-2xl p-5 border border-white/10 hover:border-cyan-400/40 transition-colors"
+                className="noise-overlay relative flex flex-col justify-between rounded-2xl p-5 border border-white/15 dark:border-white/15 light-theme:border-slate-300/40 bg-[#0b0f17]/92 dark:bg-[#0b0f17]/92 light-theme:bg-[#F7F5F1]/95 backdrop-blur-xl hover:border-cyan-400/50 transition-colors shadow-lg z-10"
               >
                 <div>
                   <div className="flex items-center justify-between mb-2">

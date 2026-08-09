@@ -140,7 +140,7 @@ export default function ContactCyber() {
           </div>
         </div>
 
-        <div className="glass-panel noise-overlay relative overflow-hidden rounded-2xl">
+        <div className="noise-overlay relative overflow-hidden rounded-2xl border border-white/15 dark:border-white/15 light-theme:border-slate-300/40 bg-[#0b0f17]/95 dark:bg-[#0b0f17]/95 light-theme:bg-[#F7F5F1]/95 backdrop-blur-2xl shadow-2xl z-10">
           <span className="border-beam" aria-hidden="true" />
 
           {/* Terminal Window Header */}

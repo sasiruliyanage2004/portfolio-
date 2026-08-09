@@ -97,7 +97,7 @@ function Card3D({ project }) {
         onMouseMove={handleMove}
         onMouseLeave={handleLeave}
         style={{ rotateX: srx, rotateY: sry, transformPerspective: 900 }}
-        className="glass-panel noise-overlay relative flex h-full min-h-[240px] flex-col overflow-hidden rounded-2xl p-6 border border-white/10 group-hover:border-cyan-400/40 transition-colors duration-300"
+        className="noise-overlay relative flex h-full min-h-[240px] flex-col overflow-hidden rounded-2xl p-6 border border-white/15 dark:border-white/15 light-theme:border-slate-300/40 bg-[#0b0f17]/92 dark:bg-[#0b0f17]/92 light-theme:bg-[#F7F5F1]/95 backdrop-blur-xl group-hover:border-cyan-400/50 transition-colors duration-300 shadow-xl z-10"
       >
         {/* Animated Border Beam Spinning Accent */}
         <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100">

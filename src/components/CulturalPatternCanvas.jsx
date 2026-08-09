@@ -111,10 +111,10 @@ function DumbaraCanvas() {
           const glow = dist < maxDist ? Math.pow(1 - dist / maxDist, 2) : 0;
           const scale = 1 + glow * 0.10;
 
-          const baseOuterOpacity = isLight ? 0.35 : 0.45;
-          const baseInnerOpacity = isLight ? 0.35 : 0.50;
-          const outerOpacity = Math.min(1, baseOuterOpacity + glow * 0.45);
-          const innerOpacity = Math.min(1, baseInnerOpacity + glow * 0.45);
+          const baseOuterOpacity = isLight ? 0.25 : 0.35;
+          const baseInnerOpacity = isLight ? 0.25 : 0.40;
+          const outerOpacity = Math.min(1, baseOuterOpacity + glow * 0.50);
+          const innerOpacity = Math.min(1, baseInnerOpacity + glow * 0.50);
 
           // Outer Diamond Border
           ctx.strokeStyle = isLight
@@ -144,7 +144,7 @@ function DumbaraCanvas() {
 
           // Dumbara Center Lotus Dots
           if ((c + r) % 2 === 0) {
-            const dotOpacity = Math.min(1, (isLight ? 0.50 : 0.60) + glow * 0.40);
+            const dotOpacity = Math.min(1, (isLight ? 0.35 : 0.45) + glow * 0.45);
             ctx.fillStyle = isLight
               ? `rgba(139, 39, 212, ${dotOpacity})`
               : `rgba(6, 182, 212, ${dotOpacity})`;
@@ -168,7 +168,7 @@ function DumbaraCanvas() {
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="w-full h-full opacity-90" />;
+  return <canvas ref={canvasRef} className="w-full h-full opacity-45" />;
 }
 
 // ------------------------------------------------------------------
@@ -259,9 +259,9 @@ function LiyawelaCanvas() {
           const glow = dist < maxDist ? Math.pow(1 - dist / maxDist, 2) : 0;
 
           const baseOpacity = isLight
-            ? (v % 2 === 0 ? 0.45 : 0.40)
-            : (v % 2 === 0 ? 0.65 : 0.60);
-          const opacity = Math.min(1, baseOpacity + glow * 0.35);
+            ? (v % 2 === 0 ? 0.35 : 0.30)
+            : (v % 2 === 0 ? 0.50 : 0.45);
+          const opacity = Math.min(1, baseOpacity + glow * 0.45);
 
           ctx.lineWidth = 2.5 + glow * 2.0;
           ctx.strokeStyle = isLight
@@ -284,7 +284,7 @@ function LiyawelaCanvas() {
           const lx = x + Math.cos(leafAngle) * (35 + glow * 8);
           const ly = y + Math.sin(leafAngle) * (35 + glow * 8);
 
-          const leafOpacity = Math.min(1, (isLight ? 0.50 : 0.70) + glow * 0.30);
+          const leafOpacity = Math.min(1, (isLight ? 0.35 : 0.50) + glow * 0.45);
           ctx.strokeStyle = isLight
             ? `rgba(139, 39, 212, ${leafOpacity})`
             : `rgba(168, 85, 247, ${leafOpacity})`;
@@ -316,7 +316,7 @@ function LiyawelaCanvas() {
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="w-full h-full opacity-90" />;
+  return <canvas ref={canvasRef} className="w-full h-full opacity-45" />;
 }
 
 // ------------------------------------------------------------------
@@ -406,8 +406,8 @@ function PalaPethiCanvas() {
           const glow = dist < maxDist ? Math.pow(1 - dist / maxDist, 2) : 0;
           const scale = 1 + glow * 0.12;
 
-          const basePetalOpacity = isLight ? 0.45 : 0.65;
-          const petalOpacity = Math.min(1, basePetalOpacity + glow * 0.35);
+          const basePetalOpacity = isLight ? 0.35 : 0.50;
+          const petalOpacity = Math.min(1, basePetalOpacity + glow * 0.45);
 
           ctx.strokeStyle = isLight
             ? `rgba(14, 116, 144, ${petalOpacity})`
@@ -438,7 +438,7 @@ function PalaPethiCanvas() {
           }
 
           // Center Lotus Seed
-          const seedOpacity = Math.min(1, (isLight ? 0.70 : 0.85) + glow * 0.25);
+          const seedOpacity = Math.min(1, (isLight ? 0.50 : 0.70) + glow * 0.30);
           ctx.fillStyle = isLight
             ? `rgba(180, 83, 9, ${seedOpacity})`
             : `rgba(245, 158, 11, ${seedOpacity})`;
@@ -461,5 +461,5 @@ function PalaPethiCanvas() {
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="w-full h-full opacity-90" />;
+  return <canvas ref={canvasRef} className="w-full h-full opacity-45" />;
 }

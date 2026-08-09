@@ -2,11 +2,11 @@
 
 /* ------------------------------------------------------------------
    DESIGN TOKENS
-   Deep Carbon base, Electric Indigo / Cyber Cyan / Neon Violet accents.
+   Deep Midnight Carbon base (#05080f), Electric Indigo / Cyber Cyan / Neon Violet.
    ------------------------------------------------------------------ */
 :root {
-  --bg-obsidian: #0b0f17;
-  --bg-obsidian-raised: #0e1420;
+  --bg-obsidian: #05080f;
+  --bg-obsidian-raised: #0a0e18;
   --indigo: #6366f1;
   --cyan: #06b6d4;
   --violet: #a855f7;
@@ -91,13 +91,13 @@ body.light-theme,
 
 /* Hero Portrait Card & Frame Theme Overrides */
 .hero-portrait-card {
-  background-color: rgba(11, 15, 23, 0.95);
+  background-color: rgba(8, 12, 20, 0.95);
   border: 2px solid rgba(255, 255, 255, 0.20);
   backdrop-filter: blur(20px);
 }
 
 .hero-portrait-frame {
-  background-color: #0b0f17;
+  background-color: #05080f;
 }
 
 .light-theme .hero-portrait-card {
@@ -113,7 +113,7 @@ body.light-theme,
 
 /* Pattern Dimming Mask Overlay Behind Text */
 .pattern-mask-left {
-  background: linear-gradient(to right, rgba(11, 15, 23, 0.5) 0%, rgba(11, 15, 23, 0.2) 60%, transparent 100%);
+  background: linear-gradient(to right, rgba(5, 8, 15, 0.65) 0%, rgba(5, 8, 15, 0.25) 60%, transparent 100%);
 }
 .light-theme .pattern-mask-left {
   background: linear-gradient(to right, rgba(247, 245, 241, 0.65) 0%, rgba(247, 245, 241, 0.25) 60%, transparent 100%) !important;
@@ -276,11 +276,11 @@ body.light-theme,
 .animate-border-spin { animation: border-spin 3.5s linear infinite; }
 
 /* ------------------------------------------------------------------
-   UNIFIED GLOBAL MESH GRADIENT
+   UNIFIED GLOBAL MESH GRADIENT — DEEP OBSIDIAN CARBON (#05080f)
    ------------------------------------------------------------------ */
 .mesh-bg {
   background-color: var(--bg-obsidian);
-  background-image: linear-gradient(to bottom, var(--bg-obsidian), var(--bg-obsidian));
+  background-image: linear-gradient(to bottom, #05080f, #05080f);
 }
 
 @keyframes gradient-x {

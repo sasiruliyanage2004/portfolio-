@@ -23,7 +23,7 @@ export default function CulturalPatternCanvas({ theme = "dumbara" }) {
 }
 
 // ------------------------------------------------------------------
-// 1. FULL-PAGE CURSOR-REACTIVE DUMBARA GEOMETRIC MAT CANVAS
+// 1. FULL-PAGE VIBRANT CURSOR-REACTIVE DUMBARA GEOMETRIC MAT CANVAS
 // ------------------------------------------------------------------
 function DumbaraCanvas() {
   const canvasRef = useRef(null);
@@ -79,19 +79,19 @@ function DumbaraCanvas() {
       mouse.y += (mouse.targetY - mouse.y) * 0.1;
 
       const isLight = document.documentElement.classList.contains("light-theme");
-      const size = 90;
+      const size = 95;
       const cols = Math.ceil(w / size) + 2;
       const rows = Math.ceil(h / size) + 2;
-      const maxDist = 280;
+      const maxDist = 300;
 
       // Draw Cursor Spotlight Glow Aura
       if (mouse.x > 0 && mouse.y > 0 && !isTouchDevice) {
         const glowGrad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, maxDist);
         if (isLight) {
-          glowGrad.addColorStop(0, "rgba(67, 56, 202, 0.08)");
+          glowGrad.addColorStop(0, "rgba(67, 56, 202, 0.12)");
           glowGrad.addColorStop(1, "rgba(67, 56, 202, 0)");
         } else {
-          glowGrad.addColorStop(0, "rgba(6, 182, 212, 0.12)");
+          glowGrad.addColorStop(0, "rgba(6, 182, 212, 0.18)");
           glowGrad.addColorStop(1, "rgba(6, 182, 212, 0)");
         }
         ctx.fillStyle = glowGrad;
@@ -109,18 +109,18 @@ function DumbaraCanvas() {
           // Distance-based Cursor Glow & Scale Interpolation
           const dist = Math.hypot(x - mouse.x, y + wave - mouse.y);
           const glow = dist < maxDist ? Math.pow(1 - dist / maxDist, 2) : 0;
-          const scale = 1 + glow * 0.10;
+          const scale = 1 + glow * 0.12;
 
-          const baseOuterOpacity = isLight ? 0.25 : 0.35;
-          const baseInnerOpacity = isLight ? 0.25 : 0.40;
-          const outerOpacity = Math.min(1, baseOuterOpacity + glow * 0.50);
-          const innerOpacity = Math.min(1, baseInnerOpacity + glow * 0.50);
+          const baseOuterOpacity = isLight ? 0.55 : 0.65;
+          const baseInnerOpacity = isLight ? 0.50 : 0.60;
+          const outerOpacity = Math.min(1, baseOuterOpacity + glow * 0.35);
+          const innerOpacity = Math.min(1, baseInnerOpacity + glow * 0.35);
 
           // Outer Diamond Border
           ctx.strokeStyle = isLight
             ? `rgba(67, 56, 202, ${outerOpacity})`
             : `rgba(6, 182, 212, ${outerOpacity})`;
-          ctx.lineWidth = 1.8 + glow * 0.8;
+          ctx.lineWidth = 2.2 + glow * 0.8;
           ctx.beginPath();
           ctx.moveTo(x, y - (size / 2) * scale + wave);
           ctx.lineTo(x + (size / 2) * scale, y + wave);
@@ -133,7 +133,7 @@ function DumbaraCanvas() {
           ctx.strokeStyle = isLight
             ? `rgba(14, 116, 144, ${innerOpacity})`
             : `rgba(99, 102, 241, ${innerOpacity})`;
-          ctx.lineWidth = 1.4 + glow * 0.6;
+          ctx.lineWidth = 1.6 + glow * 0.6;
           ctx.beginPath();
           ctx.moveTo(x, y - (size / 3.5) * scale + wave);
           ctx.lineTo(x + (size / 3.5) * scale, y + wave);
@@ -144,12 +144,12 @@ function DumbaraCanvas() {
 
           // Dumbara Center Lotus Dots
           if ((c + r) % 2 === 0) {
-            const dotOpacity = Math.min(1, (isLight ? 0.35 : 0.45) + glow * 0.45);
+            const dotOpacity = Math.min(1, (isLight ? 0.65 : 0.75) + glow * 0.25);
             ctx.fillStyle = isLight
               ? `rgba(139, 39, 212, ${dotOpacity})`
               : `rgba(6, 182, 212, ${dotOpacity})`;
             ctx.beginPath();
-            ctx.arc(x, y + wave, 4 + glow * 2.5, 0, Math.PI * 2);
+            ctx.arc(x, y + wave, 4.5 + glow * 2.5, 0, Math.PI * 2);
             ctx.fill();
           }
         }
@@ -168,11 +168,11 @@ function DumbaraCanvas() {
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="w-full h-full opacity-45" />;
+  return <canvas ref={canvasRef} className="w-full h-full opacity-85" />;
 }
 
 // ------------------------------------------------------------------
-// 2. FULL-PAGE CURSOR-REACTIVE LIYAWELA BIO-FLOW CANVAS
+// 2. FULL-PAGE VIBRANT CURSOR-REACTIVE LIYAWELA BIO-FLOW CANVAS
 // ------------------------------------------------------------------
 function LiyawelaCanvas() {
   const canvasRef = useRef(null);
@@ -228,16 +228,16 @@ function LiyawelaCanvas() {
 
       const isLight = document.documentElement.classList.contains("light-theme");
       const vineCount = Math.ceil(h / 180);
-      const maxDist = 280;
+      const maxDist = 300;
 
       // Draw Cursor Spotlight Glow Aura
       if (mouse.x > 0 && mouse.y > 0 && !isTouchDevice) {
         const glowGrad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, maxDist);
         if (isLight) {
-          glowGrad.addColorStop(0, "rgba(139, 39, 212, 0.08)");
+          glowGrad.addColorStop(0, "rgba(139, 39, 212, 0.12)");
           glowGrad.addColorStop(1, "rgba(139, 39, 212, 0)");
         } else {
-          glowGrad.addColorStop(0, "rgba(168, 85, 247, 0.12)");
+          glowGrad.addColorStop(0, "rgba(168, 85, 247, 0.18)");
           glowGrad.addColorStop(1, "rgba(168, 85, 247, 0)");
         }
         ctx.fillStyle = glowGrad;
@@ -259,11 +259,11 @@ function LiyawelaCanvas() {
           const glow = dist < maxDist ? Math.pow(1 - dist / maxDist, 2) : 0;
 
           const baseOpacity = isLight
-            ? (v % 2 === 0 ? 0.35 : 0.30)
-            : (v % 2 === 0 ? 0.50 : 0.45);
-          const opacity = Math.min(1, baseOpacity + glow * 0.45);
+            ? (v % 2 === 0 ? 0.55 : 0.50)
+            : (v % 2 === 0 ? 0.70 : 0.65);
+          const opacity = Math.min(1, baseOpacity + glow * 0.30);
 
-          ctx.lineWidth = 2.5 + glow * 2.0;
+          ctx.lineWidth = 2.8 + glow * 2.0;
           ctx.strokeStyle = isLight
             ? v % 2 === 0 ? `rgba(139, 39, 212, ${opacity})` : `rgba(14, 116, 144, ${opacity})`
             : v % 2 === 0 ? `rgba(168, 85, 247, ${opacity})` : `rgba(6, 182, 212, ${opacity})`;
@@ -284,11 +284,11 @@ function LiyawelaCanvas() {
           const lx = x + Math.cos(leafAngle) * (35 + glow * 8);
           const ly = y + Math.sin(leafAngle) * (35 + glow * 8);
 
-          const leafOpacity = Math.min(1, (isLight ? 0.35 : 0.50) + glow * 0.45);
+          const leafOpacity = Math.min(1, (isLight ? 0.55 : 0.70) + glow * 0.30);
           ctx.strokeStyle = isLight
             ? `rgba(139, 39, 212, ${leafOpacity})`
             : `rgba(168, 85, 247, ${leafOpacity})`;
-          ctx.lineWidth = 1.8 + glow * 0.8;
+          ctx.lineWidth = 2.0 + glow * 0.8;
           ctx.beginPath();
           ctx.moveTo(x, y);
           ctx.quadraticCurveTo(x + 20, y - 25, lx, ly);
@@ -316,11 +316,11 @@ function LiyawelaCanvas() {
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="w-full h-full opacity-45" />;
+  return <canvas ref={canvasRef} className="w-full h-full opacity-85" />;
 }
 
 // ------------------------------------------------------------------
-// 3. FULL-PAGE CURSOR-REACTIVE PALA PETHI FLORAL CANVAS
+// 3. FULL-PAGE VIBRANT CURSOR-REACTIVE PALA PETHI FLORAL CANVAS
 // ------------------------------------------------------------------
 function PalaPethiCanvas() {
   const canvasRef = useRef(null);
@@ -378,16 +378,16 @@ function PalaPethiCanvas() {
       const spacing = 100;
       const cols = Math.ceil(w / spacing) + 2;
       const rows = Math.ceil(h / spacing) + 2;
-      const maxDist = 280;
+      const maxDist = 300;
 
       // Draw Cursor Spotlight Glow Aura
       if (mouse.x > 0 && mouse.y > 0 && !isTouchDevice) {
         const glowGrad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, maxDist);
         if (isLight) {
-          glowGrad.addColorStop(0, "rgba(14, 116, 144, 0.08)");
+          glowGrad.addColorStop(0, "rgba(14, 116, 144, 0.12)");
           glowGrad.addColorStop(1, "rgba(14, 116, 144, 0)");
         } else {
-          glowGrad.addColorStop(0, "rgba(20, 184, 166, 0.12)");
+          glowGrad.addColorStop(0, "rgba(20, 184, 166, 0.18)");
           glowGrad.addColorStop(1, "rgba(20, 184, 166, 0)");
         }
         ctx.fillStyle = glowGrad;
@@ -406,13 +406,13 @@ function PalaPethiCanvas() {
           const glow = dist < maxDist ? Math.pow(1 - dist / maxDist, 2) : 0;
           const scale = 1 + glow * 0.12;
 
-          const basePetalOpacity = isLight ? 0.35 : 0.50;
-          const petalOpacity = Math.min(1, basePetalOpacity + glow * 0.45);
+          const basePetalOpacity = isLight ? 0.50 : 0.65;
+          const petalOpacity = Math.min(1, basePetalOpacity + glow * 0.35);
 
           ctx.strokeStyle = isLight
             ? `rgba(14, 116, 144, ${petalOpacity})`
             : `rgba(20, 184, 166, ${petalOpacity})`;
-          ctx.lineWidth = 2.2 + glow * 0.8;
+          ctx.lineWidth = 2.4 + glow * 0.8;
           const R = 28 * scale;
 
           for (let angle = 0; angle < Math.PI * 2; angle += Math.PI / 2) {
@@ -427,18 +427,18 @@ function PalaPethiCanvas() {
             ctx.strokeStyle = isLight
               ? `rgba(180, 83, 9, ${petalOpacity * 0.9})`
               : `rgba(245, 158, 11, ${petalOpacity * 0.9})`;
-            ctx.lineWidth = 1.4 + glow * 0.5;
+            ctx.lineWidth = 1.6 + glow * 0.5;
             ctx.beginPath();
             ctx.arc(px, py, R / 3.5, angle - Math.PI / 2, angle + Math.PI / 2);
             ctx.stroke();
             ctx.strokeStyle = isLight
               ? `rgba(14, 116, 144, ${petalOpacity})`
               : `rgba(20, 184, 166, ${petalOpacity})`;
-            ctx.lineWidth = 2.2 + glow * 0.8;
+            ctx.lineWidth = 2.4 + glow * 0.8;
           }
 
           // Center Lotus Seed
-          const seedOpacity = Math.min(1, (isLight ? 0.50 : 0.70) + glow * 0.30);
+          const seedOpacity = Math.min(1, (isLight ? 0.65 : 0.80) + glow * 0.25);
           ctx.fillStyle = isLight
             ? `rgba(180, 83, 9, ${seedOpacity})`
             : `rgba(245, 158, 11, ${seedOpacity})`;
@@ -461,5 +461,5 @@ function PalaPethiCanvas() {
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="w-full h-full opacity-45" />;
+  return <canvas ref={canvasRef} className="w-full h-full opacity-85" />;
 }

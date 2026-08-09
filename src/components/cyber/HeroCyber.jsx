@@ -143,9 +143,6 @@ export default function HeroCyber() {
       id="home"
       className="relative min-h-screen w-full overflow-hidden bg-transparent flex items-center pt-24 sm:pt-28 lg:pt-32 pb-16"
     >
-      {/* Theme-Aware Pattern dimming mask overlay behind text column */}
-      <div className="pattern-mask-left absolute top-0 left-0 bottom-0 w-full max-w-2xl pointer-events-none z-[1]" />
-
       <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 gap-8 px-6 py-4 sm:py-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:px-10">
         {/* Left Column — Text Intro */}
         <motion.div style={{ scale: heroTextScale, y: heroTextY, opacity: heroTextOpacity }}>

@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
-import { motion, AnimatePresence, useMotionValue, useSpring, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, FileDown, Code2, Star, Sparkles, Cpu, X, Info } from "lucide-react";
+import { motion, useMotionValue, useSpring, useScroll, useTransform } from "framer-motion";
+import { ArrowRight, FileDown, Code2, Star, Cpu } from "lucide-react";
 import CulturalPatternCanvas from "../CulturalPatternCanvas";
 
 function MagneticButton({ children, className = "", ...props }) {
@@ -78,8 +78,7 @@ function TiltCard({ children, className = "" }) {
   );
 }
 
-export default function HeroCyber({ culturalTheme = "dumbara" }) {
-  const [showCaseStudy, setShowCaseStudy] = useState(false);
+export default function HeroCyber({ culturalTheme = "dumbara", onOpenCaseStudy }) {
   const { scrollY } = useScroll();
 
   // Scroll-driven transforms for Portrait Image Card
@@ -92,40 +91,18 @@ export default function HeroCyber({ culturalTheme = "dumbara" }) {
   const heroTextY = useTransform(scrollY, [0, 500], [0, 40]);
   const heroTextOpacity = useTransform(scrollY, [0, 500], [1, 0.75]);
 
-  // Dynamic Theme Case Study Configurations
-  const themeConfig = {
-    dumbara: {
-      badge: "[SYSTEM_STATUS: DUMBARA_GEOMETRIC_BLUEPRINT]",
-      title: "Dumbara Geometric Mat Weave Algorithm",
-      motif: "18th-Century Sri Lankan Dumbara Weaving Motif",
-      technique: "HTML5 Canvas 2D Procedural Lattice Rendering",
-      algorithmText: "This background pattern is procedurally generated in real-time using HTML5 Canvas 2D vector pathing. Trigonometric sine-wave functions simulate the physical mechanical tension of traditional Dumbara weaving looms at 60fps. Concentric rhombus diamonds and geometric lotus cross motifs are dynamically calculated with zero static image assets.",
-      glowColor: "from-cyan-500/25 via-indigo-500/25 to-blue-500/25",
-    },
-    liyawela: {
-      badge: "[SYSTEM_STATUS: LIYAWELA_BIOTECH_FLOW]",
-      title: "Liyawela Bio-Organic Vine Flow Algorithm",
-      motif: "Traditional Sri Lankan Liyawel (Leaf & Vine) Carving",
-      technique: "Parametric Sinusoidal Bezier Curve Math",
-      algorithmText: "This background pattern is procedurally rendered in real-time using parametric sinusoidal Bezier curves and quadratic leaf-tendril node spirals. Employs 60fps fluid wave mathematics to simulate weightless organic energy forms drifting across the screen without scroll latency.",
-      glowColor: "from-violet-500/25 via-purple-500/25 to-cyan-500/25",
-    },
-    palapethi: {
-      badge: "[SYSTEM_STATUS: PALA_PETHI_DECONSTRUCTED_UI]",
-      title: "Pala Pethi Floral Petal Lattice Algorithm",
-      motif: "Traditional Sri Lankan Pala Pethi (Petal) Border Motif",
-      technique: "Polar Coordinate Dual-Arc Flower Parametrics",
-      algorithmText: "This background pattern is procedurally constructed using polar coordinate transformations and dual-concentric arc pathing. Interlocking 4-petal lotus flower lattices are rendered with an antigravity floating drift calculation at 60fps.",
-      glowColor: "from-cyan-500/25 via-teal-500/25 to-indigo-500/25",
-    },
-  }[culturalTheme] || {
-    badge: "[SYSTEM_STATUS: DUMBARA_GEOMETRIC_BLUEPRINT]",
-    title: "Dumbara Geometric Mat Weave Algorithm",
-    motif: "Dumbara Mat Weave Motif",
-    technique: "HTML5 Canvas 2D Vector Geometry",
-    algorithmText: "Procedurally generated HTML5 Canvas 2D vector geometry.",
-    glowColor: "from-cyan-500/25 via-indigo-500/25 to-violet-500/25",
-  };
+  // Dynamic Theme Status Badges
+  const badgeText = {
+    dumbara: "[SYSTEM_STATUS: DUMBARA_GEOMETRIC_BLUEPRINT]",
+    liyawela: "[SYSTEM_STATUS: LIYAWELA_BIOTECH_FLOW]",
+    palapethi: "[SYSTEM_STATUS: PALA_PETHI_DECONSTRUCTED_UI]",
+  }[culturalTheme] || "[SYSTEM_STATUS: DUMBARA_GEOMETRIC_BLUEPRINT]";
+
+  const glowColor = {
+    dumbara: "from-cyan-500/25 via-indigo-500/25 to-blue-500/25",
+    liyawela: "from-violet-500/25 via-purple-500/25 to-cyan-500/25",
+    palapethi: "from-cyan-500/25 via-teal-500/25 to-indigo-500/25",
+  }[culturalTheme] || "from-cyan-500/25 via-indigo-500/25 to-violet-500/25";
 
   return (
     <section
@@ -141,7 +118,7 @@ export default function HeroCyber({ culturalTheme = "dumbara" }) {
       <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 gap-12 px-6 py-24 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:px-10">
         {/* Left Column — Text Intro */}
         <motion.div style={{ scale: heroTextScale, y: heroTextY, opacity: heroTextOpacity }}>
-          <div className="flex flex-wrap items-center gap-2 mb-6">
+          <div className="flex flex-wrap items-center gap-2.5 mb-6">
             {/* Status Badge */}
             <motion.div
               initial={{ opacity: 0, y: 12 }}
@@ -153,15 +130,15 @@ export default function HeroCyber({ culturalTheme = "dumbara" }) {
                 <span className="pulse-dot absolute inline-flex h-full w-full rounded-full bg-emerald-400" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
               </span>
-              {themeConfig.badge}
+              {badgeText}
             </motion.div>
 
             {/* "HOW IT'S MADE" Micro Case-Study Button */}
             <button
-              onClick={() => setShowCaseStudy(true)}
-              className="glass-panel inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 font-mono text-[10px] text-emerald-300 border border-emerald-400/40 bg-emerald-950/40 hover:bg-emerald-900/50 transition-all shadow-lg hover:scale-105"
+              onClick={onOpenCaseStudy}
+              className="glass-panel inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 font-mono text-[10px] text-emerald-300 border border-emerald-400/40 bg-emerald-950/50 hover:bg-emerald-900/70 transition-all shadow-lg hover:scale-105 cursor-pointer z-20"
             >
-              <Cpu className="h-3 w-3 text-emerald-400" />
+              <Cpu className="h-3.5 w-3.5 text-emerald-400" />
               <span>⚡ How It's Made</span>
             </button>
           </div>
@@ -222,7 +199,7 @@ export default function HeroCyber({ culturalTheme = "dumbara" }) {
           className="group relative flex justify-center [perspective:1000px] py-6 px-4"
         >
           {/* Ambient Glow Aura */}
-          <div className={`absolute inset-4 bg-gradient-to-r ${themeConfig.glowColor} rounded-3xl blur-3xl scale-105 pointer-events-none`} />
+          <div className={`absolute inset-4 bg-gradient-to-r ${glowColor} rounded-3xl blur-3xl scale-105 pointer-events-none`} />
 
           {/* Main 3D Card Container */}
           <TiltCard className="glass-panel noise-overlay relative w-full max-w-[420px] rounded-3xl p-3 shadow-2xl border-2 border-white/20 transition-all duration-500">
@@ -259,65 +236,6 @@ export default function HeroCyber({ culturalTheme = "dumbara" }) {
       >
         SCROLL
       </motion.div>
-
-      {/* "HOW IT'S MADE" Algorithmic Micro Case Study Modal */}
-      <AnimatePresence>
-        {showCaseStudy && (
-          <div className="fixed inset-0 z-[120] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="glass-panel noise-overlay relative w-full max-w-lg rounded-2xl p-6 border border-cyan-400/40 bg-[#0b0f17]/95 shadow-2xl text-left"
-            >
-              <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-4">
-                <div className="flex items-center gap-2">
-                  <Cpu className="h-5 w-5 text-cyan-400" />
-                  <h3 className="font-mono text-xs font-semibold text-white uppercase tracking-wider">
-                    Engineering Case Study // {culturalTheme.toUpperCase()}
-                  </h3>
-                </div>
-                <button
-                  onClick={() => setShowCaseStudy(false)}
-                  className="rounded-full p-1 text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
-                >
-                  <X className="h-5 w-5" />
-                </button>
-              </div>
-
-              <div className="space-y-4 font-mono text-xs text-slate-300 leading-relaxed">
-                <div className="rounded-xl border border-cyan-500/20 bg-cyan-950/30 p-3.5">
-                  <span className="text-cyan-300 font-semibold uppercase block mb-1">{themeConfig.title}</span>
-                  <p className="text-[11px] text-slate-200 leading-relaxed">
-                    {themeConfig.algorithmText}
-                  </p>
-                </div>
-
-                <div>
-                  <h4 className="text-white font-semibold mb-2 text-[11px] uppercase tracking-wider text-cyan-400">
-                    // Technical Specifications
-                  </h4>
-                  <ul className="list-disc list-inside space-y-1.5 text-slate-400 text-[11px]">
-                    <li><strong className="text-slate-200">Cultural Motif:</strong> {themeConfig.motif}</li>
-                    <li><strong className="text-slate-200">Technique:</strong> {themeConfig.technique}</li>
-                    <li><strong className="text-slate-200">Engine Stack:</strong> React 19 + HTML5 Canvas 2D Context API</li>
-                    <li><strong className="text-slate-200">Performance:</strong> 60fps GPU-accelerated requestAnimationFrame loop with zero scroll lag</li>
-                  </ul>
-                </div>
-              </div>
-
-              <div className="mt-6 flex justify-end">
-                <button
-                  onClick={() => setShowCaseStudy(false)}
-                  className="rounded-full bg-gradient-to-r from-indigo-500 to-cyan-500 px-5 py-2 text-xs font-medium text-white shadow-lg hover:shadow-cyan-500/25 transition-shadow"
-                >
-                  Close Technical Briefing
-                </button>
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
     </section>
   );
 }

@@ -7,9 +7,9 @@ export default function CulturalPatternCanvas({ theme = "dumbara" }) {
       <AnimatePresence mode="wait">
         <motion.div
           key={theme}
-          initial={{ opacity: 0, scale: 0.98 }}
+          initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 1.02 }}
+          exit={{ opacity: 0, scale: 1.04 }}
           transition={{ duration: 0.5, ease: "easeInOut" }}
           className="absolute inset-0 w-full h-full"
         >
@@ -23,8 +23,8 @@ export default function CulturalPatternCanvas({ theme = "dumbara" }) {
 }
 
 // ------------------------------------------------------------------
-// 1. DUMBARA GEOMETRIC MAT WEAVING CANVASES (ඩම්බර රටා)
-// Bold Rhombus Lattice + Stylized Elephant/Peacock Geometric Motifs
+// 1. DUMBARA GEOMETRIC MAT WEAVING CANVAS (ඩම්බර රටා - TAB 1)
+// Rhombus Diamond Lattice + Center Lotus Cross Dots (Kept Intact)
 // ------------------------------------------------------------------
 function DumbaraCanvas() {
   const canvasRef = useRef(null);
@@ -49,7 +49,7 @@ function DumbaraCanvas() {
       const h = canvas.height;
       ctx.clearRect(0, 0, w, h);
 
-      const size = 90; // Large, bold grid size
+      const size = 90;
       const cols = Math.ceil(w / size) + 2;
       const rows = Math.ceil(h / size) + 2;
 
@@ -60,7 +60,7 @@ function DumbaraCanvas() {
           const wave = Math.sin(time * 0.02 + (c + r) * 0.5) * 4;
 
           // Outer Bold Diamond Border
-          ctx.strokeStyle = "rgba(6, 182, 212, 0.40)"; // Bright cyan stroke
+          ctx.strokeStyle = "rgba(6, 182, 212, 0.45)";
           ctx.lineWidth = 1.8;
           ctx.beginPath();
           ctx.moveTo(x, y - size / 2 + wave);
@@ -71,7 +71,7 @@ function DumbaraCanvas() {
           ctx.stroke();
 
           // Inner Concentric Diamond
-          ctx.strokeStyle = "rgba(99, 102, 241, 0.45)"; // Bright indigo stroke
+          ctx.strokeStyle = "rgba(99, 102, 241, 0.50)";
           ctx.lineWidth = 1.4;
           ctx.beginPath();
           ctx.moveTo(x, y - size / 3.5 + wave);
@@ -81,22 +81,12 @@ function DumbaraCanvas() {
           ctx.closePath();
           ctx.stroke();
 
-          // Stylized Dumbara Elephant/Peacock Geometric Figure Motif in center cells
+          // Dumbara Center Dots
           if ((c + r) % 2 === 0) {
-            ctx.fillStyle = "rgba(6, 182, 212, 0.50)";
+            ctx.fillStyle = "rgba(6, 182, 212, 0.60)";
             ctx.beginPath();
             ctx.arc(x, y + wave, 4, 0, Math.PI * 2);
             ctx.fill();
-
-            // Dumbara Diamond Accents
-            ctx.strokeStyle = "rgba(6, 182, 212, 0.35)";
-            ctx.beginPath();
-            ctx.moveTo(x - 8, y + wave);
-            ctx.lineTo(x, y - 8 + wave);
-            ctx.lineTo(x + 8, y + wave);
-            ctx.lineTo(x, y + 8 + wave);
-            ctx.closePath();
-            ctx.stroke();
           }
         }
       }
@@ -116,8 +106,8 @@ function DumbaraCanvas() {
 }
 
 // ------------------------------------------------------------------
-// 2. LIYAWELA ORGANIC BIO-FLOW VINE CANVAS (ලියවැල)
-// Interlacing Curved S-Lines + Leaf Tendril Spirals
+// 2. LIYAWELA ORGANIC BIO-FLOW VINE CANVAS (ලියවැල - TAB 2)
+// Sweeping S-Curve Vines + Leaf Tendril Spirals (Unmistakable Organic Flow)
 // ------------------------------------------------------------------
 function LiyawelaCanvas() {
   const canvasRef = useRef(null);
@@ -142,46 +132,47 @@ function LiyawelaCanvas() {
       const h = canvas.height;
       ctx.clearRect(0, 0, w, h);
 
-      const vineCount = 6;
-      ctx.lineWidth = 2.2;
+      // Draw 8 Interlacing Organic Liyawela Vines
+      const vineCount = 8;
 
       for (let v = 0; v < vineCount; v++) {
         const baseY = (h / (vineCount + 1)) * (v + 1);
-        const speed = 0.01 + v * 0.003;
-        const amplitude = 55 + v * 12;
+        const speed = 0.012 + v * 0.003;
+        const amplitude = 65 + v * 10;
+
+        ctx.lineWidth = 2.5;
+        ctx.strokeStyle = v % 2 === 0 ? "rgba(168, 85, 247, 0.65)" : "rgba(6, 182, 212, 0.60)";
 
         ctx.beginPath();
-        ctx.strokeStyle = v % 2 === 0 ? "rgba(168, 85, 247, 0.45)" : "rgba(6, 182, 212, 0.40)";
-
-        for (let x = -40; x < w + 40; x += 15) {
-          const y = baseY + Math.sin(x * 0.008 + time * speed + v) * amplitude;
-
-          if (x === -40) ctx.moveTo(x, y);
+        for (let x = -50; x < w + 50; x += 10) {
+          const y = baseY + Math.sin(x * 0.007 + time * speed + v * 1.5) * amplitude;
+          if (x === -50) ctx.moveTo(x, y);
           else ctx.lineTo(x, y);
-
-          // Draw Liyawela Leaf Tendril Spirals
-          if (x % 90 === 0) {
-            const angle = Math.cos(x * 0.008 + time * speed) * 1.2;
-            const lx = x + Math.cos(angle) * 30;
-            const ly = y + Math.sin(angle) * 30;
-
-            ctx.save();
-            ctx.strokeStyle = "rgba(168, 85, 247, 0.50)";
-            ctx.lineWidth = 1.5;
-            ctx.beginPath();
-            ctx.moveTo(x, y);
-            ctx.quadraticCurveTo(x + 15, y - 20, lx, ly);
-            ctx.stroke();
-
-            // Leaf Tendril Tip Node
-            ctx.fillStyle = "rgba(6, 182, 212, 0.60)";
-            ctx.beginPath();
-            ctx.arc(lx, ly, 4, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.restore();
-          }
         }
         ctx.stroke();
+
+        // Draw Liyawela Leaf-and-Tendril Nodes along the vine
+        for (let x = 40; x < w; x += 110) {
+          const y = baseY + Math.sin(x * 0.007 + time * speed + v * 1.5) * amplitude;
+          const leafAngle = Math.cos(x * 0.007 + time * speed) * 1.4;
+
+          const lx = x + Math.cos(leafAngle) * 35;
+          const ly = y + Math.sin(leafAngle) * 35;
+
+          // Draw Leaf Tendril Curve
+          ctx.strokeStyle = "rgba(168, 85, 247, 0.70)";
+          ctx.lineWidth = 1.8;
+          ctx.beginPath();
+          ctx.moveTo(x, y);
+          ctx.quadraticCurveTo(x + 20, y - 25, lx, ly);
+          ctx.stroke();
+
+          // Draw Filled Liyawela Leaf Oval Node
+          ctx.fillStyle = "rgba(6, 182, 212, 0.70)";
+          ctx.beginPath();
+          ctx.ellipse(lx, ly, 7, 4, leafAngle, 0, Math.PI * 2);
+          ctx.fill();
+        }
       }
 
       animationFrameId = requestAnimationFrame(render);
@@ -199,8 +190,8 @@ function LiyawelaCanvas() {
 }
 
 // ------------------------------------------------------------------
-// 3. PALA PETHI FLORAL PETAL CANVAS (පළා පෙති)
-// Layered Petal/Lotus Flowers + Antigravity Floating Petal Fragments
+// 3. PALA PETHI FLORAL PETAL CANVAS (පළා පෙති - TAB 3)
+// Repeating 4-Petal Lotus Flowers + Amber Seeds (Unmistakable Lotus Petals)
 // ------------------------------------------------------------------
 function PalaPethiCanvas() {
   const canvasRef = useRef(null);
@@ -225,22 +216,21 @@ function PalaPethiCanvas() {
       const h = canvas.height;
       ctx.clearRect(0, 0, w, h);
 
-      const spacing = 110;
+      const spacing = 100;
       const cols = Math.ceil(w / spacing) + 2;
       const rows = Math.ceil(h / spacing) + 2;
 
-      ctx.lineWidth = 2.0;
-
       for (let r = -1; r < rows; r++) {
         for (let c = -1; c < cols; c++) {
-          const cx = c * spacing;
+          const cx = c * spacing + (r % 2 === 0 ? 0 : spacing / 2);
           const cy = r * spacing;
-          const driftY = Math.sin(time * 0.015 + c * 0.4) * 8;
+          const driftY = Math.sin(time * 0.015 + c * 0.5) * 8;
 
-          ctx.strokeStyle = "rgba(20, 184, 166, 0.45)"; // Teal cyan
+          // Draw 4 Outer Lotus Petals (Teal Cyan)
+          ctx.strokeStyle = "rgba(20, 184, 166, 0.65)";
+          ctx.lineWidth = 2.2;
+          const R = 28;
 
-          // Draw Layered 4-Petal Lotus Flower Motif
-          const R = 24;
           for (let angle = 0; angle < Math.PI * 2; angle += Math.PI / 2) {
             const px = cx + Math.cos(angle) * (R / 2);
             const py = cy + driftY + Math.sin(angle) * (R / 2);
@@ -249,18 +239,20 @@ function PalaPethiCanvas() {
             ctx.arc(px, py, R / 2, angle - Math.PI / 2, angle + Math.PI / 2);
             ctx.stroke();
 
-            // Inner Petal Layer
-            ctx.strokeStyle = "rgba(245, 158, 11, 0.35)"; // Amber gold accent
+            // Inner Petal Layer (Amber Gold)
+            ctx.strokeStyle = "rgba(245, 158, 11, 0.55)";
+            ctx.lineWidth = 1.4;
             ctx.beginPath();
             ctx.arc(px, py, R / 3.5, angle - Math.PI / 2, angle + Math.PI / 2);
             ctx.stroke();
-            ctx.strokeStyle = "rgba(20, 184, 166, 0.45)";
+            ctx.strokeStyle = "rgba(20, 184, 166, 0.65)";
+            ctx.lineWidth = 2.2;
           }
 
-          // Center Lotus Seed
-          ctx.fillStyle = "rgba(245, 158, 11, 0.70)";
+          // Center Glowing Amber Lotus Seed
+          ctx.fillStyle = "rgba(245, 158, 11, 0.85)";
           ctx.beginPath();
-          ctx.arc(cx, cy + driftY, 3.5, 0, Math.PI * 2);
+          ctx.arc(cx, cy + driftY, 4.5, 0, Math.PI * 2);
           ctx.fill();
         }
       }

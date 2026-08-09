@@ -97,55 +97,55 @@ function Card3D({ project }) {
         onMouseMove={handleMove}
         onMouseLeave={handleLeave}
         style={{ rotateX: srx, rotateY: sry, transformPerspective: 900 }}
-        className="noise-overlay relative flex h-full min-h-[240px] flex-col overflow-hidden rounded-2xl p-6 border border-white/15 dark:border-white/15 light-theme:border-slate-300/40 bg-[#0b0f17]/92 dark:bg-[#0b0f17]/92 light-theme:bg-[#F7F5F1]/95 backdrop-blur-xl group-hover:border-cyan-400/50 transition-colors duration-300 shadow-xl z-10"
+        className="noise-overlay relative flex h-full min-h-[250px] flex-col overflow-hidden rounded-2xl p-7 border-2 border-white/20 dark:border-white/20 light-theme:border-slate-300/60 bg-[#0e1422] dark:bg-[#0e1422] light-theme:bg-[#ffffff] group-hover:border-cyan-400 transition-all duration-300 shadow-2xl z-10"
       >
         {/* Animated Border Beam Spinning Accent */}
         <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-          <div className="absolute inset-[-100%] animate-border-spin bg-[conic-gradient(from_0deg,transparent_0%,#6366F1_10%,#06B6D4_25%,transparent_40%)] opacity-30" />
+          <div className="absolute inset-[-100%] animate-border-spin bg-[conic-gradient(from_0deg,transparent_0%,#6366F1_10%,#06B6D4_25%,transparent_40%)] opacity-40" />
         </div>
 
-        <div className="flex items-start justify-between">
-          <h3 className="text-xl font-semibold text-white group-hover:text-cyan-300 transition-colors">
+        <div className="flex items-start justify-between gap-4">
+          <h3 className="text-2xl font-bold text-white dark:text-white light-theme:text-slate-900 group-hover:text-cyan-300 transition-colors">
             {project.title}
           </h3>
           {project.live && (
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-2.5 py-1 font-mono text-[10px] tracking-wide text-emerald-300">
-              <Radio className="h-2.5 w-2.5" />
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/50 bg-emerald-500/20 px-3 py-1 font-mono text-xs font-semibold text-emerald-300">
+              <Radio className="h-3 w-3" />
               LIVE
             </span>
           )}
         </div>
 
-        <p className="mt-3 text-sm leading-relaxed text-slate-300">
+        <p className="mt-4 text-base leading-relaxed text-slate-200 dark:text-slate-200 light-theme:text-slate-700 font-normal">
           {project.blurb}
         </p>
 
         <div className="mt-auto pt-6">
-          <div className="flex flex-wrap gap-1.5 mb-4">
+          <div className="flex flex-wrap gap-2 mb-5">
             {project.tech.map((t) => (
               <span
                 key={t}
-                className="rounded-md border border-white/10 bg-white/5 px-2.5 py-1 font-mono text-[10px] text-slate-300"
+                className="rounded-lg border border-cyan-500/30 bg-cyan-950/40 dark:bg-cyan-950/40 light-theme:bg-cyan-50 px-3 py-1 font-mono text-xs font-semibold text-cyan-300 dark:text-cyan-300 light-theme:text-cyan-700"
               >
                 {t}
               </span>
             ))}
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-5">
             <a
               href={project.demo}
-              className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold text-cyan-300 transition-colors hover:text-white"
+              className="inline-flex items-center gap-1.5 font-mono text-xs font-bold text-cyan-300 hover:text-white transition-colors"
             >
-              Demo <ArrowUpRight className="h-3.5 w-3.5" />
+              Demo <ArrowUpRight className="h-4 w-4" />
             </a>
             <a
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold text-slate-400 transition-colors hover:text-cyan-300"
+              className="inline-flex items-center gap-1.5 font-mono text-xs font-bold text-slate-300 hover:text-cyan-300 transition-colors"
             >
-              <GithubIcon className="h-3.5 w-3.5" /> Code
+              <GithubIcon className="h-4 w-4" /> Code
             </a>
           </div>
         </div>
@@ -177,14 +177,14 @@ export default function ProjectsCyber() {
       <motion.div style={{ scale, opacity, y }} className="mx-auto max-w-7xl">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12 gap-6">
           <div>
-            <p className="font-mono text-xs tracking-[0.3em] text-cyan-400/80">SELECTED WORK</p>
-            <h2 className="mt-2 text-4xl font-semibold text-white sm:text-5xl">
+            <p className="font-mono text-xs tracking-[0.3em] text-cyan-400 font-semibold">SELECTED WORK</p>
+            <h2 className="mt-2 text-4xl font-bold text-white sm:text-5xl">
               Projects &amp; <span className="text-gradient">Builds</span>
             </h2>
           </div>
 
           {/* Sliding Category Tab Switcher Indicator */}
-          <div className="relative flex flex-wrap gap-1 rounded-full border border-white/10 bg-white/5 p-1.5 backdrop-blur-md">
+          <div className="relative flex flex-wrap gap-1 rounded-full border border-white/15 bg-[#0e1422] p-1.5 backdrop-blur-md">
             {CATEGORIES.map((c) => (
               <button
                 key={c}

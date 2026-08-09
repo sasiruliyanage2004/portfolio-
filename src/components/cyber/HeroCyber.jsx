@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { motion, useMotionValue, useSpring, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, FileDown, Code2, Star, Cpu } from "lucide-react";
+import { ArrowRight, FileDown, Code2, Star } from "lucide-react";
 import CulturalPatternCanvas from "../CulturalPatternCanvas";
 
 function MagneticButton({ children, className = "", ...props }) {
@@ -78,7 +78,7 @@ function TiltCard({ children, className = "" }) {
   );
 }
 
-export default function HeroCyber({ culturalTheme = "dumbara", onOpenCaseStudy }) {
+export default function HeroCyber({ culturalTheme = "dumbara" }) {
   const { scrollY } = useScroll();
 
   // Scroll-driven transforms for Portrait Image Card
@@ -91,23 +91,10 @@ export default function HeroCyber({ culturalTheme = "dumbara", onOpenCaseStudy }
   const heroTextY = useTransform(scrollY, [0, 500], [0, 40]);
   const heroTextOpacity = useTransform(scrollY, [0, 500], [1, 0.75]);
 
-  // Dynamic Theme Status Badges
-  const badgeText = {
-    dumbara: "[SYSTEM_STATUS: DUMBARA_GEOMETRIC_BLUEPRINT]",
-    liyawela: "[SYSTEM_STATUS: LIYAWELA_BIOTECH_FLOW]",
-    palapethi: "[SYSTEM_STATUS: PALA_PETHI_DECONSTRUCTED_UI]",
-  }[culturalTheme] || "[SYSTEM_STATUS: DUMBARA_GEOMETRIC_BLUEPRINT]";
-
-  const glowColor = {
-    dumbara: "from-cyan-500/25 via-indigo-500/25 to-blue-500/25",
-    liyawela: "from-violet-500/25 via-purple-500/25 to-cyan-500/25",
-    palapethi: "from-cyan-500/25 via-teal-500/25 to-indigo-500/25",
-  }[culturalTheme] || "from-cyan-500/25 via-indigo-500/25 to-violet-500/25";
-
   return (
     <section
       id="home"
-      className="relative min-h-screen w-full overflow-hidden mesh-bg flex items-center pt-24 sm:pt-28"
+      className="relative min-h-screen w-full overflow-hidden mesh-bg flex items-center pt-16 sm:pt-20 lg:pt-24"
     >
       {/* Real-time Procedural HTML5 Canvas Cultural Motif Engine */}
       <CulturalPatternCanvas theme={culturalTheme} />
@@ -115,38 +102,13 @@ export default function HeroCyber({ culturalTheme = "dumbara", onOpenCaseStudy }
       <div className="absolute -top-40 -left-32 h-96 w-96 rounded-full bg-indigo-500/20 blur-[120px] float-slow pointer-events-none" />
       <div className="absolute bottom-0 right-0 h-[28rem] w-[28rem] rounded-full bg-violet-500/15 blur-[130px] pointer-events-none" />
 
-      <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 gap-12 px-6 py-24 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:px-10">
+      <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 gap-10 px-6 py-16 sm:py-20 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:px-10">
         {/* Left Column — Text Intro */}
         <motion.div style={{ scale: heroTextScale, y: heroTextY, opacity: heroTextOpacity }}>
-          <div className="flex flex-wrap items-center gap-2.5 mb-6">
-            {/* Status Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="glass-panel noise-overlay relative inline-flex items-center gap-2.5 rounded-full px-4 py-2 font-mono text-[11px] tracking-wide text-cyan-300/90 border border-cyan-400/30"
-            >
-              <span className="relative flex h-2 w-2">
-                <span className="pulse-dot absolute inline-flex h-full w-full rounded-full bg-emerald-400" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
-              </span>
-              {badgeText}
-            </motion.div>
-
-            {/* "HOW IT'S MADE" Micro Case-Study Button */}
-            <button
-              onClick={onOpenCaseStudy}
-              className="glass-panel inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 font-mono text-[10px] text-emerald-300 border border-emerald-400/40 bg-emerald-950/50 hover:bg-emerald-900/70 transition-all shadow-lg hover:scale-105 cursor-pointer z-20"
-            >
-              <Cpu className="h-3.5 w-3.5 text-emerald-400" />
-              <span>⚡ How It's Made</span>
-            </button>
-          </div>
-
           <motion.h1
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
+            transition={{ duration: 0.7 }}
             className="text-5xl font-semibold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-7xl"
           >
             Building interfaces
@@ -157,7 +119,7 @@ export default function HeroCyber({ culturalTheme = "dumbara", onOpenCaseStudy }
           <motion.p
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
+            transition={{ duration: 0.7, delay: 0.15 }}
             className="mt-6 max-w-lg text-lg leading-relaxed text-slate-300"
           >
             Full-stack engineer crafting fast, precise, and quietly futuristic
@@ -196,10 +158,10 @@ export default function HeroCyber({ culturalTheme = "dumbara", onOpenCaseStudy }
           initial={{ opacity: 0, y: 24, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="group relative flex justify-center [perspective:1000px] py-6 px-4"
+          className="group relative flex justify-center [perspective:1000px] py-4 px-4"
         >
           {/* Ambient Glow Aura */}
-          <div className={`absolute inset-4 bg-gradient-to-r ${glowColor} rounded-3xl blur-3xl scale-105 pointer-events-none`} />
+          <div className="absolute inset-4 bg-gradient-to-r from-cyan-500/25 via-indigo-500/25 to-blue-500/25 rounded-3xl blur-3xl scale-105 pointer-events-none" />
 
           {/* Main 3D Card Container */}
           <TiltCard className="glass-panel noise-overlay relative w-full max-w-[420px] rounded-3xl p-3 shadow-2xl border-2 border-white/20 transition-all duration-500">

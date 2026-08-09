@@ -3,13 +3,13 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export default function CulturalPatternCanvas({ theme = "dumbara" }) {
   return (
-    <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+    <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden w-full h-full">
       <AnimatePresence mode="wait">
         <motion.div
           key={theme}
-          initial={{ opacity: 0, scale: 0.96 }}
+          initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 1.04 }}
+          exit={{ opacity: 0, scale: 1.02 }}
           transition={{ duration: 0.5, ease: "easeInOut" }}
           className="absolute inset-0 w-full h-full"
         >
@@ -23,7 +23,7 @@ export default function CulturalPatternCanvas({ theme = "dumbara" }) {
 }
 
 // ------------------------------------------------------------------
-// 1. CURSOR-REACTIVE DUMBARA GEOMETRIC MAT CANVAS (ඩම්බර රටා - TAB 1)
+// 1. FULL-PAGE CURSOR-REACTIVE DUMBARA GEOMETRIC MAT CANVAS
 // ------------------------------------------------------------------
 function DumbaraCanvas() {
   const canvasRef = useRef(null);
@@ -35,23 +35,37 @@ function DumbaraCanvas() {
     let animationFrameId;
     let time = 0;
 
-    // Mouse Tracking with Smooth Lerp
     let mouse = { x: -1000, y: -1000, targetX: -1000, targetY: -1000 };
+    let lastClientX = -1000;
+    let lastClientY = -1000;
     const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
 
     const handlePointerMove = (e) => {
       if (isTouchDevice) return;
+      lastClientX = e.clientX;
+      lastClientY = e.clientY;
       mouse.targetX = e.clientX;
-      mouse.targetY = e.clientY;
+      mouse.targetY = e.clientY + window.scrollY;
+    };
+
+    const handleScroll = () => {
+      if (isTouchDevice || lastClientX < 0) return;
+      mouse.targetX = lastClientX;
+      mouse.targetY = lastClientY + window.scrollY;
     };
 
     const handleResize = () => {
       canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      canvas.height = Math.max(
+        document.body.scrollHeight,
+        document.documentElement.scrollHeight,
+        window.innerHeight
+      );
     };
 
     handleResize();
     window.addEventListener("resize", handleResize);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("pointermove", handlePointerMove, { passive: true });
 
     const render = () => {
@@ -68,7 +82,7 @@ function DumbaraCanvas() {
       const size = 90;
       const cols = Math.ceil(w / size) + 2;
       const rows = Math.ceil(h / size) + 2;
-      const maxDist = 260;
+      const maxDist = 280;
 
       // Draw Cursor Spotlight Glow Aura
       if (mouse.x > 0 && mouse.y > 0 && !isTouchDevice) {
@@ -148,6 +162,7 @@ function DumbaraCanvas() {
 
     return () => {
       window.removeEventListener("resize", handleResize);
+      window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("pointermove", handlePointerMove);
       cancelAnimationFrame(animationFrameId);
     };
@@ -157,7 +172,7 @@ function DumbaraCanvas() {
 }
 
 // ------------------------------------------------------------------
-// 2. CURSOR-REACTIVE LIYAWELA BIO-FLOW CANVAS (ලියවැල - TAB 2)
+// 2. FULL-PAGE CURSOR-REACTIVE LIYAWELA BIO-FLOW CANVAS
 // ------------------------------------------------------------------
 function LiyawelaCanvas() {
   const canvasRef = useRef(null);
@@ -170,21 +185,36 @@ function LiyawelaCanvas() {
     let time = 0;
 
     let mouse = { x: -1000, y: -1000, targetX: -1000, targetY: -1000 };
+    let lastClientX = -1000;
+    let lastClientY = -1000;
     const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
 
     const handlePointerMove = (e) => {
       if (isTouchDevice) return;
+      lastClientX = e.clientX;
+      lastClientY = e.clientY;
       mouse.targetX = e.clientX;
-      mouse.targetY = e.clientY;
+      mouse.targetY = e.clientY + window.scrollY;
+    };
+
+    const handleScroll = () => {
+      if (isTouchDevice || lastClientX < 0) return;
+      mouse.targetX = lastClientX;
+      mouse.targetY = lastClientY + window.scrollY;
     };
 
     const handleResize = () => {
       canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      canvas.height = Math.max(
+        document.body.scrollHeight,
+        document.documentElement.scrollHeight,
+        window.innerHeight
+      );
     };
 
     handleResize();
     window.addEventListener("resize", handleResize);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("pointermove", handlePointerMove, { passive: true });
 
     const render = () => {
@@ -197,8 +227,8 @@ function LiyawelaCanvas() {
       mouse.y += (mouse.targetY - mouse.y) * 0.1;
 
       const isLight = document.documentElement.classList.contains("light-theme");
-      const vineCount = 8;
-      const maxDist = 260;
+      const vineCount = Math.ceil(h / 180);
+      const maxDist = 280;
 
       // Draw Cursor Spotlight Glow Aura
       if (mouse.x > 0 && mouse.y > 0 && !isTouchDevice) {
@@ -217,15 +247,14 @@ function LiyawelaCanvas() {
       }
 
       for (let v = 0; v < vineCount; v++) {
-        const baseY = (h / (vineCount + 1)) * (v + 1);
-        const speed = 0.012 + v * 0.003;
-        const amplitude = 65 + v * 10;
+        const baseY = 120 + v * 180;
+        const speed = 0.012 + (v % 4) * 0.003;
+        const amplitude = 65 + (v % 3) * 10;
 
         ctx.beginPath();
         for (let x = -50; x < w + 50; x += 10) {
           const y = baseY + Math.sin(x * 0.007 + time * speed + v * 1.5) * amplitude;
 
-          // Distance to cursor
           const dist = Math.hypot(x - mouse.x, y - mouse.y);
           const glow = dist < maxDist ? Math.pow(1 - dist / maxDist, 2) : 0;
 
@@ -281,6 +310,7 @@ function LiyawelaCanvas() {
 
     return () => {
       window.removeEventListener("resize", handleResize);
+      window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("pointermove", handlePointerMove);
       cancelAnimationFrame(animationFrameId);
     };
@@ -290,7 +320,7 @@ function LiyawelaCanvas() {
 }
 
 // ------------------------------------------------------------------
-// 3. CURSOR-REACTIVE PALA PETHI FLORAL CANVAS (පළා පෙති - TAB 3)
+// 3. FULL-PAGE CURSOR-REACTIVE PALA PETHI FLORAL CANVAS
 // ------------------------------------------------------------------
 function PalaPethiCanvas() {
   const canvasRef = useRef(null);
@@ -303,21 +333,36 @@ function PalaPethiCanvas() {
     let time = 0;
 
     let mouse = { x: -1000, y: -1000, targetX: -1000, targetY: -1000 };
+    let lastClientX = -1000;
+    let lastClientY = -1000;
     const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
 
     const handlePointerMove = (e) => {
       if (isTouchDevice) return;
+      lastClientX = e.clientX;
+      lastClientY = e.clientY;
       mouse.targetX = e.clientX;
-      mouse.targetY = e.clientY;
+      mouse.targetY = e.clientY + window.scrollY;
+    };
+
+    const handleScroll = () => {
+      if (isTouchDevice || lastClientX < 0) return;
+      mouse.targetX = lastClientX;
+      mouse.targetY = lastClientY + window.scrollY;
     };
 
     const handleResize = () => {
       canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      canvas.height = Math.max(
+        document.body.scrollHeight,
+        document.documentElement.scrollHeight,
+        window.innerHeight
+      );
     };
 
     handleResize();
     window.addEventListener("resize", handleResize);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("pointermove", handlePointerMove, { passive: true });
 
     const render = () => {
@@ -333,7 +378,7 @@ function PalaPethiCanvas() {
       const spacing = 100;
       const cols = Math.ceil(w / spacing) + 2;
       const rows = Math.ceil(h / spacing) + 2;
-      const maxDist = 260;
+      const maxDist = 280;
 
       // Draw Cursor Spotlight Glow Aura
       if (mouse.x > 0 && mouse.y > 0 && !isTouchDevice) {
@@ -410,6 +455,7 @@ function PalaPethiCanvas() {
 
     return () => {
       window.removeEventListener("resize", handleResize);
+      window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("pointermove", handlePointerMove);
       cancelAnimationFrame(animationFrameId);
     };

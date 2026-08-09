@@ -1,7 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence, useMotionValue, useSpring, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, FileDown, Code2, Star, Sparkles, Terminal, Atom, Zap, Layers } from "lucide-react";
-import CulturalPatternCanvas from "../CulturalPatternCanvas";
 
 function MagneticButton({ children, className = "", ...props }) {
   const ref = useRef(null);
@@ -126,7 +125,7 @@ function CyclingTechBadge() {
   );
 }
 
-export default function HeroCyber({ culturalTheme = "dumbara" }) {
+export default function HeroCyber() {
   const { scrollY } = useScroll();
 
   // Scroll-driven transforms for Portrait Image Card
@@ -144,9 +143,6 @@ export default function HeroCyber({ culturalTheme = "dumbara" }) {
       id="home"
       className="relative min-h-screen w-full overflow-hidden bg-transparent flex items-center pt-24 sm:pt-28 lg:pt-32 pb-16"
     >
-      {/* Real-time Procedural HTML5 Canvas Cultural Motif Engine */}
-      <CulturalPatternCanvas theme={culturalTheme} />
-
       {/* Theme-Aware Pattern dimming mask overlay behind text column */}
       <div className="pattern-mask-left absolute top-0 left-0 bottom-0 w-full max-w-2xl pointer-events-none z-[1]" />
 

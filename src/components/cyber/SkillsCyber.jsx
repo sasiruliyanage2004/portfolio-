@@ -60,23 +60,24 @@ export default function SkillsCyber() {
     offset: ["start end", "end start"],
   });
 
-  const scale = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.85, 1, 1, 0.85]);
-  const opacity = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [0.5, 1, 1, 0.5]);
-  const y = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [40, 0, 0, -40]);
+  const scale = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.92, 1, 1, 0.92]);
+  const y = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [30, 0, 0, -30]);
 
   const activeData = GROUPS.find((g) => g.label === activeGroup) || GROUPS[0];
 
   return (
     <section ref={sectionRef} id="skills" className="relative w-full bg-transparent overflow-hidden py-28 px-6 lg:px-10 scroll-mt-24">
-      <motion.div style={{ scale, opacity, y }} className="mx-auto max-w-7xl relative">
-        {/* Clean Header without any outer box card — uses invisible soft black blur aura directly behind text */}
+      <motion.div style={{ scale, y }} className="mx-auto max-w-7xl relative">
+        {/* Section Header with 100% Full Opacity & Dark Aura Patch matching Projects & Builds */}
         <div className="relative flex flex-col md:flex-row md:items-end md:justify-between mb-12 gap-6">
-          {/* Invisible Soft Black Blur Aura directly behind text to absorb background lines */}
-          <div className="pointer-events-none absolute -top-8 -left-8 w-[500px] h-[160px] bg-[#05080f] rounded-full blur-3xl opacity-90 z-0" />
+          {/* Pitch Black Dark Absorber Aura directly behind section heading to absorb background lines */}
+          <div className="pointer-events-none absolute -top-10 -left-10 w-[550px] h-[180px] bg-[#05080f] rounded-full blur-2xl opacity-100 z-0" />
 
           <div className="relative z-10">
-            <p className="font-mono text-xs tracking-[0.3em] text-cyan-400 font-bold drop-shadow-[0_2px_8px_rgba(0,0,0,1)]">TECHNICAL PROFICIENCY</p>
-            <h2 className="mt-2 text-4xl font-extrabold text-white sm:text-5xl drop-shadow-[0_4px_20px_rgba(5,8,15,1)] drop-shadow-[0_2px_4px_rgba(0,0,0,1)]">
+            <p className="font-mono text-xs tracking-[0.3em] text-cyan-400 font-extrabold drop-shadow-[0_2px_10px_rgba(0,0,0,1)] uppercase">
+              TECHNICAL PROFICIENCY
+            </p>
+            <h2 className="mt-2 text-5xl font-extrabold text-white sm:text-6xl drop-shadow-[0_4px_25px_rgba(0,0,0,1)]">
               Skills <span className="text-gradient">Matrix</span>
             </h2>
           </div>

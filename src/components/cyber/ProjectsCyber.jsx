@@ -1,6 +1,6 @@
 import { useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion, useMotionValue, useSpring, useScroll, useTransform } from "framer-motion";
-import { ArrowUpRight, Radio, ExternalLink } from "lucide-react";
+import { ArrowUpRight, Radio, ExternalLink, Activity, Database, ShieldCheck } from "lucide-react";
 
 const GithubIcon = (props) => (
   <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" {...props}>
@@ -14,10 +14,11 @@ const CATEGORIES = ["All", "Web Apps", "AI Solutions", "UI/UX"];
 const PROJECTS = [
   {
     title: "AyurLife — Ayurvedic Health Platform",
-    blurb: "Integrated Ayurvedic Herbal Medicine Platform combining smart diagnostic search, doctor appointments, and personalized herbal remedies.",
+    blurb: "Integrated Ayurvedic Herbal Medicine Platform combining smart diagnostic search, doctor appointments, and personalized herbal remedies tailored for traditional wellness.",
     category: "Web Apps",
-    tech: ["React", "Node.js", "Express", "MongoDB", "Tailwind"],
+    tech: ["React 19", "Node.js", "Express", "MongoDB", "Tailwind v4"],
     span: "lg:col-span-2 lg:row-span-2",
+    featured: true,
     live: true,
     github: "https://github.com/sasiruliyanage2004",
     demo: "#",
@@ -28,6 +29,7 @@ const PROJECTS = [
     category: "Web Apps",
     tech: ["React", "Node.js", "PostgreSQL", "Redis"],
     span: "lg:col-span-1 lg:row-span-1",
+    featured: false,
     live: true,
     github: "https://github.com/sasiruliyanage2004",
     demo: "#",
@@ -38,6 +40,7 @@ const PROJECTS = [
     category: "AI Solutions",
     tech: ["Python", "PyTorch", "FastAPI"],
     span: "lg:col-span-1 lg:row-span-1",
+    featured: false,
     live: true,
     github: "https://github.com/sasiruliyanage2004",
     demo: "#",
@@ -48,6 +51,7 @@ const PROJECTS = [
     category: "UI/UX",
     tech: ["Figma", "Storybook", "Tailwind"],
     span: "lg:col-span-2 lg:row-span-1",
+    featured: false,
     live: true,
     github: "https://github.com/sasiruliyanage2004",
     demo: "#",
@@ -58,6 +62,7 @@ const PROJECTS = [
     category: "AI Solutions",
     tech: ["Next.js", "TensorFlow.js"],
     span: "lg:col-span-1 lg:row-span-1",
+    featured: false,
     live: true,
     github: "https://github.com/sasiruliyanage2004",
     demo: "#",
@@ -70,6 +75,8 @@ function Card3D({ project }) {
   const ry = useMotionValue(0);
   const srx = useSpring(rx, { stiffness: 180, damping: 20 });
   const sry = useSpring(ry, { stiffness: 180, damping: 20 });
+
+  const isFeatured = project.featured || project.span.includes("row-span-2");
 
   const handleMove = (e) => {
     const rect = ref.current.getBoundingClientRect();
@@ -97,30 +104,71 @@ function Card3D({ project }) {
         onMouseMove={handleMove}
         onMouseLeave={handleLeave}
         style={{ rotateX: srx, rotateY: sry, transformPerspective: 900 }}
-        className="project-card-obsidian noise-overlay relative flex h-full min-h-[250px] flex-col overflow-hidden rounded-2xl p-7 group-hover:border-cyan-400 transition-all duration-300 shadow-2xl z-10"
+        className="project-card-obsidian noise-overlay relative flex h-full min-h-[250px] flex-col justify-between overflow-hidden rounded-2xl p-7 group-hover:border-cyan-400 transition-all duration-300 shadow-2xl z-10"
       >
         {/* Animated Border Beam Spinning Accent */}
         <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100">
           <div className="absolute inset-[-100%] animate-border-spin bg-[conic-gradient(from_0deg,transparent_0%,#6366F1_10%,#06B6D4_25%,transparent_40%)] opacity-40" />
         </div>
 
-        <div className="flex items-start justify-between gap-4">
-          <h3 className="text-2xl font-bold transition-colors">
-            {project.title}
-          </h3>
-          {project.live && (
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/50 bg-emerald-500/20 px-3 py-1 font-mono text-xs font-semibold text-emerald-300">
-              <Radio className="h-3 w-3" />
-              LIVE
-            </span>
+        {/* Top Header Block */}
+        <div>
+          <div className="flex items-start justify-between gap-4">
+            <h3 className="text-2xl font-bold transition-colors">
+              {project.title}
+            </h3>
+            {project.live && (
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/50 bg-emerald-500/20 px-3 py-1 font-mono text-xs font-semibold text-emerald-300 shrink-0">
+                <Radio className="h-3 w-3" />
+                LIVE
+              </span>
+            )}
+          </div>
+
+          <p className="mt-4 text-base leading-relaxed font-normal">
+            {project.blurb}
+          </p>
+
+          {/* Featured Bento Hero UI Preview Frame (Only rendered on 2-row hero cards) */}
+          {isFeatured && (
+            <div className="my-6 rounded-xl border border-white/15 bg-black/50 p-4 font-mono text-xs shadow-inner">
+              <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-3">
+                <div className="flex items-center gap-2 text-cyan-400 font-semibold">
+                  <Activity className="h-4 w-4 animate-pulse text-cyan-300" />
+                  <span>Ayurvedic Herbal Portal UI Engine</span>
+                </div>
+                <span className="text-slate-500 text-[10px]">v2.4.0 • ONLINE</span>
+              </div>
+
+              <div className="grid grid-cols-3 gap-3 my-3 text-center">
+                <div className="rounded-lg bg-white/5 p-2.5 border border-white/10">
+                  <div className="text-cyan-300 font-bold text-sm">50+</div>
+                  <div className="text-slate-400 text-[10px] mt-0.5">Herbal Remedies</div>
+                </div>
+                <div className="rounded-lg bg-white/5 p-2.5 border border-white/10">
+                  <div className="text-emerald-400 font-bold text-sm">&lt;80ms</div>
+                  <div className="text-slate-400 text-[10px] mt-0.5">Query Latency</div>
+                </div>
+                <div className="rounded-lg bg-white/5 p-2.5 border border-white/10">
+                  <div className="text-indigo-400 font-bold text-sm">24/7</div>
+                  <div className="text-slate-400 text-[10px] mt-0.5">Doc Booking</div>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between text-[11px] text-slate-400 pt-1 border-t border-white/5">
+                <span className="flex items-center gap-1">
+                  <Database className="h-3 w-3 text-indigo-400" /> MongoDB Atlas Sync
+                </span>
+                <span className="flex items-center gap-1 text-emerald-400">
+                  <ShieldCheck className="h-3 w-3" /> HIPAA Compliant
+                </span>
+              </div>
+            </div>
           )}
         </div>
 
-        <p className="mt-4 text-base leading-relaxed font-normal">
-          {project.blurb}
-        </p>
-
-        <div className="mt-auto pt-6">
+        {/* Bottom Block (Anchored to bottom) */}
+        <div className="mt-auto pt-4">
           <div className="flex flex-wrap gap-2 mb-5">
             {project.tech.map((t) => (
               <span

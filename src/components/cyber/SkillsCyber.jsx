@@ -68,17 +68,20 @@ export default function SkillsCyber() {
 
   return (
     <section ref={sectionRef} id="skills" className="relative w-full bg-transparent overflow-hidden py-28 px-6 lg:px-10 scroll-mt-24">
-      <motion.div style={{ scale, opacity, y }} className="mx-auto max-w-7xl">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12 gap-6">
-          <div>
-            <p className="font-mono text-xs tracking-[0.3em] text-cyan-400/80">TECHNICAL PROFICIENCY</p>
-            <h2 className="mt-2 text-4xl font-semibold text-white sm:text-5xl">
+      <motion.div style={{ scale, opacity, y }} className="mx-auto max-w-7xl relative">
+        <div className="relative flex flex-col md:flex-row md:items-end md:justify-between mb-12 gap-6">
+          {/* Subtle Radial Dimming Mask Overlay behind Section Heading for Crystal-Clear Readability */}
+          <div className="pointer-events-none absolute -top-12 -left-12 w-[480px] h-[220px] rounded-full bg-radial from-[#05080f]/90 via-[#05080f]/60 to-transparent blur-2xl z-0" />
+
+          <div className="relative z-10">
+            <p className="font-mono text-xs tracking-[0.3em] text-cyan-400 font-semibold drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">TECHNICAL PROFICIENCY</p>
+            <h2 className="mt-2 text-4xl font-bold text-white sm:text-5xl drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]">
               Skills <span className="text-gradient">Matrix</span>
             </h2>
           </div>
 
           {/* Sliding Domain Tab Switcher Indicator */}
-          <div className="relative flex flex-wrap gap-1 rounded-full border border-white/10 bg-white/5 p-1.5 backdrop-blur-md">
+          <div className="relative z-10 flex flex-wrap gap-1 rounded-full border border-white/10 bg-[#0e1422] p-1.5 backdrop-blur-md">
             {GROUPS.map((g) => {
               const Icon = g.icon;
               const isActive = activeGroup === g.label;
@@ -113,7 +116,7 @@ export default function SkillsCyber() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -15 }}
             transition={{ duration: 0.3 }}
-            className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4"
+            className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 relative z-10"
           >
             {activeData.skills.map((skill) => (
               <div

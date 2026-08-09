@@ -76,7 +76,7 @@ function Card3D({ project }) {
   const srx = useSpring(rx, { stiffness: 180, damping: 20 });
   const sry = useSpring(ry, { stiffness: 180, damping: 20 });
 
-  const isFeatured = project.featured || project.span.includes("row-span-2");
+  const isFeatured = project.featured || (project.span && project.span.includes("row-span-2"));
 
   const handleMove = (e) => {
     const rect = ref.current.getBoundingClientRect();
@@ -129,7 +129,7 @@ function Card3D({ project }) {
             {project.blurb}
           </p>
 
-          {/* Featured Bento Hero UI Preview Frame (Only rendered on 2-row hero cards) */}
+          {/* Featured Bento Hero UI Preview Frame (Rendered on any taller/featured card) */}
           {isFeatured && (
             <div className="my-6 rounded-xl border border-white/15 bg-black/50 p-4 font-mono text-xs shadow-inner">
               <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-3">
@@ -167,7 +167,7 @@ function Card3D({ project }) {
           )}
         </div>
 
-        {/* Bottom Block (Anchored to bottom) */}
+        {/* Bottom Block (Anchored cleanly to bottom) */}
         <div className="mt-auto pt-4">
           <div className="flex flex-wrap gap-2 mb-5">
             {project.tech.map((t) => (
@@ -222,17 +222,22 @@ export default function ProjectsCyber() {
 
   return (
     <section id="projects" className="relative overflow-hidden bg-transparent px-6 py-28 lg:px-10 scroll-mt-24">
-      <motion.div style={{ scale, opacity, y }} className="mx-auto max-w-7xl">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12 gap-6">
-          <div>
-            <p className="font-mono text-xs tracking-[0.3em] text-cyan-400 font-semibold">SELECTED WORK</p>
-            <h2 className="mt-2 text-4xl font-bold text-white sm:text-5xl">
+      <motion.div style={{ scale, opacity, y }} className="mx-auto max-w-7xl relative">
+        <div className="relative flex flex-col md:flex-row md:items-end md:justify-between mb-12 gap-6">
+          {/* Subtle Radial Dimming Mask Overlay behind Section Heading for Crystal-Clear Readability */}
+          <div className="pointer-events-none absolute -top-12 -left-12 w-[480px] h-[220px] rounded-full bg-radial from-[#05080f]/90 via-[#05080f]/60 to-transparent blur-2xl z-0" />
+
+          <div className="relative z-10">
+            <p className="font-mono text-xs tracking-[0.3em] text-cyan-400 font-semibold drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+              SELECTED WORK
+            </p>
+            <h2 className="mt-2 text-4xl font-bold text-white sm:text-5xl drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]">
               Projects &amp; <span className="text-gradient">Builds</span>
             </h2>
           </div>
 
           {/* Sliding Category Tab Switcher Indicator */}
-          <div className="relative flex flex-wrap gap-1 rounded-full border border-white/15 bg-[#0e1422] p-1.5 backdrop-blur-md">
+          <div className="relative z-10 flex flex-wrap gap-1 rounded-full border border-white/15 bg-[#0e1422] p-1.5 backdrop-blur-md">
             {CATEGORIES.map((c) => (
               <button
                 key={c}
@@ -255,7 +260,7 @@ export default function ProjectsCyber() {
         </div>
 
         {/* Bento Grid Layout */}
-        <motion.div layout className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <motion.div layout className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 relative z-10">
           <AnimatePresence mode="popLayout">
             {list.map((project) => (
               <Card3D key={project.title} project={project} />

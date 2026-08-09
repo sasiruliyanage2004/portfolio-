@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FileDown, Home, Layers, Mail, User } from "lucide-react";
+import { FileDown, Home, Layers, Mail, User, Sun, Moon } from "lucide-react";
 
 const GithubIcon = (props) => (
   <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" {...props}>
@@ -27,11 +27,27 @@ const NAV = [
 export default function FloatingDockCyber() {
   const [active, setActive] = useState("home");
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isLightMode, setIsLightMode] = useState(() => {
+    return document.documentElement.classList.contains("light-theme");
+  });
+
+  const toggleTheme = () => {
+    const nextMode = !isLightMode;
+    setIsLightMode(nextMode);
+    if (nextMode) {
+      document.documentElement.classList.add("light-theme");
+      document.body.classList.add("light-theme");
+      localStorage.setItem("theme", "light");
+    } else {
+      document.documentElement.classList.remove("light-theme");
+      document.body.classList.remove("light-theme");
+      localStorage.setItem("theme", "dark");
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 15);
-      // Ensure 'home' is active when near top of the page
       if (window.scrollY < 300) {
         setActive("home");
       }
@@ -63,10 +79,14 @@ export default function FloatingDockCyber() {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ type: "spring", stiffness: 300, damping: 26 }}
-      className={`fixed left-1/2 top-6 z-[60] flex -translate-x-1/2 items-center gap-1.5 rounded-full border border-white/20 backdrop-blur-2xl transition-all duration-500 ${
-        isScrolled
-          ? "px-3 py-1.5 shadow-[0_16px_50px_rgba(0,0,0,0.95)] bg-[#0b0f17]/95 scale-95 border-white/25"
-          : "px-4 py-2.5 shadow-[0_20px_60px_rgba(0,0,0,0.85)] bg-[#0b0f17]/90 scale-100 border-white/20"
+      className={`fixed left-1/2 top-6 z-[60] flex -translate-x-1/2 items-center gap-1.5 rounded-full border backdrop-blur-2xl transition-all duration-500 ${
+        isLightMode
+          ? isScrolled
+            ? "px-3 py-1.5 shadow-[0_16px_40px_rgba(15,23,42,0.15)] bg-white/95 scale-95 border-slate-300"
+            : "px-4 py-2.5 shadow-[0_20px_50px_rgba(15,23,42,0.12)] bg-white/90 scale-100 border-slate-200"
+          : isScrolled
+            ? "px-3 py-1.5 shadow-[0_16px_50px_rgba(0,0,0,0.95)] bg-[#0b0f17]/95 scale-95 border-white/25"
+            : "px-4 py-2.5 shadow-[0_20px_60px_rgba(0,0,0,0.85)] bg-[#0b0f17]/90 scale-100 border-white/20"
       }`}
     >
       {NAV.map((item) => {
@@ -81,14 +101,36 @@ export default function FloatingDockCyber() {
             {isActive && (
               <motion.span
                 layoutId="dock-active"
-                className="absolute inset-0 rounded-full bg-gradient-to-r from-indigo-500/35 via-violet-500/35 to-cyan-500/35 ring-1 ring-cyan-400/50 shadow-[0_0_20px_rgba(6,182,212,0.3)]"
+                className={`absolute inset-0 rounded-full ${
+                  isLightMode
+                    ? "bg-gradient-to-r from-indigo-500/20 via-violet-500/20 to-cyan-500/20 ring-1 ring-indigo-500/40 shadow-[0_0_15px_rgba(67,56,202,0.2)]"
+                    : "bg-gradient-to-r from-indigo-500/35 via-violet-500/35 to-cyan-500/35 ring-1 ring-cyan-400/50 shadow-[0_0_20px_rgba(6,182,212,0.3)]"
+                }`}
                 transition={{ type: "spring", stiffness: 380, damping: 28 }}
               />
             )}
             <Icon
-              className={`relative h-3.5 w-3.5 ${isActive ? "text-cyan-300" : "text-slate-400"}`}
+              className={`relative h-3.5 w-3.5 ${
+                isActive
+                  ? isLightMode
+                    ? "text-indigo-600 font-semibold"
+                    : "text-cyan-300"
+                  : isLightMode
+                    ? "text-slate-600"
+                    : "text-slate-400"
+              }`}
             />
-            <span className={`relative ${isActive ? "text-white font-semibold" : "text-slate-400"}`}>
+            <span
+              className={`relative ${
+                isActive
+                  ? isLightMode
+                    ? "text-indigo-950 font-semibold"
+                    : "text-white font-semibold"
+                  : isLightMode
+                    ? "text-slate-600"
+                    : "text-slate-400"
+              }`}
+            >
               {item.label}
             </span>
           </a>
@@ -106,21 +148,36 @@ export default function FloatingDockCyber() {
             transition={{ type: "spring", stiffness: 320, damping: 28 }}
             className="flex items-center gap-1.5 overflow-hidden"
           >
-            <div className="mx-1 h-5 w-px bg-white/15" />
+            <div className={`mx-1 h-5 w-px ${isLightMode ? "bg-slate-300" : "bg-white/15"}`} />
 
-            <span className="hidden items-center gap-1.5 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1.5 font-mono text-[10px] text-emerald-300 md:inline-flex whitespace-nowrap">
+            <span className="hidden items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1.5 font-mono text-[10px] text-emerald-600 font-medium dark:text-emerald-300 md:inline-flex whitespace-nowrap">
               <span className="relative flex h-1.5 w-1.5">
-                <span className="pulse-dot absolute inline-flex h-full w-full rounded-full bg-emerald-400" />
-                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                <span className="pulse-dot absolute inline-flex h-full w-full rounded-full bg-emerald-500" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
               </span>
               Available for Hire
             </span>
+
+            {/* Light / Dark Mode Toggle Switcher Button */}
+            <button
+              onClick={toggleTheme}
+              aria-label="Toggle Light/Dark Theme"
+              className={`flex h-8 w-8 items-center justify-center rounded-full transition-colors cursor-pointer ${
+                isLightMode
+                  ? "text-indigo-600 hover:bg-slate-200/80 bg-slate-100"
+                  : "text-yellow-300 hover:bg-white/10 hover:text-cyan-300"
+              }`}
+            >
+              {isLightMode ? <Moon className="h-3.5 w-3.5" /> : <Sun className="h-3.5 w-3.5" />}
+            </button>
 
             <a
               href="/resume.pdf"
               download="Sasiru_Liyanage_CV.pdf"
               aria-label="Download resume"
-              className="flex h-8 w-8 items-center justify-center rounded-full text-slate-400 transition-colors hover:text-cyan-300 hover:bg-white/10"
+              className={`flex h-8 w-8 items-center justify-center rounded-full transition-colors ${
+                isLightMode ? "text-slate-600 hover:text-indigo-600 hover:bg-slate-200/80" : "text-slate-400 hover:text-cyan-300 hover:bg-white/10"
+              }`}
             >
               <FileDown className="h-3.5 w-3.5" />
             </a>
@@ -129,7 +186,9 @@ export default function FloatingDockCyber() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub"
-              className="flex h-8 w-8 items-center justify-center rounded-full text-slate-400 transition-colors hover:text-cyan-300 hover:bg-white/10"
+              className={`flex h-8 w-8 items-center justify-center rounded-full transition-colors ${
+                isLightMode ? "text-slate-600 hover:text-indigo-600 hover:bg-slate-200/80" : "text-slate-400 hover:text-cyan-300 hover:bg-white/10"
+              }`}
             >
               <GithubIcon className="h-3.5 w-3.5" />
             </a>
@@ -138,7 +197,9 @@ export default function FloatingDockCyber() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn"
-              className="flex h-8 w-8 items-center justify-center rounded-full text-slate-400 transition-colors hover:text-cyan-300 hover:bg-white/10"
+              className={`flex h-8 w-8 items-center justify-center rounded-full transition-colors ${
+                isLightMode ? "text-slate-600 hover:text-indigo-600 hover:bg-slate-200/80" : "text-slate-400 hover:text-cyan-300 hover:bg-white/10"
+              }`}
             >
               <LinkedinIcon className="h-3.5 w-3.5" />
             </a>

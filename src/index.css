@@ -3,8 +3,6 @@
 /* ------------------------------------------------------------------
    DESIGN TOKENS
    Deep Carbon base, Electric Indigo / Cyber Cyan / Neon Violet accents.
-   Fonts: swap in real files via <link> or @font-face — these are the
-   intended pairing (display / body / mono-utility).
    ------------------------------------------------------------------ */
 :root {
   --bg-obsidian: #0b0f17;
@@ -39,6 +37,93 @@ body {
   -webkit-font-smoothing: antialiased;
   width: 100%;
   overflow-x: hidden;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* ------------------------------------------------------------------
+   LIGHT THEME — "Porcelain Circuit"
+   ------------------------------------------------------------------ */
+html.light-theme,
+body.light-theme,
+.light-theme {
+  --bg-obsidian: #F7F5F1;
+  --bg-obsidian-raised: #F1EFEA;
+  --indigo: #4338CA;
+  --cyan: #0E7490;
+  --violet: #8B27D4;
+
+  --glass-bg: rgba(255, 255, 255, 0.75);
+  --glass-bg-hover: rgba(255, 255, 255, 0.90);
+  --glass-border: rgba(30, 41, 59, 0.12);
+  --glass-border-hover: rgba(67, 56, 202, 0.28);
+
+  --text-primary: #0F172A;
+  --text-muted: #475569;
+  --text-dim: #64748B;
+
+  color-scheme: light;
+  background-color: #F7F5F1 !important;
+  color: #0F172A !important;
+}
+
+.light-theme body {
+  background-color: #F7F5F1 !important;
+  color: #0F172A !important;
+}
+
+.light-theme .mesh-bg {
+  background:
+    radial-gradient(at 10% 10%, rgba(67, 56, 202, 0.08) 0px, transparent 50%),
+    radial-gradient(at 90% 20%, rgba(14, 116, 144, 0.08) 0px, transparent 50%),
+    radial-gradient(at 50% 80%, rgba(139, 39, 212, 0.06) 0px, transparent 50%),
+    #F7F5F1 !important;
+}
+
+.light-theme .glass-panel {
+  background: rgba(255, 255, 255, 0.78) !important;
+  border: 1px solid rgba(30, 41, 59, 0.12) !important;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06) !important;
+  color: #0F172A !important;
+}
+
+.light-theme .glass-panel:hover {
+  background: rgba(255, 255, 255, 0.92) !important;
+  border-color: rgba(67, 56, 202, 0.28) !important;
+}
+
+.light-theme h1, 
+.light-theme h2, 
+.light-theme h3, 
+.light-theme h4 {
+  color: #0F172A !important;
+}
+
+.light-theme p, 
+.light-theme span {
+  color: inherit;
+}
+
+.light-theme .text-slate-300,
+.light-theme .text-slate-400 {
+  color: #475569 !important;
+}
+
+.light-theme .text-slate-200,
+.light-theme .text-white {
+  color: #0F172A !important;
+}
+
+.light-theme .text-gradient {
+  background: linear-gradient(135deg, #4338CA 0%, #0E7490 50%, #8B27D4 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important;
+}
+
+.light-theme ::-webkit-scrollbar-track { background: #F7F5F1; }
+.light-theme ::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #4338CA, #8B27D4);
+  border: 2px solid #F7F5F1;
 }
 
 /* ------------------------------------------------------------------
@@ -80,7 +165,7 @@ body {
 }
 
 /* ------------------------------------------------------------------
-   NOISE TEXTURE — subtle film-grain overlay for glass surfaces
+   NOISE TEXTURE
    ------------------------------------------------------------------ */
 .noise-overlay {
   position: relative;
@@ -98,7 +183,7 @@ body {
 }
 
 /* ------------------------------------------------------------------
-   BORDER BEAM — rotating conic-gradient light traveling a card edge.
+   BORDER BEAM
    ------------------------------------------------------------------ */
 .border-beam {
   position: absolute;
@@ -144,38 +229,6 @@ body {
 }
 
 /* ------------------------------------------------------------------
-   GRID OVERLAY — faint technical baseline grid
-   ------------------------------------------------------------------ */
-.grid-overlay {
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-  background-size: 48px 48px;
-  mask-image: radial-gradient(ellipse 100% 100% at 50% 50%, #000 60%, transparent 100%);
-}
-
-/* ------------------------------------------------------------------
-   SRI LANKAN CULTURAL TECH HYBRID PATTERNS (100% Viewport Edge-to-Edge)
-   ------------------------------------------------------------------ */
-.dumbara-pattern-bg {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 0 L60 30 L30 60 L0 30 Z M30 10 L50 30 L30 50 L10 30 Z M30 20 L40 30 L30 40 L20 30 Z' fill='none' stroke='rgba(6,182,212,0.22)' stroke-width='1.2'/%3E%3C/svg%3E");
-  background-size: 60px 60px;
-  mask-image: radial-gradient(ellipse 100% 100% at 50% 50%, #000 60%, transparent 100%);
-}
-
-.liyawela-pattern-bg {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cpath d='M0 40 Q 20 0, 40 40 T 80 40 M40 40 Q 60 80, 80 40' fill='none' stroke='rgba(168,85,247,0.25)' stroke-width='1.5'/%3E%3Ccircle cx='40' cy='40' r='4' fill='rgba(6,182,212,0.35)'/%3E%3Cpath d='M20 20 Q 30 10, 40 20 Q 30 30, 20 20' fill='rgba(168,85,247,0.15)' stroke='rgba(168,85,247,0.28)'/%3E%3C/svg%3E");
-  background-size: 80px 80px;
-  mask-image: radial-gradient(ellipse 100% 100% at 50% 50%, #000 60%, transparent 100%);
-}
-
-.palapethi-pattern-bg {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 50 50'%3E%3Cpath d='M25 0 Q 35 15, 25 25 Q 15 15, 25 0 Z M25 25 Q 35 35, 25 50 Q 15 35, 25 25 Z M0 25 Q 15 15, 25 25 Q 15 35, 0 25 Z M25 25 Q 35 15, 50 25 Q 35 35, 25 25 Z' fill='rgba(6,182,212,0.06)' stroke='rgba(6,182,212,0.25)' stroke-width='1.2'/%3E%3C/svg%3E");
-  background-size: 50px 50px;
-  mask-image: radial-gradient(ellipse 100% 100% at 50% 50%, #000 60%, transparent 100%);
-}
-
-/* ------------------------------------------------------------------
    MISC KEYFRAMES
    ------------------------------------------------------------------ */
 @keyframes pulse-dot {
@@ -189,12 +242,6 @@ body {
   50% { transform: translateY(-14px); }
 }
 .float-slow { animation: float-slow 6s ease-in-out infinite; }
-
-@keyframes caret-blink {
-  0%, 45% { opacity: 1; }
-  50%, 100% { opacity: 0; }
-}
-.caret { animation: caret-blink 1s step-end infinite; }
 
 .text-gradient {
   background: linear-gradient(100deg, var(--indigo) 0%, var(--cyan) 50%, var(--violet) 100%);

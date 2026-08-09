@@ -95,37 +95,37 @@ body {
 
 /* ------------------------------------------------------------------
    BORDER BEAM — rotating conic-gradient light traveling a card edge.
-   Wrap target in a `relative overflow-hidden` container, place
-   <span class="border-beam" /> as first child.
    ------------------------------------------------------------------ */
-@property --beam-angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
-}
-
 .border-beam {
   position: absolute;
-  inset: 0;
+  inset: -1px;
   border-radius: inherit;
   padding: 1px;
+  pointer-events: none;
+  z-index: 2;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: destination-out;
+}
+.border-beam::before {
+  content: "";
+  position: absolute;
+  inset: -150%;
   background: conic-gradient(
-    from var(--beam-angle),
+    from 0deg,
     transparent 0%,
-    var(--cyan) 8%,
-    var(--indigo) 16%,
-    transparent 28%,
+    transparent 70%,
+    var(--cyan) 85%,
+    var(--violet) 95%,
     transparent 100%
   );
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  animation: beam-rotate 4.5s linear infinite;
-  pointer-events: none;
+  animation: border-beam-spin 8s linear infinite;
 }
 
-@keyframes beam-rotate {
-  to { --beam-angle: 360deg; }
+@keyframes border-beam-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 /* ------------------------------------------------------------------
@@ -133,17 +133,10 @@ body {
    ------------------------------------------------------------------ */
 .mesh-bg {
   background:
-    radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.22), transparent 40%),
-    radial-gradient(circle at 80% 15%, rgba(6, 182, 212, 0.18), transparent 40%),
-    radial-gradient(circle at 50% 80%, rgba(168, 85, 247, 0.18), transparent 45%),
+    radial-gradient(at 10% 10%, rgba(99, 102, 241, 0.12) 0px, transparent 50%),
+    radial-gradient(at 90% 20%, rgba(6, 182, 212, 0.12) 0px, transparent 50%),
+    radial-gradient(at 50% 80%, rgba(168, 85, 247, 0.08) 0px, transparent 50%),
     var(--bg-obsidian);
-  background-size: 200% 200%;
-  animation: mesh-drift 18s ease-in-out infinite;
-}
-
-@keyframes mesh-drift {
-  0%, 100% { background-position: 0% 0%, 100% 0%, 50% 100%; }
-  50% { background-position: 20% 30%, 80% 25%, 40% 70%; }
 }
 
 /* ------------------------------------------------------------------
@@ -155,6 +148,27 @@ body {
     linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
   background-size: 48px 48px;
   mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, #000 40%, transparent 90%);
+}
+
+/* ------------------------------------------------------------------
+   SRI LANKAN CULTURAL TECH HYBRID PATTERNS
+   ------------------------------------------------------------------ */
+.dumbara-pattern-bg {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 0 L60 30 L30 60 L0 30 Z M30 10 L50 30 L30 50 L10 30 Z M30 20 L40 30 L30 40 L20 30 Z' fill='none' stroke='rgba(6,182,212,0.22)' stroke-width='1.2'/%3E%3C/svg%3E");
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 85% 70% at 50% 30%, #000 40%, transparent 95%);
+}
+
+.liyawela-pattern-bg {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cpath d='M0 40 Q 20 0, 40 40 T 80 40 M40 40 Q 60 80, 80 40' fill='none' stroke='rgba(168,85,247,0.25)' stroke-width='1.5'/%3E%3Ccircle cx='40' cy='40' r='4' fill='rgba(6,182,212,0.35)'/%3E%3Cpath d='M20 20 Q 30 10, 40 20 Q 30 30, 20 20' fill='rgba(168,85,247,0.15)' stroke='rgba(168,85,247,0.28)'/%3E%3C/svg%3E");
+  background-size: 80px 80px;
+  mask-image: radial-gradient(ellipse 85% 70% at 50% 30%, #000 40%, transparent 95%);
+}
+
+.palapethi-pattern-bg {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 50 50'%3E%3Cpath d='M25 0 Q 35 15, 25 25 Q 15 15, 25 0 Z M25 25 Q 35 35, 25 50 Q 15 35, 25 25 Z M0 25 Q 15 15, 25 25 Q 15 35, 0 25 Z M25 25 Q 35 15, 50 25 Q 35 35, 25 25 Z' fill='rgba(6,182,212,0.06)' stroke='rgba(6,182,212,0.25)' stroke-width='1.2'/%3E%3C/svg%3E");
+  background-size: 50px 50px;
+  mask-image: radial-gradient(ellipse 85% 70% at 50% 30%, #000 40%, transparent 95%);
 }
 
 /* ------------------------------------------------------------------

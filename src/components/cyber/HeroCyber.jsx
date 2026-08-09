@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { motion, useMotionValue, useSpring, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, FileDown, Code2, Star } from "lucide-react";
+import { ArrowRight, FileDown, Code2, Star, Sparkles, Compass } from "lucide-react";
 
 function MagneticButton({ children, className = "", ...props }) {
   const ref = useRef(null);
@@ -77,7 +77,7 @@ function TiltCard({ children, className = "" }) {
   );
 }
 
-export default function HeroCyber() {
+export default function HeroCyber({ culturalTheme = "dumbara" }) {
   const { scrollY } = useScroll();
 
   // Scroll-driven transforms for Portrait Image Card
@@ -85,35 +85,62 @@ export default function HeroCyber() {
   const avatarY = useTransform(scrollY, [0, 500], [0, 45]);
   const avatarOpacity = useTransform(scrollY, [0, 500], [1, 0.8]);
 
-  // Scroll-driven transforms for Hero Text Column (Headline, Badge, Paragraph, Buttons)
+  // Scroll-driven transforms for Hero Text Column
   const heroTextScale = useTransform(scrollY, [0, 500], [1, 0.88]);
   const heroTextY = useTransform(scrollY, [0, 500], [0, 40]);
   const heroTextOpacity = useTransform(scrollY, [0, 500], [1, 0.75]);
 
+  // Theme-specific motif configuration
+  const themeConfig = {
+    dumbara: {
+      badge: "[SYSTEM_STATUS: DUMBARA_GEOMETRIC_BLUEPRINT]",
+      patternClass: "dumbara-pattern-bg",
+      accentTitle: "Dumbara Matrix",
+      glowColor: "from-cyan-500/25 via-indigo-500/25 to-blue-500/25",
+    },
+    liyawela: {
+      badge: "[SYSTEM_STATUS: LIYAWELA_BIOTECH_FLOW]",
+      patternClass: "liyawela-pattern-bg",
+      accentTitle: "Liyawela Bio-Flow",
+      glowColor: "from-violet-500/25 via-purple-500/25 to-cyan-500/25",
+    },
+    palapethi: {
+      badge: "[SYSTEM_STATUS: PALA_PETHI_DECONSTRUCTED_UI]",
+      patternClass: "palapethi-pattern-bg",
+      accentTitle: "Pala Pethi Petals",
+      glowColor: "from-cyan-500/25 via-teal-500/25 to-indigo-500/25",
+    },
+  }[culturalTheme] || {
+    badge: "[SYSTEM_STATUS: DUMBARA_GEOMETRIC_BLUEPRINT]",
+    patternClass: "dumbara-pattern-bg",
+    accentTitle: "Cultural Tech Blueprint",
+    glowColor: "from-cyan-500/25 via-indigo-500/25 to-violet-500/25",
+  };
+
   return (
     <section
       id="home"
-      className="relative min-h-screen w-full overflow-hidden mesh-bg flex items-center pt-16 sm:pt-20"
+      className="relative min-h-screen w-full overflow-hidden mesh-bg flex items-center pt-24 sm:pt-28"
     >
-      {/* Ambient grid + glow orbs */}
-      <div className="absolute inset-0 grid-overlay pointer-events-none" />
+      {/* Dynamic Sri Lankan Cultural Motif Background Overlay */}
+      <div className={`absolute inset-0 ${themeConfig.patternClass} pointer-events-none transition-all duration-700`} />
       <div className="absolute -top-40 -left-32 h-96 w-96 rounded-full bg-indigo-500/20 blur-[120px] float-slow pointer-events-none" />
       <div className="absolute bottom-0 right-0 h-[28rem] w-[28rem] rounded-full bg-violet-500/15 blur-[130px] pointer-events-none" />
 
-      <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 gap-12 px-6 py-28 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:px-10">
-        {/* Left Column — Text Intro with Scroll-Driven Scaling & Fading */}
+      <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 gap-12 px-6 py-24 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:px-10">
+        {/* Left Column — Text Intro */}
         <motion.div style={{ scale: heroTextScale, y: heroTextY, opacity: heroTextOpacity }}>
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="glass-panel noise-overlay relative inline-flex items-center gap-2.5 rounded-full px-4 py-2 font-mono text-[11px] tracking-wide text-cyan-300/90 mb-6"
+            className="glass-panel noise-overlay relative inline-flex items-center gap-2.5 rounded-full px-4 py-2 font-mono text-[11px] tracking-wide text-cyan-300/90 mb-6 border border-cyan-400/30"
           >
             <span className="relative flex h-2 w-2">
               <span className="pulse-dot absolute inline-flex h-full w-full rounded-full bg-emerald-400" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
             </span>
-            [SYSTEM_STATUS: ONLINE // AVAILABLE_FOR_HIRE]
+            {themeConfig.badge}
           </motion.div>
 
           <motion.h1
@@ -131,11 +158,10 @@ export default function HeroCyber() {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="mt-6 max-w-lg text-lg leading-relaxed text-slate-400"
+            className="mt-6 max-w-lg text-lg leading-relaxed text-slate-300"
           >
             Full-stack engineer crafting fast, precise, and quietly futuristic
-            products — from motion systems to the architecture underneath
-            them.
+            products — fusing modern WebGL architecture with Sri Lankan cultural motifs.
           </motion.p>
 
           <motion.div
@@ -155,7 +181,7 @@ export default function HeroCyber() {
 
             <a
               href="/resume.pdf"
-              download
+              download="Sasiru_Liyanage_CV.pdf"
               className="inline-flex items-center gap-2 text-sm font-medium text-slate-400 underline-offset-4 transition-colors hover:text-cyan-300 hover:underline"
             >
               <FileDown className="h-4 w-4" />
@@ -164,7 +190,7 @@ export default function HeroCyber() {
           </motion.div>
         </motion.div>
 
-        {/* Right Column — Portrait Image Card with Scroll-Driven Scaling & Depth */}
+        {/* Right Column — Portrait Image Card */}
         <motion.div
           style={{ scale: avatarScale, y: avatarY, opacity: avatarOpacity }}
           initial={{ opacity: 0, y: 24, scale: 0.95 }}
@@ -173,13 +199,13 @@ export default function HeroCyber() {
           className="group relative flex justify-center [perspective:1000px] py-6 px-4"
         >
           {/* Ambient Glow Aura */}
-          <div className="absolute inset-4 bg-gradient-to-r from-cyan-500/25 via-indigo-500/25 to-violet-500/25 rounded-3xl blur-3xl scale-105 pointer-events-none" />
+          <div className={`absolute inset-4 bg-gradient-to-r ${themeConfig.glowColor} rounded-3xl blur-3xl scale-105 pointer-events-none`} />
 
           {/* Main 3D Card Container */}
           <TiltCard className="glass-panel noise-overlay relative w-full max-w-[420px] rounded-3xl p-3 shadow-2xl border-2 border-white/20 transition-all duration-500">
             <span className="border-beam" aria-hidden="true" />
 
-            {/* Profile Image Frame — Bright Crystal Clear Black & White -> Vibrant Color Hover */}
+            {/* Profile Image Frame */}
             <div className="relative h-[380px] sm:h-[440px] lg:h-[480px] w-full overflow-hidden rounded-2xl bg-gradient-to-b from-indigo-950/20 via-cyan-950/20 to-[#0b0f17]">
               <img
                 src="/profile.png"

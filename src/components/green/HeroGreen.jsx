@@ -154,7 +154,7 @@ export default function HeroGreen() {
           </motion.div>
         </div>
 
-        {/* Right Column — Lahiru Liyanage Style Portrait Card (Emerald Green Theme) */}
+        {/* Right Column */}
         <motion.div
           style={{ scale: avatarScale }}
           initial={{ opacity: 0, y: 24, scale: 0.95 }}
@@ -166,30 +166,30 @@ export default function HeroGreen() {
           <div className="absolute inset-4 bg-gradient-to-r from-emerald-500/30 via-teal-500/30 to-green-500/30 rounded-3xl blur-3xl scale-105 pointer-events-none" />
 
           {/* Card Frame */}
-          <TiltCard className="glass-panel relative w-full max-w-[420px] rounded-3xl p-3 shadow-2xl border-2 border-emerald-500/40 bg-[#06140e]/90">
+          <TiltCard className="glass-panel relative w-full max-w-[420px] rounded-3xl p-3 shadow-2xl border-2 border-emerald-500/40 bg-[#06140e]/90 transition-all duration-500">
             <span className="border-beam" aria-hidden="true" />
 
-            {/* Profile Image Frame */}
+            {/* Profile Image Frame with Dark Grayscale -> Vibrant Color Hover */}
             <div className="relative h-[380px] sm:h-[440px] lg:h-[480px] w-full overflow-hidden rounded-2xl bg-gradient-to-b from-emerald-950/60 via-teal-950/40 to-[#040d08]">
               <img
                 src="/profile.png"
                 alt="Developer Portrait"
-                className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                className="h-full w-full object-cover object-top filter grayscale contrast-125 brightness-75 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-105 transition-all duration-700 ease-out"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#040d08] via-transparent to-transparent opacity-85" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#040d08] via-transparent to-transparent opacity-85 group-hover:opacity-40 transition-opacity duration-700" />
             </div>
 
-            {/* Floating Badge 1 (Top-Right Star Badge) */}
+            {/* Floating Badge 1 */}
             <div className="absolute -top-3 -right-3 bg-gradient-to-r from-emerald-400 to-green-500 p-3.5 rounded-2xl shadow-xl shadow-emerald-500/30 border border-emerald-300">
               <Star className="h-5 w-5 text-slate-950 fill-slate-950" />
             </div>
 
-            {/* Floating Badge 2 (Bottom-Left Code Badge) */}
+            {/* Floating Badge 2 */}
             <div className="absolute -bottom-3 -left-3 bg-gradient-to-r from-teal-500 to-emerald-600 p-3.5 rounded-2xl shadow-xl shadow-teal-500/30 border border-emerald-300 text-slate-950">
               <Code2 className="h-5 w-5" />
             </div>
 
-            {/* Floating Badge 3 (Bottom-Right Info Card) */}
+            {/* Floating Badge 3 */}
             <div className="absolute -bottom-6 -right-3 sm:-right-6 glass-panel p-4 rounded-2xl shadow-2xl border border-emerald-400/50 backdrop-blur-md max-w-[220px] bg-[#04120a]/95">
               <div className="flex items-center gap-2.5 mb-1.5">
                 <div className="h-8 w-8 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-400 flex items-center justify-center text-slate-950 font-bold">

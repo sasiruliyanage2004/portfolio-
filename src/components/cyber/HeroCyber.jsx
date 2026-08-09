@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { motion, useMotionValue, useSpring, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, FileDown, Sparkles, Code2, Star, Cpu } from "lucide-react";
+import { ArrowRight, FileDown, Code2, Star } from "lucide-react";
 
 function MagneticButton({ children, className = "", ...props }) {
   const ref = useRef(null);
@@ -84,7 +84,7 @@ export default function HeroCyber() {
   return (
     <section
       id="home"
-      className="relative min-h-screen w-full overflow-hidden mesh-bg flex items-center"
+      className="relative min-h-screen w-full overflow-hidden mesh-bg flex items-center pt-16 sm:pt-20"
     >
       {/* Ambient grid + glow orbs */}
       <div className="absolute inset-0 grid-overlay pointer-events-none" />
@@ -155,7 +155,7 @@ export default function HeroCyber() {
           </motion.div>
         </div>
 
-        {/* Right Column — Lahiru Liyanage Style Portrait Card with Floating Badges */}
+        {/* Right Column — Clean Cyber Glassmorphic Portrait Card */}
         <motion.div
           style={{ scale: avatarScale }}
           initial={{ opacity: 0, y: 24, scale: 0.95 }}
@@ -167,46 +167,27 @@ export default function HeroCyber() {
           <div className="absolute inset-4 bg-gradient-to-r from-cyan-500/25 via-indigo-500/25 to-violet-500/25 rounded-3xl blur-3xl scale-105 pointer-events-none" />
 
           {/* Main 3D Card Container */}
-          <TiltCard className="glass-panel noise-overlay relative w-full max-w-[420px] rounded-3xl p-3 shadow-2xl border-2 border-white/20">
+          <TiltCard className="glass-panel noise-overlay relative w-full max-w-[420px] rounded-3xl p-3 shadow-2xl border-2 border-white/20 transition-all duration-500">
             <span className="border-beam" aria-hidden="true" />
 
-            {/* Profile Image Frame */}
+            {/* Profile Image Frame with Dark Grayscale -> Vibrant Color Hover */}
             <div className="relative h-[380px] sm:h-[440px] lg:h-[480px] w-full overflow-hidden rounded-2xl bg-gradient-to-b from-indigo-950/40 via-cyan-950/30 to-[#0b0f17]">
               <img
                 src="/profile.png"
                 alt="Developer Portrait"
-                className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                className="h-full w-full object-cover object-top filter grayscale contrast-125 brightness-75 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-105 transition-all duration-700 ease-out"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0b0f17] via-transparent to-transparent opacity-85" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0b0f17] via-transparent to-transparent opacity-85 group-hover:opacity-30 transition-opacity duration-700" />
             </div>
 
-            {/* Floating Badge 1 (Top-Right Star Badge) */}
-            <div className="absolute -top-3 -right-3 bg-gradient-to-r from-emerald-400 to-cyan-500 p-3.5 rounded-2xl shadow-xl shadow-cyan-500/20 border border-white/20">
-              <Star className="h-5 w-5 text-white fill-white" />
+            {/* Floating Badge 1 (Top-Right Star Badge - Seamless Glassmorphic Theme) */}
+            <div className="glass-panel noise-overlay absolute -top-3 -right-3 p-3.5 rounded-2xl shadow-xl border border-cyan-400/30 bg-[#0b0f17]/90 backdrop-blur-md">
+              <Star className="h-5 w-5 text-cyan-300 fill-cyan-300/30" />
             </div>
 
-            {/* Floating Badge 2 (Bottom-Left Code Badge) */}
-            <div className="absolute -bottom-3 -left-3 bg-gradient-to-r from-indigo-500 to-violet-600 p-3.5 rounded-2xl shadow-xl shadow-indigo-500/20 border border-white/20">
-              <Code2 className="h-5 w-5 text-white" />
-            </div>
-
-            {/* Floating Badge 3 (Bottom-Right Info Card) */}
-            <div className="absolute -bottom-6 -right-3 sm:-right-6 glass-panel noise-overlay p-4 rounded-2xl shadow-2xl border border-cyan-400/40 backdrop-blur-md max-w-[220px]">
-              <div className="flex items-center gap-2.5 mb-1.5">
-                <div className="h-8 w-8 rounded-xl bg-gradient-to-tr from-indigo-500 to-cyan-400 flex items-center justify-center text-white">
-                  <Cpu className="h-4 w-4" />
-                </div>
-                <div>
-                  <h4 className="font-mono text-xs font-semibold text-white">Architecture → Code</h4>
-                  <p className="font-mono text-[10px] text-cyan-300/80">Scalable Systems</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="h-1.5 flex-1 rounded-full bg-white/10 overflow-hidden">
-                  <div className="h-full w-full rounded-full bg-gradient-to-r from-indigo-400 to-cyan-400" />
-                </div>
-                <span className="font-mono text-[10px] text-emerald-400 font-semibold">100%</span>
-              </div>
+            {/* Floating Badge 2 (Bottom-Left Code Badge - Seamless Glassmorphic Theme) */}
+            <div className="glass-panel noise-overlay absolute -bottom-3 -left-3 p-3.5 rounded-2xl shadow-xl border border-indigo-400/30 bg-[#0b0f17]/90 backdrop-blur-md">
+              <Code2 className="h-5 w-5 text-indigo-300" />
             </div>
           </TiltCard>
         </motion.div>

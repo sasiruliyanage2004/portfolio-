@@ -97,7 +97,7 @@ function Card3D({ project }) {
         onMouseMove={handleMove}
         onMouseLeave={handleLeave}
         style={{ rotateX: srx, rotateY: sry, transformPerspective: 900 }}
-        className="noise-overlay relative flex h-full min-h-[250px] flex-col overflow-hidden rounded-2xl p-7 border-2 border-white/20 dark:border-white/20 light-theme:border-slate-300/60 bg-[#0e1422] dark:bg-[#0e1422] light-theme:bg-[#ffffff] group-hover:border-cyan-400 transition-all duration-300 shadow-2xl z-10"
+        className="project-card-obsidian noise-overlay relative flex h-full min-h-[250px] flex-col overflow-hidden rounded-2xl p-7 group-hover:border-cyan-400 transition-all duration-300 shadow-2xl z-10"
       >
         {/* Animated Border Beam Spinning Accent */}
         <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100">
@@ -105,7 +105,7 @@ function Card3D({ project }) {
         </div>
 
         <div className="flex items-start justify-between gap-4">
-          <h3 className="text-2xl font-bold text-white dark:text-white light-theme:text-slate-900 group-hover:text-cyan-300 transition-colors">
+          <h3 className="text-2xl font-bold transition-colors">
             {project.title}
           </h3>
           {project.live && (
@@ -116,7 +116,7 @@ function Card3D({ project }) {
           )}
         </div>
 
-        <p className="mt-4 text-base leading-relaxed text-slate-200 dark:text-slate-200 light-theme:text-slate-700 font-normal">
+        <p className="mt-4 text-base leading-relaxed font-normal">
           {project.blurb}
         </p>
 
@@ -125,7 +125,7 @@ function Card3D({ project }) {
             {project.tech.map((t) => (
               <span
                 key={t}
-                className="rounded-lg border border-cyan-500/30 bg-cyan-950/40 dark:bg-cyan-950/40 light-theme:bg-cyan-50 px-3 py-1 font-mono text-xs font-semibold text-cyan-300 dark:text-cyan-300 light-theme:text-cyan-700"
+                className="tech-badge rounded-lg px-3 py-1 font-mono text-xs font-semibold"
               >
                 {t}
               </span>

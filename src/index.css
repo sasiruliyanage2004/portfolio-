@@ -90,6 +90,67 @@ body.light-theme,
 }
 
 /* ------------------------------------------------------------------
+   LIGHT THEME FOOTER OVERRIDES
+   ------------------------------------------------------------------ */
+.light-theme footer {
+  background-color: #F7F5F1 !important;
+  color: #0F172A !important;
+}
+
+.light-theme footer h2,
+.light-theme footer h3 {
+  color: #0F172A !important;
+}
+
+.light-theme footer p,
+.light-theme footer span {
+  color: #475569 !important;
+}
+
+.light-theme footer .bg-white\/5 {
+  background-color: #ffffff !important;
+  border-color: rgba(30, 41, 59, 0.15) !important;
+  color: #0F172A !important;
+}
+
+/* ------------------------------------------------------------------
+   LIGHT THEME CONTACT TERMINAL BOX OVERRIDES
+   ------------------------------------------------------------------ */
+.contact-terminal-box {
+  background-color: rgba(11, 15, 23, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.light-theme .contact-terminal-box {
+  background-color: #ffffff !important;
+  border: 2px solid rgba(30, 41, 59, 0.18) !important;
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08) !important;
+  color: #0f172a !important;
+}
+
+.light-theme .contact-terminal-box label {
+  color: #475569 !important;
+}
+
+.light-theme .contact-terminal-box input,
+.light-theme .contact-terminal-box textarea {
+  background-color: #f8fafc !important;
+  border-color: rgba(30, 41, 59, 0.18) !important;
+  color: #0f172a !important;
+}
+
+.light-theme .contact-terminal-box input::placeholder,
+.light-theme .contact-terminal-box textarea::placeholder {
+  color: #64748B !important;
+}
+
+.light-theme .contact-terminal-box .bg-black\/40 {
+  background-color: #f1f5f9 !important;
+  border-color: rgba(30, 41, 59, 0.12) !important;
+  color: #0f172a !important;
+}
+
+/* ------------------------------------------------------------------
    HEADING ABSORBER AURA (Theme-Aware)
    ------------------------------------------------------------------ */
 .heading-absorber-aura {

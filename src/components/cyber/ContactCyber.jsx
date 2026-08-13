@@ -49,7 +49,7 @@ function MagneticIcon({ icon: Icon, href, label }) {
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
       style={{ x: sx, y: sy }}
-      className="glass-panel flex h-10 w-10 items-center justify-center rounded-xl text-slate-300 transition-colors hover:text-cyan-400"
+      className="glass-panel flex h-10 w-10 items-center justify-center rounded-xl transition-colors hover:text-cyan-400"
     >
       <Icon className="h-4 w-4" />
     </motion.a>
@@ -69,7 +69,7 @@ function CopyBadge({ value, icon: Icon, label }) {
     <button
       onClick={handleCopy}
       type="button"
-      className="glass-panel inline-flex items-center gap-2 rounded-full px-4 py-2 transition-all hover:border-cyan-400/50 hover:text-white cursor-pointer"
+      className="glass-panel inline-flex items-center gap-2 rounded-full px-4 py-2 transition-all hover:border-cyan-400/50 cursor-pointer"
     >
       <Icon className="h-3.5 w-3.5 text-cyan-400" />
       <span>{label}</span>
@@ -192,23 +192,23 @@ export default function ContactCyber() {
     <section ref={sectionRef} id="contact" className="relative overflow-hidden bg-transparent px-6 pt-36 pb-28 lg:px-10 scroll-mt-24">
       <motion.div style={{ scale, y }} className="relative mx-auto max-w-3xl">
         <div className="mb-12 text-center">
-          <p className="font-mono text-xs tracking-[0.3em] text-cyan-400/80">GET IN TOUCH</p>
-          <h2 className="mt-3 text-4xl font-semibold text-white sm:text-5xl">
+          <p className="font-mono text-xs tracking-[0.3em] text-cyan-400 font-extrabold uppercase">GET IN TOUCH</p>
+          <h2 className="mt-3 text-4xl font-extrabold text-slate-900 dark:text-white sm:text-5xl">
             Let's build something <span className="text-gradient">worth shipping</span>
           </h2>
 
           {/* Interactive Copy-to-Clipboard Badges */}
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-3 font-mono text-xs text-slate-300">
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-3 font-mono text-xs">
             <CopyBadge value="liyanagesasiru@gmail.com" icon={Mail} label="liyanagesasiru@gmail.com" />
             <CopyBadge value="+94715700953" icon={Phone} label="+94 71 57 00 953" />
-            <span className="glass-panel inline-flex items-center gap-2 rounded-full px-4 py-2 text-slate-400">
+            <span className="glass-panel inline-flex items-center gap-2 rounded-full px-4 py-2">
               <MapPin className="h-3.5 w-3.5 text-indigo-400" />
               Western Province, Sri Lanka
             </span>
           </div>
         </div>
 
-        <div className="noise-overlay relative overflow-hidden rounded-2xl border border-white/15 dark:border-white/15 light-theme:border-slate-300/40 bg-[#0b0f17]/95 dark:bg-[#0b0f17]/95 light-theme:bg-[#F7F5F1]/95 backdrop-blur-2xl shadow-2xl z-10">
+        <div className="contact-terminal-box noise-overlay relative overflow-hidden rounded-3xl backdrop-blur-2xl shadow-2xl z-10">
           <span className="border-beam" aria-hidden="true" />
 
           {/* Terminal Window Header with Interactive Mode Tabs */}
@@ -217,14 +217,14 @@ export default function ContactCyber() {
               <span className="h-2.5 w-2.5 rounded-full bg-red-500/70" />
               <span className="h-2.5 w-2.5 rounded-full bg-yellow-500/70" />
               <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/70" />
-              <span className="ml-2 font-mono text-xs text-slate-400 opacity-80">contact_terminal.sh</span>
+              <span className="ml-2 font-mono text-xs opacity-80">contact_terminal.sh</span>
             </div>
 
             <div className="flex gap-2">
               <button
                 onClick={() => setActiveTab("form")}
                 className={`rounded-lg px-3 py-1 font-mono text-xs transition-colors cursor-pointer ${
-                  activeTab === "form" ? "bg-cyan-500/20 text-cyan-300 font-semibold" : "opacity-60 hover:opacity-100"
+                  activeTab === "form" ? "bg-cyan-500/20 text-cyan-400 font-semibold" : "opacity-60 hover:opacity-100"
                 }`}
               >
                 Contact Form
@@ -232,7 +232,7 @@ export default function ContactCyber() {
               <button
                 onClick={() => setActiveTab("cli")}
                 className={`flex items-center gap-1.5 rounded-lg px-3 py-1 font-mono text-xs transition-colors cursor-pointer ${
-                  activeTab === "cli" ? "bg-cyan-500/20 text-cyan-300 font-semibold" : "opacity-60 hover:opacity-100"
+                  activeTab === "cli" ? "bg-cyan-500/20 text-cyan-400 font-semibold" : "opacity-60 hover:opacity-100"
                 }`}
               >
                 <TerminalIcon className="h-3 w-3" /> CLI Mode
@@ -244,7 +244,7 @@ export default function ContactCyber() {
           {activeTab === "form" ? (
             <form onSubmit={handleSubmit} className="space-y-6 p-7 sm:p-9">
               <div>
-                <label htmlFor="name" className="mb-2 block font-mono text-xs text-slate-300 uppercase tracking-wider">
+                <label htmlFor="name" className="mb-2 block font-mono text-xs uppercase tracking-wider">
                   // FULL_NAME
                 </label>
                 <input
@@ -254,12 +254,12 @@ export default function ContactCyber() {
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
                   placeholder="Sasiru Nethvidu Liyanage"
-                  className="w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 font-mono text-sm text-white placeholder-slate-500 transition-all focus:border-cyan-400 focus:bg-white/[0.06] focus:outline-none"
+                  className="w-full rounded-xl border px-4 py-3 font-mono text-sm transition-all focus:border-cyan-400 focus:outline-none"
                 />
               </div>
 
               <div>
-                <label htmlFor="email" className="mb-2 block font-mono text-xs text-slate-300 uppercase tracking-wider">
+                <label htmlFor="email" className="mb-2 block font-mono text-xs uppercase tracking-wider">
                   // EMAIL_ADDRESS
                 </label>
                 <input
@@ -269,12 +269,12 @@ export default function ContactCyber() {
                   value={form.email}
                   onChange={(e) => setForm({ ...form, email: e.target.value })}
                   placeholder="liyanagesasiru@gmail.com"
-                  className="w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 font-mono text-sm text-white placeholder-slate-500 transition-all focus:border-cyan-400 focus:bg-white/[0.06] focus:outline-none"
+                  className="w-full rounded-xl border px-4 py-3 font-mono text-sm transition-all focus:border-cyan-400 focus:outline-none"
                 />
               </div>
 
               <div>
-                <label htmlFor="message" className="mb-2 block font-mono text-xs text-slate-300 uppercase tracking-wider">
+                <label htmlFor="message" className="mb-2 block font-mono text-xs uppercase tracking-wider">
                   // PROJECT_DETAILS
                 </label>
                 <textarea
@@ -284,7 +284,7 @@ export default function ContactCyber() {
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
                   placeholder="Tell me about your project idea..."
-                  className="w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 font-mono text-sm text-white placeholder-slate-500 transition-all focus:border-cyan-400 focus:bg-white/[0.06] focus:outline-none"
+                  className="w-full rounded-xl border px-4 py-3 font-mono text-sm transition-all focus:border-cyan-400 focus:outline-none"
                 />
               </div>
 
@@ -326,12 +326,12 @@ export default function ContactCyber() {
                     key={idx}
                     className={`whitespace-pre-line ${
                       item.type === "sys"
-                        ? "text-cyan-400 opacity-80"
+                        ? "text-cyan-400 font-semibold"
                         : item.type === "user"
                         ? "text-indigo-400 font-bold"
                         : item.type === "error"
                         ? "text-red-400"
-                        : "text-slate-300"
+                        : "opacity-90"
                     }`}
                   >
                     {item.text}
@@ -346,14 +346,14 @@ export default function ContactCyber() {
                   value={cmdInput}
                   onChange={(e) => setCmdInput(e.target.value)}
                   placeholder="Type 'help', 'whoami', 'projects', 'skills', or 'contact'..."
-                  className="w-full bg-transparent font-mono text-xs text-white placeholder-slate-500 focus:outline-none"
+                  className="w-full bg-transparent font-mono text-xs focus:outline-none"
                 />
               </form>
             </div>
           )}
 
           {/* Terminal Footer */}
-          <div className="flex flex-wrap items-center justify-between border-t border-white/[0.06] px-7 py-4 bg-black/40 text-xs text-slate-400">
+          <div className="flex flex-wrap items-center justify-between border-t border-white/[0.06] px-7 py-4 bg-black/40 text-xs">
             <div className="flex items-center gap-3">
               {SOCIALS.map((s) => (
                 <MagneticIcon key={s.label} {...s} />

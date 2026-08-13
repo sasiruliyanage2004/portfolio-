@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState, useEffect } from "react";
 import { AnimatePresence, motion, useMotionValue, useSpring, useScroll, useTransform } from "framer-motion";
 import { ArrowUpRight, Radio, ExternalLink, Activity, Database, ShieldCheck, Cpu, Layers, Sparkles } from "lucide-react";
 
@@ -130,14 +130,14 @@ function LandscapeCard3D({ project }) {
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.95 }}
       transition={{ duration: 0.4 }}
-      className="group relative [perspective:1000px] w-[540px] sm:w-[640px] lg:w-[680px] shrink-0"
+      className="group relative [perspective:1000px] w-[540px] sm:w-[620px] lg:w-[660px] shrink-0"
     >
       <motion.div
         ref={ref}
         onMouseMove={handleMove}
         onMouseLeave={handleLeave}
         style={{ rotateX: srx, rotateY: sry, transformPerspective: 900 }}
-        className="project-card-obsidian noise-overlay relative flex h-full min-h-[440px] flex-col justify-between overflow-hidden rounded-3xl p-7 sm:p-8 group-hover:border-cyan-400 transition-all duration-300 shadow-2xl z-10"
+        className="project-card-obsidian noise-overlay relative flex h-full min-h-[430px] flex-col justify-between overflow-hidden rounded-3xl p-7 sm:p-8 group-hover:border-cyan-400 transition-all duration-300 shadow-2xl z-10"
       >
         {/* Card Header */}
         <div>
@@ -225,40 +225,58 @@ function LandscapeCard3D({ project }) {
 export default function ProjectsCyber() {
   const [cat, setCat] = useState("All");
   const sectionRef = useRef(null);
-
-  // Framer Motion Scroll-Driven Horizontal Track Transformation
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end end"],
-  });
+  const trackRef = useRef(null);
+  const [scrollDistance, setScrollDistance] = useState(0);
 
   const list = useMemo(() => {
     if (cat === "All") return PROJECTS;
     return PROJECTS.filter((p) => p.category === cat);
   }, [cat]);
 
-  // Dynamically calculate horizontal translation percentage based on number of active cards
-  const targetX = useMemo(() => {
-    if (list.length <= 1) return "0%";
-    if (list.length === 2) return "-45%";
-    if (list.length === 3) return "-62%";
-    if (list.length === 4) return "-74%";
-    return "-82%";
-  }, [list.length]);
+  // Dynamically measure exact horizontal track width for 1:1 scroll synchronization
+  useEffect(() => {
+    const calculateDistance = () => {
+      if (trackRef.current) {
+        const trackWidth = trackRef.current.scrollWidth;
+        const viewWidth = window.innerWidth;
+        // Distance needed to scroll so the very last card is completely visible with comfortable padding
+        const dist = Math.max(0, trackWidth - viewWidth + 90);
+        setScrollDistance(dist);
+      }
+    };
 
-  // Smooth transform mapping 0 -> 0.90 to 0% -> targetX (locks sticky view through 100% of cards)
-  const x = useTransform(scrollYProgress, [0, 0.90], ["0%", targetX]);
+    calculateDistance();
+    // Recalculate on window resize or when active category filter changes
+    const timer = setTimeout(calculateDistance, 100);
+    window.addEventListener("resize", calculateDistance);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("resize", calculateDistance);
+    };
+  }, [list]);
+
+  // Framer Motion 1:1 Scroll-Driven Transformation
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end end"],
+  });
+
+  // Map scrollYProgress directly to pixel distance (0 to -scrollDistance px)
+  const x = useTransform(scrollYProgress, [0, 1], [0, -scrollDistance]);
 
   return (
     <section
       id="projects"
       ref={sectionRef}
-      className="relative h-[500vh] bg-transparent scroll-mt-24"
+      style={{
+        height: `${Math.max(scrollDistance + window.innerHeight * 0.8, window.innerHeight * 1.5)}px`,
+      }}
+      className="relative bg-transparent scroll-mt-24"
     >
       {/* Sticky Viewport Container */}
       <div className="sticky top-0 flex h-screen w-full flex-col justify-center overflow-hidden py-8 px-6 lg:px-12">
         {/* Theme-Aware Section Header Bar */}
-        <div className="relative flex flex-col md:flex-row md:items-end md:justify-between mb-8 gap-6 shrink-0 max-w-7xl mx-auto w-full">
+        <div className="relative flex flex-col md:flex-row md:items-end md:justify-between mb-6 gap-6 shrink-0 max-w-7xl mx-auto w-full">
           {/* Theme-Aware Absorber Aura directly behind text */}
           <div className="heading-absorber-aura pointer-events-none absolute -top-10 -left-10 w-[550px] h-[180px] rounded-full blur-2xl z-0" />
 
@@ -296,8 +314,9 @@ export default function ProjectsCyber() {
         </div>
 
         {/* Horizontal Motion Track Container */}
-        <div className="relative w-full max-w-7xl mx-auto flex items-center overflow-hidden py-4">
+        <div className="relative w-full max-w-7xl mx-auto flex items-center overflow-hidden py-2">
           <motion.div
+            ref={trackRef}
             style={{ x }}
             className="flex gap-7 sm:gap-8 items-stretch min-w-max"
           >
@@ -310,13 +329,13 @@ export default function ProjectsCyber() {
         </div>
 
         {/* Scroll Progress Bar & Horizontal Navigation Indicator */}
-        <div className="max-w-7xl mx-auto w-full flex items-center justify-between pt-4 font-mono text-xs text-slate-400">
+        <div className="max-w-7xl mx-auto w-full flex items-center justify-between pt-3 font-mono text-xs text-slate-400">
           <div className="flex items-center gap-2">
             <span className="caret inline-block w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
             <span className="text-slate-300">SCROLL DOWN TO EXPLORE ALL {list.length} LANDSCAPE BUILDS</span>
           </div>
           <div className="hidden sm:flex items-center gap-2">
-            <span className="text-cyan-400 font-bold">5 FEATURED BUILDS</span>
+            <span className="text-cyan-400 font-bold">1:1 SYNCHRONIZED TRACK</span>
           </div>
         </div>
       </div>

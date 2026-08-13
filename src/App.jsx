@@ -54,8 +54,8 @@ export default function App() {
         setOpen={setCmdOpen}
       />
 
-      {/* Main Portfolio Page Content — Uncovers Sticky Footer like a Curtain */}
-      <main className="relative z-10 flex flex-col bg-[#05080f] dark:bg-[#05080f] light-theme:bg-[#F7F5F1] shadow-[0_25px_60px_rgba(0,0,0,0.9)] transition-colors duration-300">
+      {/* Main Portfolio Page Content — 100% Transparent Canvas View with Uncover Curtain Footer */}
+      <main className="relative z-10 flex flex-col bg-transparent backdrop-blur-[2px]">
         <HeroCyber culturalTheme={culturalTheme} />
         <ProjectsCyber />
         <CulturalCraftCyber />

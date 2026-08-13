@@ -67,12 +67,25 @@ export default function FloatingDockCyber({ theme, toggleTheme }) {
         isLightMode
           ? isScrolled
             ? "px-3 py-1.5 shadow-[0_16px_40px_rgba(15,23,42,0.15)] bg-white/95 scale-95 border-slate-300"
-            : "px-4 py-2.5 shadow-[0_20px_50px_rgba(15,23,42,0.12)] bg-white/90 scale-100 border-slate-200"
+            : "px-4 py-2 shadow-[0_20px_50px_rgba(15,23,42,0.12)] bg-white/90 scale-100 border-slate-200"
           : isScrolled
             ? "px-3 py-1.5 shadow-[0_16px_50px_rgba(0,0,0,0.95)] bg-[#0b0f17]/95 scale-95 border-white/25"
-            : "px-4 py-2.5 shadow-[0_20px_60px_rgba(0,0,0,0.85)] bg-[#0b0f17]/90 scale-100 border-white/20"
+            : "px-4 py-2 shadow-[0_20px_60px_rgba(0,0,0,0.85)] bg-[#0b0f17]/90 scale-100 border-white/20"
       }`}
     >
+      {/* Personal Circular Avatar Brand Pill */}
+      <a
+        href="#home"
+        className="flex items-center gap-2 rounded-full pl-1 pr-2.5 py-1 transition-transform hover:scale-105"
+      >
+        <div className="relative h-6 w-6 rounded-full overflow-hidden border border-cyan-400/80 shadow-md ring-1 ring-cyan-500/30">
+          <img src="/profile.png" alt="Sasiru Liyanage" className="h-full w-full object-cover object-top" />
+        </div>
+        <span className="font-mono text-xs font-bold tracking-tight text-slate-900 dark:text-white">Sasiru</span>
+      </a>
+
+      <div className={`mx-0.5 h-4 w-px ${isLightMode ? "bg-slate-300" : "bg-white/15"}`} />
+
       {NAV.map((item) => {
         const Icon = item.icon;
         const isActive = active === item.id;
@@ -80,7 +93,7 @@ export default function FloatingDockCyber({ theme, toggleTheme }) {
           <a
             key={item.id}
             href={`#${item.id}`}
-            className="relative flex items-center gap-1.5 rounded-full px-3.5 py-2 text-xs font-medium transition-colors"
+            className="relative flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition-colors"
           >
             {isActive && (
               <motion.span

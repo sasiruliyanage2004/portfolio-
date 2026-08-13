@@ -68,16 +68,13 @@ export default function SkillsCyber() {
   return (
     <section ref={sectionRef} id="skills" className="relative w-full bg-transparent overflow-hidden py-28 px-6 lg:px-10 scroll-mt-24">
       <motion.div style={{ scale, y }} className="mx-auto max-w-7xl relative">
-        {/* Theme-Aware Section Header */}
+        {/* Clean Section Header without any dark shadow patches */}
         <div className="relative flex flex-col md:flex-row md:items-end md:justify-between mb-12 gap-6">
-          {/* Theme-Aware Absorber Aura directly behind section heading */}
-          <div className="heading-absorber-aura pointer-events-none absolute -top-10 -left-10 w-[550px] h-[180px] rounded-full blur-2xl z-0" />
-
           <div className="relative z-10">
-            <p className="font-mono text-xs tracking-[0.3em] text-cyan-400 font-extrabold drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)] uppercase">
+            <p className="font-mono text-xs tracking-[0.3em] text-cyan-400 font-extrabold uppercase drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
               TECHNICAL PROFICIENCY
             </p>
-            <h2 className="mt-2 text-5xl font-extrabold text-slate-900 dark:text-white sm:text-6xl drop-shadow-[0_4px_25px_rgba(0,0,0,0.5)]">
+            <h2 className="mt-2 text-5xl font-extrabold text-slate-900 dark:text-white sm:text-6xl drop-shadow-[0_4px_16px_rgba(0,0,0,0.8)]">
               Skills <span className="text-gradient">Matrix</span>
             </h2>
           </div>

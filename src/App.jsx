@@ -13,18 +13,37 @@ import Footer from "./components/Footer";
 import "./index.css";
 
 export default function App() {
-  const [theme, setTheme] = useState("dark");
-  const [culturalTheme, setCulturalTheme] = useState("dumbara");
+  // Theme state persisted via localStorage
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem("portfolio_theme") || "dark";
+  });
+
+  const [culturalTheme, setCulturalTheme] = useState(() => {
+    return localStorage.getItem("portfolio_cultural_theme") || "dumbara";
+  });
+
   const [cmdOpen, setCmdOpen] = useState(false);
+
+  // Sync theme changes with DOM documentElement & localStorage
+  useEffect(() => {
+    if (theme === "light") {
+      document.documentElement.classList.add("light-theme");
+      document.body.classList.add("light-theme");
+    } else {
+      document.documentElement.classList.remove("light-theme");
+      document.body.classList.remove("light-theme");
+    }
+    localStorage.setItem("portfolio_theme", theme);
+  }, [theme]);
+
+  // Sync cultural motif theme with localStorage
+  useEffect(() => {
+    localStorage.setItem("portfolio_cultural_theme", culturalTheme);
+  }, [culturalTheme]);
 
   const toggleTheme = () => {
     const nextTheme = theme === "dark" ? "light" : "dark";
     setTheme(nextTheme);
-    if (nextTheme === "light") {
-      document.documentElement.classList.add("light-theme");
-    } else {
-      document.documentElement.classList.remove("light-theme");
-    }
   };
 
   return (
@@ -54,8 +73,8 @@ export default function App() {
         setOpen={setCmdOpen}
       />
 
-      {/* Main Portfolio Page Content — 100% Transparent Canvas View with Uncover Curtain Footer */}
-      <main className="relative z-10 flex flex-col bg-transparent backdrop-blur-[2px]">
+      {/* Main Portfolio Page Content — 100% Crisp Transparent Canvas View without backdrop blur smudges */}
+      <main className="relative z-10 flex flex-col bg-transparent">
         <HeroCyber culturalTheme={culturalTheme} />
         <ProjectsCyber />
         <CulturalCraftCyber />

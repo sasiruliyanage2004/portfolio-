@@ -24,26 +24,10 @@ const NAV = [
   { id: "contact", label: "Contact", icon: Mail },
 ];
 
-export default function FloatingDockCyber() {
+export default function FloatingDockCyber({ theme, toggleTheme }) {
   const [active, setActive] = useState("home");
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isLightMode, setIsLightMode] = useState(() => {
-    return document.documentElement.classList.contains("light-theme");
-  });
-
-  const toggleTheme = () => {
-    const nextMode = !isLightMode;
-    setIsLightMode(nextMode);
-    if (nextMode) {
-      document.documentElement.classList.add("light-theme");
-      document.body.classList.add("light-theme");
-      localStorage.setItem("theme", "light");
-    } else {
-      document.documentElement.classList.remove("light-theme");
-      document.body.classList.remove("light-theme");
-      localStorage.setItem("theme", "dark");
-    }
-  };
+  const isLightMode = theme === "light";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -100,53 +84,46 @@ export default function FloatingDockCyber() {
           >
             {isActive && (
               <motion.span
-                layoutId="dock-active"
-                className={`absolute inset-0 rounded-full ${
-                  isLightMode
-                    ? "bg-gradient-to-r from-indigo-500/20 via-violet-500/20 to-cyan-500/20 ring-1 ring-indigo-500/40 shadow-[0_0_15px_rgba(67,56,202,0.2)]"
-                    : "bg-gradient-to-r from-indigo-500/35 via-violet-500/35 to-cyan-500/35 ring-1 ring-cyan-400/50 shadow-[0_0_20px_rgba(6,182,212,0.3)]"
-                }`}
+                layoutId="activeDockCyberPill"
+                className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-500 to-indigo-500 opacity-90 shadow-md"
                 transition={{ type: "spring", stiffness: 380, damping: 28 }}
               />
             )}
+
             <Icon
-              className={`relative h-3.5 w-3.5 ${
-                isActive
-                  ? isLightMode
-                    ? "text-indigo-600 font-semibold"
-                    : "text-cyan-300"
-                  : isLightMode
-                    ? "text-slate-600"
-                    : "text-slate-400"
+              className={`relative z-10 h-3.5 w-3.5 transition-transform duration-300 ${
+                isActive ? "text-white scale-110" : isLightMode ? "text-slate-600 hover:text-indigo-600" : "text-slate-400 hover:text-cyan-300"
               }`}
             />
-            <span
-              className={`relative ${
-                isActive
-                  ? isLightMode
-                    ? "text-indigo-950 font-semibold"
-                    : "text-white font-semibold"
-                  : isLightMode
-                    ? "text-slate-600"
-                    : "text-slate-400"
-              }`}
-            >
-              {item.label}
-            </span>
+
+            <AnimatePresence>
+              {(!isScrolled || isActive) && (
+                <motion.span
+                  initial={{ opacity: 0, width: 0 }}
+                  animate={{ opacity: 1, width: "auto" }}
+                  exit={{ opacity: 0, width: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className={`relative z-10 font-mono overflow-hidden whitespace-nowrap ${
+                    isActive ? "text-white font-semibold" : isLightMode ? "text-slate-600" : "text-slate-300"
+                  }`}
+                >
+                  {item.label}
+                </motion.span>
+              )}
+            </AnimatePresence>
           </a>
         );
       })}
 
-      {/* Smoothly Collapsing Right Items on Scroll */}
-      <AnimatePresence mode="popLayout">
+      {/* Dock Right Controls & Social Action Buttons */}
+      <AnimatePresence>
         {!isScrolled && (
           <motion.div
-            layout
-            initial={{ opacity: 0, width: 0, scale: 0.8 }}
-            animate={{ opacity: 1, width: "auto", scale: 1 }}
-            exit={{ opacity: 0, width: 0, scale: 0.8 }}
-            transition={{ type: "spring", stiffness: 320, damping: 28 }}
-            className="flex items-center gap-1.5 overflow-hidden"
+            initial={{ opacity: 0, width: 0 }}
+            animate={{ opacity: 1, width: "auto" }}
+            exit={{ opacity: 0, width: 0 }}
+            transition={{ duration: 0.25 }}
+            className="flex items-center gap-1 overflow-hidden"
           >
             <div className={`mx-1 h-5 w-px ${isLightMode ? "bg-slate-300" : "bg-white/15"}`} />
 

@@ -106,11 +106,6 @@ function Card3D({ project }) {
         style={{ rotateX: srx, rotateY: sry, transformPerspective: 900 }}
         className="project-card-obsidian noise-overlay relative flex h-full min-h-[250px] flex-col justify-between overflow-hidden rounded-2xl p-7 group-hover:border-cyan-400 transition-all duration-300 shadow-2xl z-10"
       >
-        {/* Animated Border Beam Spinning Accent */}
-        <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-          <div className="absolute inset-[-100%] animate-border-spin bg-[conic-gradient(from_0deg,transparent_0%,#6366F1_10%,#06B6D4_25%,transparent_40%)] opacity-40" />
-        </div>
-
         {/* Top Header Block */}
         <div>
           <div className="flex items-start justify-between gap-4">

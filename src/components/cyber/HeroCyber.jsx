@@ -2,6 +2,42 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
 import { ArrowRight, FileText, Sparkles, Activity, CheckCircle2, GraduationCap } from "lucide-react";
 
+function MagneticButton({ children, className = "", href, download, ...props }) {
+  const ref = useRef(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const sx = useSpring(x, { stiffness: 220, damping: 16 });
+  const sy = useSpring(y, { stiffness: 220, damping: 16 });
+
+  const handleMove = (e) => {
+    if (!ref.current) return;
+    const r = ref.current.getBoundingClientRect();
+    x.set((e.clientX - (r.left + r.width / 2)) * 0.35);
+    y.set((e.clientY - (r.top + r.height / 2)) * 0.35);
+  };
+
+  const handleLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <motion.a
+      ref={ref}
+      href={href}
+      download={download}
+      onMouseMove={handleMove}
+      onMouseLeave={handleLeave}
+      style={{ x: sx, y: sy }}
+      className={className}
+      {...props}
+    >
+      {children}
+    </motion.a>
+  );
+}
+
 function TiltCard({ children, className = "" }) {
   const ref = useRef(null);
   const x = useMotionValue(0);
@@ -126,31 +162,31 @@ export default function HeroCyber() {
               Full-stack engineer crafting fast, precise, and quietly futuristic products — fusing modern WebGL architecture with Sri Lankan cultural motifs.
             </p>
 
-            {/* Call To Action Buttons */}
+            {/* Magnetic Call To Action Buttons */}
             <div className="flex flex-wrap items-center gap-4 pt-4">
-              <a
+              <MagneticButton
                 href="#projects"
                 className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-indigo-500 via-cyan-500 to-violet-500 px-7 py-3.5 font-mono text-xs font-bold text-white shadow-xl transition-all hover:shadow-cyan-500/25 cursor-pointer"
               >
                 <span>View My Work</span>
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </a>
+              </MagneticButton>
 
-              <a
+              <MagneticButton
                 href="#contact"
                 className="glass-panel inline-flex items-center gap-2 rounded-full px-6 py-3.5 font-mono text-xs font-bold text-slate-800 dark:text-slate-200 transition-all hover:border-cyan-400/50 hover:text-cyan-400 cursor-pointer"
               >
                 <span>Get in Touch</span>
-              </a>
+              </MagneticButton>
 
-              <a
+              <MagneticButton
                 href="/resume.pdf"
                 download="Sasiru_Liyanage_CV.pdf"
                 className="glass-panel inline-flex items-center gap-2 rounded-full px-5 py-3.5 font-mono text-xs font-medium text-slate-600 dark:text-slate-400 transition-all hover:border-cyan-400/50 hover:text-white cursor-pointer"
               >
                 <FileText className="h-3.5 w-3.5 text-cyan-400" />
                 <span>Resume</span>
-              </a>
+              </MagneticButton>
             </div>
           </motion.div>
 

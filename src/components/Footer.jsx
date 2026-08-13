@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Command, Heart, Clock, ArrowUpRight, Copy, Check, Mail } from "lucide-react";
+import { Command, Heart, Clock, ArrowUpRight, Copy, Check, Mail, Sparkles, FolderGit2, Terminal, ShieldCheck, Zap } from "lucide-react";
 
 const GithubIcon = (props) => (
   <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" {...props}>
@@ -45,20 +45,22 @@ export default function Footer({ onOpenCommandPalette }) {
   };
 
   return (
-    <footer className="sticky bottom-0 h-[85vh] sm:h-screen w-full flex flex-col justify-between p-8 sm:p-12 lg:p-16 bg-[#05080f] dark:bg-[#05080f] light-theme:bg-[#F7F5F1] text-slate-100 dark:text-slate-100 light-theme:text-slate-900 z-0 overflow-hidden">
+    <footer className="sticky bottom-0 h-[92vh] sm:h-screen w-full flex flex-col justify-between p-7 sm:p-12 lg:p-16 bg-[#05080f] dark:bg-[#05080f] light-theme:bg-[#F7F5F1] text-slate-100 dark:text-slate-100 light-theme:text-slate-900 z-0 overflow-hidden">
+      {/* Giant Ambient Background Marquee Watermark */}
+      <div className="absolute inset-0 pointer-events-none flex items-center justify-center opacity-[0.035] dark:opacity-[0.035] light-theme:opacity-[0.06] select-none overflow-hidden">
+        <h1 className="text-[14vw] font-extrabold uppercase tracking-tighter whitespace-nowrap font-mono">
+          SASIRU LIYANAGE • FULL-STACK ENGINEER • SLIIT '26
+        </h1>
+      </div>
+
       {/* Top Header Row */}
-      <div className="flex flex-wrap items-start justify-between gap-6 border-b border-white/10 dark:border-white/10 light-theme:border-slate-300 pb-8">
-        <div>
-          <p className="font-mono text-xs text-cyan-400 font-extrabold uppercase tracking-[0.3em] mb-2">
-            LOCATION &amp; LOCAL TIME
-          </p>
-          <div className="flex items-center gap-3 font-mono text-sm text-slate-300 dark:text-slate-300 light-theme:text-slate-700">
-            <span className="flex items-center gap-1.5">
-              <Clock className="h-4 w-4 text-cyan-400 animate-spin-slow" />
-              Sri Lanka (GMT+5:30):
-            </span>
-            <span className="font-bold text-white dark:text-white light-theme:text-slate-900 bg-white/5 px-2.5 py-1 rounded-lg border border-white/10">
-              {time || "11:30:00 AM"}
+      <div className="relative z-10 flex flex-wrap items-center justify-between gap-6 border-b border-white/10 dark:border-white/10 light-theme:border-slate-300/60 pb-6">
+        <div className="flex items-center gap-4">
+          <div className="glass-panel flex items-center gap-3 px-4 py-2 rounded-full border border-white/10">
+            <Clock className="h-4 w-4 text-cyan-400 animate-spin-slow shrink-0" />
+            <span className="font-mono text-xs opacity-70">Sri Lanka (GMT+5:30):</span>
+            <span className="font-mono text-xs font-bold text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded">
+              {time || "11:55:00 AM"}
             </span>
           </div>
         </div>
@@ -66,7 +68,7 @@ export default function Footer({ onOpenCommandPalette }) {
         {/* Clean Integrated Command Palette Trigger */}
         <button
           onClick={onOpenCommandPalette}
-          className="flex items-center gap-2.5 rounded-full border border-white/20 dark:border-white/20 light-theme:border-slate-300 bg-white/5 px-5 py-2.5 font-mono text-xs transition-all hover:border-cyan-400 hover:text-cyan-300 hover:bg-cyan-500/10 cursor-pointer shadow-lg"
+          className="flex items-center gap-2.5 rounded-full border border-white/20 dark:border-white/20 light-theme:border-slate-300/80 bg-white/5 px-5 py-2.5 font-mono text-xs transition-all hover:border-cyan-400 hover:text-cyan-300 hover:bg-cyan-500/10 cursor-pointer shadow-lg"
         >
           <Command className="h-4 w-4 text-cyan-400" />
           <span>Open Command Palette</span>
@@ -74,39 +76,69 @@ export default function Footer({ onOpenCommandPalette }) {
         </button>
       </div>
 
-      {/* Middle Hero Section */}
-      <div className="my-auto py-8">
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
-          <div>
+      {/* Middle Hero Showcase Area */}
+      <div className="relative z-10 my-auto py-6">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-10">
+          <div className="max-w-2xl">
+            <p className="font-mono text-xs text-cyan-400 font-extrabold uppercase tracking-[0.3em] mb-3 flex items-center gap-2">
+              <Sparkles className="h-4 w-4" />
+              READY FOR NEW CHALLENGES
+            </p>
             <h2 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-none drop-shadow-xl">
               Let's create the <span className="text-gradient">Extraordinary</span>
             </h2>
-            <p className="mt-4 text-base sm:text-lg text-slate-400 max-w-xl">
-              2nd Year SLIIT Undergraduate &amp; Full-Stack Engineer crafting high-performance React 19 web applications with Sri Lankan cultural motif algorithms.
+            <p className="mt-4 text-base sm:text-lg text-slate-400 max-w-xl font-normal leading-relaxed">
+              2nd Year SLIIT Undergraduate &amp; Full-Stack Software Engineer specializing in React 19, Node.js, Python, and Sri Lankan cultural motif algorithms.
             </p>
+
+            <div className="mt-6 flex flex-wrap gap-3">
+              <button
+                onClick={handleCopy}
+                className="inline-flex items-center gap-2.5 rounded-2xl bg-gradient-to-r from-indigo-500 via-cyan-500 to-violet-500 px-7 py-3.5 font-mono text-xs font-bold text-white shadow-xl hover:shadow-cyan-500/25 transition-all cursor-pointer"
+              >
+                <Mail className="h-4 w-4" />
+                {copied ? "Email Copied to Clipboard!" : "liyanagesasiru@gmail.com"}
+                {copied ? <Check className="h-4 w-4 text-emerald-300" /> : <Copy className="h-4 w-4 opacity-80" />}
+              </button>
+            </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-4">
-            <button
-              onClick={handleCopy}
-              className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-indigo-500 via-cyan-500 to-violet-500 px-6 py-3 font-mono text-xs font-bold text-white shadow-xl hover:shadow-cyan-500/25 transition-all cursor-pointer"
-            >
-              <Mail className="h-4 w-4" />
-              {copied ? "Email Copied!" : "liyanagesasiru@gmail.com"}
-              {copied ? <Check className="h-4 w-4 text-emerald-300" /> : <Copy className="h-4 w-4 opacity-80" />}
-            </button>
+          {/* Footer Bento Mini Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-md w-full shrink-0">
+            <div className="glass-panel noise-overlay p-5 rounded-2xl border border-white/10 dark:border-white/10 light-theme:border-slate-300/60 shadow-lg">
+              <div className="flex items-center gap-2 text-emerald-400 font-mono text-xs font-bold mb-2">
+                <span className="relative flex h-2 w-2">
+                  <span className="pulse-dot absolute inline-flex h-full w-full rounded-full bg-emerald-500" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+                </span>
+                AVAILABLE FOR HIRE
+              </div>
+              <p className="text-xs text-slate-400 font-normal">
+                Open for full-stack engineering roles, internships &amp; freelance web applications.
+              </p>
+            </div>
+
+            <div className="glass-panel noise-overlay p-5 rounded-2xl border border-white/10 dark:border-white/10 light-theme:border-slate-300/60 shadow-lg">
+              <div className="flex items-center gap-2 text-cyan-400 font-mono text-xs font-bold mb-2">
+                <Zap className="h-3.5 w-3.5" />
+                PRIMARY TECH STACK
+              </div>
+              <p className="text-xs text-slate-400 font-normal">
+                React 19 • Node.js • Python • Express • MongoDB • Tailwind v4
+              </p>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Giant Ambient Background Typography */}
-      <div className="relative py-4 border-t border-white/10 dark:border-white/10 light-theme:border-slate-300 flex flex-col md:flex-row items-center justify-between gap-4 font-mono text-xs text-slate-400">
+      {/* Footer Bottom Bar */}
+      <div className="relative z-10 py-5 border-t border-white/10 dark:border-white/10 light-theme:border-slate-300/60 flex flex-col md:flex-row items-center justify-between gap-4 font-mono text-xs text-slate-400">
         <div className="flex items-center gap-6">
           <a
             href="https://github.com/sasiruliyanage2004"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1.5 hover:text-cyan-400 transition-colors"
+            className="flex items-center gap-1.5 font-bold hover:text-cyan-400 transition-colors"
           >
             <GithubIcon className="h-4 w-4" /> GitHub <ArrowUpRight className="h-3.5 w-3.5" />
           </a>
@@ -114,14 +146,14 @@ export default function Footer({ onOpenCommandPalette }) {
             href="https://www.linkedin.com/in/sasiruliyanage"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1.5 hover:text-cyan-400 transition-colors"
+            className="flex items-center gap-1.5 font-bold hover:text-cyan-400 transition-colors"
           >
             <LinkedinIcon className="h-4 w-4" /> LinkedIn <ArrowUpRight className="h-3.5 w-3.5" />
           </a>
         </div>
 
         <p className="flex items-center gap-1.5 opacity-80">
-          © {new Date().getFullYear()} Sasiru Liyanage. Crafting with <Heart className="h-3.5 w-3.5 text-rose-500 fill-rose-500 animate-pulse" /> in Sri Lanka.
+          © {new Date().getFullYear()} Sasiru Liyanage. Crafted with <Heart className="h-3.5 w-3.5 text-rose-500 fill-rose-500 animate-pulse" /> in Sri Lanka.
         </p>
       </div>
     </footer>

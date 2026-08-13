@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
-import { ArrowRight, FileText, Code2, Sparkles, Terminal, Activity, CheckCircle2 } from "lucide-react";
+import { ArrowRight, FileText, Sparkles, Activity, CheckCircle2, GraduationCap } from "lucide-react";
 
 function TiltCard({ children, className = "" }) {
   const ref = useRef(null);
@@ -37,50 +37,13 @@ function TiltCard({ children, className = "" }) {
   );
 }
 
-const TECH_BADGES = [
-  "React 19 + Vite 8",
-  "Tailwind CSS v4",
-  "Node.js + Express",
-  "Python + FastAPI",
-  "Framer Motion",
-];
-
-function CyclingTechBadge() {
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setIndex((prev) => (prev + 1) % TECH_BADGES.length);
-    }, 2800);
-    return () => clearInterval(timer);
-  }, []);
-
-  return (
-    <div className="absolute top-4 left-4 z-20 overflow-hidden rounded-full border border-white/20 bg-black/60 px-3.5 py-1.5 backdrop-blur-md shadow-lg">
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={TECH_BADGES[index]}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -10 }}
-          transition={{ duration: 0.3 }}
-          className="flex items-center gap-2 font-mono text-xs font-semibold text-cyan-300"
-        >
-          <Sparkles className="h-3.5 w-3.5 text-cyan-400 animate-pulse" />
-          <span>{TECH_BADGES[index]}</span>
-        </motion.div>
-      </AnimatePresence>
-    </div>
-  );
-}
-
 const LIVE_STATUSES = [
-  { text: "Available for Hire", icon: CheckCircle2, color: "text-emerald-400", dot: "bg-emerald-500" },
-  { text: "Coding: React 19 + Node", icon: Activity, color: "text-cyan-400", dot: "bg-cyan-500" },
-  { text: "50+ Commits This Month", icon: Sparkles, color: "text-indigo-400", dot: "bg-indigo-500" },
+  { text: "Available for Hire", icon: CheckCircle2, color: "text-emerald-400 dark:text-emerald-400 light-theme:text-emerald-600", dot: "bg-emerald-500" },
+  { text: "Coding: React 19 + Node", icon: Activity, color: "text-cyan-400 dark:text-cyan-400 light-theme:text-cyan-600", dot: "bg-cyan-500" },
+  { text: "50+ Commits This Month", icon: Sparkles, color: "text-indigo-400 dark:text-indigo-400 light-theme:text-indigo-600", dot: "bg-indigo-500" },
 ];
 
-function CyclingStatusBadge() {
+function UnifiedStatusBadge() {
   const [statusIdx, setStatusIdx] = useState(0);
 
   useEffect(() => {
@@ -94,7 +57,7 @@ function CyclingStatusBadge() {
   const IconComponent = current.icon;
 
   return (
-    <div className="absolute bottom-4 right-4 z-20 overflow-hidden rounded-full border border-white/20 bg-black/75 px-4 py-2 backdrop-blur-md shadow-2xl">
+    <div className="absolute bottom-4 right-4 z-20 overflow-hidden rounded-full border border-white/20 dark:border-white/20 light-theme:border-slate-300 bg-[#0e1422]/90 dark:bg-[#0e1422]/90 light-theme:bg-white/95 px-4 py-2 backdrop-blur-md shadow-2xl">
       <AnimatePresence mode="wait">
         <motion.div
           key={current.text}
@@ -102,7 +65,7 @@ function CyclingStatusBadge() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -12 }}
           transition={{ duration: 0.35, ease: "easeOut" }}
-          className="flex items-center gap-2.5 font-mono text-xs font-semibold text-white whitespace-nowrap"
+          className="flex items-center gap-2.5 font-mono text-xs font-bold whitespace-nowrap"
         >
           <span className="relative flex h-2 w-2">
             <span className={`pulse-dot absolute inline-flex h-full w-full rounded-full ${current.dot}`} />
@@ -116,7 +79,7 @@ function CyclingStatusBadge() {
   );
 }
 
-export default function HeroCyber({ culturalTheme }) {
+export default function HeroCyber() {
   const targetRef = useRef(null);
 
   const { scrollYProgress } = useScroll({
@@ -147,9 +110,9 @@ export default function HeroCyber({ culturalTheme }) {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="lg:col-span-7 space-y-6"
           >
-            {/* Tagline Badge */}
-            <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-950/40 px-4 py-1.5 font-mono text-xs font-semibold text-cyan-300 shadow-md">
-              <Terminal className="h-3.5 w-3.5 text-cyan-400" />
+            {/* High-Contrast Crisp Tagline Badge */}
+            <div className="inline-flex items-center gap-2.5 rounded-full border border-cyan-500/40 bg-[#0e1422] dark:bg-[#0e1422] light-theme:bg-white px-4 py-2 font-mono text-xs font-bold text-cyan-400 dark:text-cyan-300 light-theme:text-cyan-700 shadow-xl backdrop-blur-md">
+              <GraduationCap className="h-4 w-4 text-indigo-400 shrink-0" />
               <span>SLIIT Undergraduate • Full-Stack Engineer</span>
             </div>
 
@@ -199,7 +162,7 @@ export default function HeroCyber({ culturalTheme }) {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="lg:col-span-5 group relative flex justify-center [perspective:1000px] py-2 px-4"
           >
-            {/* Main 3D Card Container (Clean without square backdrop glow) */}
+            {/* Main 3D Card Container (Clean, focused, 1 single status badge) */}
             <TiltCard className="hero-portrait-card noise-overlay relative w-full max-w-[420px] rounded-[2rem] p-4 sm:p-5 shadow-2xl transition-all duration-500">
               <span className="border-beam" aria-hidden="true" />
 
@@ -213,11 +176,8 @@ export default function HeroCyber({ culturalTheme }) {
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0b0f17]/80 via-transparent to-transparent opacity-40 group-hover:opacity-10 transition-opacity duration-700" />
               </div>
 
-              {/* Cycling Tech Stack Badge */}
-              <CyclingTechBadge />
-
-              {/* Cycling Live Availability Status Badge */}
-              <CyclingStatusBadge />
+              {/* Unified Single Dynamic Status Badge */}
+              <UnifiedStatusBadge />
             </TiltCard>
           </motion.div>
         </div>

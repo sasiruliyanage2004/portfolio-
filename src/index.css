@@ -90,6 +90,21 @@ body.light-theme,
 }
 
 /* ------------------------------------------------------------------
+   LIGHT THEME ABSOLUTE DROP-SHADOW OBLITERATOR (FIXES ALL SMUDGES)
+   ------------------------------------------------------------------ */
+.light-theme h1,
+.light-theme h2,
+.light-theme h3,
+.light-theme h4,
+.light-theme p,
+.light-theme span,
+.light-theme div,
+.light-theme [class*="drop-shadow"] {
+  filter: none !important;
+  text-shadow: none !important;
+}
+
+/* ------------------------------------------------------------------
    LIGHT THEME FOOTER OVERRIDES
    ------------------------------------------------------------------ */
 .light-theme footer {

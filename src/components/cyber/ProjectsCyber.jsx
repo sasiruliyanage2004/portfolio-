@@ -1,6 +1,6 @@
-import { useMemo, useRef, useState, useEffect } from "react";
+import { useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion, useMotionValue, useSpring, useScroll, useTransform } from "framer-motion";
-import { ArrowUpRight, Radio, ExternalLink, Activity, Database, ShieldCheck, Cpu, Layers, Sparkles } from "lucide-react";
+import { ArrowUpRight, Radio, ExternalLink, Activity, Database, ShieldCheck } from "lucide-react";
 
 const GithubIcon = (props) => (
   <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" {...props}>
@@ -18,6 +18,8 @@ const PROJECTS = [
     blurb: "Integrated Ayurvedic Herbal Medicine Platform combining smart diagnostic search, doctor appointments, and personalized herbal remedies tailored for traditional wellness.",
     category: "Web Apps",
     tech: ["React 19", "Node.js", "Express", "MongoDB", "Tailwind v4"],
+    span: "lg:col-span-2 lg:row-span-2",
+    featured: true,
     live: true,
     github: "https://github.com/sasiruliyanage2004",
     demo: "#",
@@ -33,90 +35,68 @@ const PROJECTS = [
   {
     id: "nimbus",
     title: "Nimbus Analytics Engine",
-    blurb: "High-throughput real-time streaming analytics engine processing 2M+ telemetry events/day with automated anomaly detection alerts.",
+    blurb: "Real-time data platform processing 2M+ events/day with sub-100ms query latency.",
     category: "Web Apps",
-    tech: ["React", "Node.js", "PostgreSQL", "Redis", "WebSockets"],
+    tech: ["React", "Node.js", "PostgreSQL", "Redis"],
+    span: "lg:col-span-1 lg:row-span-1",
+    featured: false,
     live: true,
     github: "https://github.com/sasiruliyanage2004",
     demo: "#",
-    metrics: [
-      { label: "Events / Day", val: "2M+" },
-      { label: "P99 Latency", val: "42ms" },
-      { label: "Uptime SLA", val: "99.99%" },
-    ],
-    status: "v1.8.2 • STREAMING",
-    sync: "TimescaleDB Pipeline",
-    badge: "Sub-100ms Ingestion",
   },
   {
     id: "aria",
     title: "Aria AI Writing Copilot",
-    blurb: "Context-aware LLM writing assistant with real-time tone adaptation, semantic document search, and instant automated summarization.",
+    blurb: "LLM-powered writing assistant with contextual tone matching.",
     category: "AI Solutions",
-    tech: ["Python", "PyTorch", "FastAPI", "React", "Tailwind"],
+    tech: ["Python", "PyTorch", "FastAPI"],
+    span: "lg:col-span-1 lg:row-span-1",
+    featured: false,
     live: true,
     github: "https://github.com/sasiruliyanage2004",
     demo: "#",
-    metrics: [
-      { label: "Model Parameters", val: "7B" },
-      { label: "Tokens / Sec", val: "120" },
-      { label: "Accuracy Score", val: "98.4%" },
-    ],
-    status: "v3.1.0 • INFERENCING",
-    sync: "Pinecone Vector Index",
-    badge: "Zero Data Logging",
   },
   {
     id: "vertex",
     title: "Vertex Token Design System",
-    blurb: "Multi-brand, token-driven component architecture adopted across 6 cross-functional engineering teams for unified UI consistency.",
+    blurb: "Token-driven component library adopted across 6 product teams.",
     category: "UI/UX",
-    tech: ["Figma", "Storybook", "Tailwind CSS", "React"],
+    tech: ["Figma", "Storybook", "Tailwind"],
+    span: "lg:col-span-2 lg:row-span-1",
+    featured: false,
     live: true,
     github: "https://github.com/sasiruliyanage2004",
     demo: "#",
-    metrics: [
-      { label: "UI Tokens", val: "450+" },
-      { label: "Product Teams", val: "6" },
-      { label: "A11y Score", val: "100/100" },
-    ],
-    status: "v4.0.0 • PRODUCTION",
-    sync: "Figma Tokens API",
-    badge: "WCAG AAA Compliant",
   },
   {
     id: "pulse",
     title: "Pulse AI Predictive CRM",
-    blurb: "Sales pipeline automation suite leveraging TensorFlow.js client-side inference for real-time lead conversion scoring.",
+    blurb: "Sales pipeline tool with predictive lead scoring.",
     category: "AI Solutions",
-    tech: ["Next.js", "TensorFlow.js", "Prisma", "Tailwind"],
+    tech: ["Next.js", "TensorFlow.js"],
+    span: "lg:col-span-1 lg:row-span-1",
+    featured: false,
     live: true,
     github: "https://github.com/sasiruliyanage2004",
     demo: "#",
-    metrics: [
-      { label: "Lead Scoring Acc", val: "94%" },
-      { label: "Client Model Size", val: "4.2MB" },
-      { label: "Active Deals", val: "12k+" },
-    ],
-    status: "v2.0.1 • ACTIVE",
-    sync: "Edge Workers Sync",
-    badge: "Client-Side ML Engine",
   },
 ];
 
-function LandscapeCard3D({ project }) {
+function Card3D({ project }) {
   const ref = useRef(null);
   const rx = useMotionValue(0);
   const ry = useMotionValue(0);
   const srx = useSpring(rx, { stiffness: 180, damping: 20 });
   const sry = useSpring(ry, { stiffness: 180, damping: 20 });
 
+  const isFeatured = project.featured || (project.span && project.span.includes("row-span-2"));
+
   const handleMove = (e) => {
     const rect = ref.current.getBoundingClientRect();
     const px = (e.clientX - rect.left) / rect.width;
     const py = (e.clientY - rect.top) / rect.height;
-    ry.set((px - 0.5) * 10);
-    rx.set((0.5 - py) * 10);
+    ry.set((px - 0.5) * 12);
+    rx.set((0.5 - py) * 12);
   };
   const handleLeave = () => {
     rx.set(0);
@@ -126,23 +106,23 @@ function LandscapeCard3D({ project }) {
   return (
     <motion.div
       layout
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.95 }}
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -16 }}
       transition={{ duration: 0.4 }}
-      className="group relative [perspective:1000px] w-[540px] sm:w-[620px] lg:w-[660px] shrink-0"
+      className={`group relative [perspective:1000px] ${project.span}`}
     >
       <motion.div
         ref={ref}
         onMouseMove={handleMove}
         onMouseLeave={handleLeave}
         style={{ rotateX: srx, rotateY: sry, transformPerspective: 900 }}
-        className="project-card-obsidian noise-overlay relative flex h-full min-h-[430px] flex-col justify-between overflow-hidden rounded-3xl p-7 sm:p-8 group-hover:border-cyan-400 transition-all duration-300 shadow-2xl z-10"
+        className="project-card-obsidian noise-overlay relative flex h-full min-h-[250px] flex-col justify-between overflow-hidden rounded-3xl p-7 sm:p-8 group-hover:border-cyan-400 transition-all duration-300 shadow-2xl z-10"
       >
-        {/* Card Header */}
+        {/* Top Header Block */}
         <div>
           <div className="flex items-start justify-between gap-4">
-            <h3 className="text-2xl sm:text-3xl font-extrabold transition-colors">
+            <h3 className="text-2xl font-bold transition-colors">
               {project.title}
             </h3>
             {project.live && (
@@ -153,42 +133,44 @@ function LandscapeCard3D({ project }) {
             )}
           </div>
 
-          <p className="mt-4 text-base sm:text-lg leading-relaxed font-normal">
+          <p className="mt-4 text-base leading-relaxed font-normal">
             {project.blurb}
           </p>
 
-          {/* Interactive Widescreen UI Engine Preview Mockup */}
-          <div className="bento-ui-preview-frame my-6 rounded-2xl p-5 font-mono text-xs shadow-inner">
-            <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-3">
-              <div className="flex items-center gap-2 text-cyan-400 font-semibold">
-                <Activity className="h-4 w-4 animate-pulse text-cyan-300" />
-                <span>{project.title.split("—")[0]} Architecture Engine</span>
-              </div>
-              <span className="text-[10px] opacity-70">{project.status}</span>
-            </div>
-
-            <div className="grid grid-cols-3 gap-3 my-4 text-center">
-              {project.metrics.map((m, i) => (
-                <div key={i} className="rounded-xl bg-white/5 p-3 border border-white/10">
-                  <div className="text-cyan-400 font-bold text-base sm:text-lg">{m.val}</div>
-                  <div className="text-[10px] sm:text-xs opacity-70 mt-0.5">{m.label}</div>
+          {/* Featured Bento Hero UI Preview Frame (Rendered on 2-row Hero Card) */}
+          {isFeatured && (
+            <div className="bento-ui-preview-frame my-6 rounded-2xl p-5 font-mono text-xs shadow-inner">
+              <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-3">
+                <div className="flex items-center gap-2 text-cyan-400 font-semibold">
+                  <Activity className="h-4 w-4 animate-pulse text-cyan-300" />
+                  <span>Ayurvedic Herbal Portal UI Engine</span>
                 </div>
-              ))}
-            </div>
+                <span className="text-[10px] opacity-70">{project.status}</span>
+              </div>
 
-            <div className="flex items-center justify-between text-[11px] opacity-80 pt-2 border-t border-white/10">
-              <span className="flex items-center gap-1.5">
-                <Database className="h-3.5 w-3.5 text-indigo-400" /> {project.sync}
-              </span>
-              <span className="flex items-center gap-1.5 text-emerald-500">
-                <ShieldCheck className="h-3.5 w-3.5" /> {project.badge}
-              </span>
+              <div className="grid grid-cols-3 gap-3 my-4 text-center">
+                {project.metrics.map((m, i) => (
+                  <div key={i} className="rounded-xl bg-white/5 p-3 border border-white/10">
+                    <div className="text-cyan-400 font-bold text-base sm:text-lg">{m.val}</div>
+                    <div className="text-[10px] sm:text-xs opacity-70 mt-0.5">{m.label}</div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex items-center justify-between text-[11px] opacity-80 pt-2 border-t border-white/10">
+                <span className="flex items-center gap-1.5">
+                  <Database className="h-3.5 w-3.5 text-indigo-400" /> {project.sync}
+                </span>
+                <span className="flex items-center gap-1.5 text-emerald-500">
+                  <ShieldCheck className="h-3.5 w-3.5" /> {project.badge}
+                </span>
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
-        {/* Card Footer Anchored to Bottom */}
-        <div className="mt-auto pt-2">
+        {/* Bottom Block (Anchored cleanly to bottom) */}
+        <div className="mt-auto pt-4">
           <div className="flex flex-wrap gap-2 mb-5">
             {project.tech.map((t) => (
               <span
@@ -225,72 +207,38 @@ function LandscapeCard3D({ project }) {
 export default function ProjectsCyber() {
   const [cat, setCat] = useState("All");
   const sectionRef = useRef(null);
-  const trackRef = useRef(null);
-  const [scrollDistance, setScrollDistance] = useState(0);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+
+  const scale = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.95, 1, 1, 0.95]);
+  const y = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [30, 0, 0, -30]);
 
   const list = useMemo(() => {
     if (cat === "All") return PROJECTS;
     return PROJECTS.filter((p) => p.category === cat);
   }, [cat]);
 
-  // Dynamically measure exact horizontal track width for 1:1 scroll synchronization
-  useEffect(() => {
-    const calculateDistance = () => {
-      if (trackRef.current) {
-        const trackWidth = trackRef.current.scrollWidth;
-        const viewWidth = window.innerWidth;
-        // Distance needed to scroll so the very last card is completely visible with comfortable padding
-        const dist = Math.max(0, trackWidth - viewWidth + 90);
-        setScrollDistance(dist);
-      }
-    };
-
-    calculateDistance();
-    // Recalculate on window resize or when active category filter changes
-    const timer = setTimeout(calculateDistance, 100);
-    window.addEventListener("resize", calculateDistance);
-    return () => {
-      clearTimeout(timer);
-      window.removeEventListener("resize", calculateDistance);
-    };
-  }, [list]);
-
-  // Framer Motion 1:1 Scroll-Driven Transformation
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end end"],
-  });
-
-  // Map scrollYProgress directly to pixel distance (0 to -scrollDistance px)
-  const x = useTransform(scrollYProgress, [0, 1], [0, -scrollDistance]);
-
   return (
-    <section
-      id="projects"
-      ref={sectionRef}
-      style={{
-        height: `${Math.max(scrollDistance + window.innerHeight * 0.8, window.innerHeight * 1.5)}px`,
-      }}
-      className="relative bg-transparent scroll-mt-24"
-    >
-      {/* Sticky Viewport Container */}
-      <div className="sticky top-0 flex h-screen w-full flex-col justify-center overflow-hidden py-8 px-6 lg:px-12">
-        {/* Theme-Aware Section Header Bar */}
-        <div className="relative flex flex-col md:flex-row md:items-end md:justify-between mb-6 gap-6 shrink-0 max-w-7xl mx-auto w-full">
+    <section id="projects" ref={sectionRef} className="relative overflow-hidden bg-transparent px-6 py-28 lg:px-10 scroll-mt-24">
+      <motion.div style={{ scale, y }} className="mx-auto max-w-7xl relative">
+        {/* Theme-Aware Section Header */}
+        <div className="relative flex flex-col md:flex-row md:items-end md:justify-between mb-12 gap-6">
           {/* Theme-Aware Absorber Aura directly behind text */}
           <div className="heading-absorber-aura pointer-events-none absolute -top-10 -left-10 w-[550px] h-[180px] rounded-full blur-2xl z-0" />
 
           <div className="relative z-10">
-            <p className="font-mono text-xs tracking-[0.3em] text-cyan-400 font-extrabold drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)] uppercase flex items-center gap-2">
-              <Sparkles className="h-3.5 w-3.5" />
-              HORIZONTAL LANDSCAPE SHOWCASE
+            <p className="font-mono text-xs tracking-[0.3em] text-cyan-400 font-extrabold drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)] uppercase">
+              SELECTED WORK
             </p>
-            <h2 className="mt-2 text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white drop-shadow-[0_4px_25px_rgba(0,0,0,0.5)]">
+            <h2 className="mt-2 text-5xl font-extrabold text-slate-900 dark:text-white sm:text-6xl drop-shadow-[0_4px_25px_rgba(0,0,0,0.5)]">
               Projects &amp; <span className="text-gradient">Builds</span>
             </h2>
           </div>
 
-          {/* Theme-Aware Category Filter Tabs */}
+          {/* Theme-Aware Sliding Category Tab Switcher Indicator */}
           <div className="theme-switcher-bar relative z-10 flex flex-wrap gap-1 rounded-full p-1.5 backdrop-blur-md shadow-lg border">
             {CATEGORIES.map((c) => (
               <button
@@ -313,32 +261,15 @@ export default function ProjectsCyber() {
           </div>
         </div>
 
-        {/* Horizontal Motion Track Container */}
-        <div className="relative w-full max-w-7xl mx-auto flex items-center overflow-hidden py-2">
-          <motion.div
-            ref={trackRef}
-            style={{ x }}
-            className="flex gap-7 sm:gap-8 items-stretch min-w-max"
-          >
-            <AnimatePresence mode="popLayout">
-              {list.map((project) => (
-                <LandscapeCard3D key={project.id} project={project} />
-              ))}
-            </AnimatePresence>
-          </motion.div>
-        </div>
-
-        {/* Scroll Progress Bar & Horizontal Navigation Indicator */}
-        <div className="max-w-7xl mx-auto w-full flex items-center justify-between pt-3 font-mono text-xs text-slate-400">
-          <div className="flex items-center gap-2">
-            <span className="caret inline-block w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
-            <span className="text-slate-300">SCROLL DOWN TO EXPLORE ALL {list.length} LANDSCAPE BUILDS</span>
-          </div>
-          <div className="hidden sm:flex items-center gap-2">
-            <span className="text-cyan-400 font-bold">1:1 SYNCHRONIZED TRACK</span>
-          </div>
-        </div>
-      </div>
+        {/* Bento Grid Layout */}
+        <motion.div layout className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 relative z-10">
+          <AnimatePresence mode="popLayout">
+            {list.map((project) => (
+              <Card3D key={project.id} project={project} />
+            ))}
+          </AnimatePresence>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }

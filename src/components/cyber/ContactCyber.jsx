@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { AnimatePresence, motion, useMotionValue, useSpring, useScroll, useTransform } from "framer-motion";
-import { CheckCircle2, Send, Mail, Phone, MapPin, AlertCircle, Copy, Check } from "lucide-react";
+import { CheckCircle2, Send, Mail, Phone, MapPin, AlertCircle, Copy, Check, Terminal as TerminalIcon } from "lucide-react";
 
 const GithubIcon = (props) => (
   <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" {...props}>
@@ -79,8 +79,17 @@ function CopyBadge({ value, icon: Icon, label }) {
 }
 
 export default function ContactCyber() {
+  const [activeTab, setActiveTab] = useState("form"); // "form" | "cli"
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState("idle");
+
+  // CLI Command Executor States
+  const [cmdInput, setCmdInput] = useState("");
+  const [cmdHistory, setCmdHistory] = useState([
+    { type: "sys", text: "Sasiru CyberShell v2.4.0 (x86_64-apple-darwin20)" },
+    { type: "sys", text: "Type 'help' to view available system commands." },
+  ]);
+
   const sectionRef = useRef(null);
 
   const { scrollYProgress } = useScroll({
@@ -88,9 +97,59 @@ export default function ContactCyber() {
     offset: ["start end", "end start"],
   });
 
-  // Awwwards Signature Scroll Zoom-In & Zoom-Out Parallax Effect
   const scale = useTransform(scrollYProgress, [0, 0.35, 0.65, 1], [0.88, 1, 1, 0.88]);
   const y = useTransform(scrollYProgress, [0, 0.35, 0.65, 1], [60, 0, 0, -60]);
+
+  const handleCommandExecute = (e) => {
+    e.preventDefault();
+    const cleanCmd = cmdInput.trim().toLowerCase();
+    if (!cleanCmd) return;
+
+    const newHistory = [...cmdHistory, { type: "user", text: `$ ${cmdInput}` }];
+
+    switch (cleanCmd) {
+      case "help":
+        newHistory.push({
+          type: "out",
+          text: "AVAILABLE COMMANDS:\n  whoami    - Display developer identity & background\n  projects  - Jump to Projects & Builds section\n  skills    - Jump to Skills Matrix section\n  contact   - Display email & phone details\n  github    - Open GitHub repository\n  clear     - Clear shell output",
+        });
+        break;
+      case "whoami":
+        newHistory.push({
+          type: "out",
+          text: "Sasiru Nethvidu Liyanage\nFull-Stack Software Engineer & 2nd Year Undergraduate at SLIIT ('26)\nSpecialization: React 19, Node.js, Python, Tailwind v4, & Framer Motion.",
+        });
+        break;
+      case "projects":
+        newHistory.push({ type: "out", text: "Redirecting to Projects & Builds section..." });
+        document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
+        break;
+      case "skills":
+        newHistory.push({ type: "out", text: "Redirecting to Skills Matrix section..." });
+        document.getElementById("skills")?.scrollIntoView({ behavior: "smooth" });
+        break;
+      case "contact":
+        newHistory.push({
+          type: "out",
+          text: "Email: liyanagesasiru@gmail.com\nPhone: +94 71 57 00 953\nLocation: Western Province, Sri Lanka",
+        });
+        break;
+      case "github":
+        newHistory.push({ type: "out", text: "Opening https://github.com/sasiruliyanage2004..." });
+        window.open("https://github.com/sasiruliyanage2004", "_blank");
+        break;
+      case "clear":
+        setCmdHistory([]);
+        setCmdInput("");
+        return;
+      default:
+        newHistory.push({ type: "error", text: `command not found: ${cleanCmd}. Type 'help' for options.` });
+        break;
+    }
+
+    setCmdHistory(newHistory);
+    setCmdInput("");
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -152,89 +211,146 @@ export default function ContactCyber() {
         <div className="noise-overlay relative overflow-hidden rounded-2xl border border-white/15 dark:border-white/15 light-theme:border-slate-300/40 bg-[#0b0f17]/95 dark:bg-[#0b0f17]/95 light-theme:bg-[#F7F5F1]/95 backdrop-blur-2xl shadow-2xl z-10">
           <span className="border-beam" aria-hidden="true" />
 
-          {/* Terminal Window Header */}
-          <div className="flex items-center gap-2 border-b border-white/[0.06] px-5 py-3.5 bg-black/40">
-            <span className="h-2.5 w-2.5 rounded-full bg-red-500/70" />
-            <span className="h-2.5 w-2.5 rounded-full bg-yellow-500/70" />
-            <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/70" />
-            <span className="ml-2 font-mono text-xs text-slate-400 opacity-80">contact_terminal.sh</span>
+          {/* Terminal Window Header with Interactive Mode Tabs */}
+          <div className="flex items-center justify-between border-b border-white/[0.06] px-5 py-3.5 bg-black/40">
+            <div className="flex items-center gap-2">
+              <span className="h-2.5 w-2.5 rounded-full bg-red-500/70" />
+              <span className="h-2.5 w-2.5 rounded-full bg-yellow-500/70" />
+              <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/70" />
+              <span className="ml-2 font-mono text-xs text-slate-400 opacity-80">contact_terminal.sh</span>
+            </div>
+
+            <div className="flex gap-2">
+              <button
+                onClick={() => setActiveTab("form")}
+                className={`rounded-lg px-3 py-1 font-mono text-xs transition-colors cursor-pointer ${
+                  activeTab === "form" ? "bg-cyan-500/20 text-cyan-300 font-semibold" : "opacity-60 hover:opacity-100"
+                }`}
+              >
+                Contact Form
+              </button>
+              <button
+                onClick={() => setActiveTab("cli")}
+                className={`flex items-center gap-1.5 rounded-lg px-3 py-1 font-mono text-xs transition-colors cursor-pointer ${
+                  activeTab === "cli" ? "bg-cyan-500/20 text-cyan-300 font-semibold" : "opacity-60 hover:opacity-100"
+                }`}
+              >
+                <TerminalIcon className="h-3 w-3" /> CLI Mode
+              </button>
+            </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6 p-7 sm:p-9">
-            <div>
-              <label htmlFor="name" className="mb-2 block font-mono text-xs text-slate-300 uppercase tracking-wider">
-                // FULL_NAME
-              </label>
-              <input
-                id="name"
-                type="text"
-                required
-                value={form.name}
-                onChange={(e) => setForm({ ...form, name: e.target.value })}
-                placeholder="Sasiru Nethvidu Liyanage"
-                className="w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 font-mono text-sm text-white placeholder-slate-500 transition-all focus:border-cyan-400 focus:bg-white/[0.06] focus:outline-none"
-              />
-            </div>
+          {/* Tab 1: Standard GUI Contact Form */}
+          {activeTab === "form" ? (
+            <form onSubmit={handleSubmit} className="space-y-6 p-7 sm:p-9">
+              <div>
+                <label htmlFor="name" className="mb-2 block font-mono text-xs text-slate-300 uppercase tracking-wider">
+                  // FULL_NAME
+                </label>
+                <input
+                  id="name"
+                  type="text"
+                  required
+                  value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  placeholder="Sasiru Nethvidu Liyanage"
+                  className="w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 font-mono text-sm text-white placeholder-slate-500 transition-all focus:border-cyan-400 focus:bg-white/[0.06] focus:outline-none"
+                />
+              </div>
 
-            <div>
-              <label htmlFor="email" className="mb-2 block font-mono text-xs text-slate-300 uppercase tracking-wider">
-                // EMAIL_ADDRESS
-              </label>
-              <input
-                id="email"
-                type="email"
-                required
-                value={form.email}
-                onChange={(e) => setForm({ ...form, email: e.target.value })}
-                placeholder="liyanagesasiru@gmail.com"
-                className="w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 font-mono text-sm text-white placeholder-slate-500 transition-all focus:border-cyan-400 focus:bg-white/[0.06] focus:outline-none"
-              />
-            </div>
+              <div>
+                <label htmlFor="email" className="mb-2 block font-mono text-xs text-slate-300 uppercase tracking-wider">
+                  // EMAIL_ADDRESS
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  required
+                  value={form.email}
+                  onChange={(e) => setForm({ ...form, email: e.target.value })}
+                  placeholder="liyanagesasiru@gmail.com"
+                  className="w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 font-mono text-sm text-white placeholder-slate-500 transition-all focus:border-cyan-400 focus:bg-white/[0.06] focus:outline-none"
+                />
+              </div>
 
-            <div>
-              <label htmlFor="message" className="mb-2 block font-mono text-xs text-slate-300 uppercase tracking-wider">
-                // PROJECT_DETAILS
-              </label>
-              <textarea
-                id="message"
-                rows={5}
-                required
-                value={form.message}
-                onChange={(e) => setForm({ ...form, message: e.target.value })}
-                placeholder="Tell me about your project idea..."
-                className="w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 font-mono text-sm text-white placeholder-slate-500 transition-all focus:border-cyan-400 focus:bg-white/[0.06] focus:outline-none"
-              />
-            </div>
+              <div>
+                <label htmlFor="message" className="mb-2 block font-mono text-xs text-slate-300 uppercase tracking-wider">
+                  // PROJECT_DETAILS
+                </label>
+                <textarea
+                  id="message"
+                  rows={5}
+                  required
+                  value={form.message}
+                  onChange={(e) => setForm({ ...form, message: e.target.value })}
+                  placeholder="Tell me about your project idea..."
+                  className="w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 font-mono text-sm text-white placeholder-slate-500 transition-all focus:border-cyan-400 focus:bg-white/[0.06] focus:outline-none"
+                />
+              </div>
 
-            <button
-              type="submit"
-              disabled={status === "sending"}
-              className="group relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-indigo-500 via-cyan-500 to-violet-500 py-3.5 font-mono text-xs font-semibold text-white shadow-lg transition-all hover:shadow-cyan-500/25 disabled:opacity-50 cursor-pointer"
-            >
-              <AnimatePresence mode="wait">
-                {status === "idle" && (
-                  <motion.span key="idle" className="flex items-center gap-2">
-                    Send Message <Send className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-                  </motion.span>
-                )}
-                {status === "sending" && (
-                  <motion.span key="sending" className="flex items-center gap-2">
-                    Transmitting...
-                  </motion.span>
-                )}
-                {status === "sent" && (
-                  <motion.span key="sent" className="flex items-center gap-2 text-emerald-300">
-                    <CheckCircle2 className="h-4 w-4" /> Message Sent Successfully!
-                  </motion.span>
-                )}
-                {status === "error" && (
-                  <motion.span key="error" className="flex items-center gap-2 text-red-300">
-                    <AlertCircle className="h-4 w-4" /> Error Transmitting. Try Again!
-                  </motion.span>
-                )}
-              </AnimatePresence>
-            </button>
-          </form>
+              <button
+                type="submit"
+                disabled={status === "sending"}
+                className="group relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-indigo-500 via-cyan-500 to-violet-500 py-3.5 font-mono text-xs font-semibold text-white shadow-lg transition-all hover:shadow-cyan-500/25 disabled:opacity-50 cursor-pointer"
+              >
+                <AnimatePresence mode="wait">
+                  {status === "idle" && (
+                    <motion.span key="idle" className="flex items-center gap-2">
+                      Send Message <Send className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                    </motion.span>
+                  )}
+                  {status === "sending" && (
+                    <motion.span key="sending" className="flex items-center gap-2">
+                      Transmitting...
+                    </motion.span>
+                  )}
+                  {status === "sent" && (
+                    <motion.span key="sent" className="flex items-center gap-2 text-emerald-300">
+                      <CheckCircle2 className="h-4 w-4" /> Message Sent Successfully!
+                    </motion.span>
+                  )}
+                  {status === "error" && (
+                    <motion.span key="error" className="flex items-center gap-2 text-red-300">
+                      <AlertCircle className="h-4 w-4" /> Error Transmitting. Try Again!
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+              </button>
+            </form>
+          ) : (
+            /* Tab 2: Interactive Terminal Command Executor */
+            <div className="p-7 sm:p-9 font-mono text-xs">
+              <div className="min-h-[220px] max-h-[300px] overflow-y-auto space-y-2 mb-4 pr-2">
+                {cmdHistory.map((item, idx) => (
+                  <div
+                    key={idx}
+                    className={`whitespace-pre-line ${
+                      item.type === "sys"
+                        ? "text-cyan-400 opacity-80"
+                        : item.type === "user"
+                        ? "text-indigo-400 font-bold"
+                        : item.type === "error"
+                        ? "text-red-400"
+                        : "text-slate-300"
+                    }`}
+                  >
+                    {item.text}
+                  </div>
+                ))}
+              </div>
+
+              <form onSubmit={handleCommandExecute} className="flex items-center gap-2 border-t border-white/10 pt-4">
+                <span className="text-cyan-400 font-bold">$</span>
+                <input
+                  type="text"
+                  value={cmdInput}
+                  onChange={(e) => setCmdInput(e.target.value)}
+                  placeholder="Type 'help', 'whoami', 'projects', 'skills', or 'contact'..."
+                  className="w-full bg-transparent font-mono text-xs text-white placeholder-slate-500 focus:outline-none"
+                />
+              </form>
+            </div>
+          )}
 
           {/* Terminal Footer */}
           <div className="flex flex-wrap items-center justify-between border-t border-white/[0.06] px-7 py-4 bg-black/40 text-xs text-slate-400">

@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { AnimatePresence, motion, useMotionValue, useSpring } from "framer-motion";
+import { AnimatePresence, motion, useMotionValue, useSpring, useScroll, useTransform } from "framer-motion";
 import { CheckCircle2, Send, Mail, Phone, MapPin, AlertCircle, Copy, Check } from "lucide-react";
 
 const GithubIcon = (props) => (
@@ -49,7 +49,7 @@ function MagneticIcon({ icon: Icon, href, label }) {
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
       style={{ x: sx, y: sy }}
-      className="glass-panel flex h-11 w-11 items-center justify-center rounded-full text-slate-400 transition-colors hover:text-cyan-300 cursor-pointer"
+      className="glass-panel flex h-10 w-10 items-center justify-center rounded-xl text-slate-300 transition-colors hover:text-cyan-400"
     >
       <Icon className="h-4 w-4" />
     </motion.a>
@@ -58,6 +58,7 @@ function MagneticIcon({ icon: Icon, href, label }) {
 
 function CopyBadge({ value, icon: Icon, label }) {
   const [copied, setCopied] = useState(false);
+
   const handleCopy = () => {
     navigator.clipboard.writeText(value);
     setCopied(true);
@@ -67,25 +68,33 @@ function CopyBadge({ value, icon: Icon, label }) {
   return (
     <button
       onClick={handleCopy}
-      className="glass-panel inline-flex items-center gap-2 rounded-full px-4 py-2 hover:border-cyan-400/40 hover:text-cyan-300 transition-colors font-mono text-xs cursor-pointer"
+      type="button"
+      className="glass-panel inline-flex items-center gap-2 rounded-full px-4 py-2 transition-all hover:border-cyan-400/50 hover:text-white cursor-pointer"
     >
-      {copied ? <Check className="h-3.5 w-3.5 text-emerald-400" /> : <Icon className="h-3.5 w-3.5 text-cyan-400" />}
-      <span>{copied ? "Copied!" : label}</span>
+      <Icon className="h-3.5 w-3.5 text-cyan-400" />
+      <span>{label}</span>
+      {copied ? <Check className="h-3.5 w-3.5 text-emerald-400" /> : <Copy className="h-3.5 w-3.5 opacity-60" />}
     </button>
   );
 }
 
-const FIELDS = [
-  { id: "name", label: "name", type: "text", placeholder: "Sasiru Nethvidu Liyanage" },
-  { id: "email", label: "email", type: "email", placeholder: "liyanagesasiru@gmail.com" },
-];
-
 export default function ContactCyber() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState("idle");
+  const sectionRef = useRef(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+
+  // Awwwards Signature Scroll Zoom-In & Zoom-Out Parallax Effect
+  const scale = useTransform(scrollYProgress, [0, 0.35, 0.65, 1], [0.88, 1, 1, 0.88]);
+  const y = useTransform(scrollYProgress, [0, 0.35, 0.65, 1], [60, 0, 0, -60]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!form.name || !form.email || !form.message) return;
     setStatus("sending");
 
     try {
@@ -121,8 +130,8 @@ export default function ContactCyber() {
   };
 
   return (
-    <section id="contact" className="relative overflow-hidden bg-transparent px-6 pt-36 pb-28 lg:px-10 scroll-mt-24">
-      <div className="relative mx-auto max-w-3xl">
+    <section ref={sectionRef} id="contact" className="relative overflow-hidden bg-transparent px-6 pt-36 pb-28 lg:px-10 scroll-mt-24">
+      <motion.div style={{ scale, y }} className="relative mx-auto max-w-3xl">
         <div className="mb-12 text-center">
           <p className="font-mono text-xs tracking-[0.3em] text-cyan-400/80">GET IN TOUCH</p>
           <h2 className="mt-3 text-4xl font-semibold text-white sm:text-5xl">
@@ -148,104 +157,98 @@ export default function ContactCyber() {
             <span className="h-2.5 w-2.5 rounded-full bg-red-500/70" />
             <span className="h-2.5 w-2.5 rounded-full bg-yellow-500/70" />
             <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/70" />
-            <span className="ml-3 font-mono text-[11px] text-slate-400">~/contact --new</span>
+            <span className="ml-2 font-mono text-xs text-slate-400 opacity-80">contact_terminal.sh</span>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-5 px-6 py-8 sm:px-8">
-            {FIELDS.map((field) => (
-              <div key={field.id}>
-                <label
-                  htmlFor={field.id}
-                  className="mb-1.5 block font-mono text-xs text-slate-400"
-                >
-                  <span className="text-cyan-400">$</span> {field.label}:
-                  <span className="caret inline-block w-1.5 h-3 bg-cyan-400 ml-1 translate-y-0.5" />
-                </label>
-                <input
-                  id={field.id}
-                  type={field.type}
-                  required
-                  value={form[field.id]}
-                  onChange={(e) => setForm({ ...form, [field.id]: e.target.value })}
-                  placeholder={field.placeholder}
-                  className="w-full rounded-lg border border-white/10 bg-white/[0.03] px-4 py-3 font-mono text-sm text-slate-100 placeholder:text-slate-600 outline-none transition-colors focus:border-cyan-400/50"
-                />
-              </div>
-            ))}
+          <form onSubmit={handleSubmit} className="space-y-6 p-7 sm:p-9">
+            <div>
+              <label htmlFor="name" className="mb-2 block font-mono text-xs text-slate-300 uppercase tracking-wider">
+                // FULL_NAME
+              </label>
+              <input
+                id="name"
+                type="text"
+                required
+                value={form.name}
+                onChange={(e) => setForm({ ...form, name: e.target.value })}
+                placeholder="Sasiru Nethvidu Liyanage"
+                className="w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 font-mono text-sm text-white placeholder-slate-500 transition-all focus:border-cyan-400 focus:bg-white/[0.06] focus:outline-none"
+              />
+            </div>
 
             <div>
-              <label htmlFor="message" className="mb-1.5 block font-mono text-xs text-slate-400">
-                <span className="text-cyan-400">$</span> message:
-                <span className="caret inline-block w-1.5 h-3 bg-cyan-400 ml-1 translate-y-0.5" />
+              <label htmlFor="email" className="mb-2 block font-mono text-xs text-slate-300 uppercase tracking-wider">
+                // EMAIL_ADDRESS
+              </label>
+              <input
+                id="email"
+                type="email"
+                required
+                value={form.email}
+                onChange={(e) => setForm({ ...form, email: e.target.value })}
+                placeholder="liyanagesasiru@gmail.com"
+                className="w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 font-mono text-sm text-white placeholder-slate-500 transition-all focus:border-cyan-400 focus:bg-white/[0.06] focus:outline-none"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="message" className="mb-2 block font-mono text-xs text-slate-300 uppercase tracking-wider">
+                // PROJECT_DETAILS
               </label>
               <textarea
                 id="message"
+                rows={5}
                 required
-                rows={4}
                 value={form.message}
                 onChange={(e) => setForm({ ...form, message: e.target.value })}
-                placeholder="Tell me about your project..."
-                className="w-full resize-none rounded-lg border border-white/10 bg-white/[0.03] px-4 py-3 font-mono text-sm text-slate-100 placeholder:text-slate-600 outline-none transition-colors focus:border-cyan-400/50"
+                placeholder="Tell me about your project idea..."
+                className="w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 font-mono text-sm text-white placeholder-slate-500 transition-all focus:border-cyan-400 focus:bg-white/[0.06] focus:outline-none"
               />
             </div>
 
             <button
               type="submit"
               disabled={status === "sending"}
-              className="group relative inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-lg bg-gradient-to-r from-indigo-500 via-violet-500 to-cyan-500 px-6 py-3.5 font-mono text-sm font-medium text-white shadow-[0_0_25px_rgba(99,102,241,0.3)] transition-shadow hover:shadow-[0_0_40px_rgba(99,102,241,0.5)] disabled:opacity-70 cursor-pointer"
+              className="group relative flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-indigo-500 via-cyan-500 to-violet-500 py-3.5 font-mono text-xs font-semibold text-white shadow-lg transition-all hover:shadow-cyan-500/25 disabled:opacity-50 cursor-pointer"
             >
-              {status === "sending" ? (
-                "sending()..."
-              ) : (
-                <>
-                  send_message()
-                  <Send className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-                </>
-              )}
+              <AnimatePresence mode="wait">
+                {status === "idle" && (
+                  <motion.span key="idle" className="flex items-center gap-2">
+                    Send Message <Send className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                  </motion.span>
+                )}
+                {status === "sending" && (
+                  <motion.span key="sending" className="flex items-center gap-2">
+                    Transmitting...
+                  </motion.span>
+                )}
+                {status === "sent" && (
+                  <motion.span key="sent" className="flex items-center gap-2 text-emerald-300">
+                    <CheckCircle2 className="h-4 w-4" /> Message Sent Successfully!
+                  </motion.span>
+                )}
+                {status === "error" && (
+                  <motion.span key="error" className="flex items-center gap-2 text-red-300">
+                    <AlertCircle className="h-4 w-4" /> Error Transmitting. Try Again!
+                  </motion.span>
+                )}
+              </AnimatePresence>
             </button>
           </form>
+
+          {/* Terminal Footer */}
+          <div className="flex flex-wrap items-center justify-between border-t border-white/[0.06] px-7 py-4 bg-black/40 text-xs text-slate-400">
+            <div className="flex items-center gap-3">
+              {SOCIALS.map((s) => (
+                <MagneticIcon key={s.label} {...s} />
+              ))}
+            </div>
+            <p className="font-mono text-[11px] opacity-70">
+              © {new Date().getFullYear()} Sasiru Liyanage. Built with React 19 + Vite 8.
+            </p>
+          </div>
         </div>
-
-        <div className="mt-10 flex justify-center gap-4">
-          {SOCIALS.map((s) => (
-            <MagneticIcon key={s.label} {...s} />
-          ))}
-        </div>
-      </div>
-
-      {/* Success Toast */}
-      <AnimatePresence>
-        {status === "sent" && (
-          <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="glass-panel fixed bottom-8 left-1/2 z-50 flex -translate-x-1/2 items-center gap-2.5 rounded-full px-5 py-3 shadow-2xl border border-emerald-400/40 bg-[#0b0f17]/95"
-          >
-            <CheckCircle2 className="h-4 w-4 text-emerald-400" />
-            <span className="font-mono text-xs text-slate-200">
-              Message sent successfully! Delivered to liyanagesasiru@gmail.com.
-            </span>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Error Toast */}
-      <AnimatePresence>
-        {status === "error" && (
-          <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="glass-panel fixed bottom-8 left-1/2 z-50 flex -translate-x-1/2 items-center gap-2.5 rounded-full px-5 py-3 shadow-2xl border border-rose-400/40 bg-[#0b0f17]/95"
-          >
-            <AlertCircle className="h-4 w-4 text-rose-400" />
-            <span className="font-mono text-xs text-slate-200">
-              Failed to send. Please try again or email liyanagesasiru@gmail.com directly.
-            </span>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      </motion.div>
     </section>
   );
 }

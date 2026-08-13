@@ -213,8 +213,9 @@ export default function ProjectsCyber() {
     offset: ["start end", "end start"],
   });
 
-  const scale = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.95, 1, 1, 0.95]);
-  const y = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [30, 0, 0, -30]);
+  // Awwwards Signature Scroll Zoom-In & Zoom-Out Parallax Effect
+  const scale = useTransform(scrollYProgress, [0, 0.35, 0.65, 1], [0.88, 1, 1, 0.88]);
+  const y = useTransform(scrollYProgress, [0, 0.35, 0.65, 1], [60, 0, 0, -60]);
 
   const list = useMemo(() => {
     if (cat === "All") return PROJECTS;
@@ -224,7 +225,7 @@ export default function ProjectsCyber() {
   return (
     <section id="projects" ref={sectionRef} className="relative overflow-hidden bg-transparent px-6 py-28 lg:px-10 scroll-mt-24">
       <motion.div style={{ scale, y }} className="mx-auto max-w-7xl relative">
-        {/* Clean Section Header without any dark shadow patches */}
+        {/* Clean Section Header */}
         <div className="relative flex flex-col md:flex-row md:items-end md:justify-between mb-12 gap-6">
           <div className="relative z-10">
             <p className="font-mono text-xs tracking-[0.3em] text-cyan-400 font-extrabold uppercase drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">

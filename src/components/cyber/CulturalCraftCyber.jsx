@@ -37,16 +37,16 @@ export default function CulturalCraftCyber() {
   return (
     <section ref={sectionRef} id="craft" className="relative overflow-hidden bg-transparent px-6 py-24 lg:px-10 scroll-mt-24">
       <motion.div style={{ scale, y }} className="mx-auto max-w-7xl relative">
-        {/* Section Header */}
+        {/* Section Header (Smudge-free in Light Mode) */}
         <div className="mb-12 text-center">
-          <p className="font-mono text-xs tracking-[0.3em] text-cyan-400 font-extrabold uppercase flex items-center justify-center gap-2 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
+          <p className="font-mono text-xs tracking-[0.3em] text-cyan-400 font-extrabold uppercase flex items-center justify-center gap-2 dark:drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
             <Sparkles className="h-3.5 w-3.5" />
             HERITAGE MEETS PROCEDURAL MATH
           </p>
-          <h2 className="mt-2 text-4xl sm:text-5xl font-extrabold text-slate-900 dark:text-white drop-shadow-[0_4px_16px_rgba(0,0,0,0.8)]">
+          <h2 className="mt-2 text-4xl sm:text-5xl font-extrabold text-slate-900 dark:text-white dark:drop-shadow-[0_4px_16px_rgba(0,0,0,0.8)]">
             The Craft Behind <span className="text-gradient">The Code</span>
           </h2>
-          <p className="mt-3 text-base text-slate-400 max-w-2xl mx-auto font-normal">
+          <p className="mt-3 text-base text-slate-600 dark:text-slate-400 max-w-2xl mx-auto font-normal">
             Bridging centuries-old Sri Lankan motif artistry with 60fps real-time HTML5 Canvas math algorithms.
           </p>
         </div>
@@ -66,7 +66,7 @@ export default function CulturalCraftCyber() {
                   <h3 className="text-xl font-bold">{item.title}</h3>
                 </div>
 
-                <p className="text-sm leading-relaxed text-slate-300 font-normal mb-5">
+                <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-300 font-normal mb-5">
                   {item.heritage}
                 </p>
               </div>

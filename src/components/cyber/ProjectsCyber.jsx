@@ -130,14 +130,14 @@ function LandscapeCard3D({ project }) {
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.95 }}
       transition={{ duration: 0.4 }}
-      className="group relative [perspective:1000px] w-[580px] sm:w-[680px] lg:w-[720px] shrink-0"
+      className="group relative [perspective:1000px] w-[540px] sm:w-[640px] lg:w-[680px] shrink-0"
     >
       <motion.div
         ref={ref}
         onMouseMove={handleMove}
         onMouseLeave={handleLeave}
         style={{ rotateX: srx, rotateY: sry, transformPerspective: 900 }}
-        className="project-card-obsidian noise-overlay relative flex h-full min-h-[460px] flex-col justify-between overflow-hidden rounded-3xl p-7 sm:p-8 group-hover:border-cyan-400 transition-all duration-300 shadow-2xl z-10"
+        className="project-card-obsidian noise-overlay relative flex h-full min-h-[440px] flex-col justify-between overflow-hidden rounded-3xl p-7 sm:p-8 group-hover:border-cyan-400 transition-all duration-300 shadow-2xl z-10"
       >
         {/* Card Header */}
         <div>
@@ -232,19 +232,28 @@ export default function ProjectsCyber() {
     offset: ["start start", "end end"],
   });
 
-  // Transform 0 -> 1 vertical scroll progress to 0% -> -72% horizontal translation
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-70%"]);
-
   const list = useMemo(() => {
     if (cat === "All") return PROJECTS;
     return PROJECTS.filter((p) => p.category === cat);
   }, [cat]);
 
+  // Dynamically calculate horizontal translation percentage based on number of active cards
+  const targetX = useMemo(() => {
+    if (list.length <= 1) return "0%";
+    if (list.length === 2) return "-45%";
+    if (list.length === 3) return "-62%";
+    if (list.length === 4) return "-74%";
+    return "-82%";
+  }, [list.length]);
+
+  // Smooth transform mapping 0 -> 0.90 to 0% -> targetX (locks sticky view through 100% of cards)
+  const x = useTransform(scrollYProgress, [0, 0.90], ["0%", targetX]);
+
   return (
     <section
       id="projects"
       ref={sectionRef}
-      className="relative h-[280vh] bg-transparent scroll-mt-24"
+      className="relative h-[500vh] bg-transparent scroll-mt-24"
     >
       {/* Sticky Viewport Container */}
       <div className="sticky top-0 flex h-screen w-full flex-col justify-center overflow-hidden py-8 px-6 lg:px-12">
@@ -304,10 +313,10 @@ export default function ProjectsCyber() {
         <div className="max-w-7xl mx-auto w-full flex items-center justify-between pt-4 font-mono text-xs text-slate-400">
           <div className="flex items-center gap-2">
             <span className="caret inline-block w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
-            <span className="text-slate-300">SCROLL DOWN TO EXPLORE LANDSCAPE TRACK</span>
+            <span className="text-slate-300">SCROLL DOWN TO EXPLORE ALL {list.length} LANDSCAPE BUILDS</span>
           </div>
           <div className="hidden sm:flex items-center gap-2">
-            <span className="text-cyan-400 font-bold">{list.length} FEATURED BUILDS</span>
+            <span className="text-cyan-400 font-bold">5 FEATURED BUILDS</span>
           </div>
         </div>
       </div>

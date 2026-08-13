@@ -15,6 +15,7 @@ import "./index.css";
 export default function App() {
   const [theme, setTheme] = useState("dark");
   const [culturalTheme, setCulturalTheme] = useState("dumbara");
+  const [cmdOpen, setCmdOpen] = useState(false);
 
   const toggleTheme = () => {
     const nextTheme = theme === "dark" ? "light" : "dark";
@@ -49,10 +50,12 @@ export default function App() {
         toggleTheme={toggleTheme}
         activePattern={culturalTheme}
         setActivePattern={setCulturalTheme}
+        open={cmdOpen}
+        setOpen={setCmdOpen}
       />
 
-      {/* Main Portfolio Page Sections — Single Unified Seamless Canvas */}
-      <main className="relative z-10 flex flex-col">
+      {/* Main Portfolio Page Content — Uncovers Sticky Footer like a Curtain */}
+      <main className="relative z-10 flex flex-col bg-[#05080f] dark:bg-[#05080f] light-theme:bg-[#F7F5F1] shadow-[0_25px_60px_rgba(0,0,0,0.9)] transition-colors duration-300">
         <HeroCyber culturalTheme={culturalTheme} />
         <ProjectsCyber />
         <CulturalCraftCyber />
@@ -60,7 +63,8 @@ export default function App() {
         <ContactCyber />
       </main>
 
-      <Footer />
+      {/* Parallax Uncover Curtain Footer */}
+      <Footer onOpenCommandPalette={() => setCmdOpen(true)} />
     </div>
   );
 }

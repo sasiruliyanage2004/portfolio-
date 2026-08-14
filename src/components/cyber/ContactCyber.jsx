@@ -17,9 +17,17 @@ const LinkedinIcon = (props) => (
   </svg>
 );
 
+const WhatsAppIcon = (props) => (
+  <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21" />
+    <path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1" />
+  </svg>
+);
+
 const SOCIALS = [
   { icon: GithubIcon, href: "https://github.com/sasiruliyanage2004", label: "GitHub" },
   { icon: LinkedinIcon, href: "https://www.linkedin.com/in/sasiruliyanage", label: "LinkedIn" },
+  { icon: WhatsAppIcon, href: "https://wa.me/94715700953?text=Hi%20Sasiru,%20I%20visited%20your%20portfolio%20and%20would%20like%20to%20connect!", label: "WhatsApp" },
 ];
 
 function MagneticIcon({ icon: Icon, href, label }) {
@@ -111,7 +119,7 @@ export default function ContactCyber() {
       case "help":
         newHistory.push({
           type: "out",
-          text: "AVAILABLE COMMANDS:\n  whoami    - Display developer identity & background\n  projects  - Jump to Projects & Builds section\n  skills    - Jump to Skills Matrix section\n  contact   - Display email & phone details\n  github    - Open GitHub repository\n  clear     - Clear shell output",
+          text: "AVAILABLE COMMANDS:\n  whoami    - Display developer identity & background\n  projects  - Jump to Projects & Builds section\n  skills    - Jump to Skills Matrix section\n  contact   - Display email & phone details\n  whatsapp  - Direct chat on WhatsApp (+94 71 57 00 953)\n  github    - Open GitHub repository\n  clear     - Clear shell output",
         });
         break;
       case "whoami":
@@ -131,8 +139,12 @@ export default function ContactCyber() {
       case "contact":
         newHistory.push({
           type: "out",
-          text: "Email: liyanagesasiru@gmail.com\nPhone: +94 71 57 00 953\nLocation: Western Province, Sri Lanka",
+          text: "Email: liyanagesasiru@gmail.com\nPhone: +94 71 57 00 953\nWhatsApp: wa.me/94715700953\nLocation: Western Province, Sri Lanka",
         });
+        break;
+      case "whatsapp":
+        newHistory.push({ type: "out", text: "Opening WhatsApp chat..." });
+        window.open("https://wa.me/94715700953?text=Hi%20Sasiru,%20I%20visited%20your%20portfolio%20and%20would%20like%20to%20connect!", "_blank");
         break;
       case "github":
         newHistory.push({ type: "out", text: "Opening https://github.com/sasiruliyanage2004..." });
@@ -197,10 +209,18 @@ export default function ContactCyber() {
             Let's build something <span className="text-gradient">worth shipping</span>
           </h2>
 
-          {/* Interactive Copy-to-Clipboard Badges */}
+          {/* Interactive Copy-to-Clipboard Badges & WhatsApp Quick Link */}
           <div className="mt-6 flex flex-wrap items-center justify-center gap-3 font-mono text-xs">
             <CopyBadge value="liyanagesasiru@gmail.com" icon={Mail} label="liyanagesasiru@gmail.com" />
-            <CopyBadge value="+94715700953" icon={Phone} label="+94 71 57 00 953" />
+            <a
+              href="https://wa.me/94715700953?text=Hi%20Sasiru,%20I%20visited%20your%20portfolio%20and%20would%20like%20to%20connect!"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="glass-panel inline-flex items-center gap-2 rounded-full px-4 py-2 hover:border-emerald-400/50 hover:text-emerald-400 transition-all cursor-pointer"
+            >
+              <WhatsAppIcon className="h-3.5 w-3.5 text-emerald-400" />
+              <span>+94 71 57 00 953 (WhatsApp)</span>
+            </a>
             <span className="glass-panel inline-flex items-center gap-2 rounded-full px-4 py-2">
               <MapPin className="h-3.5 w-3.5 text-indigo-400" />
               Western Province, Sri Lanka
@@ -345,7 +365,7 @@ export default function ContactCyber() {
                   type="text"
                   value={cmdInput}
                   onChange={(e) => setCmdInput(e.target.value)}
-                  placeholder="Type 'help', 'whoami', 'projects', 'skills', or 'contact'..."
+                  placeholder="Type 'help', 'whoami', 'projects', 'skills', 'contact', or 'whatsapp'..."
                   className="w-full bg-transparent font-mono text-xs focus:outline-none"
                 />
               </form>

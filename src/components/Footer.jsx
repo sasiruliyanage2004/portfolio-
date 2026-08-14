@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Command, Heart, Clock, ArrowUpRight, Copy, Check, Mail, Sparkles, Zap, MapPin } from "lucide-react";
+import { Command, Heart, Clock, ArrowUpRight, Copy, Check, Mail, Sparkles, Zap } from "lucide-react";
 
 const GithubIcon = (props) => (
   <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" {...props}>
@@ -111,16 +111,6 @@ export default function Footer({ onOpenCommandPalette }) {
                 {copied ? "Email Copied to Clipboard!" : "liyanagesasiru@gmail.com"}
                 {copied ? <Check className="h-4 w-4 text-emerald-300" /> : <Copy className="h-4 w-4 opacity-80" />}
               </button>
-
-              <a
-                href="https://wa.me/94715700953?text=Hi%20Sasiru,%20I%20visited%20your%20portfolio%20and%20would%20like%20to%20connect!"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="glass-panel inline-flex items-center gap-2.5 rounded-2xl px-6 py-3.5 font-mono text-xs font-bold text-slate-200 dark:text-slate-200 light-theme:text-slate-800 hover:border-emerald-400/50 hover:text-emerald-400 transition-all cursor-pointer shadow-lg"
-              >
-                <WhatsAppIcon className="h-4 w-4 text-emerald-400" />
-                <span>WhatsApp Chat</span>
-              </a>
             </div>
           </div>
 

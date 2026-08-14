@@ -100,7 +100,9 @@ export default function FloatingDockCyber({ theme, toggleTheme }) {
         );
       })}
 
-      {/* Dock Right Controls (Clean, uncluttered, focused) */}
+      <div className={`mx-1 h-5 w-px ${isLightMode ? "bg-slate-300" : "bg-white/15"}`} />
+
+      {/* Available for Hire Pill (Collapses on Scroll) */}
       <AnimatePresence>
         {!isScrolled && (
           <motion.div
@@ -108,33 +110,31 @@ export default function FloatingDockCyber({ theme, toggleTheme }) {
             animate={{ opacity: 1, width: "auto" }}
             exit={{ opacity: 0, width: 0 }}
             transition={{ duration: 0.25 }}
-            className="flex items-center gap-1 overflow-hidden"
+            className="hidden items-center overflow-hidden md:flex"
           >
-            <div className={`mx-1 h-5 w-px ${isLightMode ? "bg-slate-300" : "bg-white/15"}`} />
-
-            <span className="hidden items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1.5 font-mono text-[10px] text-emerald-600 font-medium dark:text-emerald-300 md:inline-flex whitespace-nowrap">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1.5 font-mono text-[10px] font-medium text-emerald-600 dark:text-emerald-300 whitespace-nowrap mr-1">
               <span className="relative flex h-1.5 w-1.5">
                 <span className="pulse-dot absolute inline-flex h-full w-full rounded-full bg-emerald-500" />
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
               </span>
               Available for Hire
             </span>
-
-            {/* Light / Dark Mode Toggle Switcher Button */}
-            <button
-              onClick={toggleTheme}
-              aria-label="Toggle Light/Dark Theme"
-              className={`flex h-8 w-8 items-center justify-center rounded-full transition-colors cursor-pointer ${
-                isLightMode
-                  ? "text-indigo-600 hover:bg-slate-200/80 bg-slate-100"
-                  : "text-yellow-300 hover:bg-white/10 hover:text-cyan-300"
-              }`}
-            >
-              {isLightMode ? <Moon className="h-3.5 w-3.5" /> : <Sun className="h-3.5 w-3.5" />}
-            </button>
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Light / Dark Mode Toggle Switcher Button — ALWAYS ACCESSIBLE AT ALL SCROLL POSITIONS */}
+      <button
+        onClick={toggleTheme}
+        aria-label="Toggle Light/Dark Theme"
+        className={`flex h-8 w-8 items-center justify-center rounded-full transition-all duration-300 cursor-pointer shrink-0 ${
+          isLightMode
+            ? "text-indigo-600 hover:bg-slate-200/80 bg-slate-100/90 shadow-sm"
+            : "text-amber-300 hover:bg-white/15 hover:text-cyan-300 bg-white/5"
+        }`}
+      >
+        {isLightMode ? <Moon className="h-3.5 w-3.5" /> : <Sun className="h-3.5 w-3.5" />}
+      </button>
     </motion.nav>
   );
 }

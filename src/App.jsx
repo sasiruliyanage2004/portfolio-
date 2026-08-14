@@ -14,7 +14,7 @@ import ContactCyber from "./components/cyber/ContactCyber";
 import Footer from "./components/Footer";
 import "./index.css";
 
-// Idea 1 & 2: Fixed Standalone 3D Floating Glass Orb Theme Switcher
+// Standalone 3D Floating Glass Orb Theme Switcher with 100% Crisp High-Contrast Tooltip
 function FloatingOrbThemeToggle({ theme, toggleTheme }) {
   const isLight = theme === "light";
   return (
@@ -30,7 +30,7 @@ function FloatingOrbThemeToggle({ theme, toggleTheme }) {
         aria-label="Toggle Light/Dark Theme (Press T)"
         className={`relative flex h-14 w-14 items-center justify-center rounded-full border backdrop-blur-xl shadow-2xl transition-all duration-300 cursor-pointer ${
           isLight
-            ? "bg-white/95 border-slate-300 text-indigo-600 shadow-slate-900/10 hover:shadow-indigo-500/30"
+            ? "bg-white/95 border-slate-300 text-indigo-600 shadow-slate-900/15 hover:shadow-indigo-500/30"
             : "bg-[#0b0f17]/95 border-white/20 text-amber-300 shadow-black/90 hover:shadow-cyan-500/30"
         }`}
       >
@@ -49,9 +49,22 @@ function FloatingOrbThemeToggle({ theme, toggleTheme }) {
         </AnimatePresence>
       </motion.button>
 
-      {/* Floating Tooltip Badge on Hover */}
-      <span className="absolute right-16 top-1/2 -translate-y-1/2 whitespace-nowrap rounded-full border border-white/10 dark:border-white/10 light-theme:border-slate-300 bg-[#090d16]/95 dark:bg-[#090d16]/95 light-theme:bg-white/95 px-3.5 py-1.5 font-mono text-xs font-semibold text-slate-200 dark:text-slate-200 light-theme:text-slate-800 shadow-xl opacity-0 group-hover:opacity-100 transition-all pointer-events-none">
-        Toggle Theme <kbd className="ml-1 rounded bg-white/20 dark:bg-white/20 light-theme:bg-slate-200 px-1.5 py-0.5 text-[10px] text-cyan-300 dark:text-cyan-300 light-theme:text-indigo-600">T</kbd>
+      {/* 100% Crisp High-Contrast Floating Tooltip Badge on Hover */}
+      <span
+        className={`absolute right-16 top-1/2 -translate-y-1/2 whitespace-nowrap rounded-full border px-4 py-2 font-mono text-xs font-extrabold shadow-2xl transition-all pointer-events-none opacity-0 group-hover:opacity-100 ${
+          isLight
+            ? "bg-white text-slate-900 border-slate-300 shadow-slate-900/20"
+            : "bg-[#090d16] text-white border-white/20 shadow-black/90"
+        }`}
+      >
+        Toggle Theme{" "}
+        <kbd
+          className={`ml-1.5 rounded px-1.5 py-0.5 text-[10px] font-bold ${
+            isLight ? "bg-indigo-100 text-indigo-700 border border-indigo-200" : "bg-cyan-500/20 text-cyan-300 border border-cyan-500/30"
+          }`}
+        >
+          T
+        </kbd>
       </span>
     </motion.div>
   );
@@ -163,7 +176,7 @@ export default function App() {
         setActivePattern={setCulturalTheme}
       />
 
-      {/* Idea 1 & 2: Standalone Fixed 3D Floating Glass Orb Theme Switcher */}
+      {/* Standalone Fixed 3D Floating Glass Orb Theme Switcher */}
       <FloatingOrbThemeToggle theme={theme} toggleTheme={toggleTheme} />
 
       {/* Command Palette (Ctrl + K) */}

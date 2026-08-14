@@ -13,10 +13,10 @@
   --indigo: #6366f1;
   --violet: #8b5cf6;
 
-  /* Dynamic Brand Gradient Tokens */
+  /* Permanent Signature Brand Gradient: Cyan → Emerald → Teal */
   --grad-start: #06b6d4;
-  --grad-mid: #6366f1;
-  --grad-end: #a855f7;
+  --grad-mid: #10b981;
+  --grad-end: #0d9488;
 
   --glass-bg: rgba(255, 255, 255, 0.035);
   --glass-bg-hover: rgba(255, 255, 255, 0.06);
@@ -30,54 +30,13 @@
   font-family: "Inter", "Space Grotesk", system-ui, sans-serif;
 }
 
-/* 4 LIVE BRAND GRADIENT PALETTES (Dark Mode - Vibrant & Glowing) */
-:root[data-palette="current"], body.palette-current {
-  --grad-start: #06b6d4;
-  --grad-mid: #6366f1;
-  --grad-end: #a855f7;
-}
-
-:root[data-palette="option-a"], body.palette-option-a {
-  --grad-start: #06b6d4;
-  --grad-mid: #10b981;
-  --grad-end: #0d9488;
-}
-
-:root[data-palette="option-b"], body.palette-option-b {
-  --grad-start: #6366f1;
-  --grad-mid: #06b6d4;
-  --grad-end: #10b981;
-}
-
-:root[data-palette="option-c"], body.palette-option-c {
-  --grad-start: #0d9488;
-  --grad-mid: #06b6d4;
-  --grad-end: #a855f7;
-}
-
-/* 4 LIVE BRAND GRADIENT PALETTES (Light Mode - Vibrant Green & Cyan Preserved) */
-.light-theme[data-palette="current"], body.light-theme.palette-current {
-  --grad-start: #0284c7;
-  --grad-mid: #6366f1;
-  --grad-end: #8b5cf6;
-}
-
-.light-theme[data-palette="option-a"], body.light-theme.palette-option-a {
+/* LIGHT THEME GRADIENT (High Contrast Cyan → Emerald → Teal) */
+.light-theme,
+body.light-theme,
+html.light-theme {
   --grad-start: #0284c7;
   --grad-mid: #10b981;
   --grad-end: #0d9488;
-}
-
-.light-theme[data-palette="option-b"], body.light-theme.palette-option-b {
-  --grad-start: #4f46e5;
-  --grad-mid: #0284c7;
-  --grad-end: #10b981;
-}
-
-.light-theme[data-palette="option-c"], body.light-theme.palette-option-c {
-  --grad-start: #0d9488;
-  --grad-mid: #0284c7;
-  --grad-end: #8b5cf6;
 }
 
 html {

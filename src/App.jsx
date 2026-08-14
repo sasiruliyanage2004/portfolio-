@@ -11,7 +11,6 @@ import ScrollProgressBar from "./components/ScrollProgressBar";
 import FloatingDockCyber from "./components/cyber/FloatingDockCyber";
 import CulturalPatternCanvas from "./components/CulturalPatternCanvas";
 import CommandPalette from "./components/CommandPalette";
-import PaletteSwitcher from "./components/PaletteSwitcher";
 import BackToTop from "./components/BackToTop";
 import HeroCyber from "./components/cyber/HeroCyber";
 import ProjectsCyber from "./components/cyber/ProjectsCyber";
@@ -37,11 +36,11 @@ function FloatingOrbThemeToggle({ theme, toggleTheme }) {
         aria-label="Toggle Light/Dark Theme (Press T)"
         className={`relative flex h-14 w-14 items-center justify-center rounded-full border backdrop-blur-xl shadow-2xl transition-all duration-300 cursor-pointer ${
           isLight
-            ? "bg-white/95 border-slate-300 text-indigo-600 shadow-slate-900/15 hover:shadow-indigo-500/30"
-            : "bg-[#0b0f17]/95 border-white/20 text-amber-300 shadow-black/90 hover:shadow-cyan-500/30"
+            ? "bg-white/95 border-slate-300 text-cyan-600 shadow-slate-900/15 hover:shadow-cyan-500/30"
+            : "bg-[#0b0f17]/95 border-white/20 text-emerald-400 shadow-black/90 hover:shadow-cyan-500/30"
         }`}
       >
-        <span className="absolute inset-0 rounded-full bg-gradient-to-tr from-cyan-500/20 via-indigo-500/20 to-amber-500/20 animate-pulse-slow pointer-events-none" />
+        <span className="absolute inset-0 rounded-full bg-gradient-to-tr from-cyan-500/20 via-emerald-500/20 to-teal-500/20 animate-pulse-slow pointer-events-none" />
         <AnimatePresence mode="wait">
           <motion.div
             key={theme}
@@ -51,7 +50,7 @@ function FloatingOrbThemeToggle({ theme, toggleTheme }) {
             transition={{ duration: 0.3 }}
             className="relative z-10"
           >
-            {isLight ? <Moon className="h-6 w-6 text-indigo-600" /> : <Sun className="h-6 w-6 text-amber-300" />}
+            {isLight ? <Moon className="h-6 w-6 text-cyan-700" /> : <Sun className="h-6 w-6 text-emerald-400" />}
           </motion.div>
         </AnimatePresence>
       </motion.button>
@@ -67,7 +66,7 @@ function FloatingOrbThemeToggle({ theme, toggleTheme }) {
         Toggle Theme{" "}
         <kbd
           className={`ml-1.5 rounded px-1.5 py-0.5 text-[10px] font-bold ${
-            isLight ? "bg-indigo-100 text-indigo-700 border border-indigo-200" : "bg-cyan-500/20 text-cyan-300 border border-cyan-500/30"
+            isLight ? "bg-cyan-100 text-cyan-800 border border-cyan-200" : "bg-cyan-500/20 text-cyan-300 border border-cyan-500/30"
           }`}
         >
           T
@@ -81,11 +80,6 @@ export default function App() {
   // Theme state persisted via localStorage
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem("portfolio_theme") || "dark";
-  });
-
-  // Dynamic Live Color Gradient Palette
-  const [palette, setPalette] = useState(() => {
-    return localStorage.getItem("portfolio_palette") || "current";
   });
 
   const [cmdOpen, setCmdOpen] = useState(false);
@@ -106,17 +100,6 @@ export default function App() {
     }
     localStorage.setItem("portfolio_theme", theme);
   }, [theme]);
-
-  // Sync palette changes with DOM documentElement data-palette attribute & body classes
-  useEffect(() => {
-    document.documentElement.setAttribute("data-palette", palette);
-    document.body.className = document.body.className
-      .replace(/palette-[a-z0-9-]+/g, "")
-      .trim();
-    document.body.classList.add(`palette-${palette}`);
-    if (theme === "light") document.body.classList.add("light-theme");
-    localStorage.setItem("portfolio_palette", palette);
-  }, [palette, theme]);
 
   // Global Keyboard Shortcut ('T' key listener) for instant Theme Toggle
   useEffect(() => {
@@ -160,7 +143,7 @@ export default function App() {
 
       const grad = ctx.createLinearGradient(0, 0, 64, 64);
       grad.addColorStop(0, "#06b6d4");
-      grad.addColorStop(1, "#6366f1");
+      grad.addColorStop(1, "#10b981");
 
       ctx.beginPath();
       ctx.arc(32, 32, 31, 0, Math.PI * 2);
@@ -201,7 +184,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen mesh-bg text-slate-200 font-body selection:bg-indigo-500/30 selection:text-white relative">
+    <div className="min-h-screen mesh-bg text-slate-200 font-body selection:bg-cyan-500/30 selection:text-white relative">
       {/* Cinematic Intro Loader — shown once per session */}
       {!loaderDone && <IntroLoader onComplete={handleLoaderComplete} />}
 
@@ -224,9 +207,6 @@ export default function App() {
 
       {/* Standalone Fixed 3D Floating Glass Orb Theme Switcher */}
       <FloatingOrbThemeToggle theme={theme} toggleTheme={toggleTheme} />
-
-      {/* Live Color Gradient Palette Switcher */}
-      <PaletteSwitcher activePalette={palette} onSelectPalette={setPalette} />
 
       {/* Back To Top Floating Button */}
       <BackToTop />

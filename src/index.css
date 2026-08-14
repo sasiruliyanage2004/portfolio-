@@ -359,7 +359,8 @@ body.light-theme,
 }
 
 .light-theme .text-gradient {
-  background: linear-gradient(135deg, #3730a3 0%, #0e7490 50%, #b45309 100%);
+  background: linear-gradient(135deg, #0284c7 0%, #4f46e5 50%, #7e22ce 100%);
+  background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent !important;
@@ -483,7 +484,7 @@ body.light-theme,
 .animate-gradient-x { animation: gradient-x 6s ease infinite; }
 
 .text-gradient {
-  background: linear-gradient(100deg, var(--cyan) 0%, var(--amber) 50%, var(--violet) 100%);
+  background: linear-gradient(135deg, #06b6d4 0%, #6366f1 50%, #a855f7 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;

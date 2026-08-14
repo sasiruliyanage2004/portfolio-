@@ -43,6 +43,12 @@ const PROJECTS = [
     live: true,
     github: "https://github.com/sasiruliyanage2004",
     demo: "#",
+    metrics: [
+      { label: "Events/Day", val: "2M+" },
+      { label: "Query Latency", val: "<100ms" },
+      { label: "Uptime", val: "99.9%" },
+    ],
+    status: "v1.8.2 • STREAMING",
   },
   {
     id: "aria",
@@ -137,7 +143,7 @@ function Card3D({ project }) {
             {project.blurb}
           </p>
 
-          {/* Featured Bento Hero UI Preview Frame (Rendered on 2-row Hero Card) */}
+          {/* Featured Bento Hero UI Preview Frame */}
           {isFeatured && (
             <div className="bento-ui-preview-frame my-6 rounded-2xl p-5 font-mono text-xs shadow-inner">
               <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-3">
@@ -164,6 +170,28 @@ function Card3D({ project }) {
                 <span className="flex items-center gap-1.5 text-emerald-500">
                   <ShieldCheck className="h-3.5 w-3.5" /> {project.badge}
                 </span>
+              </div>
+            </div>
+          )}
+
+          {/* Mini Metrics Preview for Nimbus Analytics Card */}
+          {!isFeatured && project.metrics && (
+            <div className="bento-ui-preview-frame my-4 rounded-2xl p-3.5 font-mono text-xs shadow-inner">
+              <div className="flex items-center justify-between border-b border-white/10 pb-2 mb-2">
+                <div className="flex items-center gap-1.5 text-cyan-400 font-semibold text-[11px]">
+                  <Activity className="h-3.5 w-3.5 animate-pulse text-cyan-300" />
+                  <span>Nimbus Stream Engine</span>
+                </div>
+                <span className="text-[10px] opacity-70">{project.status}</span>
+              </div>
+
+              <div className="grid grid-cols-3 gap-2 my-2 text-center">
+                {project.metrics.map((m, i) => (
+                  <div key={i} className="rounded-xl bg-white/5 p-2 border border-white/10">
+                    <div className="text-cyan-400 font-bold text-xs sm:text-sm">{m.val}</div>
+                    <div className="text-[9px] opacity-70 mt-0.5">{m.label}</div>
+                  </div>
+                ))}
               </div>
             </div>
           )}

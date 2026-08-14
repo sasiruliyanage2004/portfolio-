@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Sun, Moon } from "lucide-react";
 import ParticleBackground from "./components/ParticleBackground";
 import CustomCursor from "./components/CustomCursor";
 import FloatingDockCyber from "./components/cyber/FloatingDockCyber";
@@ -11,6 +13,49 @@ import SkillsCyber from "./components/cyber/SkillsCyber";
 import ContactCyber from "./components/cyber/ContactCyber";
 import Footer from "./components/Footer";
 import "./index.css";
+
+// Idea 1 & 2: Fixed Standalone 3D Floating Glass Orb Theme Switcher
+function FloatingOrbThemeToggle({ theme, toggleTheme }) {
+  const isLight = theme === "light";
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      className="fixed bottom-8 right-8 z-[70] group"
+    >
+      <motion.button
+        whileHover={{ scale: 1.1, rotate: 15 }}
+        whileTap={{ scale: 0.9 }}
+        onClick={toggleTheme}
+        aria-label="Toggle Light/Dark Theme (Press T)"
+        className={`relative flex h-14 w-14 items-center justify-center rounded-full border backdrop-blur-xl shadow-2xl transition-all duration-300 cursor-pointer ${
+          isLight
+            ? "bg-white/95 border-slate-300 text-indigo-600 shadow-slate-900/10 hover:shadow-indigo-500/30"
+            : "bg-[#0b0f17]/95 border-white/20 text-amber-300 shadow-black/90 hover:shadow-cyan-500/30"
+        }`}
+      >
+        <span className="absolute inset-0 rounded-full bg-gradient-to-tr from-cyan-500/20 via-indigo-500/20 to-amber-500/20 animate-pulse-slow pointer-events-none" />
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={theme}
+            initial={{ opacity: 0, rotate: -90, scale: 0.5 }}
+            animate={{ opacity: 1, rotate: 0, scale: 1 }}
+            exit={{ opacity: 0, rotate: 90, scale: 0.5 }}
+            transition={{ duration: 0.3 }}
+            className="relative z-10"
+          >
+            {isLight ? <Moon className="h-6 w-6 text-indigo-600" /> : <Sun className="h-6 w-6 text-amber-300" />}
+          </motion.div>
+        </AnimatePresence>
+      </motion.button>
+
+      {/* Floating Tooltip Badge on Hover */}
+      <span className="absolute right-16 top-1/2 -translate-y-1/2 whitespace-nowrap rounded-full border border-white/10 dark:border-white/10 light-theme:border-slate-300 bg-[#090d16]/95 dark:bg-[#090d16]/95 light-theme:bg-white/95 px-3.5 py-1.5 font-mono text-xs font-semibold text-slate-200 dark:text-slate-200 light-theme:text-slate-800 shadow-xl opacity-0 group-hover:opacity-100 transition-all pointer-events-none">
+        Toggle Theme <kbd className="ml-1 rounded bg-white/20 dark:bg-white/20 light-theme:bg-slate-200 px-1.5 py-0.5 text-[10px] text-cyan-300 dark:text-cyan-300 light-theme:text-indigo-600">T</kbd>
+      </span>
+    </motion.div>
+  );
+}
 
 export default function App() {
   // Theme state persisted via localStorage
@@ -41,6 +86,18 @@ export default function App() {
     localStorage.setItem("portfolio_cultural_theme", culturalTheme);
   }, [culturalTheme]);
 
+  // Idea 3: Global Keyboard Shortcut ('T' key listener) for instant Theme Toggle
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (["INPUT", "TEXTAREA"].includes(document.activeElement?.tagName)) return;
+      if (e.key === "t" || e.key === "T") {
+        setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
   // Dynamically generate 100% crisp circular portrait photo favicon in browser tab
   useEffect(() => {
     const img = new Image();
@@ -52,7 +109,6 @@ export default function App() {
       const ctx = canvas.getContext("2d");
       if (!ctx) return;
 
-      // Outer cyan/indigo gradient glow ring
       const grad = ctx.createLinearGradient(0, 0, 64, 64);
       grad.addColorStop(0, "#06b6d4");
       grad.addColorStop(1, "#6366f1");
@@ -62,22 +118,18 @@ export default function App() {
       ctx.fillStyle = grad;
       ctx.fill();
 
-      // Dark background inner circle
       ctx.beginPath();
       ctx.arc(32, 32, 28, 0, Math.PI * 2);
       ctx.fillStyle = "#05080f";
       ctx.fill();
 
-      // Circular crop clip for profile portrait photo
       ctx.beginPath();
       ctx.arc(32, 32, 26, 0, Math.PI * 2);
       ctx.closePath();
       ctx.clip();
 
-      // Draw profile photo inside the circle
       ctx.drawImage(img, 3, 3, 58, 58);
 
-      // Attach generated PNG Data URL to browser favicon
       const dataUrl = canvas.toDataURL("image/png");
       let link = document.querySelector("link[rel*='icon']");
       if (!link) {
@@ -91,8 +143,7 @@ export default function App() {
   }, []);
 
   const toggleTheme = () => {
-    const nextTheme = theme === "dark" ? "light" : "dark";
-    setTheme(nextTheme);
+    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
   };
 
   return (
@@ -104,13 +155,16 @@ export default function App() {
       <ParticleBackground />
       <CustomCursor />
 
-      {/* Floating Apple macOS Navigation Dock */}
+      {/* Floating Apple macOS Navigation Dock with True 3D Tilt Physics */}
       <FloatingDockCyber
         theme={theme}
         toggleTheme={toggleTheme}
         activePattern={culturalTheme}
         setActivePattern={setCulturalTheme}
       />
+
+      {/* Idea 1 & 2: Standalone Fixed 3D Floating Glass Orb Theme Switcher */}
+      <FloatingOrbThemeToggle theme={theme} toggleTheme={toggleTheme} />
 
       {/* Command Palette (Ctrl + K) */}
       <CommandPalette
@@ -122,11 +176,16 @@ export default function App() {
         setOpen={setCmdOpen}
       />
 
-      {/* Main Portfolio Page Content — 100% Crisp Transparent Canvas View without backdrop blur smudges */}
+      {/* Main Portfolio Page Content */}
       <main className="relative z-10 flex flex-col bg-transparent">
         <HeroCyber culturalTheme={culturalTheme} />
         <ProjectsCyber />
-        <CulturalCraftCyber />
+        <CulturalCraftCyber
+          theme={theme}
+          toggleTheme={toggleTheme}
+          activePattern={culturalTheme}
+          setActivePattern={setCulturalTheme}
+        />
         <SkillsCyber />
         <ContactCyber />
       </main>

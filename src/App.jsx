@@ -76,10 +76,6 @@ export default function App() {
     return localStorage.getItem("portfolio_theme") || "dark";
   });
 
-  const [culturalTheme, setCulturalTheme] = useState(() => {
-    return localStorage.getItem("portfolio_cultural_theme") || "dumbara";
-  });
-
   const [cmdOpen, setCmdOpen] = useState(false);
 
   // Sync theme changes with DOM documentElement & localStorage
@@ -94,12 +90,7 @@ export default function App() {
     localStorage.setItem("portfolio_theme", theme);
   }, [theme]);
 
-  // Sync cultural motif theme with localStorage
-  useEffect(() => {
-    localStorage.setItem("portfolio_cultural_theme", culturalTheme);
-  }, [culturalTheme]);
-
-  // Idea 3: Global Keyboard Shortcut ('T' key listener) for instant Theme Toggle
+  // Global Keyboard Shortcut ('T' key listener) for instant Theme Toggle
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (["INPUT", "TEXTAREA"].includes(document.activeElement?.tagName)) return;
@@ -161,20 +152,15 @@ export default function App() {
 
   return (
     <div className="min-h-screen mesh-bg text-slate-200 font-body selection:bg-indigo-500/30 selection:text-white relative">
-      {/* Full-Page Real-time Procedural HTML5 Cultural Motif Canvas */}
-      <CulturalPatternCanvas theme={culturalTheme} />
+      {/* Full-Page Real-time Procedural HTML5 Signature Dumbara Canvas */}
+      <CulturalPatternCanvas />
 
       {/* STITCH Particle Background & Custom Glow Cursor */}
       <ParticleBackground />
       <CustomCursor />
 
       {/* Floating Apple macOS Navigation Dock with True 3D Tilt Physics */}
-      <FloatingDockCyber
-        theme={theme}
-        toggleTheme={toggleTheme}
-        activePattern={culturalTheme}
-        setActivePattern={setCulturalTheme}
-      />
+      <FloatingDockCyber theme={theme} />
 
       {/* Standalone Fixed 3D Floating Glass Orb Theme Switcher */}
       <FloatingOrbThemeToggle theme={theme} toggleTheme={toggleTheme} />
@@ -183,22 +169,15 @@ export default function App() {
       <CommandPalette
         theme={theme}
         toggleTheme={toggleTheme}
-        activePattern={culturalTheme}
-        setActivePattern={setCulturalTheme}
         open={cmdOpen}
         setOpen={setCmdOpen}
       />
 
       {/* Main Portfolio Page Content */}
       <main className="relative z-10 flex flex-col bg-transparent">
-        <HeroCyber culturalTheme={culturalTheme} />
+        <HeroCyber />
         <ProjectsCyber />
-        <CulturalCraftCyber
-          theme={theme}
-          toggleTheme={toggleTheme}
-          activePattern={culturalTheme}
-          setActivePattern={setCulturalTheme}
-        />
+        <CulturalCraftCyber />
         <SkillsCyber />
         <ContactCyber />
       </main>

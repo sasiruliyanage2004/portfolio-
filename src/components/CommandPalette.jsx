@@ -17,7 +17,7 @@ const LinkedinIcon = (props) => (
   </svg>
 );
 
-export default function CommandPalette({ theme, toggleTheme, activePattern, setActivePattern, open, setOpen }) {
+export default function CommandPalette({ theme, toggleTheme, open, setOpen }) {
   const [query, setQuery] = useState("");
   const [copied, setCopied] = useState(false);
 
@@ -87,39 +87,9 @@ export default function CommandPalette({ theme, toggleTheme, activePattern, setA
       },
     },
     {
-      id: "pattern-dumbara",
-      category: "Cultural Motifs",
-      label: "Set Background Pattern: Dumbara Geometric",
-      icon: Sparkles,
-      run: () => {
-        setActivePattern("dumbara");
-        setOpen(false);
-      },
-    },
-    {
-      id: "pattern-liyawela",
-      category: "Cultural Motifs",
-      label: "Set Background Pattern: Liyawela Bio-Flow",
-      icon: Sparkles,
-      run: () => {
-        setActivePattern("liyawela");
-        setOpen(false);
-      },
-    },
-    {
-      id: "pattern-palapethi",
-      category: "Cultural Motifs",
-      label: "Set Background Pattern: Pala Pethi Floral",
-      icon: Sparkles,
-      run: () => {
-        setActivePattern("palapethi");
-        setOpen(false);
-      },
-    },
-    {
       id: "copy-email",
-      category: "Quick Actions",
-      label: "Copy Email Address (liyanagesasiru@gmail.com)",
+      category: "Actions",
+      label: "Copy Email (liyanagesasiru@gmail.com)",
       icon: Copy,
       run: () => {
         navigator.clipboard.writeText("liyanagesasiru@gmail.com");
@@ -128,8 +98,21 @@ export default function CommandPalette({ theme, toggleTheme, activePattern, setA
       },
     },
     {
+      id: "download-resume",
+      category: "Actions",
+      label: "Download CV / Resume (PDF)",
+      icon: FileText,
+      run: () => {
+        const link = document.createElement("a");
+        link.href = "/resume.pdf";
+        link.download = "Sasiru_Liyanage_CV.pdf";
+        link.click();
+        setOpen(false);
+      },
+    },
+    {
       id: "github",
-      category: "Quick Actions",
+      category: "Social Links",
       label: "Open GitHub Profile",
       icon: GithubIcon,
       run: () => {
@@ -139,7 +122,7 @@ export default function CommandPalette({ theme, toggleTheme, activePattern, setA
     },
     {
       id: "linkedin",
-      category: "Quick Actions",
+      category: "Social Links",
       label: "Open LinkedIn Profile",
       icon: LinkedinIcon,
       run: () => {
@@ -158,66 +141,85 @@ export default function CommandPalette({ theme, toggleTheme, activePattern, setA
   return (
     <AnimatePresence>
       {open && (
-        <div className="fixed inset-0 z-[100] flex items-start justify-center pt-24 px-4">
+        <div className="fixed inset-0 z-[100] flex items-start justify-center pt-20 px-4 sm:px-6">
+          {/* Backdrop Blur Overlay */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setOpen(false)}
-            className="absolute inset-0 bg-black/75 backdrop-blur-md"
+            className="fixed inset-0 bg-black/60 backdrop-blur-md"
           />
 
+          {/* Command Modal Box */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95, y: -20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: -20 }}
-            transition={{ duration: 0.2 }}
-            className="relative w-full max-w-xl overflow-hidden rounded-2xl border border-white/20 bg-[#0b0f17] dark:bg-[#0b0f17] light-theme:bg-[#ffffff] text-slate-100 dark:text-slate-100 light-theme:text-slate-900 shadow-2xl backdrop-blur-2xl z-10"
+            transition={{ type: "spring", stiffness: 350, damping: 28 }}
+            className="command-modal-box noise-overlay relative w-full max-w-2xl overflow-hidden rounded-3xl border border-white/20 dark:border-white/20 light-theme:border-slate-300 bg-[#090d16]/95 dark:bg-[#090d16]/95 light-theme:bg-white/95 text-slate-100 dark:text-slate-100 light-theme:text-slate-900 shadow-2xl backdrop-blur-2xl"
           >
-            {/* Search Bar Input Header */}
-            <div className="flex items-center gap-3 border-b border-white/10 px-4 py-3.5">
-              <Search className="h-4 w-4 text-cyan-400 shrink-0" />
+            <span className="border-beam" aria-hidden="true" />
+
+            {/* Input Search Header */}
+            <div className="flex items-center border-b border-white/10 dark:border-white/10 light-theme:border-slate-200 px-5 py-4">
+              <Search className="h-5 w-5 text-cyan-400 shrink-0 mr-3" />
               <input
                 type="text"
+                autoFocus
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Type a command or search..."
-                autoFocus
-                className="w-full bg-transparent font-mono text-sm placeholder-slate-500 focus:outline-none"
+                className="w-full bg-transparent font-mono text-sm placeholder:text-slate-500 focus:outline-none"
               />
-              <kbd className="rounded bg-white/10 px-2 py-1 font-mono text-[10px] text-slate-400">ESC</kbd>
+              <kbd className="hidden sm:inline-block rounded-md bg-white/10 dark:bg-white/10 light-theme:bg-slate-100 px-2 py-1 font-mono text-[10px] opacity-70">
+                ESC to close
+              </kbd>
             </div>
 
-            {/* Action List */}
-            <div className="max-h-80 overflow-y-auto p-2">
-              {filteredActions.length === 0 ? (
-                <p className="p-4 text-center font-mono text-xs text-slate-400">No matching commands found.</p>
-              ) : (
+            {/* Actions List */}
+            <div className="max-h-[360px] overflow-y-auto p-3 space-y-1">
+              {filteredActions.length > 0 ? (
                 filteredActions.map((action) => {
                   const Icon = action.icon;
                   return (
                     <button
                       key={action.id}
                       onClick={action.run}
-                      className="flex w-full items-center justify-between rounded-xl px-3.5 py-2.5 text-left font-mono text-xs transition-colors hover:bg-cyan-500/20 hover:text-cyan-300 cursor-pointer"
+                      className="group flex w-full items-center justify-between rounded-xl px-4 py-3 text-left transition-all hover:bg-cyan-500/10 hover:text-cyan-400 cursor-pointer"
                     >
-                      <div className="flex items-center gap-3">
-                        <Icon className="h-4 w-4 text-cyan-400" />
-                        <span>{action.label}</span>
+                      <div className="flex items-center gap-3 font-mono text-xs">
+                        <div className="glass-panel flex h-8 w-8 items-center justify-center rounded-lg group-hover:border-cyan-400/50">
+                          <Icon className="h-4 w-4" />
+                        </div>
+                        <div>
+                          <span className="font-semibold">{action.label}</span>
+                          <span className="ml-2 text-[10px] opacity-50 uppercase tracking-wider">
+                            • {action.category}
+                          </span>
+                        </div>
                       </div>
-                      <span className="text-[10px] text-slate-500 uppercase">{action.category}</span>
+                      {action.id === "copy-email" && copied && (
+                        <span className="flex items-center gap-1 text-xs text-emerald-400 font-mono">
+                          <Check className="h-3.5 w-3.5" /> Copied!
+                        </span>
+                      )}
                     </button>
                   );
                 })
+              ) : (
+                <div className="p-8 text-center font-mono text-xs opacity-60">
+                  No matching commands found for "{query}".
+                </div>
               )}
             </div>
 
-            {/* Footer */}
-            <div className="flex items-center justify-between border-t border-white/10 px-4 py-2.5 font-mono text-[11px] text-slate-500 bg-black/30">
-              <div className="flex items-center gap-2">
-                <span>Press <kbd className="text-cyan-400">Ctrl + K</kbd> anytime to open</span>
-              </div>
-              {copied && <span className="text-emerald-400 flex items-center gap-1"><Check className="h-3 w-3" /> Email Copied!</span>}
+            {/* Modal Footer */}
+            <div className="flex items-center justify-between border-t border-white/10 dark:border-white/10 light-theme:border-slate-200 px-5 py-3 font-mono text-[11px] opacity-60">
+              <span className="flex items-center gap-1.5">
+                <Command className="h-3.5 w-3.5 text-cyan-400" /> Navigation Shortcuts
+              </span>
+              <span>Use ↑ ↓ to navigate, Enter to select</span>
             </div>
           </motion.div>
         </div>

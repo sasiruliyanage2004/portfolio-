@@ -1,5 +1,5 @@
-import { useEffect, useState, useRef } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { Home, Layers, Mail, User } from "lucide-react";
 
 const NAV = [
@@ -13,28 +13,6 @@ export default function FloatingDockCyber({ theme }) {
   const [active, setActive] = useState("home");
   const [isScrolled, setIsScrolled] = useState(false);
   const isLightMode = theme === "light";
-
-  // 3D Tilt Spring Physics for Floating Dock
-  const ref = useRef(null);
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-
-  const rotateX = useSpring(y, { stiffness: 220, damping: 18 });
-  const rotateY = useSpring(x, { stiffness: 220, damping: 18 });
-
-  const handleMouseMove = (e) => {
-    if (!ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
-    const px = (e.clientX - rect.left) / rect.width;
-    const py = (e.clientY - rect.top) / rect.height;
-    x.set((px - 0.5) * 12);
-    y.set((0.5 - py) * 12);
-  };
-
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
 
   // Bulletproof Scroll Spy for 100% Accurate Navbar Active Section Highlighting
   useEffect(() => {
@@ -85,27 +63,23 @@ export default function FloatingDockCyber({ theme }) {
   }, []);
 
   return (
-    <div className="fixed left-1/2 top-6 z-[60] -translate-x-1/2 [perspective:1000px]">
+    <div className="fixed left-1/2 top-6 z-[60] -translate-x-1/2">
       <motion.nav
-        ref={ref}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
         layout
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ type: "spring", stiffness: 300, damping: 26 }}
-        className={`relative flex items-center gap-1.5 rounded-full border backdrop-blur-2xl transition-all duration-500 px-4.5 py-2.5 ${
+        className={`relative flex items-center gap-1.5 rounded-full border backdrop-blur-2xl transition-all duration-500 px-5 py-2.5 ${
           isLightMode
             ? isScrolled
-              ? "shadow-[0_20px_45px_rgba(15,23,42,0.18)] bg-white/95 border-slate-300/90"
+              ? "shadow-[0_20px_45px_rgba(15,23,42,0.18)] bg-white/95 border-slate-300"
               : "shadow-[0_25px_55px_rgba(15,23,42,0.14)] bg-white/90 border-slate-200"
             : isScrolled
               ? "shadow-[0_25px_60px_rgba(0,0,0,0.95)] bg-[#0b0f17]/95 border-white/25"
               : "shadow-[0_30px_70px_rgba(0,0,0,0.88)] bg-[#0b0f17]/90 border-white/20"
         }`}
       >
-        {/* Specular Rim Highlight for Real 3D Glass Look */}
+        {/* Specular Rim Highlight for Real Glass Look */}
         <div className="absolute inset-x-4 top-0 h-[1.5px] bg-gradient-to-r from-transparent via-white/40 dark:via-white/40 light-theme:via-indigo-400/40 to-transparent rounded-full pointer-events-none" />
 
         {/* Fully Expanded Navigation Items at ALL Scroll Positions */}
@@ -145,7 +119,7 @@ export default function FloatingDockCyber({ theme }) {
 
         <div className={`mx-1.5 h-5 w-px ${isLightMode ? "bg-slate-300" : "bg-white/15"}`} />
 
-        {/* Ultra-Premium 3D Emerald Live Status Pill Badge — ALWAYS VISIBLE AT ALL SCROLL POSITIONS */}
+        {/* Ultra-Premium 3D Emerald Live Status Pill Badge */}
         <div className="hidden items-center md:flex">
           <a
             href="#contact"

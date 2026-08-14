@@ -14,13 +14,22 @@ export default function CulturalPatternCanvas() {
     let time = 0;
 
     let mouse = { x: -1000, y: -1000, targetX: -1000, targetY: -1000 };
+    let lastClientX = -1000;
+    let lastClientY = -1000;
     const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
 
     const handlePointerMove = (e) => {
       if (isTouchDevice) return;
-      // Exact viewport mouse coordinates for 100% zero-offset alignment
+      lastClientX = e.clientX;
+      lastClientY = e.clientY;
       mouse.targetX = e.clientX;
       mouse.targetY = e.clientY;
+    };
+
+    const handleScroll = () => {
+      if (isTouchDevice || lastClientX < 0) return;
+      mouse.targetX = lastClientX;
+      mouse.targetY = lastClientY;
     };
 
     const handleResize = () => {
@@ -30,6 +39,7 @@ export default function CulturalPatternCanvas() {
 
     handleResize();
     window.addEventListener("resize", handleResize);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("pointermove", handlePointerMove, { passive: true });
 
     const render = () => {
@@ -38,24 +48,28 @@ export default function CulturalPatternCanvas() {
       const h = canvas.height;
       ctx.clearRect(0, 0, w, h);
 
-      // Lerp mouse position for silky smooth movement
+      // Smooth lerp mouse coordinates
       mouse.x += (mouse.targetX - mouse.x) * 0.12;
       mouse.y += (mouse.targetY - mouse.y) * 0.12;
 
       const isLight = document.documentElement.classList.contains("light-theme");
-      const size = 95;
-      const cols = Math.ceil(w / size) + 2;
-      const rows = Math.ceil(h / size) + 2;
+      
+      // Proportional Dumbara Diamond Grid Dimensions
+      const sizeX = 110;
+      const sizeY = 70;
+      const rowHeight = sizeY / 2; // 35px spacing for perfect interlocking diamond grid
+      const cols = Math.ceil(w / sizeX) + 3;
+      const rows = Math.ceil(h / rowHeight) + 4; // Cover 100% of viewport from top to bottom
       const maxDist = 320;
 
       // Draw Cursor Spotlight Glow Aura
       if (mouse.x > 0 && mouse.y > 0 && !isTouchDevice) {
         const glowGrad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, maxDist);
         if (isLight) {
-          glowGrad.addColorStop(0, "rgba(55, 48, 163, 0.06)");
+          glowGrad.addColorStop(0, "rgba(55, 48, 163, 0.08)");
           glowGrad.addColorStop(1, "rgba(55, 48, 163, 0)");
         } else {
-          glowGrad.addColorStop(0, "rgba(6, 182, 212, 0.18)");
+          glowGrad.addColorStop(0, "rgba(6, 182, 212, 0.22)");
           glowGrad.addColorStop(1, "rgba(6, 182, 212, 0)");
         }
         ctx.fillStyle = glowGrad;
@@ -64,17 +78,17 @@ export default function CulturalPatternCanvas() {
         ctx.fill();
       }
 
-      for (let r = -1; r < rows; r++) {
-        for (let c = -1; c < cols; c++) {
-          const x = c * size + (r % 2 === 0 ? 0 : size / 2);
-          const y = r * (size * 0.6);
-          const wave = Math.sin(time * 0.02 + (c + r) * 0.5) * 4;
+      for (let r = -2; r < rows; r++) {
+        for (let c = -2; c < cols; c++) {
+          const x = c * sizeX + (Math.abs(r) % 2 === 0 ? 0 : sizeX / 2);
+          const y = r * rowHeight;
+          const wave = Math.sin(time * 0.02 + (c + r) * 0.4) * 3;
 
           const dist = Math.hypot(x - mouse.x, y + wave - mouse.y);
           const glow = dist < maxDist ? Math.pow(1 - dist / maxDist, 2) : 0;
           const scale = 1 + glow * 0.12;
 
-          // Light mode uses whisper-quiet opacities (0.07 base) for ultra-clean porcelain look
+          // Light mode uses whisper-quiet opacities (0.07 base) for clean porcelain look
           const baseOuterOpacity = isLight ? 0.07 : 0.28;
           const baseInnerOpacity = isLight ? 0.05 : 0.22;
           const outerOpacity = Math.min(isLight ? 0.35 : 0.75, baseOuterOpacity + glow * (isLight ? 0.28 : 0.45));
@@ -86,10 +100,10 @@ export default function CulturalPatternCanvas() {
             : `rgba(6, 182, 212, ${outerOpacity})`;
           ctx.lineWidth = isLight ? 1.2 + glow * 0.6 : 1.6 + glow * 0.8;
           ctx.beginPath();
-          ctx.moveTo(x, y - (size / 2) * scale + wave);
-          ctx.lineTo(x + (size / 2) * scale, y + wave);
-          ctx.lineTo(x, y + (size / 2) * scale + wave);
-          ctx.lineTo(x - (size / 2) * scale, y + wave);
+          ctx.moveTo(x, y - (sizeY / 2) * scale + wave);
+          ctx.lineTo(x + (sizeX / 2) * scale, y + wave);
+          ctx.lineTo(x, y + (sizeY / 2) * scale + wave);
+          ctx.lineTo(x - (sizeX / 2) * scale, y + wave);
           ctx.closePath();
           ctx.stroke();
 
@@ -99,10 +113,10 @@ export default function CulturalPatternCanvas() {
             : `rgba(99, 102, 241, ${innerOpacity})`;
           ctx.lineWidth = isLight ? 0.9 + glow * 0.5 : 1.2 + glow * 0.6;
           ctx.beginPath();
-          ctx.moveTo(x, y - (size / 3.5) * scale + wave);
-          ctx.lineTo(x + (size / 3.5) * scale, y + wave);
-          ctx.lineTo(x, y + (size / 3.5) * scale + wave);
-          ctx.lineTo(x - (size / 3.5) * scale, y + wave);
+          ctx.moveTo(x, y - (sizeY / 3.5) * scale + wave);
+          ctx.lineTo(x + (sizeX / 3.5) * scale, y + wave);
+          ctx.lineTo(x, y + (sizeY / 3.5) * scale + wave);
+          ctx.lineTo(x - (sizeX / 3.5) * scale, y + wave);
           ctx.closePath();
           ctx.stroke();
 
@@ -126,6 +140,7 @@ export default function CulturalPatternCanvas() {
 
     return () => {
       window.removeEventListener("resize", handleResize);
+      window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("pointermove", handlePointerMove);
       cancelAnimationFrame(animationFrameId);
     };

@@ -380,7 +380,7 @@ export default function ContactCyber() {
               ))}
             </div>
             <p className="font-mono text-[11px] opacity-70">
-              © {new Date().getFullYear()} Sasiru Liyanage. Built with React 19 + Vite 8.
+              © {new Date().getFullYear()} Sasiru Liyanage
             </p>
           </div>
         </div>

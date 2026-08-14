@@ -213,7 +213,8 @@ export default function HeroCyber() {
             <div className="flex flex-wrap items-center gap-4 pt-4">
               <MagneticButton
                 href="#projects"
-                className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-indigo-600 via-cyan-500 to-indigo-600 px-7 py-3.5 font-mono text-xs font-bold text-white shadow-xl transition-all hover:shadow-cyan-500/25 cursor-pointer"
+                style={{ background: "linear-gradient(135deg, var(--grad-start), var(--grad-mid), var(--grad-end))" }}
+                className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full px-7 py-3.5 font-mono text-xs font-bold text-white shadow-xl transition-all hover:shadow-cyan-500/25 cursor-pointer"
               >
                 <span>View My Work</span>
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />

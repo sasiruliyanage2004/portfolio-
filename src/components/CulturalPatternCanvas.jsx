@@ -66,8 +66,8 @@ export default function CulturalPatternCanvas() {
       if (mouse.x > 0 && mouse.y > 0 && !isTouchDevice) {
         const glowGrad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, maxDist);
         if (isLight) {
-          glowGrad.addColorStop(0, "rgba(55, 48, 163, 0.08)");
-          glowGrad.addColorStop(1, "rgba(55, 48, 163, 0)");
+          glowGrad.addColorStop(0, "rgba(14, 116, 144, 0.08)");
+          glowGrad.addColorStop(1, "rgba(14, 116, 144, 0)");
         } else {
           glowGrad.addColorStop(0, "rgba(6, 182, 212, 0.20)");
           glowGrad.addColorStop(1, "rgba(6, 182, 212, 0)");
@@ -89,14 +89,14 @@ export default function CulturalPatternCanvas() {
           const scale = 1 + glow * 0.18;
 
           // Upright Dumbara Mat settings matching traditional Sri Lankan weave
-          const baseOuterOpacity = isLight ? 0.07 : 0.20;
-          const baseInnerOpacity = isLight ? 0.05 : 0.15;
-          const outerOpacity = Math.min(isLight ? 0.35 : 0.75, baseOuterOpacity + glow * (isLight ? 0.28 : 0.55));
-          const innerOpacity = Math.min(isLight ? 0.30 : 0.65, baseInnerOpacity + glow * (isLight ? 0.25 : 0.48));
+          const baseOuterOpacity = isLight ? 0.08 : 0.20;
+          const baseInnerOpacity = isLight ? 0.06 : 0.15;
+          const outerOpacity = Math.min(isLight ? 0.38 : 0.75, baseOuterOpacity + glow * (isLight ? 0.28 : 0.55));
+          const innerOpacity = Math.min(isLight ? 0.32 : 0.65, baseInnerOpacity + glow * (isLight ? 0.25 : 0.48));
 
-          // Outer Diamond Border (Ceylon Sapphire Cyan / Royal Indigo)
+          // Outer Diamond Border (Ceylon Sapphire Cyan / Teal)
           ctx.strokeStyle = isLight
-            ? `rgba(55, 48, 163, ${outerOpacity})`
+            ? `rgba(14, 116, 144, ${outerOpacity})`
             : `rgba(6, 182, 212, ${outerOpacity})`;
           ctx.lineWidth = isLight ? 1.2 + glow * 0.6 : 1.4 + glow * 1.0;
           ctx.beginPath();
@@ -107,10 +107,10 @@ export default function CulturalPatternCanvas() {
           ctx.closePath();
           ctx.stroke();
 
-          // Inner Concentric Diamond (Electric Indigo)
+          // Inner Concentric Diamond (Emerald Green / Cyan)
           ctx.strokeStyle = isLight
-            ? `rgba(14, 116, 144, ${innerOpacity})`
-            : `rgba(99, 102, 241, ${innerOpacity})`;
+            ? `rgba(16, 185, 129, ${innerOpacity})`
+            : `rgba(16, 185, 129, ${innerOpacity})`;
           ctx.lineWidth = isLight ? 0.9 + glow * 0.4 : 1.0 + glow * 0.7;
           ctx.beginPath();
           ctx.moveTo(x, y - (sizeY / 3.5) * scale + wave);
@@ -120,12 +120,12 @@ export default function CulturalPatternCanvas() {
           ctx.closePath();
           ctx.stroke();
 
-          // Dumbara Center Lotus Dots (Royal Kandy Violet)
+          // Dumbara Center Lotus Dots (Pure Teal / Emerald - Zero purple!)
           if ((c + r) % 2 === 0) {
-            const dotOpacity = Math.min(isLight ? 0.35 : 0.75, (isLight ? 0.08 : 0.22) + glow * (isLight ? 0.25 : 0.50));
+            const dotOpacity = Math.min(isLight ? 0.40 : 0.75, (isLight ? 0.10 : 0.22) + glow * (isLight ? 0.25 : 0.50));
             ctx.fillStyle = isLight
-              ? `rgba(126, 34, 206, ${dotOpacity})`
-              : `rgba(168, 85, 247, ${dotOpacity})`;
+              ? `rgba(13, 148, 136, ${dotOpacity})`
+              : `rgba(6, 182, 212, ${dotOpacity})`;
             ctx.beginPath();
             ctx.arc(x, y + wave, isLight ? 2.8 + glow * 1.2 : 3.5 + glow * 1.5, 0, Math.PI * 2);
             ctx.fill();

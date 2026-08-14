@@ -91,7 +91,8 @@ export default function FloatingDockCyber({ theme }) {
             {isActive && (
               <motion.span
                 layoutId="activeDockCyberPill"
-                className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-500 to-indigo-500 opacity-90 shadow-md"
+                style={{ background: "linear-gradient(135deg, var(--grad-start), var(--grad-mid))" }}
+                className="absolute inset-0 rounded-full opacity-90 shadow-md"
                 transition={{ type: "spring", stiffness: 380, damping: 28 }}
               />
             )}

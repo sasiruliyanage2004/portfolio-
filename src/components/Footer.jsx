@@ -105,7 +105,8 @@ export default function Footer({ onOpenCommandPalette }) {
             <div className="mt-6 flex flex-wrap items-center gap-3">
               <button
                 onClick={handleCopy}
-                className="inline-flex items-center gap-2.5 rounded-2xl bg-gradient-to-r from-indigo-500 via-cyan-500 to-indigo-600 px-7 py-3.5 font-mono text-xs font-bold text-white shadow-xl hover:shadow-cyan-500/25 transition-all cursor-pointer"
+                style={{ background: "linear-gradient(135deg, var(--grad-start), var(--grad-mid), var(--grad-end))" }}
+                className="inline-flex items-center gap-2.5 rounded-2xl px-7 py-3.5 font-mono text-xs font-bold text-white shadow-xl hover:shadow-cyan-500/25 transition-all cursor-pointer"
               >
                 <Mail className="h-4 w-4" />
                 {copied ? "Email Copied to Clipboard!" : "liyanagesasiru@gmail.com"}

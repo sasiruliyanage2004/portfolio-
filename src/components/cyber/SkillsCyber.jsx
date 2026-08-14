@@ -104,7 +104,8 @@ export default function SkillsCyber() {
                   {isActive && (
                     <motion.span
                       layoutId="activeDomainPill"
-                      className="absolute inset-0 rounded-full bg-gradient-to-r from-indigo-500 to-cyan-500 shadow-md"
+                      style={{ background: "linear-gradient(135deg, var(--grad-start), var(--grad-mid))" }}
+                      className="absolute inset-0 rounded-full shadow-md"
                       transition={{ type: "spring", stiffness: 400, damping: 30 }}
                     />
                   )}

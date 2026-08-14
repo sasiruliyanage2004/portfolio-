@@ -54,22 +54,22 @@ export default function CulturalPatternCanvas() {
 
       const isLight = document.documentElement.classList.contains("light-theme");
 
-      // Proportional Dumbara Diamond Grid Dimensions (Matching Image 2 Exactly)
-      const sizeX = 110;
+      // Wide Traditional Sri Lankan Dumbara Diamond Dimensions (Matching Image 1 Exactly)
+      const sizeX = 140;
       const sizeY = 70;
       const rowHeight = sizeY / 2; // 35px spacing for interlocked diamond grid
       const cols = Math.ceil(w / sizeX) + 3;
       const rows = Math.ceil(h / rowHeight) + 4; // Cover 100% of viewport from top to bottom
-      const maxDist = 280;
+      const maxDist = 320;
 
-      // Draw Soft Spotlight Glow Aura around Cursor
+      // Draw Radiant Cursor Spotlight Glow Aura (Matching Image 1)
       if (mouse.x > 0 && mouse.y > 0 && !isTouchDevice) {
         const glowGrad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, maxDist);
         if (isLight) {
-          glowGrad.addColorStop(0, "rgba(55, 48, 163, 0.06)");
+          glowGrad.addColorStop(0, "rgba(55, 48, 163, 0.08)");
           glowGrad.addColorStop(1, "rgba(55, 48, 163, 0)");
         } else {
-          glowGrad.addColorStop(0, "rgba(6, 182, 212, 0.14)");
+          glowGrad.addColorStop(0, "rgba(6, 182, 212, 0.22)");
           glowGrad.addColorStop(1, "rgba(6, 182, 212, 0)");
         }
         ctx.fillStyle = glowGrad;
@@ -86,19 +86,19 @@ export default function CulturalPatternCanvas() {
 
           const dist = Math.hypot(x - mouse.x, y + wave - mouse.y);
           const glow = dist < maxDist ? Math.pow(1 - dist / maxDist, 2) : 0;
-          const scale = 1 + glow * 0.10;
+          const scale = 1 + glow * 0.20;
 
-          // Elegant, low-opacity watermark settings matching Image 2
-          const baseOuterOpacity = isLight ? 0.06 : 0.12;
-          const baseInnerOpacity = isLight ? 0.04 : 0.08;
-          const outerOpacity = Math.min(isLight ? 0.30 : 0.42, baseOuterOpacity + glow * (isLight ? 0.24 : 0.30));
-          const innerOpacity = Math.min(isLight ? 0.25 : 0.35, baseInnerOpacity + glow * (isLight ? 0.20 : 0.25));
+          // Vibrant, radiant Dumbara Mat settings matching Image 1
+          const baseOuterOpacity = isLight ? 0.07 : 0.22;
+          const baseInnerOpacity = isLight ? 0.05 : 0.18;
+          const outerOpacity = Math.min(isLight ? 0.35 : 0.80, baseOuterOpacity + glow * (isLight ? 0.28 : 0.58));
+          const innerOpacity = Math.min(isLight ? 0.30 : 0.70, baseInnerOpacity + glow * (isLight ? 0.25 : 0.50));
 
-          // Outer Diamond Border (Hairline Sapphire Cyan)
+          // Outer Diamond Border (Ceylon Sapphire Cyan / Royal Indigo)
           ctx.strokeStyle = isLight
             ? `rgba(55, 48, 163, ${outerOpacity})`
             : `rgba(6, 182, 212, ${outerOpacity})`;
-          ctx.lineWidth = isLight ? 1.0 + glow * 0.4 : 1.1 + glow * 0.5;
+          ctx.lineWidth = isLight ? 1.2 + glow * 0.6 : 1.5 + glow * 1.0;
           ctx.beginPath();
           ctx.moveTo(x, y - (sizeY / 2) * scale + wave);
           ctx.lineTo(x + (sizeX / 2) * scale, y + wave);
@@ -111,7 +111,7 @@ export default function CulturalPatternCanvas() {
           ctx.strokeStyle = isLight
             ? `rgba(14, 116, 144, ${innerOpacity})`
             : `rgba(99, 102, 241, ${innerOpacity})`;
-          ctx.lineWidth = isLight ? 0.8 + glow * 0.3 : 0.9 + glow * 0.4;
+          ctx.lineWidth = isLight ? 0.9 + glow * 0.4 : 1.1 + glow * 0.7;
           ctx.beginPath();
           ctx.moveTo(x, y - (sizeY / 3.5) * scale + wave);
           ctx.lineTo(x + (sizeX / 3.5) * scale, y + wave);
@@ -122,12 +122,12 @@ export default function CulturalPatternCanvas() {
 
           // Dumbara Center Lotus Dots (Royal Kandy Violet)
           if ((c + r) % 2 === 0) {
-            const dotOpacity = Math.min(isLight ? 0.30 : 0.45, (isLight ? 0.06 : 0.12) + glow * (isLight ? 0.20 : 0.30));
+            const dotOpacity = Math.min(isLight ? 0.35 : 0.80, (isLight ? 0.08 : 0.25) + glow * (isLight ? 0.25 : 0.55));
             ctx.fillStyle = isLight
               ? `rgba(126, 34, 206, ${dotOpacity})`
               : `rgba(168, 85, 247, ${dotOpacity})`;
             ctx.beginPath();
-            ctx.arc(x, y + wave, isLight ? 2.5 + glow * 1.0 : 3.0 + glow * 1.2, 0, Math.PI * 2);
+            ctx.arc(x, y + wave, isLight ? 2.8 + glow * 1.2 : 3.5 + glow * 1.6, 0, Math.PI * 2);
             ctx.fill();
           }
         }

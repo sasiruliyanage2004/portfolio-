@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 const CustomCursor = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const updateMousePosition = (e) => {
@@ -18,12 +19,19 @@ const CustomCursor = () => {
       }
     };
 
+    const handleMouseEnter = () => setIsVisible(true);
+    const handleMouseLeave = () => setIsVisible(false);
+
     window.addEventListener('mousemove', updateMousePosition);
     window.addEventListener('mouseover', handleMouseOver);
+    document.documentElement.addEventListener('mouseenter', handleMouseEnter);
+    document.documentElement.addEventListener('mouseleave', handleMouseLeave);
 
     return () => {
       window.removeEventListener('mousemove', updateMousePosition);
       window.removeEventListener('mouseover', handleMouseOver);
+      document.documentElement.removeEventListener('mouseenter', handleMouseEnter);
+      document.documentElement.removeEventListener('mouseleave', handleMouseLeave);
     };
   }, []);
 
@@ -32,9 +40,10 @@ const CustomCursor = () => {
       x: mousePosition.x - 16,
       y: mousePosition.y - 16,
       backgroundColor: "transparent",
-      border: "2px solid rgba(14, 165, 233, 0.8)", // tailwind primary
+      border: "2px solid rgba(14, 165, 233, 0.8)",
       height: 32,
       width: 32,
+      opacity: isVisible ? 1 : 0,
       transition: {
         type: "spring",
         mass: 0.1,
@@ -49,6 +58,7 @@ const CustomCursor = () => {
       border: "2px solid rgba(14, 165, 233, 1)",
       height: 48,
       width: 48,
+      opacity: isVisible ? 1 : 0,
       transition: {
         type: "spring",
         mass: 0.1,
@@ -65,11 +75,12 @@ const CustomCursor = () => {
         variants={variants}
         animate={isHovering ? "hover" : "default"}
       />
-      <div 
+      <div
         className="fixed top-0 left-0 z-[9999] w-2 h-2 bg-primary rounded-full pointer-events-none shadow-[0_0_10px_2px_rgba(56,189,248,0.8)]"
         style={{
           transform: `translate(${mousePosition.x - 4}px, ${mousePosition.y - 4}px)`,
-          transition: 'transform 0.05s linear'
+          transition: 'transform 0.05s linear',
+          opacity: isVisible ? 1 : 0,
         }}
       />
     </>

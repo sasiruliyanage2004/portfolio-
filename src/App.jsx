@@ -8,7 +8,6 @@ import CulturalPatternCanvas from "./components/CulturalPatternCanvas";
 import CommandPalette from "./components/CommandPalette";
 import HeroCyber from "./components/cyber/HeroCyber";
 import ProjectsCyber from "./components/cyber/ProjectsCyber";
-import CulturalCraftCyber from "./components/cyber/CulturalCraftCyber";
 import SkillsCyber from "./components/cyber/SkillsCyber";
 import ContactCyber from "./components/cyber/ContactCyber";
 import Footer from "./components/Footer";
@@ -173,11 +172,10 @@ export default function App() {
         setOpen={setCmdOpen}
       />
 
-      {/* Main Portfolio Page Content */}
+      {/* Main Portfolio Page Content — Streamlined, Ultra-Clean & Fast Flow */}
       <main className="relative z-10 flex flex-col bg-transparent">
         <HeroCyber />
         <ProjectsCyber />
-        <CulturalCraftCyber />
         <SkillsCyber />
         <ContactCyber />
       </main>

@@ -36,32 +36,53 @@ export default function FloatingDockCyber({ theme }) {
     y.set(0);
   };
 
+  // Bulletproof Scroll Spy for 100% Accurate Navbar Active Section Highlighting
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 15);
-      if (window.scrollY < 300) {
-        setActive("home");
-      }
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    const handleScrollSpy = () => {
+      const scrollPosition = window.scrollY;
+      setIsScrolled(scrollPosition > 15);
 
-  useEffect(() => {
-    const sections = NAV.map((n) => document.getElementById(n.id)).filter(Boolean);
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && window.scrollY >= 300) {
-            setActive(entry.target.id);
+      if (scrollPosition < 250) {
+        setActive("home");
+        return;
+      }
+
+      // If scrolled near bottom of page (Contact & Footer area)
+      const isAtBottom =
+        window.innerHeight + window.scrollY >=
+        Math.max(document.body.scrollHeight, document.documentElement.scrollHeight) - 300;
+
+      if (isAtBottom) {
+        setActive("contact");
+        return;
+      }
+
+      const sections = NAV.map((n) => document.getElementById(n.id)).filter(Boolean);
+      const viewportMiddle = window.innerHeight / 2;
+
+      let currentActive = "home";
+      let minDistance = Infinity;
+
+      sections.forEach((section) => {
+        const rect = section.getBoundingClientRect();
+        const sectionCenter = rect.top + rect.height / 2;
+        const distance = Math.abs(sectionCenter - viewportMiddle);
+
+        // Section is in active view if top is above viewport middle and bottom is below top 25%
+        if (rect.top <= viewportMiddle + 100 && rect.bottom >= 150) {
+          if (distance < minDistance) {
+            minDistance = distance;
+            currentActive = section.id;
           }
-        });
-      },
-      { rootMargin: "-30% 0px -30% 0px" }
-    );
-    sections.forEach((s) => observer.observe(s));
-    return () => observer.disconnect();
+        }
+      });
+
+      setActive(currentActive);
+    };
+
+    window.addEventListener("scroll", handleScrollSpy, { passive: true });
+    handleScrollSpy();
+    return () => window.removeEventListener("scroll", handleScrollSpy);
   }, []);
 
   return (

@@ -414,17 +414,18 @@ body.light-theme,
 }
 
 .light-theme .text-gradient {
-  background: linear-gradient(135deg, #0284c7 0%, #4f46e5 50%, #7e22ce 100%);
+  background: linear-gradient(135deg, var(--grad-start) 0%, var(--grad-mid) 50%, var(--grad-end) 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent !important;
 }
 
-.light-theme ::-webkit-scrollbar-track { background: #f8f6f0; }
+.light-theme ::-webkit-scrollbar-track { background: var(--bg-obsidian); }
 .light-theme ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #3730a3, #b45309);
-  border: 2px solid #f8f6f0;
+  background: linear-gradient(180deg, var(--grad-start) 0%, var(--grad-mid) 50%, var(--grad-end) 100%);
+  border-radius: 999px;
+  border: 2px solid var(--bg-obsidian);
 }
 
 /* ------------------------------------------------------------------

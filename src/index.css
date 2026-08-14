@@ -55,29 +55,29 @@
   --grad-end: #a855f7;
 }
 
-/* 4 LIVE BRAND GRADIENT PALETTES (Light Mode - Deep, Rich & High-Contrast) */
+/* 4 LIVE BRAND GRADIENT PALETTES (Light Mode - Vibrant Green & Cyan Preserved) */
 .light-theme[data-palette="current"], body.light-theme.palette-current {
   --grad-start: #0284c7;
-  --grad-mid: #4f46e5;
-  --grad-end: #7e22ce;
+  --grad-mid: #6366f1;
+  --grad-end: #8b5cf6;
 }
 
 .light-theme[data-palette="option-a"], body.light-theme.palette-option-a {
   --grad-start: #0284c7;
-  --grad-mid: #059669;
-  --grad-end: #0f766e;
+  --grad-mid: #10b981;
+  --grad-end: #0d9488;
 }
 
 .light-theme[data-palette="option-b"], body.light-theme.palette-option-b {
-  --grad-start: #4338ca;
+  --grad-start: #4f46e5;
   --grad-mid: #0284c7;
-  --grad-end: #059669;
+  --grad-end: #10b981;
 }
 
 .light-theme[data-palette="option-c"], body.light-theme.palette-option-c {
-  --grad-start: #0f766e;
+  --grad-start: #0d9488;
   --grad-mid: #0284c7;
-  --grad-end: #7e22ce;
+  --grad-end: #8b5cf6;
 }
 
 html {

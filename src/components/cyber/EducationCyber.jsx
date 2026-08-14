@@ -69,34 +69,34 @@ export default function EducationCyber() {
       <div className="mx-auto max-w-6xl px-6 lg:px-10 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-16 sm:mb-20">
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 font-mono text-xs text-cyan-400 mb-4 backdrop-blur-md">
+          <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 dark:border-white/10 bg-cyan-500/10 dark:bg-white/5 px-4 py-1.5 font-mono text-xs text-cyan-600 dark:text-cyan-400 mb-4 backdrop-blur-md">
             <Sparkles className="h-3.5 w-3.5" />
             <span>ACADEMIC FOUNDATION</span>
           </div>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white">
             Education &amp; <span className="text-gradient">Journey</span>
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-slate-400 font-normal leading-relaxed">
+          <p className="mt-4 text-base sm:text-lg text-slate-600 dark:text-slate-400 font-normal leading-relaxed">
             The academic rigor and structured computer science disciplines shaping my engineering philosophy.
           </p>
         </div>
 
         {/* Timeline Container */}
         <div className="relative">
-          {/* Vertical spine background */}
-          <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-[2px] -translate-x-1/2 bg-white/10" />
+          {/* Vertical spine background track */}
+          <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-[3px] -translate-x-1/2 bg-slate-300/80 dark:bg-white/10 rounded-full" />
 
           {/* Animated Glowing spine fill */}
           <motion.div
-            style={{ height: pathHeight }}
-            className="absolute left-6 md:left-1/2 top-0 w-[2px] -translate-x-1/2 origin-top"
             style={{
+              height: pathHeight,
               background: "linear-gradient(to bottom, var(--grad-start), var(--grad-mid), var(--grad-end))",
             }}
+            className="absolute left-6 md:left-1/2 top-0 w-[3px] -translate-x-1/2 origin-top rounded-full shadow-[0_0_12px_rgba(6,182,212,0.6)] z-10"
           />
 
           {/* Timeline Nodes */}
-          <div className="space-y-12 sm:space-y-16">
+          <div className="space-y-12 sm:space-y-16 pt-4">
             {EDUCATION_DATA.map((item, idx) => {
               const isEven = idx % 2 === 0;
               const Icon = item.icon;
@@ -113,47 +113,47 @@ export default function EducationCyber() {
                   } gap-8 md:gap-12`}
                 >
                   {/* Center Node Icon */}
-                  <div className="absolute left-6 md:left-1/2 -translate-x-1/2 z-20 flex h-12 w-12 items-center justify-center rounded-2xl border border-white/20 bg-[#090d16] shadow-xl backdrop-blur-xl group">
-                    <Icon className="h-5 w-5 text-cyan-400" />
+                  <div className="absolute left-6 md:left-1/2 -translate-x-1/2 z-20 flex h-12 w-12 items-center justify-center rounded-2xl border border-slate-300 dark:border-white/20 bg-white dark:bg-[#090d16] shadow-xl backdrop-blur-xl group">
+                    <Icon className="h-5 w-5 text-cyan-600 dark:text-cyan-400" />
                     {item.status === "active" && (
                       <span className="absolute -top-1 -right-1 flex h-3 w-3">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75" />
-                        <span className="relative inline-flex rounded-full h-3 w-3 bg-cyan-500" />
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                        <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500" />
                       </span>
                     )}
                   </div>
 
                   {/* Card Content */}
                   <div className="ml-14 md:ml-0 w-full md:w-[calc(50%-3rem)]">
-                    <div className="project-card-obsidian noise-overlay rounded-3xl p-6 sm:p-8 border border-white/10 hover:border-cyan-400/40 transition-all duration-300 shadow-xl group">
+                    <div className="project-card-obsidian noise-overlay rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-white/10 hover:border-cyan-400/50 transition-all duration-300 shadow-xl group">
                       <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-                        <span className="inline-flex items-center gap-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 font-mono text-[11px] font-bold text-cyan-300">
+                        <span className="inline-flex items-center gap-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 font-mono text-[11px] font-bold text-cyan-600 dark:text-cyan-300">
                           <Calendar className="h-3 w-3" />
                           {item.period}
                         </span>
-                        <span className="font-mono text-xs text-slate-400">
+                        <span className="font-mono text-xs text-slate-500 dark:text-slate-400">
                           {item.badge}
                         </span>
                       </div>
 
-                      <h3 className="text-xl sm:text-2xl font-extrabold text-white group-hover:text-cyan-300 transition-colors">
+                      <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-300 transition-colors">
                         {item.title}
                       </h3>
 
-                      <div className="mt-1 flex items-center gap-1.5 font-mono text-xs text-slate-400">
-                        <MapPin className="h-3.5 w-3.5 text-cyan-400 shrink-0" />
+                      <div className="mt-1 flex items-center gap-1.5 font-mono text-xs text-slate-600 dark:text-slate-400">
+                        <MapPin className="h-3.5 w-3.5 text-cyan-600 dark:text-cyan-400 shrink-0" />
                         <span>{item.institution}</span>
                       </div>
 
-                      <p className="mt-4 text-sm text-slate-300 leading-relaxed font-normal">
+                      <p className="mt-4 text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-normal">
                         {item.description}
                       </p>
 
                       {/* Highlights */}
-                      <ul className="mt-4 space-y-2 pt-3 border-t border-white/10">
+                      <ul className="mt-4 space-y-2 pt-3 border-t border-slate-200 dark:border-white/10">
                         {item.highlights.map((highlight, hIdx) => (
-                          <li key={hIdx} className="flex items-start gap-2 text-xs text-slate-400 font-mono">
-                            <CheckCircle2 className="h-3.5 w-3.5 text-cyan-400 shrink-0 mt-0.5" />
+                          <li key={hIdx} className="flex items-start gap-2 text-xs text-slate-600 dark:text-slate-400 font-mono">
+                            <CheckCircle2 className="h-3.5 w-3.5 text-cyan-600 dark:text-cyan-400 shrink-0 mt-0.5" />
                             <span>{highlight}</span>
                           </li>
                         ))}

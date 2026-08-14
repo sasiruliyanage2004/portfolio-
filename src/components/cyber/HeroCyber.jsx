@@ -1,6 +1,53 @@
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform, useMotionValue, useSpring, useInView } from "framer-motion";
 import { ArrowRight, FileText, Sparkles, Activity, CheckCircle2, GraduationCap, ChevronDown } from "lucide-react";
+
+// Animated count-up hook
+function useCountUp(target, inView, duration = 1600) {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    if (!inView) return;
+    let start = 0;
+    const step = target / (duration / 16);
+    const timer = setInterval(() => {
+      start = Math.min(start + step, target);
+      setCount(Math.floor(start));
+      if (start >= target) clearInterval(timer);
+    }, 16);
+    return () => clearInterval(timer);
+  }, [inView, target, duration]);
+  return count;
+}
+
+// Stats row with count-up
+function StatsRow() {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const projects = useCountUp(10, inView);
+  const commits = useCountUp(50, inView);
+  const techs = useCountUp(12, inView);
+  const years = useCountUp(2, inView);
+
+  const stats = [
+    { value: projects, suffix: "+", label: "Projects" },
+    { value: commits, suffix: "+", label: "Commits" },
+    { value: techs, suffix: "+", label: "Technologies" },
+    { value: years, suffix: "Y", label: "Experience" },
+  ];
+
+  return (
+    <div ref={ref} className="flex flex-wrap gap-6 pt-2">
+      {stats.map((s) => (
+        <div key={s.label} className="flex flex-col">
+          <span className="font-mono text-2xl font-extrabold" style={{ background: "linear-gradient(135deg,#06b6d4,#6366f1,#a855f7)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+            {s.value}{s.suffix}
+          </span>
+          <span className="font-mono text-[10px] uppercase tracking-widest text-slate-500 mt-0.5">{s.label}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
 
 function MagneticButton({ children, className = "", href, download, ...props }) {
   const ref = useRef(null);
@@ -188,6 +235,9 @@ export default function HeroCyber() {
                 <span>Resume</span>
               </MagneticButton>
             </div>
+
+            {/* Animated Count-Up Stats */}
+            <StatsRow />
           </motion.div>
 
           {/* Right Column — Portrait Image Card */}

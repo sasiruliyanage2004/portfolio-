@@ -1,8 +1,13 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sun, Moon } from "lucide-react";
+import Lenis from "lenis";
 import ParticleBackground from "./components/ParticleBackground";
 import CustomCursor from "./components/CustomCursor";
+import CursorTrail from "./components/CursorTrail";
+import IntroLoader from "./components/IntroLoader";
+import EasterEggs from "./components/EasterEggs";
+import ScrollProgressBar from "./components/ScrollProgressBar";
 import FloatingDockCyber from "./components/cyber/FloatingDockCyber";
 import CulturalPatternCanvas from "./components/CulturalPatternCanvas";
 import CommandPalette from "./components/CommandPalette";
@@ -77,6 +82,11 @@ export default function App() {
 
   const [cmdOpen, setCmdOpen] = useState(false);
 
+  // Show loader only once per session
+  const [loaderDone, setLoaderDone] = useState(() => {
+    return sessionStorage.getItem("intro_shown") === "true";
+  });
+
   // Sync theme changes with DOM documentElement & localStorage
   useEffect(() => {
     if (theme === "light") {
@@ -99,6 +109,23 @@ export default function App() {
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
+  // Lenis smooth scroll — buttery-smooth inertia scroll
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smooth: true,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    return () => lenis.destroy();
   }, []);
 
   // Dynamically generate 100% crisp circular portrait photo favicon in browser tab
@@ -149,14 +176,29 @@ export default function App() {
     setTheme((prev) => (prev === "dark" ? "light" : "dark"));
   };
 
+  const handleLoaderComplete = () => {
+    sessionStorage.setItem("intro_shown", "true");
+    setLoaderDone(true);
+  };
+
   return (
     <div className="min-h-screen mesh-bg text-slate-200 font-body selection:bg-indigo-500/30 selection:text-white relative">
+      {/* Cinematic Intro Loader — shown once per session */}
+      {!loaderDone && <IntroLoader onComplete={handleLoaderComplete} />}
+
       {/* Full-Page Real-time Procedural HTML5 Signature Dumbara Canvas */}
       <CulturalPatternCanvas />
 
       {/* STITCH Particle Background & Custom Glow Cursor */}
       <ParticleBackground />
       <CustomCursor />
+      <CursorTrail />
+
+      {/* Scroll Progress Bar — thin brand gradient at top */}
+      <ScrollProgressBar />
+
+      {/* Easter Eggs: tab title + Konami code confetti */}
+      <EasterEggs />
 
       {/* Floating Apple macOS Navigation Dock with True 3D Tilt Physics */}
       <FloatingDockCyber theme={theme} />

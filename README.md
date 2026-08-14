@@ -1,63 +1,142 @@
-# 🚀 CyberSpace Portfolio — Ultra-Premium Futuristic Developer Portfolio
+<div align="center">
 
-An Awwwards-inspired, ultra-premium developer portfolio web application built with **React 19**, **Tailwind CSS v4**, **Framer Motion**, and **WebGL / tsParticles Shader Canvas**. Features **4 switchable live design themes**, 3D holographic tilt cards, interactive architecture diagrams, recruiter briefing mode, and responsive glassmorphism.
+# 🇱🇰 Sasiru Liyanage — Cultural Tech Portfolio
+### *Ultra-Premium Full-Stack Developer Portfolio & Interactive Cultural Matrix*
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-![React](https://img.shields.io/badge/React-19.0-61dafb.svg)
-![Tailwind](https://img.shields.io/badge/Tailwind_CSS-v4.0-06b6d4.svg)
-![Vite](https://img.shields.io/badge/Vite-6.0-646cff.svg)
+[![React 19](https://img.shields.io/badge/React-19.0-61dafb?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
+[![Tailwind CSS v4](https://img.shields.io/badge/Tailwind_CSS-v4.0-06b6d4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![Vite](https://img.shields.io/badge/Vite-6.0-646cff?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Framer Motion](https://img.shields.io/badge/Framer_Motion-12.0-ff0055?style=for-the-badge&logo=framer&logoColor=white)](https://www.framer.com/motion/)
+[![Lenis Scroll](https://img.shields.io/badge/Lenis-Smooth_Scroll-10b981?style=for-the-badge)](https://lenis.darkroom.engineering/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
----
+**[Explore Portfolio](https://github.com/sasiruliyanage2004/portfolio-) • [LinkedIn](https://www.linkedin.com/in/sasiruliyanage) • [Get in Touch](mailto:liyanagesasiru@gmail.com)**
 
-## 🎨 Switchable Live Design Themes
-
-1. **✨ Cyber Glassmorphism**: Vibrant Indigo/Cyan mesh background, 3D holographic tilt portrait cards, rotating border-beam animations, floating dock navbar, and magnetic buttons.
-2. **🟢 Emerald Green Matrix**: Cyberpunk emerald green backdrop, green matrix status badge, emerald progress bars, and high-impact portrait showcase.
-3. **⚡ v0 Minimalist Blueprint**: Carbon obsidian blueprint with technical corner crosshairs (`+`), WebGL shader canvas, recruiter 30-second briefing mode toggle, and inline architecture diagram toggles.
-4. **🌌 STITCH Particle Matrix**: Interactive floating particles canvas background (`@tsparticles`), custom glow cursor tracking, and cyber glassmorphic layout.
+</div>
 
 ---
 
-## ✨ Key Features
+## 🌟 Overview
 
-- **High-Impact Portrait Showcase**: Signature portrait card with floating star/code status badges and scroll-driven scale animations.
-- **3D Interactive Tilt Cards**: Custom Framer Motion spring physics with dynamic mouse spotlight sheen.
-- **Recruiter 30-Sec Briefing Mode**: One-click executive summary tailored for tech recruiters and hiring managers.
-- **Inline System Architecture Diagrams**: Interactive node diagrams inside project showcase cards.
-- **Floating Glassmorphic Dock**: Apple macOS-inspired floating navigation with active scroll tracking.
-- **Cyber Contact Hub**: Interactive bash-terminal contact form with toast notifications and magnetic social icons.
+An **Awwwards-inspired, state-of-the-art developer portfolio** engineering experience built with **React 19**, **Tailwind CSS v4**, and **Framer Motion**. Designed for **Sasiru Nethvidu Liyanage** (2nd Year SLIIT Undergraduate & Full-Stack Software Engineer), this project fuses modern ultra-fast WebGL / HTML5 Canvas architectures with procedural Sri Lankan **Dumbara Geometric Cultural Mat Weave** algorithms.
 
 ---
 
-## 🛠️ Tech Stack
+## ✨ Architectural & Design Highlights
 
-- **Framework**: [React 19](https://react.dev/) + [Vite](https://vitejs.dev/)
-- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
-- **Animations**: [Framer Motion](https://www.framer.com/motion/)
-- **Canvas / Shaders**: WebGL Shader API + [@tsparticles/react](https://particles.js.org/)
-- **Icons**: [Lucide React](https://lucide.dev/)
+### 🇱🇰 1. Signature Procedural Dumbara Mat Canvas
+* **Full-Viewport Math Matrix**: 60fps procedural HTML5 Canvas rendering upright interlocking diamond geometry (`85px × 120px`) derived from traditional Kandy Dumbara weaving heritage.
+* **Interactive Spotlight Aura**: Mouse proximity tracking that organically illuminates canvas nodes with dynamic pulse wave equations.
+
+### 🎬 2. Cinematic Telemetry Intro Loader
+* **Session-Aware Boot Sequence**: Real-time typed telemetry system (`"Initializing Portfolio..."` → `"Calibrating Dumbara Matrix..."` → `"Systems Online ✓"`).
+* **Smooth Curtain Reveal**: Integrated 0→100% progress telemetry and Framer Motion spring exit transition.
+
+### 🎢 3. Lenis Inertia Smooth Scroll & Progress Track
+* **Buttery Smooth Scroll**: Integrated **Lenis Inertia Engine** for ultra-responsive, silky-smooth scrolling across all viewports.
+* **Top Gradient Progress Spine**: Seamless 3px brand gradient progress bar tracking reading distance without bulky browser scrollbars.
+
+### ⌨️ 4. Spotlight Command Palette (`Ctrl + K` / `⌘K`)
+* Global modal palette with fuzzy search, smooth keyboard navigation (↑ / ↓ / Enter), quick section teleportation, theme switching, resume downloads, and social shortcuts.
+
+### 🎓 5. Academic & Career Journey Timeline
+* Interactive timeline highlighting:
+  * **SLIIT BSc (Hons) in Information Technology** (2nd Year • Software Engineering, OOP Java, DBMS, DSA).
+  * **GCE Advanced Level (Gurukula College)** — Accounting A, Business Studies B, Economics B.
+  * **GCE Ordinary Level** — Mathematics A, Health & Physical Education A.
+
+### 💎 6. Dynamic 3D Tilt Physics & Obsidian Glassmorphism
+* **3D Mouse Tilt Cards**: Hardware-accelerated perspective spring physics on project showcase cards.
+* **Zero-Scrollbar Clean Aesthetic**: App-like minimalist viewport flow with seamless ambient volumetric lighting.
+
+### 🎮 7. Legendary Developer Easter Eggs
+* **Konami Code (`↑ ↑ ↓ ↓ ← → ← → B A`)**: Multi-angle canvas confetti explosion with an exclusive unlock modal.
+* **Smart Tab Teleportation**: Browser tab title dynamically switches to `👋 Come back! | Sasiru Liyanage` when inactive.
 
 ---
 
-## 🚀 Quick Start
+## 🎨 Unified Color System
 
-### 1. Clone the repository
-```bash
-git clone https://github.com/YOUR_USERNAME/cyberspace-portfolio.git
-cd cyberspace-portfolio
+* **Signature Brand Gradient**: Cyan (`#06B6D4`) → Emerald Green (`#10B981`) → Deep Teal (`#0D9488`).
+* **Dark Theme (Obsidian Carbon)**: `#05070E` base with glassmorphic mesh overlays.
+* **Light Theme (Royal Porcelain)**: `#F8F6F0` base with crisp typography and high-contrast WCAG AAA accessibility.
+
+---
+
+## 🛠️ Technology Stack
+
+| Layer | Technologies |
+|---|---|
+| **Core Framework** | **React 19.0**, **Vite 6.0** (Fast HMR & Optimized Bundles) |
+| **Styling & Design System** | **Tailwind CSS v4**, Vanilla CSS Design Tokens, Custom Glassmorphism |
+| **Motion & Physics** | **Framer Motion 12**, **Lenis Inertia Smooth Scroll** |
+| **Graphics & Particles** | **HTML5 Procedural Canvas API**, **@tsparticles/engine** |
+| **Form Backend** | **Web3Forms API** with real-time `:user-valid` / `:user-invalid` feedback |
+| **Icons & Typography** | **Lucide React**, Google Fonts (*Space Grotesk*, *Inter*) |
+
+---
+
+## 📁 Clean Codebase Architecture
+
+```text
+Portfollo/
+├── public/
+│   ├── manifest.json         # PWA Web App Manifest
+│   ├── robots.txt            # SEO Crawlers Configuration
+│   ├── sitemap.xml           # SEO Sitemap
+│   ├── profile.png           # Developer Portrait Asset
+│   └── resume.pdf            # Curriculum Vitae
+├── src/
+│   ├── components/
+│   │   ├── cyber/
+│   │   │   ├── ContactCyber.jsx      # Cyber Contact Hub & Shell Terminal
+│   │   │   ├── EducationCyber.jsx    # SLIIT Academic Journey Timeline
+│   │   │   ├── FloatingDockCyber.jsx # Apple macOS-style Floating Navbar
+│   │   │   ├── HeroCyber.jsx         # Hero Section with Count-Up Stats
+│   │   │   ├── ProjectsCyber.jsx     # 3D Tilt Showcase Cards & Architecture
+│   │   │   └── SkillsCyber.jsx       # Interactive Skills Matrix with Progress Bars
+│   │   ├── BackToTop.jsx             # Floating Smooth Scroll-to-Top Button
+│   │   ├── CommandPalette.jsx        # Global Ctrl+K Search & Action Modal
+│   │   ├── CulturalPatternCanvas.jsx # Signature Dumbara Mat Weave Canvas
+│   │   ├── CursorTrail.jsx           # Canvas Particle Cursor Trail
+│   │   ├── CustomCursor.jsx          # Interactive Glow Cursor
+│   │   ├── EasterEggs.jsx            # Konami Code & Dynamic Tab Title
+│   │   ├── Footer.jsx                # Parallax Reveal Footer with Live Clock
+│   │   ├── IntroLoader.jsx           # Cinematic Telemetry Boot Sequence
+│   │   ├── ParticleBackground.jsx    # Background Particle Mesh
+│   │   └── ScrollProgressBar.jsx     # Top Gradient Reading Progress Spine
+│   ├── App.jsx                       # Root Application Component
+│   ├── index.css                     # Global Design System Tokens & Keyframes
+│   └── main.jsx                      # Vite Application Entrypoint
+├── index.html                        # SEO Meta Tags, OG Tags & Preloads
+├── package.json                      # Project Dependencies & Scripts
+└── vite.config.js                    # Vite Build Configuration
 ```
 
-### 2. Install dependencies
+---
+
+## 🚀 Quick Start Guide
+
+### Prerequisites
+* **Node.js**: `v18.0.0` or higher
+* **npm**: `v9.0.0` or higher
+
+### 1. Clone Repository
+```bash
+git clone https://github.com/sasiruliyanage2004/portfolio-.git
+cd portfolio-
+```
+
+### 2. Install Dependencies
 ```bash
 npm install
 ```
 
-### 3. Run Development Server
+### 3. Run Local Development Server
 ```bash
 npm run dev
 ```
-
-Or double-click `start.bat` on Windows to launch dev server and open browser automatically.
+Open [http://localhost:5173](http://localhost:5173) in your browser.
 
 ### 4. Build for Production
 ```bash
@@ -66,6 +145,18 @@ npm run build
 
 ---
 
-## 📄 License
+## 👤 Author
 
-Distributed under the MIT License.
+**Sasiru Nethvidu Liyanage**
+* 🎓 2nd Year Undergraduate — BSc (Hons) in Information Technology at **SLIIT**
+* 📍 Western Province, Sri Lanka
+* 📧 Email: [liyanagesasiru@gmail.com](mailto:liyanagesasiru@gmail.com)
+* 💼 LinkedIn: [@sasiruliyanage](https://www.linkedin.com/in/sasiruliyanage)
+* 🐙 GitHub: [@sasiruliyanage2004](https://github.com/sasiruliyanage2004)
+* 💬 WhatsApp: [+94 71 57 00 953](https://wa.me/94715700953)
+
+---
+
+<div align="center">
+  <sub>Crafted with passion, cultural heritage algorithms, and modern web engineering. Distributed under the MIT License.</sub>
+</div>

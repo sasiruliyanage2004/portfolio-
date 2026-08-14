@@ -30,7 +30,7 @@
   font-family: "Inter", "Space Grotesk", system-ui, sans-serif;
 }
 
-/* 4 LIVE BRAND GRADIENT PALETTES */
+/* 4 LIVE BRAND GRADIENT PALETTES (Dark Mode - Vibrant & Glowing) */
 :root[data-palette="current"], body.palette-current {
   --grad-start: #06b6d4;
   --grad-mid: #6366f1;
@@ -53,6 +53,31 @@
   --grad-start: #0d9488;
   --grad-mid: #06b6d4;
   --grad-end: #a855f7;
+}
+
+/* 4 LIVE BRAND GRADIENT PALETTES (Light Mode - Deep, Rich & High-Contrast) */
+.light-theme[data-palette="current"], body.light-theme.palette-current {
+  --grad-start: #0284c7;
+  --grad-mid: #4f46e5;
+  --grad-end: #7e22ce;
+}
+
+.light-theme[data-palette="option-a"], body.light-theme.palette-option-a {
+  --grad-start: #0284c7;
+  --grad-mid: #059669;
+  --grad-end: #0f766e;
+}
+
+.light-theme[data-palette="option-b"], body.light-theme.palette-option-b {
+  --grad-start: #4338ca;
+  --grad-mid: #0284c7;
+  --grad-end: #059669;
+}
+
+.light-theme[data-palette="option-c"], body.light-theme.palette-option-c {
+  --grad-start: #0f766e;
+  --grad-mid: #0284c7;
+  --grad-end: #7e22ce;
 }
 
 html {

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://sasiruliyanage.dev/sitemap.xml

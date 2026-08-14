@@ -11,8 +11,11 @@ import ScrollProgressBar from "./components/ScrollProgressBar";
 import FloatingDockCyber from "./components/cyber/FloatingDockCyber";
 import CulturalPatternCanvas from "./components/CulturalPatternCanvas";
 import CommandPalette from "./components/CommandPalette";
+import PaletteSwitcher from "./components/PaletteSwitcher";
+import BackToTop from "./components/BackToTop";
 import HeroCyber from "./components/cyber/HeroCyber";
 import ProjectsCyber from "./components/cyber/ProjectsCyber";
+import EducationCyber from "./components/cyber/EducationCyber";
 import SkillsCyber from "./components/cyber/SkillsCyber";
 import ContactCyber from "./components/cyber/ContactCyber";
 import Footer from "./components/Footer";
@@ -80,6 +83,11 @@ export default function App() {
     return localStorage.getItem("portfolio_theme") || "dark";
   });
 
+  // Dynamic Live Color Gradient Palette
+  const [palette, setPalette] = useState(() => {
+    return localStorage.getItem("portfolio_palette") || "current";
+  });
+
   const [cmdOpen, setCmdOpen] = useState(false);
 
   // Show loader only once per session
@@ -98,6 +106,17 @@ export default function App() {
     }
     localStorage.setItem("portfolio_theme", theme);
   }, [theme]);
+
+  // Sync palette changes with DOM documentElement data-palette attribute & body classes
+  useEffect(() => {
+    document.documentElement.setAttribute("data-palette", palette);
+    document.body.className = document.body.className
+      .replace(/palette-[a-z0-9-]+/g, "")
+      .trim();
+    document.body.classList.add(`palette-${palette}`);
+    if (theme === "light") document.body.classList.add("light-theme");
+    localStorage.setItem("portfolio_palette", palette);
+  }, [palette, theme]);
 
   // Global Keyboard Shortcut ('T' key listener) for instant Theme Toggle
   useEffect(() => {
@@ -206,6 +225,12 @@ export default function App() {
       {/* Standalone Fixed 3D Floating Glass Orb Theme Switcher */}
       <FloatingOrbThemeToggle theme={theme} toggleTheme={toggleTheme} />
 
+      {/* Live Color Gradient Palette Switcher */}
+      <PaletteSwitcher activePalette={palette} onSelectPalette={setPalette} />
+
+      {/* Back To Top Floating Button */}
+      <BackToTop />
+
       {/* Command Palette (Ctrl + K) */}
       <CommandPalette
         theme={theme}
@@ -218,6 +243,7 @@ export default function App() {
       <main className="relative z-10 flex flex-col bg-transparent">
         <HeroCyber />
         <ProjectsCyber />
+        <EducationCyber />
         <SkillsCyber />
         <ContactCyber />
       </main>

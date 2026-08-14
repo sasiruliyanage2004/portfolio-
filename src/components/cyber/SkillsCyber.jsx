@@ -150,7 +150,8 @@ export default function SkillsCyber() {
                     whileInView={{ width: `${skill.level}%` }}
                     viewport={{ once: true }}
                     transition={{ duration: 1, ease: "easeOut" }}
-                    className="h-full rounded-full bg-gradient-to-r from-indigo-500 via-cyan-400 to-violet-500 shadow-[0_0_10px_rgba(6,182,212,0.6)]"
+                    style={{ background: "linear-gradient(90deg, var(--grad-start), var(--grad-mid), var(--grad-end))" }}
+                    className="h-full rounded-full shadow-[0_0_10px_rgba(6,182,212,0.6)]"
                   />
                 </div>
               </div>

@@ -13,6 +13,11 @@
   --indigo: #6366f1;
   --violet: #8b5cf6;
 
+  /* Dynamic Brand Gradient Tokens */
+  --grad-start: #06b6d4;
+  --grad-mid: #6366f1;
+  --grad-end: #a855f7;
+
   --glass-bg: rgba(255, 255, 255, 0.035);
   --glass-bg-hover: rgba(255, 255, 255, 0.06);
   --glass-border: rgba(255, 255, 255, 0.09);
@@ -23,6 +28,31 @@
   --text-dim: #565f75;
 
   font-family: "Inter", "Space Grotesk", system-ui, sans-serif;
+}
+
+/* 4 LIVE BRAND GRADIENT PALETTES */
+:root[data-palette="current"], body.palette-current {
+  --grad-start: #06b6d4;
+  --grad-mid: #6366f1;
+  --grad-end: #a855f7;
+}
+
+:root[data-palette="option-a"], body.palette-option-a {
+  --grad-start: #06b6d4;
+  --grad-mid: #10b981;
+  --grad-end: #0d9488;
+}
+
+:root[data-palette="option-b"], body.palette-option-b {
+  --grad-start: #6366f1;
+  --grad-mid: #06b6d4;
+  --grad-end: #10b981;
+}
+
+:root[data-palette="option-c"], body.palette-option-c {
+  --grad-start: #0d9488;
+  --grad-mid: #06b6d4;
+  --grad-end: #a855f7;
 }
 
 html {
@@ -378,7 +408,7 @@ body.light-theme,
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-track { background: var(--bg-obsidian); }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #06b6d4 0%, #6366f1 50%, #a855f7 100%);
+  background: linear-gradient(180deg, var(--grad-start) 0%, var(--grad-mid) 50%, var(--grad-end) 100%);
   border-radius: 999px;
   border: 2px solid var(--bg-obsidian);
 }
@@ -451,9 +481,9 @@ body.light-theme,
     from 0deg,
     transparent 0%,
     transparent 60%,
-    #06b6d4 75%,
-    #6366f1 87%,
-    #a855f7 96%,
+    var(--grad-start) 75%,
+    var(--grad-mid) 87%,
+    var(--grad-end) 96%,
     transparent 100%
   );
   animation: border-beam-spin 8s linear infinite;
@@ -484,7 +514,7 @@ body.light-theme,
 .animate-gradient-x { animation: gradient-x 6s ease infinite; }
 
 .text-gradient {
-  background: linear-gradient(135deg, #06b6d4 0%, #6366f1 50%, #a855f7 100%);
+  background: linear-gradient(135deg, var(--grad-start) 0%, var(--grad-mid) 50%, var(--grad-end) 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;

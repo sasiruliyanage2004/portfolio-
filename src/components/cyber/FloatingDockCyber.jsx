@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Home, Layers, Mail, User } from "lucide-react";
+import { Home, Layers, Mail, User, GraduationCap } from "lucide-react";
 
 const NAV = [
   { id: "home", label: "Home", icon: Home },
   { id: "projects", label: "Projects", icon: Layers },
+  { id: "education", label: "Education", icon: GraduationCap },
   { id: "skills", label: "Skills", icon: User },
   { id: "contact", label: "Contact", icon: Mail },
 ];

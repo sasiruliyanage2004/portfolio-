@@ -1,0 +1,23 @@
+{
+  "name": "Sasiru Liyanage — Full-Stack Engineer & UI Architect",
+  "short_name": "Sasiru Portfolio",
+  "description": "Portfolio of Sasiru Nethvidu Liyanage, 2nd Year SLIIT Undergraduate and Full-Stack Software Engineer.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#05070e",
+  "theme_color": "#06b6d4",
+  "icons": [
+    {
+      "src": "/profile.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/profile.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Search, Command, Moon, Sun, Copy, FolderGit2, Terminal, User, FileText, Check } from "lucide-react";
+import { Search, Command, Moon, Sun, Copy, FolderGit2, Terminal, User, FileText, Check, GraduationCap } from "lucide-react";
 
 const GithubIcon = (props) => (
   <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" {...props}>
@@ -43,6 +43,16 @@ export default function CommandPalette({ theme, toggleTheme, open, setOpen }) {
       icon: FolderGit2,
       run: () => {
         document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
+        setOpen(false);
+      },
+    },
+    {
+      id: "education",
+      category: "Navigation",
+      label: "Jump to Education & Journey",
+      icon: GraduationCap,
+      run: () => {
+        document.getElementById("education")?.scrollIntoView({ behavior: "smooth" });
         setOpen(false);
       },
     },

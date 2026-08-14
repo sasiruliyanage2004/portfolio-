@@ -380,22 +380,17 @@ body.light-theme,
   color: transparent !important;
 }
 
-.light-theme ::-webkit-scrollbar-track { background: var(--bg-obsidian); }
-.light-theme ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, var(--grad-start) 0%, var(--grad-mid) 50%, var(--grad-end) 100%);
-  border-radius: 999px;
-  border: 2px solid var(--bg-obsidian);
-}
-
 /* ------------------------------------------------------------------
-   SCROLLBAR
+   SEAMLESS ZERO-SCROLLBAR (CLEAN MINIMALIST AESTHETIC)
    ------------------------------------------------------------------ */
-::-webkit-scrollbar { width: 10px; height: 10px; }
-::-webkit-scrollbar-track { background: var(--bg-obsidian); }
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, var(--grad-start) 0%, var(--grad-mid) 50%, var(--grad-end) 100%);
-  border-radius: 999px;
-  border: 2px solid var(--bg-obsidian);
+html, body {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+::-webkit-scrollbar {
+  display: none;
+  width: 0px;
+  height: 0px;
 }
 
 ::selection {

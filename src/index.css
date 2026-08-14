@@ -378,7 +378,7 @@ body.light-theme,
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-track { background: var(--bg-obsidian); }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, var(--cyan), var(--amber));
+  background: linear-gradient(180deg, #06b6d4 0%, #6366f1 50%, #a855f7 100%);
   border-radius: 999px;
   border: 2px solid var(--bg-obsidian);
 }
@@ -390,7 +390,7 @@ body.light-theme,
 
 /* Accessible focus ring */
 :focus-visible {
-  outline: 2px solid var(--amber);
+  outline: 2px solid #6366f1;
   outline-offset: 3px;
   border-radius: 4px;
 }
@@ -450,10 +450,10 @@ body.light-theme,
   background: conic-gradient(
     from 0deg,
     transparent 0%,
-    transparent 65%,
-    var(--cyan) 80%,
-    var(--amber) 90%,
-    var(--violet) 98%,
+    transparent 60%,
+    #06b6d4 75%,
+    #6366f1 87%,
+    #a855f7 96%,
     transparent 100%
   );
   animation: border-beam-spin 8s linear infinite;

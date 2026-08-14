@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Command, Heart, Clock, ArrowUpRight, Copy, Check, Mail, Sparkles, Zap } from "lucide-react";
+import { Command, Heart, Clock, ArrowUpRight, Copy, Check, Mail, Sparkles, Zap, MapPin } from "lucide-react";
 
 const GithubIcon = (props) => (
   <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" {...props}>
@@ -52,9 +52,13 @@ export default function Footer({ onOpenCommandPalette }) {
   };
 
   return (
-    <footer className="sticky bottom-0 h-[92vh] sm:h-screen w-full flex flex-col justify-between p-7 sm:p-12 lg:p-16 bg-[#05080f] dark:bg-[#05080f] light-theme:bg-[#F7F5F1] text-slate-100 dark:text-slate-100 light-theme:text-slate-900 z-0 overflow-hidden">
+    <footer className="sticky bottom-0 h-[92vh] sm:h-screen w-full flex flex-col justify-between p-7 sm:p-12 lg:p-16 bg-[#05070e] dark:bg-[#05070e] light-theme:bg-[#F7F5F1] text-slate-100 dark:text-slate-100 light-theme:text-slate-900 z-0 overflow-hidden">
+      {/* Volumetric Ambient Mesh Glow Orbs */}
+      <div className="absolute top-1/4 left-1/4 h-96 w-96 rounded-full bg-cyan-500/10 blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-10 right-1/4 h-96 w-96 rounded-full bg-indigo-500/10 blur-[140px] pointer-events-none" />
+
       {/* Giant Ambient Background Marquee Watermark */}
-      <div className="absolute inset-0 pointer-events-none flex items-center justify-center opacity-[0.035] dark:opacity-[0.035] light-theme:opacity-[0.06] select-none overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none flex items-center justify-center opacity-[0.04] dark:opacity-[0.04] light-theme:opacity-[0.07] select-none overflow-hidden">
         <h1 className="text-[14vw] font-extrabold uppercase tracking-tighter whitespace-nowrap font-mono">
           SASIRU LIYANAGE • FULL-STACK ENGINEER • SLIIT '26
         </h1>
@@ -63,7 +67,7 @@ export default function Footer({ onOpenCommandPalette }) {
       {/* Top Header Row */}
       <div className="relative z-10 flex flex-wrap items-center justify-between gap-6 border-b border-white/10 dark:border-white/10 light-theme:border-slate-300/60 pb-6">
         <div className="flex items-center gap-4">
-          <div className="glass-panel flex items-center gap-3 px-4 py-2 rounded-full border border-white/10">
+          <div className="glass-panel flex items-center gap-3 px-4 py-2 rounded-full border border-white/10 shadow-sm">
             <Clock className="h-4 w-4 text-cyan-400 animate-spin-slow shrink-0" />
             <span className="font-mono text-xs opacity-70">Sri Lanka (GMT+5:30):</span>
             <span className="font-mono text-xs font-bold text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded">
@@ -91,22 +95,32 @@ export default function Footer({ onOpenCommandPalette }) {
               <Sparkles className="h-4 w-4" />
               READY FOR NEW CHALLENGES
             </p>
-            <h2 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-none drop-shadow-xl">
+            <h2 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-none drop-shadow-2xl">
               Let's create the <span className="text-gradient">Extraordinary</span>
             </h2>
             <p className="mt-4 text-base sm:text-lg text-slate-400 max-w-xl font-normal leading-relaxed">
               2nd Year SLIIT Undergraduate &amp; Full-Stack Software Engineer specializing in React 19, Node.js, Python, and Sri Lankan cultural motif algorithms.
             </p>
 
-            <div className="mt-6 flex flex-wrap gap-3">
+            <div className="mt-6 flex flex-wrap items-center gap-3">
               <button
                 onClick={handleCopy}
-                className="inline-flex items-center gap-2.5 rounded-2xl bg-gradient-to-r from-indigo-500 via-cyan-500 to-violet-500 px-7 py-3.5 font-mono text-xs font-bold text-white shadow-xl hover:shadow-cyan-500/25 transition-all cursor-pointer"
+                className="inline-flex items-center gap-2.5 rounded-2xl bg-gradient-to-r from-indigo-500 via-cyan-500 to-indigo-600 px-7 py-3.5 font-mono text-xs font-bold text-white shadow-xl hover:shadow-cyan-500/25 transition-all cursor-pointer"
               >
                 <Mail className="h-4 w-4" />
                 {copied ? "Email Copied to Clipboard!" : "liyanagesasiru@gmail.com"}
                 {copied ? <Check className="h-4 w-4 text-emerald-300" /> : <Copy className="h-4 w-4 opacity-80" />}
               </button>
+
+              <a
+                href="https://wa.me/94715700953?text=Hi%20Sasiru,%20I%20visited%20your%20portfolio%20and%20would%20like%20to%20connect!"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass-panel inline-flex items-center gap-2.5 rounded-2xl px-6 py-3.5 font-mono text-xs font-bold text-slate-200 dark:text-slate-200 light-theme:text-slate-800 hover:border-emerald-400/50 hover:text-emerald-400 transition-all cursor-pointer shadow-lg"
+              >
+                <WhatsAppIcon className="h-4 w-4 text-emerald-400" />
+                <span>WhatsApp Chat</span>
+              </a>
             </div>
           </div>
 

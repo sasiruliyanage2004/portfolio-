@@ -23,7 +23,7 @@ export default function CulturalPatternCanvas({ theme = "dumbara" }) {
 }
 
 // ------------------------------------------------------------------
-// 1. DUMBARA GEOMETRIC MAT CANVAS (Subtle, Elegant, Quiet Cyber Sapphire)
+// 1. DUMBARA GEOMETRIC MAT CANVAS (Crisp Ambient Visibility & Cursor Glow)
 // ------------------------------------------------------------------
 function DumbaraCanvas() {
   const canvasRef = useRef(null);
@@ -74,7 +74,6 @@ function DumbaraCanvas() {
       const h = canvas.height;
       ctx.clearRect(0, 0, w, h);
 
-      // Lerp mouse position for silky smooth movement
       mouse.x += (mouse.targetX - mouse.x) * 0.1;
       mouse.y += (mouse.targetY - mouse.y) * 0.1;
 
@@ -88,10 +87,10 @@ function DumbaraCanvas() {
       if (mouse.x > 0 && mouse.y > 0 && !isTouchDevice) {
         const glowGrad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, maxDist);
         if (isLight) {
-          glowGrad.addColorStop(0, "rgba(55, 48, 163, 0.08)");
+          glowGrad.addColorStop(0, "rgba(55, 48, 163, 0.14)");
           glowGrad.addColorStop(1, "rgba(55, 48, 163, 0)");
         } else {
-          glowGrad.addColorStop(0, "rgba(6, 182, 212, 0.12)");
+          glowGrad.addColorStop(0, "rgba(6, 182, 212, 0.20)");
           glowGrad.addColorStop(1, "rgba(6, 182, 212, 0)");
         }
         ctx.fillStyle = glowGrad;
@@ -104,24 +103,23 @@ function DumbaraCanvas() {
         for (let c = -1; c < cols; c++) {
           const x = c * size + (r % 2 === 0 ? 0 : size / 2);
           const y = r * (size * 0.6);
-          const wave = Math.sin(time * 0.02 + (c + r) * 0.5) * 3;
+          const wave = Math.sin(time * 0.02 + (c + r) * 0.5) * 4;
 
-          // Distance-based Cursor Glow & Scale Interpolation
           const dist = Math.hypot(x - mouse.x, y + wave - mouse.y);
           const glow = dist < maxDist ? Math.pow(1 - dist / maxDist, 2) : 0;
-          const scale = 1 + glow * 0.10;
+          const scale = 1 + glow * 0.12;
 
-          // Subtle base opacities for quiet background
-          const baseOuterOpacity = isLight ? 0.12 : 0.16;
-          const baseInnerOpacity = isLight ? 0.08 : 0.12;
-          const outerOpacity = Math.min(0.70, baseOuterOpacity + glow * 0.45);
-          const innerOpacity = Math.min(0.60, baseInnerOpacity + glow * 0.40);
+          // Crisp, beautiful base opacities visible even without mouse
+          const baseOuterOpacity = isLight ? 0.35 : 0.45;
+          const baseInnerOpacity = isLight ? 0.30 : 0.40;
+          const outerOpacity = Math.min(0.85, baseOuterOpacity + glow * 0.40);
+          const innerOpacity = Math.min(0.75, baseInnerOpacity + glow * 0.35);
 
           // Outer Diamond Border (Ceylon Sapphire Cyan / Royal Indigo)
           ctx.strokeStyle = isLight
             ? `rgba(55, 48, 163, ${outerOpacity})`
             : `rgba(6, 182, 212, ${outerOpacity})`;
-          ctx.lineWidth = 1.4 + glow * 0.8;
+          ctx.lineWidth = 1.8 + glow * 1.0;
           ctx.beginPath();
           ctx.moveTo(x, y - (size / 2) * scale + wave);
           ctx.lineTo(x + (size / 2) * scale, y + wave);
@@ -134,7 +132,7 @@ function DumbaraCanvas() {
           ctx.strokeStyle = isLight
             ? `rgba(14, 116, 144, ${innerOpacity})`
             : `rgba(99, 102, 241, ${innerOpacity})`;
-          ctx.lineWidth = 1.0 + glow * 0.6;
+          ctx.lineWidth = 1.4 + glow * 0.8;
           ctx.beginPath();
           ctx.moveTo(x, y - (size / 3.5) * scale + wave);
           ctx.lineTo(x + (size / 3.5) * scale, y + wave);
@@ -145,12 +143,12 @@ function DumbaraCanvas() {
 
           // Dumbara Center Lotus Dots (Royal Kandy Violet)
           if ((c + r) % 2 === 0) {
-            const dotOpacity = Math.min(0.65, (isLight ? 0.15 : 0.20) + glow * 0.35);
+            const dotOpacity = Math.min(0.85, (isLight ? 0.40 : 0.50) + glow * 0.35);
             ctx.fillStyle = isLight
               ? `rgba(126, 34, 206, ${dotOpacity})`
               : `rgba(168, 85, 247, ${dotOpacity})`;
             ctx.beginPath();
-            ctx.arc(x, y + wave, 3.5 + glow * 2.0, 0, Math.PI * 2);
+            ctx.arc(x, y + wave, 4.0 + glow * 2.0, 0, Math.PI * 2);
             ctx.fill();
           }
         }
@@ -169,11 +167,11 @@ function DumbaraCanvas() {
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="w-full h-full opacity-60" />;
+  return <canvas ref={canvasRef} className="w-full h-full opacity-90" />;
 }
 
 // ------------------------------------------------------------------
-// 2. LIYAWELA BIO-FLOW CANVAS (Subtle Sinuous Vine Glow)
+// 2. LIYAWELA BIO-FLOW CANVAS (Crisp Sinuous Vine Glow)
 // ------------------------------------------------------------------
 function LiyawelaCanvas() {
   const canvasRef = useRef(null);
@@ -231,14 +229,13 @@ function LiyawelaCanvas() {
       const vineCount = Math.ceil(h / 180);
       const maxDist = 300;
 
-      // Draw Cursor Spotlight Glow Aura
       if (mouse.x > 0 && mouse.y > 0 && !isTouchDevice) {
         const glowGrad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, maxDist);
         if (isLight) {
-          glowGrad.addColorStop(0, "rgba(55, 48, 163, 0.08)");
+          glowGrad.addColorStop(0, "rgba(55, 48, 163, 0.14)");
           glowGrad.addColorStop(1, "rgba(55, 48, 163, 0)");
         } else {
-          glowGrad.addColorStop(0, "rgba(99, 102, 241, 0.12)");
+          glowGrad.addColorStop(0, "rgba(99, 102, 241, 0.20)");
           glowGrad.addColorStop(1, "rgba(99, 102, 241, 0)");
         }
         ctx.fillStyle = glowGrad;
@@ -260,11 +257,11 @@ function LiyawelaCanvas() {
           const glow = dist < maxDist ? Math.pow(1 - dist / maxDist, 2) : 0;
 
           const baseOpacity = isLight
-            ? (v % 2 === 0 ? 0.14 : 0.10)
-            : (v % 2 === 0 ? 0.18 : 0.14);
-          const opacity = Math.min(0.65, baseOpacity + glow * 0.40);
+            ? (v % 2 === 0 ? 0.35 : 0.30)
+            : (v % 2 === 0 ? 0.45 : 0.40);
+          const opacity = Math.min(0.85, baseOpacity + glow * 0.40);
 
-          ctx.lineWidth = 1.8 + glow * 1.5;
+          ctx.lineWidth = 2.2 + glow * 1.5;
           ctx.strokeStyle = isLight
             ? v % 2 === 0 ? `rgba(55, 48, 163, ${opacity})` : `rgba(14, 116, 144, ${opacity})`
             : v % 2 === 0 ? `rgba(99, 102, 241, ${opacity})` : `rgba(6, 182, 212, ${opacity})`;
@@ -274,7 +271,6 @@ function LiyawelaCanvas() {
         }
         ctx.stroke();
 
-        // Draw Liyawela Leaf Tendrils
         for (let x = 40; x < w; x += 110) {
           const y = baseY + Math.sin(x * 0.007 + time * speed + v * 1.5) * amplitude;
           const leafAngle = Math.cos(x * 0.007 + time * speed) * 1.4;
@@ -285,11 +281,11 @@ function LiyawelaCanvas() {
           const lx = x + Math.cos(leafAngle) * (35 + glow * 8);
           const ly = y + Math.sin(leafAngle) * (35 + glow * 8);
 
-          const leafOpacity = Math.min(0.60, (isLight ? 0.12 : 0.16) + glow * 0.35);
+          const leafOpacity = Math.min(0.80, (isLight ? 0.35 : 0.45) + glow * 0.35);
           ctx.strokeStyle = isLight
             ? `rgba(126, 34, 206, ${leafOpacity})`
             : `rgba(168, 85, 247, ${leafOpacity})`;
-          ctx.lineWidth = 1.4 + glow * 0.8;
+          ctx.lineWidth = 1.8 + glow * 0.8;
           ctx.beginPath();
           ctx.moveTo(x, y);
           ctx.quadraticCurveTo(x + 20, y - 25, lx, ly);
@@ -299,7 +295,7 @@ function LiyawelaCanvas() {
             ? `rgba(14, 116, 144, ${leafOpacity})`
             : `rgba(6, 182, 212, ${leafOpacity})`;
           ctx.beginPath();
-          ctx.ellipse(lx, ly, 5 + glow * 2, 3 + glow * 1.5, leafAngle, 0, Math.PI * 2);
+          ctx.ellipse(lx, ly, 6 + glow * 2, 4 + glow * 1.5, leafAngle, 0, Math.PI * 2);
           ctx.fill();
         }
       }
@@ -317,11 +313,11 @@ function LiyawelaCanvas() {
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="w-full h-full opacity-60" />;
+  return <canvas ref={canvasRef} className="w-full h-full opacity-90" />;
 }
 
 // ------------------------------------------------------------------
-// 3. PALA PETHI FLORAL CANVAS (Subtle Geometric Lotus Petal Glow)
+// 3. PALA PETHI FLORAL CANVAS (Crisp Lotus Petal Matrix)
 // ------------------------------------------------------------------
 function PalaPethiCanvas() {
   const canvasRef = useRef(null);
@@ -392,14 +388,14 @@ function PalaPethiCanvas() {
           const glow = dist < maxDist ? Math.pow(1 - dist / maxDist, 2) : 0;
           const petalRadius = 45 + Math.sin(time * 0.03 + c + r) * 6 + glow * 15;
 
-          const baseOpacity = isLight ? 0.10 : 0.15;
-          const opacity = Math.min(0.60, baseOpacity + glow * 0.40);
+          const baseOpacity = isLight ? 0.30 : 0.40;
+          const opacity = Math.min(0.85, baseOpacity + glow * 0.40);
 
           const petalCount = 8;
           ctx.strokeStyle = isLight
             ? `rgba(55, 48, 163, ${opacity})`
             : `rgba(6, 182, 212, ${opacity})`;
-          ctx.lineWidth = 1.4 + glow * 1.0;
+          ctx.lineWidth = 1.8 + glow * 1.0;
 
           for (let i = 0; i < petalCount; i++) {
             const angle = baseRotation + (i * Math.PI * 2) / petalCount;
@@ -423,12 +419,11 @@ function PalaPethiCanvas() {
             ctx.stroke();
           }
 
-          // Center Lotus Core (Royal Violet)
           ctx.fillStyle = isLight
             ? `rgba(126, 34, 206, ${opacity})`
             : `rgba(168, 85, 247, ${opacity})`;
           ctx.beginPath();
-          ctx.arc(cx, cy, 5 + glow * 3, 0, Math.PI * 2);
+          ctx.arc(cx, cy, 6 + glow * 3, 0, Math.PI * 2);
           ctx.fill();
         }
       }
@@ -446,5 +441,5 @@ function PalaPethiCanvas() {
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="w-full h-full opacity-60" />;
+  return <canvas ref={canvasRef} className="w-full h-full opacity-90" />;
 }

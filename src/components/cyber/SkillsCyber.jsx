@@ -81,7 +81,7 @@ export default function SkillsCyber() {
           </div>
 
           {/* Theme-Aware Sliding Domain Tab Switcher Indicator */}
-          <div className="theme-switcher-bar relative z-10 flex flex-wrap gap-1 rounded-full p-1.5 backdrop-blur-md shadow-lg border">
+          <div className="theme-switcher-bar relative z-10 flex flex-wrap gap-1 rounded-full p-1.5 backdrop-blur-md shadow-lg border" role="tablist" aria-label="Skill Categories">
             {GROUPS.map((g) => {
               const Icon = g.icon;
               const isActive = activeGroup === g.label;
@@ -89,6 +89,16 @@ export default function SkillsCyber() {
                 <button
                   key={g.label}
                   onClick={() => setActiveGroup(g.label)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      setActiveGroup(g.label);
+                    }
+                  }}
+                  role="tab"
+                  aria-selected={isActive}
+                  aria-controls={`panel-${g.id}`}
+                  id={`tab-${g.id}`}
                   className="relative flex items-center gap-2 rounded-full px-4 py-2 font-mono text-xs font-medium transition-colors cursor-pointer"
                 >
                   {isActive && (
@@ -116,6 +126,9 @@ export default function SkillsCyber() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -15 }}
             transition={{ duration: 0.3 }}
+            id={`panel-${activeData.id}`}
+            role="tabpanel"
+            aria-labelledby={`tab-${activeData.id}`}
             className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 relative z-10"
           >
             {activeData.skills.map((skill) => (

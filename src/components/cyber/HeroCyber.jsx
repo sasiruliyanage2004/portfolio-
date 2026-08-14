@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
-import { ArrowRight, FileText, Sparkles, Activity, CheckCircle2, GraduationCap } from "lucide-react";
+import { ArrowRight, FileText, Sparkles, Activity, CheckCircle2, GraduationCap, ChevronDown } from "lucide-react";
 
 function MagneticButton({ children, className = "", href, download, ...props }) {
   const ref = useRef(null);
@@ -218,6 +218,22 @@ export default function HeroCyber() {
           </motion.div>
         </div>
       </div>
+      
+      {/* Scroll Indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1, duration: 1 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+      >
+        <span className="font-mono text-xs opacity-50 text-slate-900 dark:text-white">Scroll to explore</span>
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+        >
+          <ChevronDown className="h-5 w-5 opacity-50 text-slate-900 dark:text-white" />
+        </motion.div>
+      </motion.div>
     </section>
   );
 }

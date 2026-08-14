@@ -138,6 +138,9 @@ export default function FloatingDockCyber({ theme }) {
               </span>
               Available for Hire
             </span>
+            <span className="ml-2 font-mono text-[9px] opacity-60 border border-white/15 rounded-lg px-2 py-1 whitespace-nowrap hidden sm:inline-block">
+              Ctrl+K
+            </span>
           </motion.div>
         )}
       </AnimatePresence>

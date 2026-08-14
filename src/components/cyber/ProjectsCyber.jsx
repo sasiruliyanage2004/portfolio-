@@ -123,7 +123,9 @@ function Card3D({ project }) {
         onMouseMove={handleMove}
         onMouseLeave={handleLeave}
         style={{ rotateX: srx, rotateY: sry, transformPerspective: 900 }}
-        className="project-card-obsidian noise-overlay relative flex h-full min-h-[250px] flex-col justify-between overflow-hidden rounded-3xl p-7 sm:p-8 group-hover:border-cyan-400 transition-all duration-300 shadow-2xl z-10"
+        className={`project-card-obsidian noise-overlay relative flex h-full min-h-[250px] flex-col justify-between overflow-hidden rounded-3xl p-7 sm:p-8 transition-all duration-300 shadow-2xl z-10 ${
+          !isFeatured ? "hover:scale-[1.01] hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:border-cyan-400/50 border border-transparent" : "group-hover:border-cyan-400"
+        }`}
       >
         {/* Top Header Block */}
         <div>

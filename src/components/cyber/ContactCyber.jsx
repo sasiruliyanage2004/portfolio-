@@ -219,7 +219,7 @@ export default function ContactCyber() {
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
                   placeholder="Sasiru Nethvidu Liyanage"
-                  className="w-full rounded-xl border px-4 py-3 font-mono text-sm transition-all focus:border-cyan-400 focus:outline-none"
+                  className="w-full rounded-xl border border-white/20 px-4 py-3 font-mono text-sm transition-all focus:border-cyan-400 focus:outline-none [&:user-valid]:border-emerald-500/50 [&:user-invalid]:border-red-500/40"
                 />
               </div>
 
@@ -234,7 +234,7 @@ export default function ContactCyber() {
                   value={form.email}
                   onChange={(e) => setForm({ ...form, email: e.target.value })}
                   placeholder="liyanagesasiru@gmail.com"
-                  className="w-full rounded-xl border px-4 py-3 font-mono text-sm transition-all focus:border-cyan-400 focus:outline-none"
+                  className="w-full rounded-xl border border-white/20 px-4 py-3 font-mono text-sm transition-all focus:border-cyan-400 focus:outline-none [&:user-valid]:border-emerald-500/50 [&:user-invalid]:border-red-500/40"
                 />
               </div>
 
@@ -249,7 +249,7 @@ export default function ContactCyber() {
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
                   placeholder="Tell me about your project idea..."
-                  className="w-full rounded-xl border px-4 py-3 font-mono text-sm transition-all focus:border-cyan-400 focus:outline-none"
+                  className="w-full rounded-xl border border-white/20 px-4 py-3 font-mono text-sm transition-all focus:border-cyan-400 focus:outline-none [&:user-valid]:border-emerald-500/50 [&:user-invalid]:border-red-500/40"
                 />
               </div>
 

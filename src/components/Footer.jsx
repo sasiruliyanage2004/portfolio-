@@ -58,7 +58,7 @@ export default function Footer({ onOpenCommandPalette }) {
       <div className="absolute bottom-10 right-1/4 h-96 w-96 rounded-full bg-indigo-500/10 blur-[140px] pointer-events-none" />
 
       {/* Giant Ambient Background Marquee Watermark */}
-      <div className="absolute inset-0 pointer-events-none flex items-center justify-center opacity-[0.04] dark:opacity-[0.04] light-theme:opacity-[0.07] select-none overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none flex items-center justify-center opacity-[0.04] dark:opacity-[0.04] light-theme:opacity-[0.07] select-none overflow-hidden w-full">
         <h1 className="text-[14vw] font-extrabold uppercase tracking-tighter whitespace-nowrap font-mono">
           SASIRU LIYANAGE • FULL-STACK ENGINEER • SLIIT '26
         </h1>

@@ -14,36 +14,22 @@ export default function CulturalPatternCanvas() {
     let time = 0;
 
     let mouse = { x: -1000, y: -1000, targetX: -1000, targetY: -1000 };
-    let lastClientX = -1000;
-    let lastClientY = -1000;
     const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
 
     const handlePointerMove = (e) => {
       if (isTouchDevice) return;
-      lastClientX = e.clientX;
-      lastClientY = e.clientY;
+      // Exact viewport mouse coordinates for 100% zero-offset alignment
       mouse.targetX = e.clientX;
-      mouse.targetY = e.clientY + window.scrollY;
-    };
-
-    const handleScroll = () => {
-      if (isTouchDevice || lastClientX < 0) return;
-      mouse.targetX = lastClientX;
-      mouse.targetY = lastClientY + window.scrollY;
+      mouse.targetY = e.clientY;
     };
 
     const handleResize = () => {
       canvas.width = window.innerWidth;
-      canvas.height = Math.max(
-        document.body.scrollHeight,
-        document.documentElement.scrollHeight,
-        window.innerHeight
-      );
+      canvas.height = window.innerHeight;
     };
 
     handleResize();
     window.addEventListener("resize", handleResize);
-    window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("pointermove", handlePointerMove, { passive: true });
 
     const render = () => {
@@ -53,8 +39,8 @@ export default function CulturalPatternCanvas() {
       ctx.clearRect(0, 0, w, h);
 
       // Lerp mouse position for silky smooth movement
-      mouse.x += (mouse.targetX - mouse.x) * 0.1;
-      mouse.y += (mouse.targetY - mouse.y) * 0.1;
+      mouse.x += (mouse.targetX - mouse.x) * 0.12;
+      mouse.y += (mouse.targetY - mouse.y) * 0.12;
 
       const isLight = document.documentElement.classList.contains("light-theme");
       const size = 95;
@@ -140,14 +126,13 @@ export default function CulturalPatternCanvas() {
 
     return () => {
       window.removeEventListener("resize", handleResize);
-      window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("pointermove", handlePointerMove);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
 
   return (
-    <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden w-full h-full">
+    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden w-full h-full">
       <canvas ref={canvasRef} className="w-full h-full opacity-90" />
     </div>
   );

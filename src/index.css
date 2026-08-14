@@ -1,15 +1,17 @@
 @import "tailwindcss";
 
 /* ------------------------------------------------------------------
-   DESIGN TOKENS
-   Deep Midnight Carbon base (#05080f), Electric Indigo / Cyber Cyan / Neon Violet.
+   DESIGN TOKENS — CULTURAL TECH WORLD-CLASS PALETTE
+   Dark Mode: "Kandy Sapphire & Sigiriya Gold Cyber Matrix"
+   Light Mode: "Royal Porcelain, Ceylon Sapphire & Temple Brass"
    ------------------------------------------------------------------ */
 :root {
-  --bg-obsidian: #05080f;
-  --bg-obsidian-raised: #0a0e18;
-  --indigo: #6366f1;
+  --bg-obsidian: #05070e;
+  --bg-obsidian-raised: #090d16;
   --cyan: #06b6d4;
-  --violet: #a855f7;
+  --amber: #f59e0b;
+  --indigo: #6366f1;
+  --violet: #8b5cf6;
 
   --glass-bg: rgba(255, 255, 255, 0.035);
   --glass-bg-hover: rgba(255, 255, 255, 0.06);
@@ -41,51 +43,52 @@ body {
 }
 
 /* ------------------------------------------------------------------
-   LIGHT THEME — "Porcelain Circuit"
+   LIGHT THEME — "Royal Porcelain & Ceylon Sapphire-Gold Circuit"
    ------------------------------------------------------------------ */
 html.light-theme,
 body.light-theme,
 .light-theme {
-  --bg-obsidian: #F7F5F1;
-  --bg-obsidian-raised: #F1EFEA;
-  --indigo: #4338CA;
-  --cyan: #0E7490;
-  --violet: #8B27D4;
+  --bg-obsidian: #f8f6f0;
+  --bg-obsidian-raised: #f3efe6;
+  --cyan: #0e7490;
+  --amber: #b45309;
+  --indigo: #3730a3;
+  --violet: #7e22ce;
 
   --glass-bg: rgba(255, 255, 255, 0.85);
   --glass-bg-hover: rgba(255, 255, 255, 0.95);
   --glass-border: rgba(30, 41, 59, 0.12);
-  --glass-border-hover: rgba(67, 56, 202, 0.28);
+  --glass-border-hover: rgba(55, 48, 163, 0.28);
 
-  --text-primary: #0F172A;
+  --text-primary: #0f172a;
   --text-muted: #475569;
-  --text-dim: #64748B;
+  --text-dim: #64748b;
 
   color-scheme: light;
-  background-color: #F7F5F1 !important;
-  color: #0F172A !important;
+  background-color: #f8f6f0 !important;
+  color: #0f172a !important;
 }
 
 .light-theme body {
-  background-color: #F7F5F1 !important;
-  color: #0F172A !important;
+  background-color: #f8f6f0 !important;
+  color: #0f172a !important;
 }
 
 .light-theme .mesh-bg {
-  background-color: #F7F5F1 !important;
+  background-color: #f8f6f0 !important;
   background-image: none !important;
 }
 
 .light-theme .glass-panel {
-  background: rgba(255, 255, 255, 0.85) !important;
+  background: rgba(255, 255, 255, 0.88) !important;
   border: 1px solid rgba(30, 41, 59, 0.12) !important;
   box-shadow: 0 12px 36px rgba(15, 23, 42, 0.08) !important;
-  color: #0F172A !important;
+  color: #0f172a !important;
 }
 
 .light-theme .glass-panel:hover {
-  background: rgba(255, 255, 255, 0.95) !important;
-  border-color: rgba(67, 56, 202, 0.28) !important;
+  background: rgba(255, 255, 255, 0.98) !important;
+  border-color: rgba(55, 48, 163, 0.28) !important;
   box-shadow: 0 16px 45px rgba(15, 23, 42, 0.12) !important;
 }
 
@@ -108,13 +111,13 @@ body.light-theme,
    LIGHT THEME FOOTER OVERRIDES
    ------------------------------------------------------------------ */
 .light-theme footer {
-  background-color: #F7F5F1 !important;
-  color: #0F172A !important;
+  background-color: #f8f6f0 !important;
+  color: #0f172a !important;
 }
 
 .light-theme footer h2,
 .light-theme footer h3 {
-  color: #0F172A !important;
+  color: #0f172a !important;
 }
 
 .light-theme footer p,
@@ -125,14 +128,14 @@ body.light-theme,
 .light-theme footer .bg-white\/5 {
   background-color: #ffffff !important;
   border-color: rgba(30, 41, 59, 0.15) !important;
-  color: #0F172A !important;
+  color: #0f172a !important;
 }
 
 /* ------------------------------------------------------------------
    LIGHT THEME CONTACT TERMINAL BOX OVERRIDES
    ------------------------------------------------------------------ */
 .contact-terminal-box {
-  background-color: rgba(11, 15, 23, 0.95);
+  background-color: rgba(9, 13, 22, 0.95);
   border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
@@ -156,7 +159,7 @@ body.light-theme,
 
 .light-theme .contact-terminal-box input::placeholder,
 .light-theme .contact-terminal-box textarea::placeholder {
-  color: #64748B !important;
+  color: #64748b !important;
 }
 
 .light-theme .contact-terminal-box .bg-black\/40 {
@@ -169,11 +172,11 @@ body.light-theme,
    HEADING ABSORBER AURA (Theme-Aware)
    ------------------------------------------------------------------ */
 .heading-absorber-aura {
-  background-color: #05080f;
+  background-color: #05070e;
   opacity: 0.90;
 }
 .light-theme .heading-absorber-aura {
-  background-color: #F7F5F1 !important;
+  background-color: #f8f6f0 !important;
   opacity: 0.95 !important;
 }
 
@@ -181,7 +184,7 @@ body.light-theme,
    TAB SWITCHER BAR (Theme-Aware)
    ------------------------------------------------------------------ */
 .theme-switcher-bar {
-  background-color: #0e1422;
+  background-color: #090d16;
   border-color: rgba(255, 255, 255, 0.15);
 }
 .light-theme .theme-switcher-bar {
@@ -194,8 +197,8 @@ body.light-theme,
    PROJECT CARD HIGH-CONTRAST SOLID BACKING
    ------------------------------------------------------------------ */
 .project-card-obsidian {
-  background-color: #0e1422 !important;
-  border: 2px solid rgba(255, 255, 255, 0.22) !important;
+  background-color: #090d16 !important;
+  border: 2px solid rgba(255, 255, 255, 0.20) !important;
   box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6) !important;
 }
 
@@ -261,7 +264,7 @@ body.light-theme,
 
 /* Skills Matrix Cards (Theme-Aware) */
 .skill-card-bg {
-  background-color: rgba(11, 15, 23, 0.92);
+  background-color: rgba(9, 13, 22, 0.92);
   border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
@@ -283,11 +286,11 @@ body.light-theme,
    HERO PORTRAIT CARD — TRANSLUCENT GLASS FLOATING FRAME (1-2px subtle edge)
    ------------------------------------------------------------------ */
 .hero-portrait-card {
-  background-color: rgba(5, 8, 15, 0.35) !important;
+  background-color: rgba(5, 7, 14, 0.35) !important;
   border: 1px solid rgba(255, 255, 255, 0.14) !important;
   backdrop-filter: blur(24px) saturate(180%) !important;
   -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(6, 182, 212, 0.12) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(6, 182, 212, 0.15) !important;
 }
 
 .hero-portrait-frame {
@@ -296,11 +299,11 @@ body.light-theme,
 }
 
 .light-theme .hero-portrait-card {
-  background-color: rgba(255, 255, 255, 0.45) !important;
+  background-color: rgba(255, 255, 255, 0.55) !important;
   border: 1px solid rgba(30, 41, 59, 0.15) !important;
   backdrop-filter: blur(24px) saturate(180%) !important;
   -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
-  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.06), 0 0 30px rgba(67, 56, 202, 0.08) !important;
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.06), 0 0 30px rgba(180, 83, 9, 0.10) !important;
 }
 
 .light-theme .hero-portrait-frame {
@@ -312,7 +315,7 @@ body.light-theme,
 .light-theme h2, 
 .light-theme h3, 
 .light-theme h4 {
-  color: #0F172A !important;
+  color: #0f172a !important;
 }
 
 .light-theme p {
@@ -325,24 +328,24 @@ body.light-theme,
 }
 
 .light-theme .text-slate-500 {
-  color: #64748B !important;
+  color: #64748b !important;
 }
 
 .light-theme .text-slate-200,
 .light-theme .text-white {
-  color: #0F172A !important;
+  color: #0f172a !important;
 }
 
 .light-theme input,
 .light-theme textarea {
   background: rgba(255, 255, 255, 0.90) !important;
   border: 1px solid rgba(30, 41, 59, 0.18) !important;
-  color: #0F172A !important;
+  color: #0f172a !important;
 }
 
 .light-theme input::placeholder,
 .light-theme textarea::placeholder {
-  color: #64748B !important;
+  color: #64748b !important;
 }
 
 .light-theme .bg-white\/5,
@@ -356,16 +359,16 @@ body.light-theme,
 }
 
 .light-theme .text-gradient {
-  background: linear-gradient(135deg, #4338CA 0%, #0E7490 50%, #8B27D4 100%);
+  background: linear-gradient(135deg, #3730a3 0%, #0e7490 50%, #b45309 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent !important;
 }
 
-.light-theme ::-webkit-scrollbar-track { background: #F7F5F1; }
+.light-theme ::-webkit-scrollbar-track { background: #f8f6f0; }
 .light-theme ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #4338CA, #8B27D4);
-  border: 2px solid #F7F5F1;
+  background: linear-gradient(180deg, #3730a3, #b45309);
+  border: 2px solid #f8f6f0;
 }
 
 /* ------------------------------------------------------------------
@@ -374,19 +377,19 @@ body.light-theme,
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-track { background: var(--bg-obsidian); }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, var(--indigo), var(--violet));
+  background: linear-gradient(180deg, var(--cyan), var(--amber));
   border-radius: 999px;
   border: 2px solid var(--bg-obsidian);
 }
 
 ::selection {
-  background: rgba(99, 102, 241, 0.35);
+  background: rgba(6, 182, 212, 0.35);
   color: #fff;
 }
 
 /* Accessible focus ring */
 :focus-visible {
-  outline: 2px solid var(--cyan);
+  outline: 2px solid var(--amber);
   outline-offset: 3px;
   border-radius: 4px;
 }
@@ -446,9 +449,10 @@ body.light-theme,
   background: conic-gradient(
     from 0deg,
     transparent 0%,
-    transparent 70%,
-    var(--cyan) 85%,
-    var(--violet) 95%,
+    transparent 65%,
+    var(--cyan) 80%,
+    var(--amber) 90%,
+    var(--violet) 98%,
     transparent 100%
   );
   animation: border-beam-spin 8s linear infinite;
@@ -465,11 +469,11 @@ body.light-theme,
 .animate-border-spin { animation: border-spin 3.5s linear infinite; }
 
 /* ------------------------------------------------------------------
-   UNIFIED GLOBAL MESH GRADIENT — DEEP OBSIDIAN CARBON (#05080f)
+   UNIFIED GLOBAL MESH GRADIENT — DEEP OBSIDIAN CARBON (#05070e)
    ------------------------------------------------------------------ */
 .mesh-bg {
   background-color: var(--bg-obsidian);
-  background-image: linear-gradient(to bottom, #05080f, #05080f);
+  background-image: linear-gradient(to bottom, #05070e, #05070e);
 }
 
 @keyframes gradient-x {
@@ -479,7 +483,7 @@ body.light-theme,
 .animate-gradient-x { animation: gradient-x 6s ease infinite; }
 
 .text-gradient {
-  background: linear-gradient(100deg, var(--indigo) 0%, var(--cyan) 50%, var(--violet) 100%);
+  background: linear-gradient(100deg, var(--cyan) 0%, var(--amber) 50%, var(--violet) 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
@@ -491,8 +495,8 @@ body.light-theme,
    MISC KEYFRAMES
    ------------------------------------------------------------------ */
 @keyframes pulse-dot {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.55); }
-  50% { box-shadow: 0 0 0 6px rgba(52, 211, 153, 0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.6); }
+  50% { box-shadow: 0 0 0 6px rgba(245, 158, 11, 0); }
 }
 .pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
 

@@ -76,7 +76,7 @@ function TiltCard({ children, className = "" }) {
 const LIVE_STATUSES = [
   { text: "Available for Hire", icon: CheckCircle2, color: "text-emerald-400 dark:text-emerald-400 light-theme:text-emerald-600", dot: "bg-emerald-500" },
   { text: "Coding: React 19 + Node", icon: Activity, color: "text-cyan-400 dark:text-cyan-400 light-theme:text-cyan-600", dot: "bg-cyan-500" },
-  { text: "50+ Commits This Month", icon: Sparkles, color: "text-indigo-400 dark:text-indigo-400 light-theme:text-indigo-600", dot: "bg-indigo-500" },
+  { text: "50+ Commits This Month", icon: Sparkles, color: "text-amber-400 dark:text-amber-400 light-theme:text-amber-600", dot: "bg-amber-500" },
 ];
 
 function UnifiedStatusBadge() {
@@ -93,7 +93,7 @@ function UnifiedStatusBadge() {
   const IconComponent = current.icon;
 
   return (
-    <div className="absolute bottom-4 right-4 z-20 overflow-hidden rounded-full border border-white/20 dark:border-white/20 light-theme:border-slate-300 bg-[#0e1422]/90 dark:bg-[#0e1422]/90 light-theme:bg-white/95 px-4 py-2 backdrop-blur-md shadow-2xl">
+    <div className="absolute bottom-4 right-4 z-20 overflow-hidden rounded-full border border-white/20 dark:border-white/20 light-theme:border-slate-300 bg-[#090d16]/90 dark:bg-[#090d16]/90 light-theme:bg-white/95 px-4 py-2 backdrop-blur-md shadow-2xl">
       <AnimatePresence mode="wait">
         <motion.div
           key={current.text}
@@ -146,9 +146,9 @@ export default function HeroCyber() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="lg:col-span-7 space-y-6"
           >
-            {/* High-Contrast Crisp Tagline Badge */}
-            <div className="inline-flex items-center gap-2.5 rounded-full border border-cyan-500/40 bg-[#0e1422] dark:bg-[#0e1422] light-theme:bg-white px-4 py-2 font-mono text-xs font-bold text-cyan-400 dark:text-cyan-300 light-theme:text-cyan-700 shadow-xl backdrop-blur-md">
-              <GraduationCap className="h-4 w-4 text-indigo-400 shrink-0" />
+            {/* High-Contrast Sigiriya Amber Tagline Badge */}
+            <div className="inline-flex items-center gap-2.5 rounded-full border border-amber-500/40 bg-[#090d16] dark:bg-[#090d16] light-theme:bg-white px-4 py-2 font-mono text-xs font-bold text-amber-400 dark:text-amber-300 light-theme:text-amber-700 shadow-xl backdrop-blur-md">
+              <GraduationCap className="h-4 w-4 text-amber-400 shrink-0" />
               <span>SLIIT Undergraduate • Full-Stack Engineer</span>
             </div>
 
@@ -166,7 +166,7 @@ export default function HeroCyber() {
             <div className="flex flex-wrap items-center gap-4 pt-4">
               <MagneticButton
                 href="#projects"
-                className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-indigo-500 via-cyan-500 to-violet-500 px-7 py-3.5 font-mono text-xs font-bold text-white shadow-xl transition-all hover:shadow-cyan-500/25 cursor-pointer"
+                className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-indigo-600 via-cyan-500 to-amber-500 px-7 py-3.5 font-mono text-xs font-bold text-white shadow-xl transition-all hover:shadow-amber-500/25 cursor-pointer"
               >
                 <span>View My Work</span>
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -182,9 +182,9 @@ export default function HeroCyber() {
               <MagneticButton
                 href="/resume.pdf"
                 download="Sasiru_Liyanage_CV.pdf"
-                className="glass-panel inline-flex items-center gap-2 rounded-full px-5 py-3.5 font-mono text-xs font-medium text-slate-600 dark:text-slate-400 transition-all hover:border-cyan-400/50 hover:text-white cursor-pointer"
+                className="glass-panel inline-flex items-center gap-2 rounded-full px-5 py-3.5 font-mono text-xs font-medium text-slate-600 dark:text-slate-400 transition-all hover:border-amber-400/50 hover:text-amber-300 cursor-pointer"
               >
-                <FileText className="h-3.5 w-3.5 text-cyan-400" />
+                <FileText className="h-3.5 w-3.5 text-amber-400" />
                 <span>Resume</span>
               </MagneticButton>
             </div>
@@ -198,7 +198,7 @@ export default function HeroCyber() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="lg:col-span-5 group relative flex justify-center [perspective:1000px] py-2 px-4"
           >
-            {/* Main 3D Card Container (Clean, focused, 1 single status badge) */}
+            {/* Main 3D Card Container */}
             <TiltCard className="hero-portrait-card noise-overlay relative w-full max-w-[420px] rounded-[2rem] p-4 sm:p-5 shadow-2xl transition-all duration-500">
               <span className="border-beam" aria-hidden="true" />
 
@@ -209,7 +209,7 @@ export default function HeroCyber() {
                   alt="Developer Portrait"
                   className="h-full w-full object-cover object-top filter grayscale contrast-110 brightness-115 group-hover:grayscale-0 group-hover:brightness-110 group-hover:scale-105 transition-all duration-700 ease-out"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0b0f17]/80 via-transparent to-transparent opacity-40 group-hover:opacity-10 transition-opacity duration-700" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#090d16]/80 via-transparent to-transparent opacity-40 group-hover:opacity-10 transition-opacity duration-700" />
               </div>
 
               {/* Unified Single Dynamic Status Badge */}

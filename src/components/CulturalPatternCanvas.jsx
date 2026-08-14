@@ -23,7 +23,7 @@ export default function CulturalPatternCanvas({ theme = "dumbara" }) {
 }
 
 // ------------------------------------------------------------------
-// 1. FULL-PAGE VIBRANT CURSOR-REACTIVE DUMBARA GEOMETRIC MAT CANVAS
+// 1. DUMBARA GEOMETRIC MAT CANVAS (Kandy Sapphire & Sigiriya Gold)
 // ------------------------------------------------------------------
 function DumbaraCanvas() {
   const canvasRef = useRef(null);
@@ -88,8 +88,8 @@ function DumbaraCanvas() {
       if (mouse.x > 0 && mouse.y > 0 && !isTouchDevice) {
         const glowGrad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, maxDist);
         if (isLight) {
-          glowGrad.addColorStop(0, "rgba(67, 56, 202, 0.12)");
-          glowGrad.addColorStop(1, "rgba(67, 56, 202, 0)");
+          glowGrad.addColorStop(0, "rgba(180, 83, 9, 0.14)");
+          glowGrad.addColorStop(1, "rgba(180, 83, 9, 0)");
         } else {
           glowGrad.addColorStop(0, "rgba(6, 182, 212, 0.18)");
           glowGrad.addColorStop(1, "rgba(6, 182, 212, 0)");
@@ -116,9 +116,9 @@ function DumbaraCanvas() {
           const outerOpacity = Math.min(1, baseOuterOpacity + glow * 0.35);
           const innerOpacity = Math.min(1, baseInnerOpacity + glow * 0.35);
 
-          // Outer Diamond Border
+          // Outer Diamond Border (Ceylon Sapphire Cyan / Royal Indigo)
           ctx.strokeStyle = isLight
-            ? `rgba(67, 56, 202, ${outerOpacity})`
+            ? `rgba(55, 48, 163, ${outerOpacity})`
             : `rgba(6, 182, 212, ${outerOpacity})`;
           ctx.lineWidth = 2.2 + glow * 0.8;
           ctx.beginPath();
@@ -129,10 +129,10 @@ function DumbaraCanvas() {
           ctx.closePath();
           ctx.stroke();
 
-          // Inner Concentric Diamond
+          // Inner Concentric Diamond (Sigiriya Amber Gold)
           ctx.strokeStyle = isLight
-            ? `rgba(14, 116, 144, ${innerOpacity})`
-            : `rgba(99, 102, 241, ${innerOpacity})`;
+            ? `rgba(180, 83, 9, ${innerOpacity})`
+            : `rgba(245, 158, 11, ${innerOpacity})`;
           ctx.lineWidth = 1.6 + glow * 0.6;
           ctx.beginPath();
           ctx.moveTo(x, y - (size / 3.5) * scale + wave);
@@ -142,12 +142,12 @@ function DumbaraCanvas() {
           ctx.closePath();
           ctx.stroke();
 
-          // Dumbara Center Lotus Dots
+          // Dumbara Center Lotus Dots (Royal Kandy Violet)
           if ((c + r) % 2 === 0) {
             const dotOpacity = Math.min(1, (isLight ? 0.65 : 0.75) + glow * 0.25);
             ctx.fillStyle = isLight
-              ? `rgba(139, 39, 212, ${dotOpacity})`
-              : `rgba(6, 182, 212, ${dotOpacity})`;
+              ? `rgba(126, 34, 206, ${dotOpacity})`
+              : `rgba(139, 92, 246, ${dotOpacity})`;
             ctx.beginPath();
             ctx.arc(x, y + wave, 4.5 + glow * 2.5, 0, Math.PI * 2);
             ctx.fill();
@@ -172,7 +172,7 @@ function DumbaraCanvas() {
 }
 
 // ------------------------------------------------------------------
-// 2. FULL-PAGE VIBRANT CURSOR-REACTIVE LIYAWELA BIO-FLOW CANVAS
+// 2. LIYAWELA BIO-FLOW CANVAS (Kandy Sapphire & Emerald Gold)
 // ------------------------------------------------------------------
 function LiyawelaCanvas() {
   const canvasRef = useRef(null);
@@ -234,11 +234,11 @@ function LiyawelaCanvas() {
       if (mouse.x > 0 && mouse.y > 0 && !isTouchDevice) {
         const glowGrad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, maxDist);
         if (isLight) {
-          glowGrad.addColorStop(0, "rgba(139, 39, 212, 0.12)");
-          glowGrad.addColorStop(1, "rgba(139, 39, 212, 0)");
+          glowGrad.addColorStop(0, "rgba(180, 83, 9, 0.12)");
+          glowGrad.addColorStop(1, "rgba(180, 83, 9, 0)");
         } else {
-          glowGrad.addColorStop(0, "rgba(168, 85, 247, 0.18)");
-          glowGrad.addColorStop(1, "rgba(168, 85, 247, 0)");
+          glowGrad.addColorStop(0, "rgba(245, 158, 11, 0.18)");
+          glowGrad.addColorStop(1, "rgba(245, 158, 11, 0)");
         }
         ctx.fillStyle = glowGrad;
         ctx.beginPath();
@@ -265,8 +265,8 @@ function LiyawelaCanvas() {
 
           ctx.lineWidth = 2.8 + glow * 2.0;
           ctx.strokeStyle = isLight
-            ? v % 2 === 0 ? `rgba(139, 39, 212, ${opacity})` : `rgba(14, 116, 144, ${opacity})`
-            : v % 2 === 0 ? `rgba(168, 85, 247, ${opacity})` : `rgba(6, 182, 212, ${opacity})`;
+            ? v % 2 === 0 ? `rgba(180, 83, 9, ${opacity})` : `rgba(14, 116, 144, ${opacity})`
+            : v % 2 === 0 ? `rgba(245, 158, 11, ${opacity})` : `rgba(6, 182, 212, ${opacity})`;
 
           if (x === -50) ctx.moveTo(x, y);
           else ctx.lineTo(x, y);
@@ -286,8 +286,8 @@ function LiyawelaCanvas() {
 
           const leafOpacity = Math.min(1, (isLight ? 0.55 : 0.70) + glow * 0.30);
           ctx.strokeStyle = isLight
-            ? `rgba(139, 39, 212, ${leafOpacity})`
-            : `rgba(168, 85, 247, ${leafOpacity})`;
+            ? `rgba(126, 34, 206, ${leafOpacity})`
+            : `rgba(139, 92, 246, ${leafOpacity})`;
           ctx.lineWidth = 2.0 + glow * 0.8;
           ctx.beginPath();
           ctx.moveTo(x, y);
@@ -295,8 +295,8 @@ function LiyawelaCanvas() {
           ctx.stroke();
 
           ctx.fillStyle = isLight
-            ? `rgba(14, 116, 144, ${leafOpacity})`
-            : `rgba(6, 182, 212, ${leafOpacity})`;
+            ? `rgba(180, 83, 9, ${leafOpacity})`
+            : `rgba(245, 158, 11, ${leafOpacity})`;
           ctx.beginPath();
           ctx.ellipse(lx, ly, 7 + glow * 3, 4 + glow * 2, leafAngle, 0, Math.PI * 2);
           ctx.fill();
@@ -320,7 +320,7 @@ function LiyawelaCanvas() {
 }
 
 // ------------------------------------------------------------------
-// 3. FULL-PAGE VIBRANT CURSOR-REACTIVE PALA PETHI FLORAL CANVAS
+// 3. PALA PETHI FLORAL CANVAS (Sigiriya Amber & Temple Indigo)
 // ------------------------------------------------------------------
 function PalaPethiCanvas() {
   const canvasRef = useRef(null);
@@ -375,75 +375,59 @@ function PalaPethiCanvas() {
       mouse.y += (mouse.targetY - mouse.y) * 0.1;
 
       const isLight = document.documentElement.classList.contains("light-theme");
-      const spacing = 100;
-      const cols = Math.ceil(w / spacing) + 2;
-      const rows = Math.ceil(h / spacing) + 2;
+      const gridSpacing = 160;
+      const cols = Math.ceil(w / gridSpacing) + 1;
+      const rows = Math.ceil(h / gridSpacing) + 1;
       const maxDist = 300;
 
-      // Draw Cursor Spotlight Glow Aura
-      if (mouse.x > 0 && mouse.y > 0 && !isTouchDevice) {
-        const glowGrad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, maxDist);
-        if (isLight) {
-          glowGrad.addColorStop(0, "rgba(14, 116, 144, 0.12)");
-          glowGrad.addColorStop(1, "rgba(14, 116, 144, 0)");
-        } else {
-          glowGrad.addColorStop(0, "rgba(20, 184, 166, 0.18)");
-          glowGrad.addColorStop(1, "rgba(20, 184, 166, 0)");
-        }
-        ctx.fillStyle = glowGrad;
-        ctx.beginPath();
-        ctx.arc(mouse.x, mouse.y, maxDist, 0, Math.PI * 2);
-        ctx.fill();
-      }
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          const cx = c * gridSpacing + (r % 2 === 0 ? 0 : gridSpacing / 2);
+          const cy = r * gridSpacing;
+          const rotateSpeed = 0.005 + (c % 3) * 0.002;
+          const baseRotation = time * rotateSpeed;
 
-      for (let r = -1; r < rows; r++) {
-        for (let c = -1; c < cols; c++) {
-          const cx = c * spacing + (r % 2 === 0 ? 0 : spacing / 2);
-          const cy = r * spacing;
-          const driftY = Math.sin(time * 0.015 + c * 0.5) * 8;
-
-          const dist = Math.hypot(cx - mouse.x, cy + driftY - mouse.y);
+          const dist = Math.hypot(cx - mouse.x, cy - mouse.y);
           const glow = dist < maxDist ? Math.pow(1 - dist / maxDist, 2) : 0;
-          const scale = 1 + glow * 0.12;
+          const petalRadius = 45 + Math.sin(time * 0.03 + c + r) * 6 + glow * 15;
 
-          const basePetalOpacity = isLight ? 0.50 : 0.65;
-          const petalOpacity = Math.min(1, basePetalOpacity + glow * 0.35);
+          const baseOpacity = isLight ? 0.50 : 0.65;
+          const opacity = Math.min(1, baseOpacity + glow * 0.35);
 
+          const petalCount = 8;
           ctx.strokeStyle = isLight
-            ? `rgba(14, 116, 144, ${petalOpacity})`
-            : `rgba(20, 184, 166, ${petalOpacity})`;
-          ctx.lineWidth = 2.4 + glow * 0.8;
-          const R = 28 * scale;
+            ? `rgba(55, 48, 163, ${opacity})`
+            : `rgba(6, 182, 212, ${opacity})`;
+          ctx.lineWidth = 1.8 + glow * 1.0;
 
-          for (let angle = 0; angle < Math.PI * 2; angle += Math.PI / 2) {
-            const px = cx + Math.cos(angle) * (R / 2);
-            const py = cy + driftY + Math.sin(angle) * (R / 2);
+          for (let i = 0; i < petalCount; i++) {
+            const angle = baseRotation + (i * Math.PI * 2) / petalCount;
+            const px = cx + Math.cos(angle) * petalRadius;
+            const py = cy + Math.sin(angle) * petalRadius;
 
             ctx.beginPath();
-            ctx.arc(px, py, R / 2, angle - Math.PI / 2, angle + Math.PI / 2);
+            ctx.moveTo(cx, cy);
+            ctx.quadraticCurveTo(
+              cx + Math.cos(angle + 0.3) * (petalRadius * 0.6),
+              cy + Math.sin(angle + 0.3) * (petalRadius * 0.6),
+              px,
+              py
+            );
+            ctx.quadraticCurveTo(
+              cx + Math.cos(angle - 0.3) * (petalRadius * 0.6),
+              cy + Math.sin(angle - 0.3) * (petalRadius * 0.6),
+              cx,
+              cy
+            );
             ctx.stroke();
-
-            // Inner Petal Layer
-            ctx.strokeStyle = isLight
-              ? `rgba(180, 83, 9, ${petalOpacity * 0.9})`
-              : `rgba(245, 158, 11, ${petalOpacity * 0.9})`;
-            ctx.lineWidth = 1.6 + glow * 0.5;
-            ctx.beginPath();
-            ctx.arc(px, py, R / 3.5, angle - Math.PI / 2, angle + Math.PI / 2);
-            ctx.stroke();
-            ctx.strokeStyle = isLight
-              ? `rgba(14, 116, 144, ${petalOpacity})`
-              : `rgba(20, 184, 166, ${petalOpacity})`;
-            ctx.lineWidth = 2.4 + glow * 0.8;
           }
 
-          // Center Lotus Seed
-          const seedOpacity = Math.min(1, (isLight ? 0.65 : 0.80) + glow * 0.25);
+          // Center Lotus Core (Sigiriya Gold)
           ctx.fillStyle = isLight
-            ? `rgba(180, 83, 9, ${seedOpacity})`
-            : `rgba(245, 158, 11, ${seedOpacity})`;
+            ? `rgba(180, 83, 9, ${opacity})`
+            : `rgba(245, 158, 11, ${opacity})`;
           ctx.beginPath();
-          ctx.arc(cx, cy + driftY, 4.5 + glow * 2.5, 0, Math.PI * 2);
+          ctx.arc(cx, cy, 6 + glow * 4, 0, Math.PI * 2);
           ctx.fill();
         }
       }

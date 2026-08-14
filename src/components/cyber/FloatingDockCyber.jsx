@@ -130,9 +130,9 @@ export default function FloatingDockCyber({ theme }) {
           );
         })}
 
-        <div className={`mx-1 h-5 w-px ${isLightMode ? "bg-slate-300" : "bg-white/15"}`} />
+        <div className={`mx-1.5 h-5 w-px ${isLightMode ? "bg-slate-300" : "bg-white/15"}`} />
 
-        {/* Available for Hire Pill (Collapses on Scroll) */}
+        {/* Ultra-Premium 3D Emerald Live Status Pill Badge */}
         <AnimatePresence>
           {!isScrolled && (
             <motion.div
@@ -142,13 +142,20 @@ export default function FloatingDockCyber({ theme }) {
               transition={{ duration: 0.25 }}
               className="hidden items-center overflow-hidden md:flex"
             >
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1.5 font-mono text-[10px] font-medium text-emerald-600 dark:text-emerald-300 whitespace-nowrap">
-                <span className="relative flex h-1.5 w-1.5">
-                  <span className="pulse-dot absolute inline-flex h-full w-full rounded-full bg-emerald-500" />
-                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
+              <a
+                href="#contact"
+                className={`inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 font-mono text-[11px] font-bold tracking-tight whitespace-nowrap transition-all duration-300 shadow-lg ${
+                  isLightMode
+                    ? "bg-emerald-500/15 border border-emerald-600/40 text-emerald-800 hover:bg-emerald-500/25 hover:border-emerald-600/70 hover:shadow-emerald-500/20"
+                    : "bg-emerald-500/15 border border-emerald-400/40 text-emerald-300 hover:bg-emerald-500/25 hover:border-emerald-400/70 hover:shadow-[0_0_18px_rgba(16,185,129,0.4)]"
+                }`}
+              >
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.9)]" />
                 </span>
-                Available for Hire
-              </span>
+                <span>Available for Hire</span>
+              </a>
             </motion.div>
           )}
         </AnimatePresence>

@@ -146,29 +146,29 @@ export default function ContactCyber() {
   };
 
   return (
-    <section ref={sectionRef} id="contact" className="relative overflow-hidden bg-transparent px-6 pt-36 pb-28 lg:px-10 scroll-mt-24">
+    <section ref={sectionRef} id="contact" className="relative w-full overflow-hidden bg-transparent py-20 sm:py-28 px-4 sm:px-6 lg:px-10 scroll-mt-20">
       <motion.div style={{ scale, y }} className="relative mx-auto max-w-3xl">
-        <div className="mb-12 text-center">
+        <div className="mb-8 sm:mb-12 text-center">
           <p className="font-mono text-xs tracking-[0.3em] text-cyan-400 font-extrabold uppercase">GET IN TOUCH</p>
-          <h2 className="mt-3 text-4xl font-extrabold text-slate-900 dark:text-white sm:text-5xl">
+          <h2 className="mt-2 sm:mt-3 text-3xl font-extrabold text-slate-900 dark:text-white sm:text-5xl">
             Let's build something <span className="text-gradient">worth shipping</span>
           </h2>
 
           {/* Interactive Copy-to-Clipboard Badges & WhatsApp Quick Link */}
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-3 font-mono text-xs">
+          <div className="mt-5 sm:mt-6 flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 font-mono text-xs">
             <CopyBadge value="liyanagesasiru@gmail.com" icon={Mail} label="liyanagesasiru@gmail.com" />
             <a
               href="https://wa.me/94715700953?text=Hi%20Sasiru,%20I%20visited%20your%20portfolio%20and%20would%20like%20to%20connect!"
               target="_blank"
               rel="noopener noreferrer"
-              className="glass-panel inline-flex items-center gap-2 rounded-full px-4 py-2 hover:border-emerald-400/50 hover:text-emerald-400 transition-all cursor-pointer"
+              className="glass-panel inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 sm:px-4 sm:py-2 hover:border-emerald-400/50 hover:text-emerald-400 transition-all cursor-pointer text-xs"
             >
-              <WhatsAppIcon className="h-3.5 w-3.5 text-emerald-400" />
-              <span>+94 71 57 00 953 (WhatsApp)</span>
+              <WhatsAppIcon className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
+              <span>+94 71 57 00 953</span>
             </a>
-            <span className="glass-panel inline-flex items-center gap-2 rounded-full px-4 py-2">
-              <MapPin className="h-3.5 w-3.5 text-indigo-400" />
-              Western Province, Sri Lanka
+            <span className="glass-panel inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 sm:px-4 sm:py-2 text-xs">
+              <MapPin className="h-3.5 w-3.5 text-cyan-400 shrink-0" />
+              Western Province, LK
             </span>
           </div>
         </div>
@@ -177,18 +177,18 @@ export default function ContactCyber() {
           <span className="border-beam" aria-hidden="true" />
 
           {/* Terminal Window Header with Interactive Mode Tabs */}
-          <div className="flex items-center justify-between border-b border-white/[0.06] px-5 py-3.5 bg-black/40">
-            <div className="flex items-center gap-2">
+          <div className="flex items-center justify-between border-b border-white/[0.06] px-4 sm:px-5 py-3 sm:py-3.5 bg-black/40">
+            <div className="flex items-center gap-1.5 sm:gap-2">
               <span className="h-2.5 w-2.5 rounded-full bg-red-500/70" />
               <span className="h-2.5 w-2.5 rounded-full bg-yellow-500/70" />
               <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/70" />
-              <span className="ml-2 font-mono text-xs opacity-80">contact_terminal.sh</span>
+              <span className="ml-1 sm:ml-2 font-mono text-[11px] sm:text-xs opacity-80 truncate max-w-[120px] sm:max-w-none">contact_terminal.sh</span>
             </div>
 
-            <div className="flex gap-2">
+            <div className="flex gap-1.5 sm:gap-2">
               <button
                 onClick={() => setActiveTab("form")}
-                className={`rounded-lg px-3 py-1 font-mono text-xs transition-colors cursor-pointer ${
+                className={`rounded-lg px-2.5 sm:px-3 py-1 font-mono text-[11px] sm:text-xs transition-colors cursor-pointer ${
                   activeTab === "form" ? "bg-cyan-500/20 text-cyan-400 font-semibold" : "opacity-60 hover:opacity-100"
                 }`}
               >
@@ -196,11 +196,12 @@ export default function ContactCyber() {
               </button>
               <button
                 onClick={() => setActiveTab("cli")}
-                className={`flex items-center gap-1.5 rounded-lg px-3 py-1 font-mono text-xs transition-colors cursor-pointer ${
+                className={`flex items-center gap-1 sm:gap-1.5 rounded-lg px-2.5 sm:px-3 py-1 font-mono text-[11px] sm:text-xs transition-colors cursor-pointer ${
                   activeTab === "cli" ? "bg-cyan-500/20 text-cyan-400 font-semibold" : "opacity-60 hover:opacity-100"
                 }`}
               >
-                <TerminalIcon className="h-3 w-3" /> CLI Mode
+                <TerminalIcon className="h-3 w-3" />
+                <span>Terminal</span>
               </button>
             </div>
           </div>

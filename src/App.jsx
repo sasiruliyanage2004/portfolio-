@@ -27,14 +27,14 @@ function FloatingOrbThemeToggle({ theme, toggleTheme }) {
     <motion.div
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
-      className="fixed bottom-8 right-8 z-[70] group"
+      className="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 z-[70] group"
     >
       <motion.button
         whileHover={{ scale: 1.1, rotate: 15 }}
         whileTap={{ scale: 0.9 }}
         onClick={toggleTheme}
         aria-label="Toggle Light/Dark Theme (Press T)"
-        className={`relative flex h-14 w-14 items-center justify-center rounded-full border backdrop-blur-xl shadow-2xl transition-all duration-300 cursor-pointer ${
+        className={`relative flex h-11 w-11 sm:h-14 sm:w-14 items-center justify-center rounded-full border backdrop-blur-xl shadow-2xl transition-all duration-300 cursor-pointer ${
           isLight
             ? "bg-white/95 border-slate-300 text-cyan-600 shadow-slate-900/15 hover:shadow-cyan-500/30"
             : "bg-[#0b0f17]/95 border-white/20 text-emerald-400 shadow-black/90 hover:shadow-cyan-500/30"

@@ -67,21 +67,21 @@ export default function SkillsCyber() {
   const activeData = GROUPS.find((g) => g.label === activeGroup) || GROUPS[0];
 
   return (
-    <section ref={sectionRef} id="skills" className="relative w-full bg-transparent overflow-hidden py-28 px-6 lg:px-10 scroll-mt-24">
+    <section ref={sectionRef} id="skills" className="relative w-full bg-transparent overflow-hidden py-20 sm:py-28 px-4 sm:px-6 lg:px-10 scroll-mt-20">
       <motion.div style={{ scale, y }} className="mx-auto max-w-7xl relative">
         {/* Clean Section Header (Smudge-free in Light Mode) */}
-        <div className="relative flex flex-col md:flex-row md:items-end md:justify-between mb-12 gap-6">
+        <div className="relative flex flex-col md:flex-row md:items-end md:justify-between mb-8 sm:mb-12 gap-5 sm:gap-6 text-center md:text-left">
           <div className="relative z-10">
             <p className="font-mono text-xs tracking-[0.3em] text-cyan-400 font-extrabold uppercase dark:drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
               TECHNICAL PROFICIENCY
             </p>
-            <h2 className="mt-2 text-5xl font-extrabold text-slate-900 dark:text-white sm:text-6xl dark:drop-shadow-[0_4px_16px_rgba(0,0,0,0.8)]">
+            <h2 className="mt-2 text-4xl font-extrabold text-slate-900 dark:text-white sm:text-6xl dark:drop-shadow-[0_4px_16px_rgba(0,0,0,0.8)]">
               Skills <span className="text-gradient">Matrix</span>
             </h2>
           </div>
 
           {/* Theme-Aware Sliding Domain Tab Switcher Indicator */}
-          <div className="theme-switcher-bar relative z-10 flex flex-wrap gap-1 rounded-full p-1.5 backdrop-blur-md shadow-lg border" role="tablist" aria-label="Skill Categories">
+          <div className="theme-switcher-bar relative z-10 flex flex-wrap justify-center gap-1 rounded-full p-1.5 backdrop-blur-md shadow-lg border self-center md:self-auto max-w-full" role="tablist" aria-label="Skill Categories">
             {GROUPS.map((g) => {
               const Icon = g.icon;
               const isActive = activeGroup === g.label;
@@ -99,7 +99,7 @@ export default function SkillsCyber() {
                   aria-selected={isActive}
                   aria-controls={`panel-${g.id}`}
                   id={`tab-${g.id}`}
-                  className="relative flex items-center gap-2 rounded-full px-4 py-2 font-mono text-xs font-medium transition-colors cursor-pointer"
+                  className="relative flex items-center gap-1.5 rounded-full px-3 sm:px-4 py-1.5 sm:py-2 font-mono text-[11px] sm:text-xs font-medium transition-colors cursor-pointer"
                 >
                   {isActive && (
                     <motion.span

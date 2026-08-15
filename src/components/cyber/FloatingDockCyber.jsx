@@ -69,14 +69,14 @@ export default function FloatingDockCyber({ theme }) {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ type: "spring", stiffness: 300, damping: 26 }}
-      className={`fixed left-1/2 top-6 z-[60] flex -translate-x-1/2 items-center gap-1.5 rounded-full border backdrop-blur-2xl transition-all duration-500 ${
+      className={`fixed left-1/2 top-3 sm:top-6 z-[60] flex -translate-x-1/2 items-center gap-0.5 sm:gap-1.5 rounded-full border backdrop-blur-2xl transition-all duration-500 max-w-[95vw] sm:max-w-none ${
         isLightMode
           ? isScrolled
-            ? "px-3 py-1.5 shadow-[0_16px_40px_rgba(15,23,42,0.15)] bg-white/95 scale-95 border-slate-300"
-            : "px-4 py-2.5 shadow-[0_20px_50px_rgba(15,23,42,0.12)] bg-white/90 scale-100 border-slate-200"
+            ? "px-2 sm:px-3 py-1 sm:py-1.5 shadow-[0_16px_40px_rgba(15,23,42,0.15)] bg-white/95 scale-95 border-slate-300"
+            : "px-2.5 sm:px-4 py-1.5 sm:py-2.5 shadow-[0_20px_50px_rgba(15,23,42,0.12)] bg-white/90 scale-100 border-slate-200"
           : isScrolled
-            ? "px-3 py-1.5 shadow-[0_16px_50px_rgba(0,0,0,0.95)] bg-[#0b0f17]/95 scale-95 border-white/25"
-            : "px-4 py-2.5 shadow-[0_20px_60px_rgba(0,0,0,0.85)] bg-[#0b0f17]/90 scale-100 border-white/20"
+            ? "px-2 sm:px-3 py-1 sm:py-1.5 shadow-[0_16px_50px_rgba(0,0,0,0.95)] bg-[#0b0f17]/95 scale-95 border-white/25"
+            : "px-2.5 sm:px-4 py-1.5 sm:py-2.5 shadow-[0_20px_60px_rgba(0,0,0,0.85)] bg-[#0b0f17]/90 scale-100 border-white/20"
       }`}
     >
       {NAV.map((item) => {
@@ -86,7 +86,8 @@ export default function FloatingDockCyber({ theme }) {
           <a
             key={item.id}
             href={`#${item.id}`}
-            className="relative flex items-center gap-1.5 rounded-full px-3.5 py-2 text-xs font-medium transition-colors"
+            aria-label={item.label}
+            className="relative flex items-center gap-1 sm:gap-1.5 rounded-full px-2.5 sm:px-3.5 py-1.5 sm:py-2 text-[11px] sm:text-xs font-medium transition-colors"
           >
             {isActive && (
               <motion.span
@@ -99,7 +100,7 @@ export default function FloatingDockCyber({ theme }) {
 
             <Icon
               className={`relative z-10 h-3.5 w-3.5 transition-transform duration-300 ${
-                isActive ? "text-white scale-110" : isLightMode ? "text-slate-600 hover:text-indigo-600" : "text-slate-400 hover:text-cyan-300"
+                isActive ? "text-white scale-110" : isLightMode ? "text-slate-600 hover:text-cyan-600" : "text-slate-400 hover:text-cyan-300"
               }`}
             />
 
@@ -110,7 +111,7 @@ export default function FloatingDockCyber({ theme }) {
                   animate={{ opacity: 1, width: "auto" }}
                   exit={{ opacity: 0, width: 0 }}
                   transition={{ duration: 0.2 }}
-                  className={`relative z-10 font-mono overflow-hidden whitespace-nowrap ${
+                  className={`relative z-10 font-mono overflow-hidden whitespace-nowrap hidden xs:inline-block sm:inline-block ${
                     isActive ? "text-white font-semibold" : isLightMode ? "text-slate-600" : "text-slate-300"
                   }`}
                 >

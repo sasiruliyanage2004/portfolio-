@@ -5,8 +5,15 @@ const CustomCursor = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [isTouch, setIsTouch] = useState(false);
 
   useEffect(() => {
+    // Check if device is touch-primary
+    if (window.matchMedia("(pointer: coarse)").matches || "ontouchstart" in window) {
+      setIsTouch(true);
+      return;
+    }
+
     const updateMousePosition = (e) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
@@ -68,15 +75,17 @@ const CustomCursor = () => {
     }
   };
 
+  if (isTouch) return null;
+
   return (
     <>
       <motion.div
-        className="fixed top-0 left-0 z-[9999] rounded-full pointer-events-none mix-blend-screen"
+        className="fixed top-0 left-0 z-[9999] rounded-full pointer-events-none mix-blend-screen hidden md:block"
         variants={variants}
         animate={isHovering ? "hover" : "default"}
       />
       <div
-        className="fixed top-0 left-0 z-[9999] w-2 h-2 bg-primary rounded-full pointer-events-none shadow-[0_0_10px_2px_rgba(56,189,248,0.8)]"
+        className="fixed top-0 left-0 z-[9999] w-2 h-2 bg-primary rounded-full pointer-events-none shadow-[0_0_10px_2px_rgba(56,189,248,0.8)] hidden md:block"
         style={{
           transform: `translate(${mousePosition.x - 4}px, ${mousePosition.y - 4}px)`,
           transition: 'transform 0.05s linear',

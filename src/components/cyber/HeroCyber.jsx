@@ -181,40 +181,40 @@ export default function HeroCyber() {
     <section
       ref={targetRef}
       id="home"
-      className="relative min-h-screen w-full overflow-hidden bg-transparent pt-32 pb-20 lg:pt-40 lg:pb-32 flex items-center justify-center"
+      className="relative min-h-screen w-full overflow-hidden bg-transparent pt-24 pb-16 sm:pt-32 sm:pb-20 lg:pt-40 lg:pb-32 flex items-center justify-center"
     >
-      <div className="mx-auto max-w-7xl px-6 lg:px-10 w-full relative z-10">
-        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10 w-full relative z-10">
+        <div className="grid grid-cols-1 items-center gap-8 sm:gap-12 lg:grid-cols-12 lg:gap-8">
           {/* Left Column — Text & CTAs */}
           <motion.div
             style={{ y: heroY, opacity: heroOpacity }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="lg:col-span-7 space-y-6"
+            className="lg:col-span-7 space-y-5 sm:space-y-6 text-center lg:text-left"
           >
             {/* High-Contrast Crisp Tagline Badge */}
-            <div className="inline-flex items-center gap-2.5 rounded-full border border-cyan-500/30 bg-[#090d16] dark:bg-[#090d16] light-theme:bg-white px-4 py-2 font-mono text-xs font-bold text-cyan-400 dark:text-cyan-300 light-theme:text-cyan-700 shadow-xl backdrop-blur-md">
+            <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-[#090d16] dark:bg-[#090d16] light-theme:bg-white px-3.5 py-1.5 sm:px-4 sm:py-2 font-mono text-[11px] sm:text-xs font-bold text-cyan-400 dark:text-cyan-300 light-theme:text-cyan-700 shadow-xl backdrop-blur-md max-w-full">
               <GraduationCap className="h-4 w-4 text-cyan-400 shrink-0" />
-              <span>SLIIT Undergraduate • Full-Stack Engineer</span>
+              <span className="truncate">SLIIT Undergraduate • Full-Stack Engineer</span>
             </div>
 
             {/* Main Headline */}
-            <h1 className="text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-6xl lg:text-7xl leading-[1.08]">
+            <h1 className="text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-6xl lg:text-7xl leading-[1.1] sm:leading-[1.08]">
               Building interfaces for the <span className="text-gradient">next web</span>
             </h1>
 
             {/* Bio Subtitle */}
-            <p className="text-lg text-slate-600 dark:text-slate-300 sm:text-xl font-normal leading-relaxed max-w-2xl">
+            <p className="text-base text-slate-600 dark:text-slate-300 sm:text-xl font-normal leading-relaxed max-w-2xl mx-auto lg:mx-0">
               Full-stack engineer crafting fast, precise, and quietly futuristic products — fusing modern WebGL architecture with Sri Lankan cultural motifs.
             </p>
 
             {/* Magnetic Call To Action Buttons */}
-            <div className="flex flex-wrap items-center gap-4 pt-4">
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4 pt-2 sm:pt-4">
               <MagneticButton
                 href="#projects"
                 style={{ background: "linear-gradient(135deg, var(--grad-start), var(--grad-mid), var(--grad-end))" }}
-                className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full px-7 py-3.5 font-mono text-xs font-bold text-white shadow-xl transition-all hover:shadow-cyan-500/25 cursor-pointer"
+                className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full px-5 py-3 sm:px-7 sm:py-3.5 font-mono text-xs font-bold text-white shadow-xl transition-all hover:shadow-cyan-500/25 cursor-pointer"
               >
                 <span>View My Work</span>
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -222,7 +222,7 @@ export default function HeroCyber() {
 
               <MagneticButton
                 href="#contact"
-                className="glass-panel inline-flex items-center gap-2 rounded-full px-6 py-3.5 font-mono text-xs font-bold text-slate-800 dark:text-slate-200 transition-all hover:border-cyan-400/50 hover:text-cyan-400 cursor-pointer"
+                className="glass-panel inline-flex items-center gap-2 rounded-full px-4 py-3 sm:px-6 sm:py-3.5 font-mono text-xs font-bold text-slate-800 dark:text-slate-200 transition-all hover:border-cyan-400/50 hover:text-cyan-400 cursor-pointer"
               >
                 <span>Get in Touch</span>
               </MagneticButton>
@@ -230,7 +230,7 @@ export default function HeroCyber() {
               <MagneticButton
                 href="/resume.pdf"
                 download="Sasiru_Liyanage_CV.pdf"
-                className="glass-panel inline-flex items-center gap-2 rounded-full px-5 py-3.5 font-mono text-xs font-medium text-slate-600 dark:text-slate-400 transition-all hover:border-cyan-400/50 hover:text-white cursor-pointer"
+                className="glass-panel inline-flex items-center gap-2 rounded-full px-4 py-3 sm:px-5 sm:py-3.5 font-mono text-xs font-medium text-slate-600 dark:text-slate-400 transition-all hover:border-cyan-400/50 hover:text-white cursor-pointer"
               >
                 <FileText className="h-3.5 w-3.5 text-cyan-400" />
                 <span>Resume</span>
@@ -238,7 +238,9 @@ export default function HeroCyber() {
             </div>
 
             {/* Animated Count-Up Stats */}
-            <StatsRow />
+            <div className="flex justify-center lg:justify-start">
+              <StatsRow />
+            </div>
           </motion.div>
 
           {/* Right Column — Portrait Image Card */}
@@ -247,14 +249,14 @@ export default function HeroCyber() {
             initial={{ opacity: 0, y: 24, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="lg:col-span-5 group relative flex justify-center [perspective:1000px] py-2 px-4"
+            className="lg:col-span-5 group relative flex justify-center [perspective:1000px] py-2 px-2 sm:px-4"
           >
             {/* Main 3D Card Container */}
-            <TiltCard className="hero-portrait-card noise-overlay relative w-full max-w-[420px] rounded-[2rem] p-4 sm:p-5 shadow-2xl transition-all duration-500">
+            <TiltCard className="hero-portrait-card noise-overlay relative w-full max-w-[340px] sm:max-w-[420px] rounded-[1.75rem] sm:rounded-[2rem] p-3 sm:p-5 shadow-2xl transition-all duration-500">
               <span className="border-beam" aria-hidden="true" />
 
               {/* Profile Image Frame */}
-              <div className="hero-portrait-frame relative h-[380px] sm:h-[440px] lg:h-[480px] w-full overflow-hidden rounded-[1.5rem] shadow-inner">
+              <div className="hero-portrait-frame relative h-[320px] sm:h-[440px] lg:h-[480px] w-full overflow-hidden rounded-[1.25rem] sm:rounded-[1.5rem] shadow-inner">
                 <img
                   src="/profile.png"
                   alt="Developer Portrait"

@@ -5,6 +5,11 @@ export default function CursorTrail() {
   const canvasRef = useRef(null);
 
   useEffect(() => {
+    // Disable on touch devices
+    if (window.matchMedia("(pointer: coarse)").matches || "ontouchstart" in window) {
+      return;
+    }
+
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");

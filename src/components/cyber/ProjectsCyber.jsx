@@ -253,31 +253,32 @@ export default function ProjectsCyber() {
   }, [cat]);
 
   return (
-    <section id="projects" ref={sectionRef} className="relative overflow-hidden bg-transparent px-6 py-28 lg:px-10 scroll-mt-24">
+    <section id="projects" ref={sectionRef} className="relative overflow-hidden bg-transparent px-4 sm:px-6 py-20 sm:py-28 lg:px-10 scroll-mt-20">
       <motion.div style={{ scale, y }} className="mx-auto max-w-7xl relative">
         {/* Clean Section Header (Smudge-free in Light Mode) */}
-        <div className="relative flex flex-col md:flex-row md:items-end md:justify-between mb-12 gap-6">
+        <div className="relative flex flex-col md:flex-row md:items-end md:justify-between mb-8 sm:mb-12 gap-5 sm:gap-6 text-center md:text-left">
           <div className="relative z-10">
             <p className="font-mono text-xs tracking-[0.3em] text-cyan-400 font-extrabold uppercase dark:drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
               SELECTED WORK
             </p>
-            <h2 className="mt-2 text-5xl font-extrabold text-slate-900 dark:text-white sm:text-6xl dark:drop-shadow-[0_4px_16px_rgba(0,0,0,0.8)]">
+            <h2 className="mt-2 text-4xl font-extrabold text-slate-900 dark:text-white sm:text-6xl dark:drop-shadow-[0_4px_16px_rgba(0,0,0,0.8)]">
               Projects &amp; <span className="text-gradient">Builds</span>
             </h2>
           </div>
 
           {/* Theme-Aware Sliding Category Tab Switcher Indicator */}
-          <div className="theme-switcher-bar relative z-10 flex flex-wrap gap-1 rounded-full p-1.5 backdrop-blur-md shadow-lg border">
+          <div className="theme-switcher-bar relative z-10 flex flex-wrap justify-center gap-1 rounded-full p-1.5 backdrop-blur-md shadow-lg border self-center md:self-auto max-w-full">
             {CATEGORIES.map((c) => (
               <button
                 key={c}
                 onClick={() => setCat(c)}
-                className="relative rounded-full px-4 py-1.5 font-mono text-xs font-medium transition-colors cursor-pointer"
+                className="relative rounded-full px-3 sm:px-4 py-1 sm:py-1.5 font-mono text-[11px] sm:text-xs font-medium transition-colors cursor-pointer"
               >
                 {cat === c && (
                   <motion.span
                     layoutId="activeCategoryPill"
-                    className="absolute inset-0 rounded-full bg-gradient-to-r from-indigo-500 to-cyan-500 shadow-md"
+                    style={{ background: "linear-gradient(135deg, var(--grad-start), var(--grad-mid))" }}
+                    className="absolute inset-0 rounded-full shadow-md"
                     transition={{ type: "spring", stiffness: 400, damping: 30 }}
                   />
                 )}

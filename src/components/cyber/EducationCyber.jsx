@@ -64,19 +64,19 @@ export default function EducationCyber() {
     <section
       ref={containerRef}
       id="education"
-      className="relative w-full overflow-hidden bg-transparent py-24 lg:py-32"
+      className="relative w-full overflow-hidden bg-transparent py-20 sm:py-24 lg:py-32 scroll-mt-20"
     >
-      <div className="mx-auto max-w-6xl px-6 lg:px-10 relative z-10">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-10 relative z-10">
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16 sm:mb-20">
-          <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 dark:border-white/10 bg-cyan-500/10 dark:bg-white/5 px-4 py-1.5 font-mono text-xs text-cyan-600 dark:text-cyan-400 mb-4 backdrop-blur-md">
+        <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
+          <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 dark:border-white/10 bg-cyan-500/10 dark:bg-white/5 px-3.5 py-1 sm:px-4 sm:py-1.5 font-mono text-[11px] sm:text-xs text-cyan-600 dark:text-cyan-400 mb-3 sm:mb-4 backdrop-blur-md">
             <Sparkles className="h-3.5 w-3.5" />
             <span>ACADEMIC FOUNDATION</span>
           </div>
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white">
             Education &amp; <span className="text-gradient">Journey</span>
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-slate-600 dark:text-slate-400 font-normal leading-relaxed">
+          <p className="mt-3 sm:mt-4 text-base sm:text-lg text-slate-600 dark:text-slate-400 font-normal leading-relaxed">
             The academic rigor and structured computer science disciplines shaping my engineering philosophy.
           </p>
         </div>

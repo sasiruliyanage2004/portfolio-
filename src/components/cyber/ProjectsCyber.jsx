@@ -98,6 +98,7 @@ function Card3D({ project }) {
   const isFeatured = project.featured || (project.span && project.span.includes("row-span-2"));
 
   const handleMove = (e) => {
+    if (window.matchMedia("(pointer: coarse)").matches) return;
     const rect = ref.current.getBoundingClientRect();
     const px = (e.clientX - rect.left) / rect.width;
     const py = (e.clientY - rect.top) / rect.height;

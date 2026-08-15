@@ -45,15 +45,19 @@ html {
   scroll-behavior: smooth;
   width: 100%;
   overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 body {
   background: var(--bg-obsidian);
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   width: 100%;
   overflow-x: hidden;
   transition: background-color 0.4s ease, color 0.4s ease;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
 /* ------------------------------------------------------------------

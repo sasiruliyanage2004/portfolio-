@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 
 // ------------------------------------------------------------------
-// DUMBARA GEOMETRIC MAT CANVAS — SIGNATURE CULTURAL TECH CANVAS
+// DUMBARA GEOMETRIC MAT CANVAS — ADAPTIVE DESKTOP & MOBILE AMBIENT ENGINE
 // ------------------------------------------------------------------
 export default function CulturalPatternCanvas() {
   const canvasRef = useRef(null);
@@ -14,22 +14,38 @@ export default function CulturalPatternCanvas() {
     let time = 0;
 
     let mouse = { x: -1000, y: -1000, targetX: -1000, targetY: -1000 };
-    let lastClientX = -1000;
-    let lastClientY = -1000;
-    const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
+    let isTouchActive = false;
+    let touchTimeout;
 
     const handlePointerMove = (e) => {
-      if (isTouchDevice) return;
-      lastClientX = e.clientX;
-      lastClientY = e.clientY;
       mouse.targetX = e.clientX;
       mouse.targetY = e.clientY;
     };
 
-    const handleScroll = () => {
-      if (isTouchDevice || lastClientX < 0) return;
-      mouse.targetX = lastClientX;
-      mouse.targetY = lastClientY;
+    const handleTouchStart = (e) => {
+      if (e.touches && e.touches[0]) {
+        isTouchActive = true;
+        mouse.targetX = e.touches[0].clientX;
+        mouse.targetY = e.touches[0].clientY;
+        clearTimeout(touchTimeout);
+      }
+    };
+
+    const handleTouchMove = (e) => {
+      if (e.touches && e.touches[0]) {
+        isTouchActive = true;
+        mouse.targetX = e.touches[0].clientX;
+        mouse.targetY = e.touches[0].clientY;
+        clearTimeout(touchTimeout);
+      }
+    };
+
+    const handleTouchEnd = () => {
+      // After finger is lifted, smoothly blend back to autonomous ambient wave after 2.5s
+      clearTimeout(touchTimeout);
+      touchTimeout = setTimeout(() => {
+        isTouchActive = false;
+      }, 2500);
     };
 
     const handleResize = () => {
@@ -39,8 +55,10 @@ export default function CulturalPatternCanvas() {
 
     handleResize();
     window.addEventListener("resize", handleResize);
-    window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("pointermove", handlePointerMove, { passive: true });
+    window.addEventListener("touchstart", handleTouchStart, { passive: true });
+    window.addEventListener("touchmove", handleTouchMove, { passive: true });
+    window.addEventListener("touchend", handleTouchEnd, { passive: true });
 
     const render = () => {
       time += 1;
@@ -48,28 +66,44 @@ export default function CulturalPatternCanvas() {
       const h = canvas.height;
       ctx.clearRect(0, 0, w, h);
 
-      // Smooth lerp mouse coordinates
-      mouse.x += (mouse.targetX - mouse.x) * 0.12;
-      mouse.y += (mouse.targetY - mouse.y) * 0.12;
+      const isTouchDevice = window.matchMedia("(pointer: coarse)").matches || "ontouchstart" in window;
+
+      // On touch devices when user is not actively pressing, engage Autonomous Living Ambient Wave
+      if (isTouchDevice && !isTouchActive) {
+        // Graceful harmonic Lissajous orbital path illuminating the Dumbara diamonds
+        const orbitalX = w * 0.5 + Math.cos(time * 0.015) * (w * 0.38);
+        const orbitalY = h * 0.45 + Math.sin(time * 0.022) * (h * 0.32);
+        mouse.targetX = orbitalX;
+        mouse.targetY = orbitalY;
+      }
+
+      // Smooth lerp coordinates
+      if (mouse.x < -500) {
+        mouse.x = mouse.targetX;
+        mouse.y = mouse.targetY;
+      } else {
+        mouse.x += (mouse.targetX - mouse.x) * 0.08;
+        mouse.y += (mouse.targetY - mouse.y) * 0.08;
+      }
 
       const isLight = document.documentElement.classList.contains("light-theme");
 
-      // Tall Upright Dumbara Diamond Grid Dimensions (Correct Vertical Orientation)
+      // Tall Upright Dumbara Diamond Grid Dimensions (Traditional Sri Lankan Geometry)
       const sizeX = 85;
       const sizeY = 120;
-      const rowHeight = sizeY / 2; // 60px row spacing for seamless interlocking upright diamonds
+      const rowHeight = sizeY / 2; // 60px row spacing for interlocking upright diamonds
       const cols = Math.ceil(w / sizeX) + 4;
-      const rows = Math.ceil(h / rowHeight) + 4; // Cover 100% of viewport from top to bottom
-      const maxDist = 320;
+      const rows = Math.ceil(h / rowHeight) + 4;
+      const maxDist = isTouchDevice ? 280 : 340;
 
-      // Draw Radiant Cursor Spotlight Glow Aura
-      if (mouse.x > 0 && mouse.y > 0 && !isTouchDevice) {
+      // Draw Radiant Spotlight Glow Aura
+      if (mouse.x > -200 && mouse.y > -200) {
         const glowGrad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, maxDist);
         if (isLight) {
-          glowGrad.addColorStop(0, "rgba(14, 116, 144, 0.08)");
+          glowGrad.addColorStop(0, isTouchDevice ? "rgba(14, 116, 144, 0.12)" : "rgba(14, 116, 144, 0.09)");
           glowGrad.addColorStop(1, "rgba(14, 116, 144, 0)");
         } else {
-          glowGrad.addColorStop(0, "rgba(6, 182, 212, 0.20)");
+          glowGrad.addColorStop(0, isTouchDevice ? "rgba(6, 182, 212, 0.24)" : "rgba(6, 182, 212, 0.20)");
           glowGrad.addColorStop(1, "rgba(6, 182, 212, 0)");
         }
         ctx.fillStyle = glowGrad;
@@ -91,8 +125,8 @@ export default function CulturalPatternCanvas() {
           // Upright Dumbara Mat settings matching traditional Sri Lankan weave
           const baseOuterOpacity = isLight ? 0.08 : 0.20;
           const baseInnerOpacity = isLight ? 0.06 : 0.15;
-          const outerOpacity = Math.min(isLight ? 0.38 : 0.75, baseOuterOpacity + glow * (isLight ? 0.28 : 0.55));
-          const innerOpacity = Math.min(isLight ? 0.32 : 0.65, baseInnerOpacity + glow * (isLight ? 0.25 : 0.48));
+          const outerOpacity = Math.min(isLight ? 0.45 : 0.80, baseOuterOpacity + glow * (isLight ? 0.32 : 0.58));
+          const innerOpacity = Math.min(isLight ? 0.38 : 0.70, baseInnerOpacity + glow * (isLight ? 0.28 : 0.50));
 
           // Outer Diamond Border (Ceylon Sapphire Cyan / Teal)
           ctx.strokeStyle = isLight
@@ -120,9 +154,9 @@ export default function CulturalPatternCanvas() {
           ctx.closePath();
           ctx.stroke();
 
-          // Dumbara Center Lotus Dots (Pure Teal / Emerald - Zero purple!)
+          // Dumbara Center Lotus Dots (Pure Teal / Emerald)
           if ((c + r) % 2 === 0) {
-            const dotOpacity = Math.min(isLight ? 0.40 : 0.75, (isLight ? 0.10 : 0.22) + glow * (isLight ? 0.25 : 0.50));
+            const dotOpacity = Math.min(isLight ? 0.45 : 0.80, (isLight ? 0.10 : 0.22) + glow * (isLight ? 0.28 : 0.52));
             ctx.fillStyle = isLight
               ? `rgba(13, 148, 136, ${dotOpacity})`
               : `rgba(6, 182, 212, ${dotOpacity})`;
@@ -140,8 +174,11 @@ export default function CulturalPatternCanvas() {
 
     return () => {
       window.removeEventListener("resize", handleResize);
-      window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("pointermove", handlePointerMove);
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("touchend", handleTouchEnd);
+      clearTimeout(touchTimeout);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);

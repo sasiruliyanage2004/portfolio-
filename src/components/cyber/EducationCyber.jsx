@@ -114,7 +114,7 @@ export default function EducationCyber() {
         {/* Timeline Container */}
         <div className="relative">
           {/* Vertical spine background track */}
-          <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-[3px] -translate-x-1/2 bg-slate-300/80 dark:bg-white/10 rounded-full" />
+          <div className="absolute left-3.5 sm:left-6 md:left-1/2 top-0 bottom-0 w-[2px] sm:w-[3px] -translate-x-1/2 bg-slate-300/80 dark:bg-white/10 rounded-full" />
 
           {/* Animated Glowing spine fill */}
           <motion.div
@@ -122,11 +122,11 @@ export default function EducationCyber() {
               height: pathHeight,
               background: "linear-gradient(to bottom, var(--grad-start), var(--grad-mid), var(--grad-end))",
             }}
-            className="absolute left-6 md:left-1/2 top-0 w-[3px] -translate-x-1/2 origin-top rounded-full shadow-[0_0_12px_rgba(6,182,212,0.6)] z-10"
+            className="absolute left-3.5 sm:left-6 md:left-1/2 top-0 w-[2px] sm:w-[3px] -translate-x-1/2 origin-top rounded-full shadow-[0_0_12px_rgba(6,182,212,0.6)] z-10"
           />
 
           {/* Timeline Nodes */}
-          <div className="space-y-12 sm:space-y-16 pt-4">
+          <div className="space-y-8 sm:space-y-16 pt-2 sm:pt-4">
             {EDUCATION_DATA.map((item, idx) => {
               const isEven = idx % 2 === 0;
               const Icon = item.icon;
@@ -136,55 +136,55 @@ export default function EducationCyber() {
                   key={item.title}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-80px" }}
-                  transition={{ duration: 0.6, delay: idx * 0.15 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.5, delay: idx * 0.12 }}
                   className={`relative flex flex-col md:flex-row items-start ${
                     isEven ? "md:flex-row-reverse" : ""
-                  } gap-8 md:gap-12`}
+                  } gap-6 md:gap-12`}
                 >
                   {/* Center Node Icon */}
-                  <div className="absolute left-6 md:left-1/2 -translate-x-1/2 z-20 flex h-12 w-12 items-center justify-center rounded-2xl border border-slate-300 dark:border-white/20 bg-white dark:bg-[#090d16] shadow-xl backdrop-blur-xl group">
-                    <Icon className="h-5 w-5 text-cyan-600 dark:text-cyan-400" />
+                  <div className="absolute left-3.5 sm:left-6 md:left-1/2 -translate-x-1/2 z-20 flex h-8 w-8 sm:h-12 sm:w-12 items-center justify-center rounded-xl sm:rounded-2xl border border-slate-300 dark:border-white/20 bg-white dark:bg-[#090d16] shadow-xl backdrop-blur-xl group">
+                    <Icon className="h-4 w-4 sm:h-5 sm:w-5 text-cyan-600 dark:text-cyan-400" />
                     {item.status === "active" && (
-                      <span className="absolute -top-1 -right-1 flex h-3 w-3">
+                      <span className="absolute -top-0.5 -right-0.5 sm:-top-1 sm:-right-1 flex h-2.5 w-2.5 sm:h-3 sm:w-3">
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                        <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500" />
+                        <span className="relative inline-flex rounded-full h-2.5 w-2.5 sm:h-3 sm:w-3 bg-emerald-500" />
                       </span>
                     )}
                   </div>
 
                   {/* Card Content */}
-                  <div className="ml-14 md:ml-0 w-full md:w-[calc(50%-3rem)]">
-                    <div className="project-card-obsidian noise-overlay rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-white/10 hover:border-cyan-400/50 transition-all duration-300 shadow-xl group">
-                      <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-                        <span className="inline-flex items-center gap-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 font-mono text-[11px] font-bold text-cyan-600 dark:text-cyan-300">
+                  <div className="ml-7 sm:ml-12 md:ml-0 w-[calc(100%-1.75rem)] sm:w-[calc(100%-3rem)] md:w-[calc(50%-3rem)]">
+                    <div className="project-card-obsidian noise-overlay rounded-2xl sm:rounded-3xl p-4 sm:p-7 md:p-8 border border-slate-200 dark:border-white/10 hover:border-cyan-400/50 transition-all duration-300 shadow-xl group">
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2 mb-2.5 sm:mb-3">
+                        <span className="inline-flex items-center gap-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-2.5 sm:px-3 py-0.5 sm:py-1 font-mono text-[10px] sm:text-[11px] font-bold text-cyan-600 dark:text-cyan-300 w-fit">
                           <Calendar className="h-3 w-3" />
                           {item.period}
                         </span>
-                        <span className="font-mono text-xs text-slate-500 dark:text-slate-400">
+                        <span className="font-mono text-[10px] sm:text-xs text-slate-500 dark:text-slate-400">
                           {item.badge}
                         </span>
                       </div>
 
-                      <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-300 transition-colors">
+                      <h3 className="text-lg sm:text-2xl font-extrabold text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-300 transition-colors break-words">
                         {item.title}
                       </h3>
 
-                      <div className="mt-1 flex items-center gap-1.5 font-mono text-xs text-slate-600 dark:text-slate-400">
+                      <div className="mt-1 flex items-center gap-1.5 font-mono text-[11px] sm:text-xs text-slate-600 dark:text-slate-400">
                         <MapPin className="h-3.5 w-3.5 text-cyan-600 dark:text-cyan-400 shrink-0" />
-                        <span>{item.institution}</span>
+                        <span className="truncate">{item.institution}</span>
                       </div>
 
-                      <p className="mt-4 text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-normal">
+                      <p className="mt-3 sm:mt-4 text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-normal">
                         {item.description}
                       </p>
 
                       {/* Highlights */}
-                      <ul className="mt-4 space-y-2 pt-3 border-t border-slate-200 dark:border-white/10">
+                      <ul className="mt-3 sm:mt-4 space-y-1.5 sm:space-y-2 pt-2.5 sm:pt-3 border-t border-slate-200 dark:border-white/10">
                         {item.highlights.map((highlight, hIdx) => (
-                          <li key={hIdx} className="flex items-start gap-2 text-xs text-slate-600 dark:text-slate-400 font-mono">
+                          <li key={hIdx} className="flex items-start gap-2 text-[11px] sm:text-xs text-slate-600 dark:text-slate-400 font-mono">
                             <CheckCircle2 className="h-3.5 w-3.5 text-cyan-600 dark:text-cyan-400 shrink-0 mt-0.5" />
-                            <span>{highlight}</span>
+                            <span className="break-words">{highlight}</span>
                           </li>
                         ))}
                       </ul>

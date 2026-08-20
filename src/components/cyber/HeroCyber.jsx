@@ -259,10 +259,10 @@ export default function HeroCyber() {
               <div className="hero-portrait-frame relative h-[320px] sm:h-[440px] lg:h-[480px] w-full overflow-hidden rounded-[1.25rem] sm:rounded-[1.5rem] shadow-inner">
                 <img
                   src="/profile.png"
-                  alt="Developer Portrait"
-                  className="h-full w-full object-cover object-top filter grayscale contrast-110 brightness-115 group-hover:grayscale-0 group-hover:brightness-110 group-hover:scale-105 transition-all duration-700 ease-out"
+                  alt="Sasiru Nethvidu Liyanage Portrait"
+                  className="h-full w-full object-cover object-top filter md:grayscale md:contrast-110 md:brightness-115 group-hover:grayscale-0 group-hover:brightness-110 group-hover:scale-105 transition-all duration-700 ease-out"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#090d16]/80 via-transparent to-transparent opacity-40 group-hover:opacity-10 transition-opacity duration-700" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#090d16]/80 via-transparent to-transparent opacity-20 md:opacity-40 group-hover:opacity-10 transition-opacity duration-700" />
               </div>
 
               {/* Unified Single Dynamic Status Badge */}

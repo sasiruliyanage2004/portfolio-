@@ -211,7 +211,7 @@ export default function ContactCyber() {
             <form onSubmit={handleSubmit} className="space-y-6 p-7 sm:p-9">
               <div>
                 <label htmlFor="name" className="mb-2 block font-mono text-xs uppercase tracking-wider">
-                  // FULL_NAME
+                  // YOUR_NAME
                 </label>
                 <input
                   id="name"
@@ -219,14 +219,14 @@ export default function ContactCyber() {
                   required
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
-                  placeholder="Sasiru Nethvidu Liyanage"
+                  placeholder="e.g. John Doe / Hiring Manager"
                   className="w-full rounded-xl border border-white/20 px-4 py-3 font-mono text-sm transition-all focus:border-cyan-400 focus:outline-none [&:user-valid]:border-emerald-500/50 [&:user-invalid]:border-red-500/40"
                 />
               </div>
 
               <div>
                 <label htmlFor="email" className="mb-2 block font-mono text-xs uppercase tracking-wider">
-                  // EMAIL_ADDRESS
+                  // YOUR_EMAIL_ADDRESS
                 </label>
                 <input
                   id="email"
@@ -234,14 +234,14 @@ export default function ContactCyber() {
                   required
                   value={form.email}
                   onChange={(e) => setForm({ ...form, email: e.target.value })}
-                  placeholder="liyanagesasiru@gmail.com"
+                  placeholder="e.g. recruiter@company.com"
                   className="w-full rounded-xl border border-white/20 px-4 py-3 font-mono text-sm transition-all focus:border-cyan-400 focus:outline-none [&:user-valid]:border-emerald-500/50 [&:user-invalid]:border-red-500/40"
                 />
               </div>
 
               <div>
                 <label htmlFor="message" className="mb-2 block font-mono text-xs uppercase tracking-wider">
-                  // PROJECT_DETAILS
+                  // PROJECT_OR_INQUIRY_DETAILS
                 </label>
                 <textarea
                   id="message"
@@ -249,7 +249,7 @@ export default function ContactCyber() {
                   required
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
-                  placeholder="Tell me about your project idea..."
+                  placeholder="Tell me about your project idea, job opportunity, or inquiry..."
                   className="w-full rounded-xl border border-white/20 px-4 py-3 font-mono text-sm transition-all focus:border-cyan-400 focus:outline-none [&:user-valid]:border-emerald-500/50 [&:user-invalid]:border-red-500/40"
                 />
               </div>

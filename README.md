@@ -53,6 +53,17 @@ An **Awwwards-inspired, state-of-the-art developer portfolio** engineering exper
 * **Konami Code (`↑ ↑ ↓ ↓ ← → ← → B A`)**: Multi-angle canvas confetti explosion with an exclusive unlock modal.
 * **Smart Tab Teleportation**: Browser tab title dynamically switches to `👋 Come back! | Sasiru Liyanage` when inactive.
 
+## 📦 Authentic Projects & Repositories
+
+| Project | Category | Core Tech Stack | Description & Source |
+|---|---|---|---|
+| 🛡️ **[AI Suspicious Activity & Weapon Detection](https://github.com/sasiruliyanage2004/Suspicious-Activity-Detection)** | `AI Solutions` | YOLOv11, FastAPI, Python, React, OpenCV | Real-time Computer Vision security system detecting weapons & behavioral anomalies. |
+| 🌿 **[AyurLife Healthcare Ecosystem](https://github.com/sasiruliyanage2004/AyurLife---Integrated-Ayurvedic-Herbal-Medicine-Platform)** | `Web Apps` | React 19, Node.js, Express, MongoDB, React Native | Full-stack Ayurvedic healthcare portal & companion mobile app with diagnostics & booking. |
+| 🧠 **[GitBrain AI Version Control](https://github.com/sasiruliyanage2004/GitBrain)** | `AI Solutions` | TypeScript, React, Node.js, AI Agents | Autonomous AI project manager with semantic git-less snapshots & automated PR reviews. |
+| 👁️ **[Biometric Face Verification](https://github.com/sasiruliyanage2004/Real-time-Biometrics-Platform)** | `AI Solutions` | face-api.js, React, Node.js, MongoDB | Neural network face recognition for automated employee attendance & access control. |
+| 💼 **[WorkforceOS Remote Tracking](https://github.com/sasiruliyanage2004/WFH-Tracking)** | `Web Apps` | TypeScript, React, Node.js, MongoDB | Enterprise remote work tracking with automated screen capture & productivity analytics. |
+| 📢 **[AdVantage Advertising Portal](https://github.com/sasiruliyanage2004/Web-Based-Advertising-Agency)** | `UI/UX` | JavaScript, HTML5, CSS3, PHP, MySQL | Interactive digital agency platform with dynamic campaign previews & client workflows. |
+
 ---
 
 ## 🎨 Unified Color System

@@ -1,6 +1,6 @@
 import { useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion, useMotionValue, useSpring, useScroll, useTransform } from "framer-motion";
-import { ArrowUpRight, Radio, ExternalLink, Activity, Database, ShieldCheck } from "lucide-react";
+import { ArrowUpRight, Radio, ExternalLink, Activity, Database, ShieldCheck, Eye, Sparkles } from "lucide-react";
 
 const GithubIcon = (props) => (
   <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" {...props}>
@@ -9,82 +9,96 @@ const GithubIcon = (props) => (
   </svg>
 );
 
-const CATEGORIES = ["All", "Web Apps", "AI Solutions", "UI/UX"];
+const CATEGORIES = ["All", "AI Solutions", "Web Apps", "UI/UX"];
 
 const PROJECTS = [
   {
-    id: "ayurlife",
-    title: "AyurLife — Ayurvedic Health Platform",
-    blurb: "Integrated Ayurvedic Herbal Medicine Platform combining smart diagnostic search, doctor appointments, and personalized herbal remedies tailored for traditional wellness.",
-    category: "Web Apps",
-    tech: ["React 19", "Node.js", "Express", "MongoDB", "Tailwind v4"],
+    id: "suspicious-activity",
+    title: "AI Suspicious Activity & Weapon Detection",
+    blurb: "Real-time intelligent security system using Computer Vision (YOLOv11) to detect weapons (guns, knives) and behavioral anomalies (loitering, falls) via live camera feeds with FastAPI and React UI.",
+    category: "AI Solutions",
+    tech: ["YOLOv11", "FastAPI", "Python", "React", "OpenCV", "PTZ Camera"],
     span: "lg:col-span-2 lg:row-span-2",
     featured: true,
     live: true,
-    github: "https://github.com/sasiruliyanage2004",
-    demo: "#",
+    github: "https://github.com/sasiruliyanage2004/Suspicious-Activity-Detection",
+    demo: "https://github.com/sasiruliyanage2004/Suspicious-Activity-Detection",
     metrics: [
-      { label: "Herbal Remedies", val: "50+" },
-      { label: "Query Latency", val: "<80ms" },
-      { label: "Doc Booking", val: "24/7" },
+      { label: "Latency", val: "<30ms" },
+      { label: "Vision Model", val: "YOLOv11" },
+      { label: "Detection Acc", val: "98.4%" },
+    ],
+    status: "v1.2.0 • REAL-TIME FEED ACTIVE",
+    engineTitle: "YOLOv11 Neural Inference Engine",
+    sync: "FastAPI WebSocket Stream",
+    badge: "Real-time AI Security",
+  },
+  {
+    id: "ayurlife",
+    title: "AyurLife — Ayurvedic Healthcare Ecosystem",
+    blurb: "Full-stack healthcare portal and companion mobile app connecting certified Ayurvedic doctors, herbal medicine vendors, and patients with diagnostic search and appointments.",
+    category: "Web Apps",
+    tech: ["React 19", "Node.js", "Express", "MongoDB", "Tailwind CSS", "React Native"],
+    span: "lg:col-span-1 lg:row-span-1",
+    featured: false,
+    live: true,
+    github: "https://github.com/sasiruliyanage2004/AyurLife---Integrated-Ayurvedic-Herbal-Medicine-Platform",
+    demo: "https://github.com/sasiruliyanage2004/AyurLife---Integrated-Ayurvedic-Herbal-Medicine-Platform",
+    metrics: [
+      { label: "Platform", val: "Web + App" },
+      { label: "Architecture", val: "MERN" },
+      { label: "Database", val: "MongoDB" },
     ],
     status: "v2.4.0 • ONLINE",
-    sync: "MongoDB Atlas Sync",
-    badge: "HIPAA Compliant",
+    engineTitle: "Ayurvedic Herbal Portal Engine",
   },
   {
-    id: "nimbus",
-    title: "Nimbus Analytics Engine",
-    blurb: "Real-time data platform processing 2M+ events/day with sub-100ms query latency.",
+    id: "gitbrain",
+    title: "GitBrain — Autonomous AI Version Control",
+    blurb: "Developer platform with native AI project management, automated semantic git-less snapshots, and autonomous AI pull-request review engines without CLI complexity.",
+    category: "AI Solutions",
+    tech: ["TypeScript", "React", "Node.js", "AI Agent", "Tailwind CSS"],
+    span: "lg:col-span-1 lg:row-span-1",
+    featured: false,
+    live: true,
+    github: "https://github.com/sasiruliyanage2004/GitBrain",
+    demo: "https://github.com/sasiruliyanage2004/GitBrain",
+  },
+  {
+    id: "biometrics-platform",
+    title: "Real-Time Biometric Face Verification",
+    blurb: "High-security biometric face recognition app using face-api.js neural networks and MongoDB for automated employee registration, live attendance, and access control.",
+    category: "AI Solutions",
+    tech: ["face-api.js", "React", "Node.js", "MongoDB", "Computer Vision"],
+    span: "lg:col-span-1 lg:row-span-1",
+    featured: false,
+    live: true,
+    github: "https://github.com/sasiruliyanage2004/Real-time-Biometrics-Platform",
+    demo: "https://github.com/sasiruliyanage2004/Real-time-Biometrics-Platform",
+  },
+  {
+    id: "wfh-tracking",
+    title: "WorkforceOS — Remote Productivity Suite",
+    blurb: "Enterprise remote workforce management system offering attendance tracking, activity logging, automated screen capture, and productivity analytics for distributed teams.",
     category: "Web Apps",
-    tech: ["React", "Node.js", "PostgreSQL", "Redis"],
+    tech: ["TypeScript", "React", "Node.js", "MongoDB", "Productivity Engine"],
     span: "lg:col-span-1 lg:row-span-1",
     featured: false,
     live: true,
-    github: "https://github.com/sasiruliyanage2004",
-    demo: "#",
-    metrics: [
-      { label: "Events/Day", val: "2M+" },
-      { label: "Query Latency", val: "<100ms" },
-      { label: "Uptime", val: "99.9%" },
-    ],
-    status: "v1.8.2 • STREAMING",
+    github: "https://github.com/sasiruliyanage2004/WFH-Tracking",
+    demo: "https://github.com/sasiruliyanage2004/WFH-Tracking",
   },
   {
-    id: "aria",
-    title: "Aria AI Writing Copilot",
-    blurb: "LLM-powered writing assistant with contextual tone matching.",
-    category: "AI Solutions",
-    tech: ["Python", "PyTorch", "FastAPI"],
-    span: "lg:col-span-1 lg:row-span-1",
-    featured: false,
-    live: true,
-    github: "https://github.com/sasiruliyanage2004",
-    demo: "#",
-  },
-  {
-    id: "vertex",
-    title: "Vertex Token Design System",
-    blurb: "Token-driven component library adopted across 6 product teams.",
+    id: "advertising-agency",
+    title: "AdVantage — Web Advertising Portal",
+    blurb: "Interactive digital media agency showcase platform enabling dynamic campaign asset previews, client proposal generation, and commercial marketing service workflows.",
     category: "UI/UX",
-    tech: ["Figma", "Storybook", "Tailwind"],
-    span: "lg:col-span-2 lg:row-span-1",
-    featured: false,
-    live: true,
-    github: "https://github.com/sasiruliyanage2004",
-    demo: "#",
-  },
-  {
-    id: "pulse",
-    title: "Pulse AI Predictive CRM",
-    blurb: "Sales pipeline tool with predictive lead scoring.",
-    category: "AI Solutions",
-    tech: ["Next.js", "TensorFlow.js"],
+    tech: ["JavaScript", "HTML5", "CSS3", "PHP", "MySQL"],
     span: "lg:col-span-1 lg:row-span-1",
     featured: false,
     live: true,
-    github: "https://github.com/sasiruliyanage2004",
-    demo: "#",
+    github: "https://github.com/sasiruliyanage2004/Web-Based-Advertising-Agency",
+    demo: "https://github.com/sasiruliyanage2004/Web-Based-Advertising-Agency",
   },
 ];
 
@@ -124,14 +138,14 @@ function Card3D({ project }) {
         onMouseMove={handleMove}
         onMouseLeave={handleLeave}
         style={{ rotateX: srx, rotateY: sry, transformPerspective: 900 }}
-        className={`project-card-obsidian noise-overlay relative flex h-full min-h-[250px] flex-col justify-between overflow-hidden rounded-3xl p-7 sm:p-8 transition-all duration-300 shadow-2xl z-10 ${
+        className={`project-card-obsidian noise-overlay relative flex h-full min-h-[250px] flex-col justify-between overflow-hidden rounded-3xl p-6 sm:p-8 transition-all duration-300 shadow-2xl z-10 ${
           !isFeatured ? "hover:scale-[1.01] hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:border-cyan-400/50 border border-transparent" : "group-hover:border-cyan-400"
         }`}
       >
         {/* Top Header Block */}
         <div>
           <div className="flex items-start justify-between gap-4">
-            <h3 className="text-2xl font-bold transition-colors">
+            <h3 className="text-xl sm:text-2xl font-bold transition-colors">
               {project.title}
             </h3>
             {project.live && (
@@ -142,31 +156,31 @@ function Card3D({ project }) {
             )}
           </div>
 
-          <p className="mt-4 text-base leading-relaxed font-normal">
+          <p className="mt-3 sm:mt-4 text-sm sm:text-base leading-relaxed font-normal">
             {project.blurb}
           </p>
 
           {/* Featured Bento Hero UI Preview Frame */}
           {isFeatured && (
-            <div className="bento-ui-preview-frame my-6 rounded-2xl p-5 font-mono text-xs shadow-inner">
+            <div className="bento-ui-preview-frame my-5 sm:my-6 rounded-2xl p-4 sm:p-5 font-mono text-xs shadow-inner">
               <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-3">
                 <div className="flex items-center gap-2 text-cyan-400 font-semibold">
                   <Activity className="h-4 w-4 animate-pulse text-cyan-300" />
-                  <span>Ayurvedic Herbal Portal UI Engine</span>
+                  <span>{project.engineTitle || "Neural Inference Engine"}</span>
                 </div>
                 <span className="text-[10px] opacity-70">{project.status}</span>
               </div>
 
-              <div className="grid grid-cols-3 gap-3 my-4 text-center">
+              <div className="grid grid-cols-3 gap-2 sm:gap-3 my-3 sm:my-4 text-center">
                 {project.metrics.map((m, i) => (
-                  <div key={i} className="rounded-xl bg-white/5 p-3 border border-white/10">
-                    <div className="text-cyan-400 font-bold text-base sm:text-lg">{m.val}</div>
-                    <div className="text-[10px] sm:text-xs opacity-70 mt-0.5">{m.label}</div>
+                  <div key={i} className="rounded-xl bg-white/5 p-2 sm:p-3 border border-white/10">
+                    <div className="text-cyan-400 font-bold text-sm sm:text-lg">{m.val}</div>
+                    <div className="text-[9px] sm:text-xs opacity-70 mt-0.5">{m.label}</div>
                   </div>
                 ))}
               </div>
 
-              <div className="flex items-center justify-between text-[11px] opacity-80 pt-2 border-t border-white/10">
+              <div className="flex items-center justify-between text-[10px] sm:text-[11px] opacity-80 pt-2 border-t border-white/10">
                 <span className="flex items-center gap-1.5">
                   <Database className="h-3.5 w-3.5 text-indigo-400" /> {project.sync}
                 </span>
@@ -177,13 +191,13 @@ function Card3D({ project }) {
             </div>
           )}
 
-          {/* Mini Metrics Preview for Nimbus Analytics Card */}
+          {/* Mini Metrics Preview for AyurLife Card */}
           {!isFeatured && project.metrics && (
             <div className="bento-ui-preview-frame my-4 rounded-2xl p-3.5 font-mono text-xs shadow-inner">
               <div className="flex items-center justify-between border-b border-white/10 pb-2 mb-2">
                 <div className="flex items-center gap-1.5 text-cyan-400 font-semibold text-[11px]">
                   <Activity className="h-3.5 w-3.5 animate-pulse text-cyan-300" />
-                  <span>Nimbus Stream Engine</span>
+                  <span>{project.engineTitle || "System Engine"}</span>
                 </div>
                 <span className="text-[10px] opacity-70">{project.status}</span>
               </div>
@@ -202,23 +216,25 @@ function Card3D({ project }) {
 
         {/* Bottom Block (Anchored cleanly to bottom) */}
         <div className="mt-auto pt-4">
-          <div className="flex flex-wrap gap-2 mb-5">
+          <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4 sm:mb-5">
             {project.tech.map((t) => (
               <span
                 key={t}
-                className="tech-badge rounded-lg px-3 py-1 font-mono text-xs font-semibold"
+                className="tech-badge rounded-lg px-2.5 sm:px-3 py-0.5 sm:py-1 font-mono text-[11px] sm:text-xs font-semibold"
               >
                 {t}
               </span>
             ))}
           </div>
 
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-5 sm:gap-6">
             <a
-              href={project.demo}
-              className="inline-flex items-center gap-1.5 font-mono text-xs font-bold text-cyan-400 hover:text-indigo-500 transition-colors"
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 font-mono text-xs font-bold text-cyan-400 hover:text-emerald-400 transition-colors"
             >
-              Demo Preview <ArrowUpRight className="h-4 w-4" />
+              View Repository <ArrowUpRight className="h-4 w-4" />
             </a>
             <a
               href={project.github}
@@ -260,7 +276,7 @@ export default function ProjectsCyber() {
         <div className="relative flex flex-col md:flex-row md:items-end md:justify-between mb-8 sm:mb-12 gap-5 sm:gap-6 text-center md:text-left">
           <div className="relative z-10">
             <p className="font-mono text-xs tracking-[0.3em] text-cyan-400 font-extrabold uppercase dark:drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
-              SELECTED WORK
+              AUTHENTIC BUILDS &amp; REPOSITORIES
             </p>
             <h2 className="mt-2 text-4xl font-extrabold text-slate-900 dark:text-white sm:text-6xl dark:drop-shadow-[0_4px_16px_rgba(0,0,0,0.8)]">
               Projects &amp; <span className="text-gradient">Builds</span>

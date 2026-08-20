@@ -39,7 +39,7 @@ function StatsRow() {
     <div ref={ref} className="flex flex-wrap gap-6 pt-2">
       {stats.map((s) => (
         <div key={s.label} className="flex flex-col">
-          <span className="font-mono text-2xl font-extrabold" style={{ background: "linear-gradient(135deg,#06b6d4,#6366f1,#a855f7)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+          <span className="font-mono text-2xl font-extrabold" style={{ background: "linear-gradient(135deg, var(--grad-start), var(--grad-mid), var(--grad-end))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
             {s.value}{s.suffix}
           </span>
           <span className="font-mono text-[10px] uppercase tracking-widest text-slate-500 mt-0.5">{s.label}</span>

@@ -168,7 +168,7 @@ export default function ContactCyber() {
             </a>
             <span className="glass-panel inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 sm:px-4 sm:py-2 text-xs">
               <MapPin className="h-3.5 w-3.5 text-cyan-400 shrink-0" />
-              Western Province, LK
+              Makola, Western Province, LK
             </span>
           </div>
         </div>

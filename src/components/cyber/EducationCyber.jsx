@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { GraduationCap, Award, BookOpen, Calendar, MapPin, Sparkles, CheckCircle2 } from "lucide-react";
+import { GraduationCap, Award, BookOpen, Calendar, MapPin, Sparkles, CheckCircle2, Briefcase } from "lucide-react";
 
 const EDUCATION_DATA = [
   {
@@ -9,14 +9,29 @@ const EDUCATION_DATA = [
     title: "BSc (Hons) in Information Technology",
     institution: "Sri Lanka Institute of Information Technology (SLIIT)",
     location: "Malabe, Western Province, Sri Lanka",
-    description: "Specializing in Full-Stack Software Engineering, Distributed Systems, Data Structures & Algorithms, and Cloud Architectures.",
+    description: "Specializing in Full-Stack Software Engineering, Information Technology, Distributed Systems, Data Structures & Algorithms, and Cloud Architectures.",
     highlights: [
-      "Core modules: OOP (Java), DBMS (SQL), Web Development, DSA",
-      "Building practical enterprise web architectures & AI algorithms",
-      "Active participant in tech hackathons & software project showcases"
+      "Core modules: OOP (Java), DBMS (MySQL/SQL), Web Development, DSA, C",
+      "Building practical enterprise web architectures, Computer Vision & AI algorithms",
+      "Active participant in software development hackathons & project showcases"
     ],
     icon: GraduationCap,
     status: "active"
+  },
+  {
+    period: "May 2024 — July 2024",
+    badge: "Industry Experience",
+    title: "Trainee Account Assistant",
+    institution: "Liberty Motor Associates",
+    location: "Western Province, Sri Lanka",
+    description: "Conducted financial data auditing, transactional record reconciliation, and digital database ledger management.",
+    highlights: [
+      "Assisted senior accounting teams in transaction logging and daily reconciliation",
+      "Applied structured data management, numerical accuracy, and spreadsheet automation",
+      "Developed professional teamwork, corporate communications, and multitasking skills"
+    ],
+    icon: Briefcase,
+    status: "completed"
   },
   {
     period: "2023 — 2024",
@@ -24,12 +39,12 @@ const EDUCATION_DATA = [
     title: "GCE Advanced Level Examination",
     institution: "Gurukula College, Kelaniya",
     location: "Kelaniya, Sri Lanka",
-    description: "Completed Advanced Level with high analytical and management focus.",
+    description: "Completed Advanced Level with high analytical, economics, and business management focus.",
     highlights: [
       "Accounting — A (Distinction)",
       "Business Studies — B",
       "Economics — B",
-      "Built strong foundation in quantitative analysis & logical reasoning"
+      "Built strong foundation in quantitative analysis, business logic & logical reasoning"
     ],
     icon: Award,
     status: "completed"

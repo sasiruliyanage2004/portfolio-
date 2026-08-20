@@ -4,8 +4,23 @@ import { GraduationCap, Award, BookOpen, Calendar, MapPin, Sparkles, CheckCircle
 
 const EDUCATION_DATA = [
   {
+    period: "June 2026 — Present",
+    badge: "Current • Industry Role",
+    title: "Software Engineering Intern",
+    institution: "Multi Talent Technology",
+    location: "Western Province, Sri Lanka",
+    description: "Contributing to full-stack software development, client web applications, API integrations, and modern UI engineering.",
+    highlights: [
+      "Developing production-ready web solutions with React, Node.js, and modern tech stacks",
+      "Collaborating with engineering teams on database workflows, REST APIs, and UI architecture",
+      "Actively participating in agile development sprints, code quality reviews, and testing"
+    ],
+    icon: Briefcase,
+    status: "active"
+  },
+  {
     period: "2024 — 2028 (Expected)",
-    badge: "Current • 2nd Year",
+    badge: "Undergraduate • 2nd Year",
     title: "BSc (Hons) in Information Technology",
     institution: "Sri Lanka Institute of Information Technology (SLIIT)",
     location: "Malabe, Western Province, Sri Lanka",

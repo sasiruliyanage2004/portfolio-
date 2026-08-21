@@ -64,13 +64,50 @@ export default function ContactCyber() {
       case "help":
         newHistory.push({
           type: "out",
-          text: "AVAILABLE COMMANDS:\n  whoami    - Display developer identity & background\n  projects  - Jump to Projects & Builds section\n  skills    - Jump to Skills Matrix section\n  contact   - Display email & phone details\n  whatsapp  - Direct chat on WhatsApp (+94 71 57 00 953)\n  github    - Open GitHub repository\n  clear     - Clear shell output",
+          text: "AVAILABLE CYBER TERMINAL COMMANDS:\n  whoami          - Display developer identity & credentials\n  exp             - View current & past industry experience\n  projects        - Navigate to Projects & Architecture section\n  skills          - Jump to Skills Matrix section\n  resume          - Download official updated CV (PDF)\n  stats           - View live system & engineering telemetry\n  sudo hire sasiru- Direct priority hiring protocol\n  contact         - Display email, WhatsApp & location details\n  github          - Open GitHub profile\n  clear           - Clear terminal buffer",
         });
         break;
       case "whoami":
         newHistory.push({
           type: "out",
-          text: "Sasiru Nethvidu Liyanage\nFull-Stack Software Engineer & 2nd Year Undergraduate at SLIIT ('26)\nSpecialization: React 19, Node.js, Python, Tailwind v4, & Framer Motion.",
+          text: "Sasiru Nethvidu Liyanage\nFull-Stack Software Engineer • Computer Vision & AI Enthusiast\n2nd-Year Undergraduate at SLIIT (BSc Hons IT '26)\nCurrent Role: Software Engineering Intern at Multi Talent Technology",
+        });
+        break;
+      case "exp":
+      case "experience":
+        newHistory.push({
+          type: "out",
+          text: "INDUSTRY EXPERIENCE:\n[1] Software Engineering Intern — Multi Talent Technology (Jun 2026 — Present)\n    • Full-stack web apps, API architecture, agile sprint deployments\n[2] Trainee Account Assistant — Liberty Motor Associates (May 2024 — Jul 2024)\n    • Data auditing, financial reconciliation & spreadsheet automation",
+        });
+        break;
+      case "resume":
+      case "cv":
+      case "cat resume.pdf":
+      case "cat cv":
+        newHistory.push({
+          type: "out",
+          text: "Initiating secure download of Sasiru_Liyanage_CV.pdf...",
+        });
+        const link = document.createElement("a");
+        link.href = "/resume.pdf";
+        link.download = "Sasiru_Liyanage_CV.pdf";
+        link.click();
+        break;
+      case "sudo hire sasiru":
+      case "hire":
+        newHistory.push({
+          type: "out",
+          text: "✨ ACCESS GRANTED! Priority hiring protocol initiated.\nRedirecting to WhatsApp to start the conversation...",
+        });
+        setTimeout(() => {
+          window.open("https://wa.me/94715700953?text=Hi%20Sasiru,%20I%20would%20like%20to%20discuss%20a%20job/project%20opportunity%20with%20you!", "_blank");
+        }, 800);
+        break;
+      case "stats":
+      case "telemetry":
+        newHistory.push({
+          type: "out",
+          text: "ENGINEERING TELEMETRY:\n• Primary Stacks: React 19, TypeScript, Node.js, Python, FastAPI, YOLOv11\n• Repositories: 11 Public GitHub Builds\n• Location: Makola, Western Province, Sri Lanka\n• Status: Operational & Available for Hire",
         });
         break;
       case "projects":
@@ -84,7 +121,7 @@ export default function ContactCyber() {
       case "contact":
         newHistory.push({
           type: "out",
-          text: "Email: liyanagesasiru@gmail.com\nPhone: +94 71 57 00 953\nWhatsApp: wa.me/94715700953\nLocation: Western Province, Sri Lanka",
+          text: "CONTACT DETAILS:\n• Email: liyanagesasiru@gmail.com\n• Phone: +94 71 57 00 953\n• WhatsApp: wa.me/94715700953\n• Address: 96/2 Makola South, Makola, Western Province, LK",
         });
         break;
       case "whatsapp":
@@ -100,7 +137,7 @@ export default function ContactCyber() {
         setCmdInput("");
         return;
       default:
-        newHistory.push({ type: "error", text: `command not found: ${cleanCmd}. Type 'help' for options.` });
+        newHistory.push({ type: "error", text: `command not found: ${cleanCmd}. Type 'help' to see all available commands.` });
         break;
     }
 

@@ -55,20 +55,11 @@ export default function SkillsCyber() {
   const [activeGroup, setActiveGroup] = useState("Frontend");
   const sectionRef = useRef(null);
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-
-  // Awwwards Signature Scroll Zoom-In & Zoom-Out Parallax Effect
-  const scale = useTransform(scrollYProgress, [0, 0.35, 0.65, 1], [0.88, 1, 1, 0.88]);
-  const y = useTransform(scrollYProgress, [0, 0.35, 0.65, 1], [60, 0, 0, -60]);
-
   const activeData = GROUPS.find((g) => g.label === activeGroup) || GROUPS[0];
 
   return (
     <section ref={sectionRef} id="skills" className="relative w-full bg-transparent overflow-hidden py-20 sm:py-28 px-4 sm:px-6 lg:px-10 scroll-mt-20">
-      <motion.div style={{ scale, y }} className="mx-auto max-w-7xl relative">
+      <div className="mx-auto max-w-7xl relative">
         {/* Clean Section Header (Smudge-free in Light Mode) */}
         <div className="relative flex flex-col md:flex-row md:items-end md:justify-between mb-8 sm:mb-12 gap-5 sm:gap-6 text-center md:text-left">
           <div className="relative z-10">
@@ -159,7 +150,7 @@ export default function SkillsCyber() {
             ))}
           </motion.div>
         </AnimatePresence>
-      </motion.div>
+      </div>
     </section>
   );
 }

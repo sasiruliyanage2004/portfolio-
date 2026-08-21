@@ -598,14 +598,6 @@ export default function ProjectsCyber() {
       .catch(() => {});
   }, []);
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-
-  const scale = useTransform(scrollYProgress, [0, 0.35, 0.65, 1], [0.88, 1, 1, 0.88]);
-  const y = useTransform(scrollYProgress, [0, 0.35, 0.65, 1], [60, 0, 0, -60]);
-
   const list = useMemo(() => {
     if (cat === "All") return PROJECTS;
     return PROJECTS.filter((p) => p.category === cat);
@@ -613,7 +605,7 @@ export default function ProjectsCyber() {
 
   return (
     <section id="projects" ref={sectionRef} className="relative overflow-hidden bg-transparent px-4 sm:px-6 py-20 sm:py-28 lg:px-10 scroll-mt-20">
-      <motion.div style={{ scale, y }} className="mx-auto max-w-7xl relative">
+      <div className="mx-auto max-w-7xl relative">
         {/* Real-time GitHub Live Activity Stream Pill */}
         <div className="flex justify-center md:justify-start mb-4">
           <a
@@ -673,7 +665,7 @@ export default function ProjectsCyber() {
             ))}
           </AnimatePresence>
         </motion.div>
-      </motion.div>
+      </div>
 
       {/* Interactive Project Deep-Dive Modal */}
       <AnimatePresence>

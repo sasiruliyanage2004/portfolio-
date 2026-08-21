@@ -45,14 +45,6 @@ export default function ContactCyber() {
 
   const sectionRef = useRef(null);
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-
-  const scale = useTransform(scrollYProgress, [0, 0.35, 0.65, 1], [0.88, 1, 1, 0.88]);
-  const y = useTransform(scrollYProgress, [0, 0.35, 0.65, 1], [60, 0, 0, -60]);
-
   const handleCommandExecute = (e) => {
     e.preventDefault();
     const cleanCmd = cmdInput.trim().toLowerCase();
@@ -184,7 +176,7 @@ export default function ContactCyber() {
 
   return (
     <section ref={sectionRef} id="contact" className="relative w-full overflow-hidden bg-transparent py-20 sm:py-28 px-4 sm:px-6 lg:px-10 scroll-mt-20">
-      <motion.div style={{ scale, y }} className="relative mx-auto max-w-3xl">
+      <div className="relative mx-auto max-w-3xl">
         <div className="mb-8 sm:mb-12 text-center">
           <p className="font-mono text-xs tracking-[0.3em] text-cyan-400 font-extrabold uppercase">GET IN TOUCH</p>
           <h2 className="mt-2 sm:mt-3 text-3xl font-extrabold text-slate-900 dark:text-white sm:text-5xl">
@@ -366,7 +358,7 @@ export default function ContactCyber() {
             </p>
           </div>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

@@ -113,21 +113,28 @@ export default function App() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-  // Lenis smooth scroll — buttery-smooth inertia scroll
+  // Lenis smooth scroll — buttery-smooth inertia scroll with modal lock support
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smooth: true,
+      prevent: (node) => Boolean(node.hasAttribute?.("data-lenis-prevent") || node.closest?.("[data-lenis-prevent]")),
     });
+
+    window.__lenis = lenis;
 
     function raf(time) {
       lenis.raf(time);
       requestAnimationFrame(raf);
     }
-    requestAnimationFrame(raf);
+    const reqId = requestAnimationFrame(raf);
 
-    return () => lenis.destroy();
+    return () => {
+      cancelAnimationFrame(reqId);
+      lenis.destroy();
+      window.__lenis = null;
+    };
   }, []);
 
   // Dynamically generate 100% crisp circular portrait photo favicon in browser tab

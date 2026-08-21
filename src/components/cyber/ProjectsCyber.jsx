@@ -232,6 +232,11 @@ function ProjectDeepDiveModal({ project, onClose }) {
     };
     window.addEventListener("keydown", handleKeyDown);
 
+    // Stop Lenis smooth scroll completely while modal is active
+    if (window.__lenis) {
+      window.__lenis.stop();
+    }
+
     // Completely lock background page scroll on both body and html
     const origBodyOverflow = document.body.style.overflow;
     const origHtmlOverflow = document.documentElement.style.overflow;
@@ -246,6 +251,9 @@ function ProjectDeepDiveModal({ project, onClose }) {
       document.body.style.overflow = origBodyOverflow;
       document.documentElement.style.overflow = origHtmlOverflow;
       document.body.style.touchAction = origBodyTouch;
+      if (window.__lenis) {
+        window.__lenis.start();
+      }
     };
   }, [onClose]);
 
@@ -257,6 +265,9 @@ function ProjectDeepDiveModal({ project, onClose }) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       onClick={onClose}
+      data-lenis-prevent="true"
+      onWheel={(e) => e.stopPropagation()}
+      onTouchMove={(e) => e.stopPropagation()}
       className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-2xl overflow-y-auto overscroll-contain"
     >
       <motion.div
@@ -265,6 +276,9 @@ function ProjectDeepDiveModal({ project, onClose }) {
         exit={{ scale: 0.92, y: 20, opacity: 0 }}
         transition={{ type: "spring", damping: 25, stiffness: 300 }}
         onClick={(e) => e.stopPropagation()}
+        data-lenis-prevent="true"
+        onWheel={(e) => e.stopPropagation()}
+        onTouchMove={(e) => e.stopPropagation()}
         className="project-card-obsidian noise-overlay relative w-full max-w-3xl max-h-[88vh] overflow-y-auto overscroll-contain rounded-3xl border border-cyan-500/30 p-5 sm:p-8 shadow-2xl z-10"
       >
         <span className="border-beam" aria-hidden="true" />

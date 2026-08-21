@@ -76,10 +76,10 @@ export default function Footer({ onOpenCommandPalette }) {
           </div>
         </div>
 
-        {/* Clean Integrated Command Palette Trigger */}
+        {/* Clean Integrated Command Palette Trigger (Desktop Only) */}
         <button
           onClick={onOpenCommandPalette}
-          className="flex items-center gap-2.5 rounded-full border border-white/20 dark:border-white/20 light-theme:border-slate-300/80 bg-white/5 px-5 py-2.5 font-mono text-xs transition-all hover:border-cyan-400 hover:text-cyan-300 hover:bg-cyan-500/10 cursor-pointer shadow-lg"
+          className="hidden md:flex items-center gap-2.5 rounded-full border border-white/20 dark:border-white/20 light-theme:border-slate-300/80 bg-white/5 px-5 py-2.5 font-mono text-xs transition-all hover:border-cyan-400 hover:text-cyan-300 hover:bg-cyan-500/10 cursor-pointer shadow-lg"
         >
           <Command className="h-4 w-4 text-cyan-400" />
           <span>Open Command Palette</span>

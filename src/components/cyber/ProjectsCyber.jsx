@@ -1,5 +1,5 @@
 import { useState, useRef, useMemo, useEffect } from "react";
-import { AnimatePresence, motion, useMotionValue, useSpring, useScroll, useTransform } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import {
   Radio,
   ArrowUpRight,
@@ -9,13 +9,8 @@ import {
   Layers,
   Cpu,
   X,
-  ExternalLink,
   Sparkles,
-  GitBranch,
-  Terminal,
-  Zap,
   CheckCircle2,
-  Lock,
 } from "lucide-react";
 
 const GithubIcon = (props) => (
@@ -223,7 +218,7 @@ const PROJECTS = [
 ];
 
 // ------------------------------------------------------------------
-// PROJECT DEEP DIVE MODAL COMPONENT (Awwwards Standard)
+// PROJECT DEEP DIVE MODAL (Header + Body + Sticky Footer)
 // ------------------------------------------------------------------
 function ProjectDeepDiveModal({ project, onClose }) {
   useEffect(() => {
@@ -232,25 +227,20 @@ function ProjectDeepDiveModal({ project, onClose }) {
     };
     window.addEventListener("keydown", handleKeyDown);
 
-    // Stop Lenis smooth scroll completely while modal is active
     if (window.__lenis) {
       window.__lenis.stop();
     }
 
-    // Completely lock background page scroll on both body and html
     const origBodyOverflow = document.body.style.overflow;
     const origHtmlOverflow = document.documentElement.style.overflow;
-    const origBodyTouch = document.body.style.touchAction;
 
     document.body.style.overflow = "hidden";
     document.documentElement.style.overflow = "hidden";
-    document.body.style.touchAction = "none";
 
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = origBodyOverflow;
       document.documentElement.style.overflow = origHtmlOverflow;
-      document.body.style.touchAction = origBodyTouch;
       if (window.__lenis) {
         window.__lenis.start();
       }
@@ -266,25 +256,21 @@ function ProjectDeepDiveModal({ project, onClose }) {
       exit={{ opacity: 0 }}
       onClick={onClose}
       data-lenis-prevent="true"
-      onWheel={(e) => e.stopPropagation()}
-      onTouchMove={(e) => e.stopPropagation()}
       className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-2xl overflow-hidden"
     >
       <motion.div
-        initial={{ scale: 0.92, y: 20, opacity: 0 }}
+        initial={{ scale: 0.95, y: 15, opacity: 0 }}
         animate={{ scale: 1, y: 0, opacity: 1 }}
-        exit={{ scale: 0.92, y: 20, opacity: 0 }}
+        exit={{ scale: 0.95, y: 15, opacity: 0 }}
         transition={{ type: "spring", damping: 25, stiffness: 300 }}
         onClick={(e) => e.stopPropagation()}
         data-lenis-prevent="true"
-        onWheel={(e) => e.stopPropagation()}
-        onTouchMove={(e) => e.stopPropagation()}
-        className="project-card-obsidian noise-overlay relative w-full max-w-3xl max-h-[85vh] overflow-y-auto overscroll-contain rounded-3xl border border-cyan-500/30 p-5 sm:p-8 shadow-2xl z-10"
+        className="project-card-obsidian noise-overlay relative flex flex-col w-full max-w-3xl max-h-[85vh] rounded-3xl border border-cyan-500/30 shadow-2xl z-10 overflow-hidden"
       >
         <span className="border-beam" aria-hidden="true" />
 
         {/* Modal Header */}
-        <div className="flex items-start justify-between gap-4 border-b border-white/10 pb-4 mb-5">
+        <div className="flex items-start justify-between gap-4 border-b border-white/10 p-5 sm:p-7 pb-4 shrink-0 bg-[#090d16]/95 backdrop-blur-md">
           <div>
             <div className="flex items-center gap-2 mb-1.5 flex-wrap">
               <span className="inline-flex items-center gap-1 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-2.5 py-0.5 font-mono text-[10px] font-bold text-cyan-400">
@@ -310,101 +296,102 @@ function ProjectDeepDiveModal({ project, onClose }) {
           </button>
         </div>
 
-        {/* Project Description */}
-        <div className="mb-6">
-          <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-normal">
-            {project.longDescription || project.blurb}
-          </p>
-        </div>
-
-        {/* Metrics Bar */}
-        {project.metrics && (
-          <div className="grid grid-cols-3 gap-2.5 sm:gap-4 mb-6">
-            {project.metrics.map((m, i) => (
-              <div key={i} className="rounded-2xl bg-white/5 p-3 text-center border border-white/10">
-                <div className="text-cyan-400 font-bold text-base sm:text-xl font-mono">{m.val}</div>
-                <div className="text-[10px] sm:text-xs opacity-70 mt-0.5">{m.label}</div>
-              </div>
-            ))}
+        {/* Modal Scrollable Content Area */}
+        <div className="overflow-y-auto p-5 sm:p-7 space-y-6 overscroll-contain">
+          {/* Project Description */}
+          <div>
+            <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-normal">
+              {project.longDescription || project.blurb}
+            </p>
           </div>
-        )}
 
-        {/* System Architecture Flow */}
-        {project.architecture && (
-          <div className="mb-6">
-            <h4 className="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-cyan-400 mb-3">
-              <Layers className="h-3.5 w-3.5" />
-              System Architecture &amp; Data Pipeline
-            </h4>
-            <div className="space-y-2.5">
-              {project.architecture.map((arch, idx) => (
-                <div
-                  key={idx}
-                  className="rounded-xl border border-white/10 bg-black/30 p-3 flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-4"
-                >
-                  <div className="flex items-center gap-2 font-mono text-xs text-cyan-300 font-semibold">
-                    <span className="text-[10px] opacity-60">{arch.step}</span>
-                    <span>{arch.title}</span>
-                  </div>
-                  <div className="text-[11px] text-slate-400 sm:text-right font-normal">
-                    {arch.desc}
-                  </div>
+          {/* Metrics Bar */}
+          {project.metrics && (
+            <div className="grid grid-cols-3 gap-2.5 sm:gap-4">
+              {project.metrics.map((m, i) => (
+                <div key={i} className="rounded-2xl bg-white/5 p-3 text-center border border-white/10">
+                  <div className="text-cyan-400 font-bold text-base sm:text-xl font-mono">{m.val}</div>
+                  <div className="text-[10px] sm:text-xs opacity-70 mt-0.5">{m.label}</div>
                 </div>
               ))}
             </div>
-          </div>
-        )}
+          )}
 
-        {/* Key Engineering Highlights */}
-        {project.highlights && (
-          <div className="mb-6">
-            <h4 className="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-emerald-400 mb-3">
-              <CheckCircle2 className="h-3.5 w-3.5" />
-              Key Engineering Highlights
+          {/* System Architecture Flow */}
+          {project.architecture && (
+            <div>
+              <h4 className="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-cyan-400 mb-3">
+                <Layers className="h-3.5 w-3.5" />
+                System Architecture &amp; Data Pipeline
+              </h4>
+              <div className="space-y-2.5">
+                {project.architecture.map((arch, idx) => (
+                  <div
+                    key={idx}
+                    className="rounded-xl border border-white/10 bg-black/30 p-3 flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-4"
+                  >
+                    <div className="flex items-center gap-2 font-mono text-xs text-cyan-300 font-semibold">
+                      <span className="text-[10px] opacity-60">{arch.step}</span>
+                      <span>{arch.title}</span>
+                    </div>
+                    <div className="text-[11px] text-slate-400 sm:text-right font-normal">
+                      {arch.desc}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Key Engineering Highlights */}
+          {project.highlights && (
+            <div>
+              <h4 className="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-emerald-400 mb-3">
+                <CheckCircle2 className="h-3.5 w-3.5" />
+                Key Engineering Highlights
+              </h4>
+              <ul className="space-y-2">
+                {project.highlights.map((h, i) => (
+                  <li key={i} className="flex items-start gap-2 text-xs text-slate-300 font-mono">
+                    <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                    <span>{h}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {/* Tech Badges */}
+          <div>
+            <h4 className="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-slate-400 mb-2.5">
+              <Cpu className="h-3.5 w-3.5" />
+              Technologies &amp; Libraries
             </h4>
-            <ul className="space-y-2">
-              {project.highlights.map((h, i) => (
-                <li key={i} className="flex items-start gap-2 text-xs text-slate-300 font-mono">
-                  <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400 shrink-0 mt-0.5" />
-                  <span>{h}</span>
-                </li>
+            <div className="flex flex-wrap gap-1.5 sm:gap-2">
+              {project.tech.map((t) => (
+                <span
+                  key={t}
+                  className="tech-badge rounded-lg px-3 py-1 font-mono text-[11px] font-semibold"
+                >
+                  {t}
+                </span>
               ))}
-            </ul>
-          </div>
-        )}
-
-        {/* Tech Badges */}
-        <div className="mb-6">
-          <h4 className="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-slate-400 mb-2.5">
-            <Cpu className="h-3.5 w-3.5" />
-            Technologies &amp; Libraries
-          </h4>
-          <div className="flex flex-wrap gap-1.5 sm:gap-2">
-            {project.tech.map((t) => (
-              <span
-                key={t}
-                className="tech-badge rounded-lg px-3 py-1 font-mono text-[11px] font-semibold"
-              >
-                {t}
-              </span>
-            ))}
+            </div>
           </div>
         </div>
 
-        {/* Modal Action Buttons */}
-        <div className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-white/10">
-          <div className="flex items-center gap-3">
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl bg-cyan-500 px-4 py-2.5 font-mono text-xs font-bold text-black hover:bg-cyan-400 transition-all cursor-pointer shadow-lg"
-            >
-              <GithubIcon className="h-4 w-4" />
-              <span>Explore GitHub Repository</span>
-              <ArrowUpRight className="h-3.5 w-3.5" />
-            </a>
-          </div>
+        {/* Modal Action Buttons (Fixed Pin at Bottom of Card) */}
+        <div className="flex flex-wrap items-center justify-between gap-3 p-4 sm:p-6 border-t border-white/10 shrink-0 bg-[#090d16]/95 backdrop-blur-md">
+          <a
+            href={project.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-xl bg-cyan-500 px-4 py-2.5 font-mono text-xs font-bold text-black hover:bg-cyan-400 transition-all cursor-pointer shadow-lg"
+          >
+            <GithubIcon className="h-4 w-4" />
+            <span>Explore GitHub Repository</span>
+            <ArrowUpRight className="h-3.5 w-3.5" />
+          </a>
 
           <button
             onClick={onClose}
@@ -419,29 +406,10 @@ function ProjectDeepDiveModal({ project, onClose }) {
 }
 
 // ------------------------------------------------------------------
-// 3D INTERACTIVE CARD
+// SOLID PROJECT CARD (Zero 3D Tilt - 100% Flat & Stable)
 // ------------------------------------------------------------------
-function Card3D({ project, onInspect }) {
-  const ref = useRef(null);
-  const rx = useMotionValue(0);
-  const ry = useMotionValue(0);
-  const srx = useSpring(rx, { stiffness: 180, damping: 20 });
-  const sry = useSpring(ry, { stiffness: 180, damping: 20 });
-
+function ProjectCard({ project, onInspect }) {
   const isFeatured = project.featured || (project.span && project.span.includes("row-span-2"));
-
-  const handleMove = (e) => {
-    if (window.matchMedia("(pointer: coarse)").matches) return;
-    const rect = ref.current.getBoundingClientRect();
-    const px = (e.clientX - rect.left) / rect.width;
-    const py = (e.clientY - rect.top) / rect.height;
-    ry.set((px - 0.5) * 12);
-    rx.set((0.5 - py) * 12);
-  };
-  const handleLeave = () => {
-    rx.set(0);
-    ry.set(0);
-  };
 
   return (
     <motion.div
@@ -449,18 +417,14 @@ function Card3D({ project, onInspect }) {
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -16 }}
-      transition={{ duration: 0.4 }}
-      className={`group relative [perspective:1000px] ${project.span}`}
+      transition={{ duration: 0.3 }}
+      className={`group relative ${project.span}`}
     >
-      <motion.div
-        ref={ref}
-        onMouseMove={handleMove}
-        onMouseLeave={handleLeave}
-        style={{ rotateX: srx, rotateY: sry, transformPerspective: 900 }}
-        className={`project-card-obsidian noise-overlay relative flex h-full min-h-[260px] flex-col justify-between overflow-hidden rounded-3xl p-6 sm:p-8 transition-all duration-300 shadow-2xl z-10 ${
-          !isFeatured
-            ? "hover:scale-[1.01] hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:border-cyan-400/50 border border-transparent"
-            : "group-hover:border-cyan-400"
+      <div
+        className={`project-card-obsidian noise-overlay relative flex h-full min-h-[260px] flex-col justify-between overflow-hidden rounded-3xl p-6 sm:p-8 transition-all duration-300 shadow-xl z-10 border ${
+          isFeatured
+            ? "border-cyan-500/40 hover:border-cyan-400 hover:shadow-[0_15px_35px_rgba(6,182,212,0.15)]"
+            : "border-white/10 hover:border-cyan-400/50 hover:shadow-[0_15px_35px_rgba(0,0,0,0.4)]"
         }`}
       >
         {/* Top Header Block */}
@@ -569,7 +533,7 @@ function Card3D({ project, onInspect }) {
             </a>
           </div>
         </div>
-      </motion.div>
+      </div>
     </motion.div>
   );
 }
@@ -661,7 +625,7 @@ export default function ProjectsCyber() {
         <motion.div layout className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 relative z-10">
           <AnimatePresence mode="popLayout">
             {list.map((project) => (
-              <Card3D key={project.id} project={project} onInspect={(p) => setSelectedProject(p)} />
+              <ProjectCard key={project.id} project={project} onInspect={(p) => setSelectedProject(p)} />
             ))}
           </AnimatePresence>
         </motion.div>

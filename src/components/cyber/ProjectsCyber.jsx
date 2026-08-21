@@ -268,7 +268,7 @@ function ProjectDeepDiveModal({ project, onClose }) {
       data-lenis-prevent="true"
       onWheel={(e) => e.stopPropagation()}
       onTouchMove={(e) => e.stopPropagation()}
-      className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-2xl overflow-y-auto overscroll-contain"
+      className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-2xl overflow-hidden"
     >
       <motion.div
         initial={{ scale: 0.92, y: 20, opacity: 0 }}
@@ -279,7 +279,7 @@ function ProjectDeepDiveModal({ project, onClose }) {
         data-lenis-prevent="true"
         onWheel={(e) => e.stopPropagation()}
         onTouchMove={(e) => e.stopPropagation()}
-        className="project-card-obsidian noise-overlay relative w-full max-w-3xl max-h-[88vh] overflow-y-auto overscroll-contain rounded-3xl border border-cyan-500/30 p-5 sm:p-8 shadow-2xl z-10"
+        className="project-card-obsidian noise-overlay relative w-full max-w-3xl max-h-[85vh] overflow-y-auto overscroll-contain rounded-3xl border border-cyan-500/30 p-5 sm:p-8 shadow-2xl z-10"
       >
         <span className="border-beam" aria-hidden="true" />
 

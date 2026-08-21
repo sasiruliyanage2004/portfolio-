@@ -231,10 +231,21 @@ function ProjectDeepDiveModal({ project, onClose }) {
       if (e.key === "Escape") onClose();
     };
     window.addEventListener("keydown", handleKeyDown);
+
+    // Completely lock background page scroll on both body and html
+    const origBodyOverflow = document.body.style.overflow;
+    const origHtmlOverflow = document.documentElement.style.overflow;
+    const origBodyTouch = document.body.style.touchAction;
+
     document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+    document.body.style.touchAction = "none";
+
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = "auto";
+      document.body.style.overflow = origBodyOverflow;
+      document.documentElement.style.overflow = origHtmlOverflow;
+      document.body.style.touchAction = origBodyTouch;
     };
   }, [onClose]);
 
@@ -246,7 +257,7 @@ function ProjectDeepDiveModal({ project, onClose }) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       onClick={onClose}
-      className="fixed inset-0 z-[999] flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-xl overflow-y-auto"
+      className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-2xl overflow-y-auto overscroll-contain"
     >
       <motion.div
         initial={{ scale: 0.92, y: 20, opacity: 0 }}
@@ -254,7 +265,7 @@ function ProjectDeepDiveModal({ project, onClose }) {
         exit={{ scale: 0.92, y: 20, opacity: 0 }}
         transition={{ type: "spring", damping: 25, stiffness: 300 }}
         onClick={(e) => e.stopPropagation()}
-        className="project-card-obsidian noise-overlay relative w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-3xl border border-cyan-500/30 p-5 sm:p-8 shadow-2xl z-10"
+        className="project-card-obsidian noise-overlay relative w-full max-w-3xl max-h-[88vh] overflow-y-auto overscroll-contain rounded-3xl border border-cyan-500/30 p-5 sm:p-8 shadow-2xl z-10"
       >
         <span className="border-beam" aria-hidden="true" />
 

@@ -233,11 +233,13 @@ function ProjectDeepDiveModal({ project, onClose }) {
     const origBodyOverflow = document.body.style.overflow;
     const origHtmlOverflow = document.documentElement.style.overflow;
 
+    document.body.classList.add("modal-open");
     document.body.style.overflow = "hidden";
     document.documentElement.style.overflow = "hidden";
 
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
+      document.body.classList.remove("modal-open");
       document.body.style.overflow = origBodyOverflow;
       document.documentElement.style.overflow = origHtmlOverflow;
       if (window.__lenis) {

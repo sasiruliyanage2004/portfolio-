@@ -154,10 +154,19 @@ export default function App() {
       {/* Easter Eggs: tab title + Konami code confetti */}
       <EasterEggs />
 
-      {/* Mobile Top-Right Floating Theme Switcher Widget */}
-      <div className="fixed top-3.5 right-3.5 z-[70] block md:hidden">
+      {/* Mobile Top-Right Floating Theme Switcher Widget (Safe Area & Notch Aware) */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.2, type: "spring", stiffness: 350, damping: 28 }}
+        style={{
+          top: "calc(env(safe-area-inset-top, 0px) + 16px)",
+          right: "16px",
+        }}
+        className="fixed z-[70] block md:hidden p-1 rounded-full bg-white/10 dark:bg-white/10 light-theme:bg-white/90 backdrop-blur-xl border border-white/20 dark:border-white/20 light-theme:border-slate-300 shadow-[0_4px_16px_rgba(0,0,0,0.35),0_0_12px_rgba(6,182,212,0.18)]"
+      >
         <SwitchModeToggle theme={theme} toggleTheme={toggleTheme} />
-      </div>
+      </motion.div>
 
       {/* Modern Adaptive Navigation Dock (Desktop Top Full Dock / Mobile 5-Item Bottom Dock) */}
       <FloatingDockCyber theme={theme} toggleTheme={toggleTheme} />

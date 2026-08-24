@@ -27,7 +27,6 @@ export default function FloatingDockCyber({ theme, toggleTheme }) {
         return;
       }
 
-      // If scrolled near bottom of page (Contact & Footer area)
       const isAtBottom =
         window.innerHeight + window.scrollY >=
         Math.max(document.body.scrollHeight, document.documentElement.scrollHeight) - 300;
@@ -70,16 +69,62 @@ export default function FloatingDockCyber({ theme, toggleTheme }) {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ type: "spring", stiffness: 300, damping: 26 }}
-      className={`fixed left-1/2 top-3 sm:top-6 z-[60] flex -translate-x-1/2 items-center gap-0.5 sm:gap-1.5 rounded-full border backdrop-blur-2xl transition-all duration-500 max-w-[96vw] sm:max-w-none ${
+      className={`fixed left-1/2 top-3 sm:top-6 z-[60] flex -translate-x-1/2 items-center gap-1 sm:gap-1.5 rounded-full border backdrop-blur-2xl transition-all duration-500 max-w-[96vw] sm:max-w-none ${
         isLightMode
           ? isScrolled
-            ? "px-2 sm:px-3 py-1 sm:py-1.5 shadow-[0_16px_40px_rgba(15,23,42,0.15)] bg-white/95 scale-95 border-slate-300"
-            : "px-2.5 sm:px-4 py-1.5 sm:py-2.5 shadow-[0_20px_50px_rgba(15,23,42,0.12)] bg-white/90 scale-100 border-slate-200"
+            ? "px-2.5 sm:px-3.5 py-1 sm:py-1.5 shadow-[0_16px_40px_rgba(15,23,42,0.15)] bg-white/95 scale-95 border-slate-300"
+            : "px-3 sm:px-4 py-1.5 sm:py-2.5 shadow-[0_20px_50px_rgba(15,23,42,0.12)] bg-white/90 scale-100 border-slate-200"
           : isScrolled
-            ? "px-2 sm:px-3 py-1 sm:py-1.5 shadow-[0_16px_50px_rgba(0,0,0,0.95)] bg-[#0b0f17]/95 scale-95 border-white/25"
-            : "px-2.5 sm:px-4 py-1.5 sm:py-2.5 shadow-[0_20px_60px_rgba(0,0,0,0.85)] bg-[#0b0f17]/90 scale-100 border-white/20"
+            ? "px-2.5 sm:px-3.5 py-1 sm:py-1.5 shadow-[0_16px_50px_rgba(0,0,0,0.95)] bg-[#0b0f17]/95 scale-95 border-white/25"
+            : "px-3 sm:px-4 py-1.5 sm:py-2.5 shadow-[0_20px_60px_rgba(0,0,0,0.85)] bg-[#0b0f17]/90 scale-100 border-white/20"
       }`}
     >
+      {/* 🚀 Watermelon-style Personal Brand Logo & Name */}
+      <a
+        href="#home"
+        aria-label="Sasiru Liyanage Home"
+        className="group flex items-center gap-2 pr-1 sm:pr-2 pl-1 py-1 transition-transform active:scale-95"
+      >
+        {/* Layered Cyber Diamond Brand Logo */}
+        <div className="relative flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500/20 via-cyan-500/20 to-teal-500/20 border border-emerald-400/40 shadow-[0_0_12px_rgba(16,185,129,0.3)] group-hover:border-cyan-400 group-hover:shadow-[0_0_16px_rgba(6,182,212,0.5)] transition-all">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            className="h-4 w-4 sm:h-4.5 sm:w-4.5 text-emerald-400 group-hover:text-cyan-300 transition-colors"
+          >
+            <path
+              d="M12 2L3 7L12 12L21 7L12 2Z"
+              fill="currentColor"
+              fillOpacity="0.9"
+            />
+            <path
+              d="M3 12L12 17L21 12"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M3 17L12 22L21 17"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeOpacity="0.7"
+            />
+          </svg>
+        </div>
+
+        {/* Brand Name Text (Hidden on extremely small screens, visible on sm and above) */}
+        <span className="font-extrabold tracking-tight text-slate-900 dark:text-white font-mono text-xs sm:text-sm hidden xs:inline-block sm:inline-block">
+          Sasiru<span className="text-cyan-400">.dev</span>
+        </span>
+      </a>
+
+      {/* Brand Divider */}
+      <div className={`mx-0.5 sm:mx-1 h-5 w-px ${isLightMode ? "bg-slate-300" : "bg-white/15"}`} />
+
+      {/* Navigation Links */}
       {NAV.map((item) => {
         const Icon = item.icon;
         const isActive = active === item.id;
@@ -88,7 +133,7 @@ export default function FloatingDockCyber({ theme, toggleTheme }) {
             key={item.id}
             href={`#${item.id}`}
             aria-label={item.label}
-            className="relative flex items-center gap-1 sm:gap-1.5 rounded-full px-2 sm:px-3.5 py-1.5 sm:py-2 text-[11px] sm:text-xs font-medium transition-colors"
+            className="relative flex items-center gap-1 sm:gap-1.5 rounded-full px-2.5 sm:px-3 py-1.5 sm:py-2 text-[11px] sm:text-xs font-medium transition-colors"
           >
             {isActive && (
               <motion.span
@@ -112,7 +157,7 @@ export default function FloatingDockCyber({ theme, toggleTheme }) {
                   animate={{ opacity: 1, width: "auto" }}
                   exit={{ opacity: 0, width: 0 }}
                   transition={{ duration: 0.2 }}
-                  className={`relative z-10 font-mono overflow-hidden whitespace-nowrap hidden xs:inline-block sm:inline-block ${
+                  className={`relative z-10 font-mono overflow-hidden whitespace-nowrap hidden md:inline-block ${
                     isActive ? "text-white font-semibold" : isLightMode ? "text-slate-600" : "text-slate-300"
                   }`}
                 >
@@ -131,7 +176,7 @@ export default function FloatingDockCyber({ theme, toggleTheme }) {
             animate={{ opacity: 1, width: "auto" }}
             exit={{ opacity: 0, width: 0 }}
             transition={{ duration: 0.25 }}
-            className="hidden items-center overflow-hidden md:flex"
+            className="hidden items-center overflow-hidden lg:flex"
           >
             <div className={`mx-1.5 h-5 w-px ${isLightMode ? "bg-slate-300" : "bg-white/15"}`} />
 
@@ -150,8 +195,8 @@ export default function FloatingDockCyber({ theme, toggleTheme }) {
       </AnimatePresence>
 
       {/* Modern Animated Sun/Moon Switch Mode Slider */}
-      <div className="flex items-center pl-1.5 sm:pl-2.5">
-        <div className={`mr-1.5 sm:mr-2.5 h-5 w-px ${isLightMode ? "bg-slate-300" : "bg-white/15"}`} />
+      <div className="flex items-center pl-1 sm:pl-2">
+        <div className={`mr-1 sm:mr-2 h-5 w-px ${isLightMode ? "bg-slate-300" : "bg-white/15"}`} />
         <SwitchModeToggle theme={theme} toggleTheme={toggleTheme} />
       </div>
     </motion.nav>

@@ -83,10 +83,10 @@ export default function FloatingDockCyber({ theme, toggleTheme }) {
       <a
         href="#home"
         aria-label="Sasiru Liyanage Home"
-        className="group flex items-center gap-2 pr-1 sm:pr-2 pl-1 py-1 transition-transform active:scale-95"
+        className="group flex items-center gap-2 pr-1.5 sm:pr-2.5 pl-1.5 py-1 transition-transform active:scale-95 cursor-pointer shrink-0"
       >
         {/* Layered Cyber Diamond Brand Logo */}
-        <div className="relative flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500/20 via-cyan-500/20 to-teal-500/20 border border-emerald-400/40 shadow-[0_0_12px_rgba(16,185,129,0.3)] group-hover:border-cyan-400 group-hover:shadow-[0_0_16px_rgba(6,182,212,0.5)] transition-all">
+        <div className="relative flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500/20 via-cyan-500/20 to-teal-500/20 border border-emerald-400/50 shadow-[0_0_12px_rgba(16,185,129,0.35)] group-hover:border-cyan-400 group-hover:shadow-[0_0_16px_rgba(6,182,212,0.5)] transition-all">
           <svg
             viewBox="0 0 24 24"
             fill="none"
@@ -115,14 +115,14 @@ export default function FloatingDockCyber({ theme, toggleTheme }) {
           </svg>
         </div>
 
-        {/* Brand Name Text (Hidden on extremely small screens, visible on sm and above) */}
-        <span className="font-extrabold tracking-tight text-slate-900 dark:text-white font-mono text-xs sm:text-sm hidden xs:inline-block sm:inline-block">
-          Sasiru<span className="text-cyan-400">.dev</span>
+        {/* Brand Name Text */}
+        <span className="font-extrabold tracking-tight text-slate-900 dark:text-white font-mono text-xs sm:text-sm inline-block">
+          Sasiru<span className="text-cyan-400 font-bold">.dev</span>
         </span>
       </a>
 
       {/* Brand Divider */}
-      <div className={`mx-0.5 sm:mx-1 h-5 w-px ${isLightMode ? "bg-slate-300" : "bg-white/15"}`} />
+      <div className={`mx-1 sm:mx-1.5 h-5 w-px ${isLightMode ? "bg-slate-300" : "bg-white/20"}`} />
 
       {/* Navigation Links */}
       {NAV.map((item) => {

@@ -9,6 +9,7 @@ import IntroLoader from "./components/IntroLoader";
 import EasterEggs from "./components/EasterEggs";
 import ScrollProgressBar from "./components/ScrollProgressBar";
 import FloatingDockCyber from "./components/cyber/FloatingDockCyber";
+import SwitchModeToggle from "./components/SwitchModeToggle";
 import CulturalPatternCanvas from "./components/CulturalPatternCanvas";
 import CommandPalette from "./components/CommandPalette";
 import BackToTop from "./components/BackToTop";
@@ -153,8 +154,13 @@ export default function App() {
       {/* Easter Eggs: tab title + Konami code confetti */}
       <EasterEggs />
 
-      {/* Floating Apple macOS Navigation Dock with Animated Sun/Moon Theme Switcher */}
-      <FloatingDockCyber theme={theme} toggleTheme={toggleTheme} />
+      {/* Top-Right Corner Floating Theme Switcher */}
+      <div className="fixed top-3.5 right-3.5 sm:top-5 sm:right-6 z-[70]">
+        <SwitchModeToggle theme={theme} toggleTheme={toggleTheme} />
+      </div>
+
+      {/* Modern 5-Item Floating Bottom Navigation Dock */}
+      <FloatingDockCyber theme={theme} />
 
       {/* Back To Top Floating Button */}
       <BackToTop />

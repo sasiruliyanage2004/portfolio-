@@ -1,26 +1,24 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Home, Layers, Mail, User, GraduationCap } from "lucide-react";
-import SwitchModeToggle from "../SwitchModeToggle";
 
-const NAV = [
+// Exactly 5 essential navigation destinations
+const NAV_ITEMS = [
   { id: "home", label: "Home", icon: Home },
   { id: "projects", label: "Projects", icon: Layers },
-  { id: "education", label: "Education", icon: GraduationCap },
-  { id: "skills", label: "Skills", icon: User },
+  { id: "education", label: "About", icon: User },
+  { id: "skills", label: "Skills", icon: GraduationCap },
   { id: "contact", label: "Contact", icon: Mail },
 ];
 
-export default function FloatingDockCyber({ theme, toggleTheme }) {
+export default function FloatingDockCyber({ theme }) {
   const [active, setActive] = useState("home");
-  const [isScrolled, setIsScrolled] = useState(false);
   const isLightMode = theme === "light";
 
   // Bulletproof Scroll Spy for 100% Accurate Navbar Active Section Highlighting
   useEffect(() => {
     const handleScrollSpy = () => {
       const scrollPosition = window.scrollY;
-      setIsScrolled(scrollPosition > 20);
 
       if (scrollPosition < 250) {
         setActive("home");
@@ -29,14 +27,14 @@ export default function FloatingDockCyber({ theme, toggleTheme }) {
 
       const isAtBottom =
         window.innerHeight + window.scrollY >=
-        Math.max(document.body.scrollHeight, document.documentElement.scrollHeight) - 300;
+        Math.max(document.body.scrollHeight, document.documentElement.scrollHeight) - 250;
 
       if (isAtBottom) {
         setActive("contact");
         return;
       }
 
-      const sections = NAV.map((n) => document.getElementById(n.id)).filter(Boolean);
+      const sections = NAV_ITEMS.map((n) => document.getElementById(n.id)).filter(Boolean);
       const viewportMiddle = window.innerHeight / 2;
 
       let currentActive = "home";
@@ -47,7 +45,7 @@ export default function FloatingDockCyber({ theme, toggleTheme }) {
         const sectionCenter = rect.top + rect.height / 2;
         const distance = Math.abs(sectionCenter - viewportMiddle);
 
-        if (rect.top <= viewportMiddle + 100 && rect.bottom >= 150) {
+        if (rect.top <= viewportMiddle + 100 && rect.bottom >= 120) {
           if (distance < minDistance) {
             minDistance = distance;
             currentActive = section.id;
@@ -66,63 +64,47 @@ export default function FloatingDockCyber({ theme, toggleTheme }) {
   return (
     <motion.nav
       layout
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ type: "spring", stiffness: 350, damping: 28 }}
-      className={`fixed left-1/2 -translate-x-1/2 z-[60] flex items-center rounded-full border backdrop-blur-2xl transition-all duration-300 ring-1 shadow-2xl max-w-[98vw] sm:max-w-none bottom-3 sm:bottom-auto sm:top-6 ${
+      initial={{ opacity: 0, y: 30, scale: 0.9 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ type: "spring", stiffness: 400, damping: 30 }}
+      className={`fixed bottom-4 sm:bottom-6 left-1/2 z-[60] flex -translate-x-1/2 items-center justify-around sm:justify-center gap-1 sm:gap-2 h-[64px] sm:h-[68px] px-2.5 sm:px-4 rounded-2xl sm:rounded-full border backdrop-blur-2xl transition-all duration-300 shadow-2xl w-[94vw] max-w-[440px] sm:w-auto sm:max-w-none ${
         isLightMode
-          ? isScrolled
-            ? "px-2 sm:px-3 py-1 sm:py-1.5 shadow-[0_16px_40px_rgba(15,23,42,0.18)] bg-white/95 ring-black/5 border-slate-300"
-            : "px-2.5 sm:px-4 py-1.5 sm:py-2.5 shadow-[0_20px_50px_rgba(15,23,42,0.14)] bg-white/90 ring-black/5 border-slate-200"
-          : isScrolled
-            ? "px-2 sm:px-3 py-1 sm:py-1.5 shadow-[0_20px_50px_rgba(0,0,0,0.95),0_0_20px_rgba(6,182,212,0.15)] bg-[#090d16]/95 ring-white/10 border-white/20"
-            : "px-2.5 sm:px-4 py-1.5 sm:py-2.5 shadow-[0_25px_60px_rgba(0,0,0,0.9),0_0_25px_rgba(6,182,212,0.12)] bg-[#090d16]/90 ring-white/10 border-white/15"
+          ? "bg-white/95 border-slate-300 shadow-[0_16px_40px_rgba(15,23,42,0.18)]"
+          : "bg-[#090d16]/90 border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.95),0_0_25px_rgba(13,148,136,0.2)]"
       }`}
     >
-      {/* 🚀 Personal Brand Avatar & Active Indicator */}
+      {/* 🚀 Item 1: Profile Avatar Home Link */}
       <a
         href="#home"
         aria-label="Sasiru Liyanage Home"
-        className="group flex items-center gap-1.5 sm:gap-2.5 pr-1.5 sm:pr-2.5 pl-0.5 py-0.5 transition-transform active:scale-95 cursor-pointer shrink-0"
+        className="group relative flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-full transition-transform active:scale-95 cursor-pointer shrink-0"
       >
-        <div className="relative flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full p-[1.5px] bg-gradient-to-tr from-cyan-400 via-emerald-400 to-indigo-500 shadow-[0_0_14px_rgba(6,182,212,0.5)] group-hover:shadow-[0_0_20px_rgba(6,182,212,0.8)] group-hover:scale-105 transition-all shrink-0">
+        <div className="relative flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full p-[1.5px] bg-gradient-to-tr from-teal-400 via-cyan-400 to-indigo-500 shadow-[0_0_12px_rgba(13,148,136,0.5)] group-hover:shadow-[0_0_18px_rgba(6,182,212,0.8)] group-hover:scale-105 transition-all">
           <img
             src="/profile.png"
             alt="Sasiru Liyanage"
-            className="h-full w-full rounded-full object-cover border border-black/50"
+            className="h-full w-full rounded-full object-cover border border-black/40"
             onError={(e) => {
               e.target.src = "/favicon.svg";
             }}
           />
-          {/* Live Online Status Dot */}
-          <span className="absolute bottom-0 right-0 h-2 w-2 rounded-full bg-emerald-400 border-[1.5px] border-[#090d16] shadow-[0_0_6px_#10b981]" />
+          {/* Live Online Teal Status Dot */}
+          <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-teal-400 border-2 border-[#090d16] shadow-[0_0_8px_#14b8a6]" />
         </div>
-
-        {/* Brand Name Text: High-contrast in both Light & Dark themes */}
-        <span
-          className={`font-extrabold tracking-tight font-mono text-xs sm:text-sm hidden sm:inline-block whitespace-nowrap ${
-            isLightMode ? "text-slate-900" : "text-white"
-          }`}
-        >
-          Sasiru{" "}
-          <span className={isLightMode ? "text-cyan-700 font-bold" : "text-cyan-400 font-bold"}>
-            Liyanage
-          </span>
-        </span>
       </a>
 
       {/* Laser Vertical Divider */}
       <div
-        className={`mx-0.5 sm:mx-1.5 h-4 sm:h-5 w-[1px] ${
+        className={`mx-0.5 sm:mx-1.5 h-6 w-[1px] ${
           isLightMode
             ? "bg-gradient-to-b from-transparent via-slate-300 to-transparent"
             : "bg-gradient-to-b from-transparent via-white/20 to-transparent"
         } shrink-0`}
       />
 
-      {/* Navigation Icons Group */}
-      <div className="flex items-center gap-0.5 sm:gap-1">
-        {NAV.map((item) => {
+      {/* 🧭 Navigation Items (Home, Projects, About, Skills, Contact) */}
+      <div className="flex items-center justify-between sm:justify-center flex-1 sm:flex-initial gap-1 sm:gap-1.5">
+        {NAV_ITEMS.map((item) => {
           const Icon = item.icon;
           const isActive = active === item.id;
           return (
@@ -131,36 +113,49 @@ export default function FloatingDockCyber({ theme, toggleTheme }) {
               href={`#${item.id}`}
               aria-label={item.label}
               whileTap={{ scale: 0.92 }}
-              className={`relative flex items-center gap-1.5 rounded-full px-2.5 sm:px-3.5 py-1.5 sm:py-2 text-[11px] sm:text-xs font-medium transition-colors shrink-0 ${
-                isActive ? "text-white font-bold" : isLightMode ? "text-slate-600 hover:text-cyan-600" : "text-slate-400 hover:text-cyan-300"
+              className={`relative flex items-center justify-center gap-1.5 min-w-[44px] h-[44px] sm:min-w-[48px] sm:h-[48px] px-2.5 sm:px-3.5 rounded-xl sm:rounded-full transition-all duration-200 cursor-pointer select-none ${
+                isActive
+                  ? isLightMode
+                    ? "text-teal-700 font-bold"
+                    : "text-teal-300 font-bold"
+                  : isLightMode
+                  ? "text-slate-500 hover:text-slate-900"
+                  : "text-slate-400 hover:text-white"
               }`}
             >
-              {/* Glowing High-Impact Active Pill */}
+              {/* ✨ Active Tab Sliding Pill Background (Teal Accent) */}
               {isActive && (
                 <motion.span
-                  layoutId="activeDockCyberPill"
-                  style={{
-                    background: "linear-gradient(135deg, #06b6d4 0%, #10b981 100%)",
-                  }}
-                  className="absolute inset-0 rounded-full shadow-[0_0_18px_rgba(6,182,212,0.6),inset_0_1px_1px_rgba(255,255,255,0.4)]"
-                  transition={{ type: "spring", stiffness: 450, damping: 30 }}
+                  layoutId="activeBottomNavPill"
+                  className={`absolute inset-0 rounded-xl sm:rounded-full border ${
+                    isLightMode
+                      ? "bg-teal-500/15 border-teal-500/30 shadow-[0_2px_12px_rgba(13,148,136,0.15)]"
+                      : "bg-teal-500/20 border-teal-400/40 shadow-[0_0_16px_rgba(13,148,136,0.4)]"
+                  }`}
+                  transition={{ type: "spring", stiffness: 450, damping: 32 }}
                 />
               )}
 
+              {/* Icon */}
               <Icon
-                className={`relative z-10 h-3.5 w-3.5 sm:h-4 sm:w-4 transition-transform duration-200 ${
-                  isActive ? "text-white scale-110 drop-shadow-[0_1px_2px_rgba(0,0,0,0.4)]" : ""
+                className={`relative z-10 h-4 w-4 sm:h-4.5 sm:w-4.5 transition-transform duration-200 ${
+                  isActive
+                    ? isLightMode
+                      ? "text-teal-700 scale-110"
+                      : "text-teal-300 scale-110 drop-shadow-[0_0_8px_rgba(20,184,166,0.6)]"
+                    : ""
                 }`}
               />
 
-              <AnimatePresence>
-                {(!isScrolled || isActive) && (
+              {/* Active Tab Label (Shown ONLY on the Active Tab) */}
+              <AnimatePresence mode="popLayout">
+                {isActive && (
                   <motion.span
-                    initial={{ opacity: 0, width: 0 }}
-                    animate={{ opacity: 1, width: "auto" }}
-                    exit={{ opacity: 0, width: 0 }}
+                    initial={{ opacity: 0, width: 0, x: -6 }}
+                    animate={{ opacity: 1, width: "auto", x: 0 }}
+                    exit={{ opacity: 0, width: 0, x: -6 }}
                     transition={{ duration: 0.2 }}
-                    className="relative z-10 font-mono overflow-hidden whitespace-nowrap hidden md:inline-block"
+                    className="relative z-10 font-mono text-[11px] sm:text-xs overflow-hidden whitespace-nowrap"
                   >
                     {item.label}
                   </motion.span>
@@ -169,40 +164,6 @@ export default function FloatingDockCyber({ theme, toggleTheme }) {
             </motion.a>
           );
         })}
-      </div>
-
-      {/* Available for Hire Badge (Desktop) */}
-      <AnimatePresence>
-        {!isScrolled && (
-          <motion.div
-            initial={{ opacity: 0, width: 0 }}
-            animate={{ opacity: 1, width: "auto" }}
-            exit={{ opacity: 0, width: 0 }}
-            transition={{ duration: 0.25 }}
-            className="hidden items-center overflow-hidden lg:flex"
-          >
-            <div className="mx-1.5 h-4 w-[1px] bg-gradient-to-b from-transparent via-white/20 to-transparent" />
-
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1.5 font-mono text-[10px] font-medium text-emerald-600 dark:text-emerald-300 whitespace-nowrap shadow-inner">
-              <span className="relative flex h-1.5 w-1.5">
-                <span className="pulse-dot absolute inline-flex h-full w-full rounded-full bg-emerald-500" />
-                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
-              </span>
-              Available for Hire
-            </span>
-            <span className="ml-2 font-mono text-[9px] opacity-60 border border-white/15 rounded-lg px-2 py-1 whitespace-nowrap">
-              Ctrl+K
-            </span>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Laser Vertical Divider */}
-      <div className="mx-0.5 sm:mx-1.5 h-4 sm:h-5 w-[1px] bg-gradient-to-b from-transparent via-white/20 dark:via-white/20 light-theme:via-slate-300 to-transparent shrink-0" />
-
-      {/* Modern Animated Sun/Moon Switch Mode Slider */}
-      <div className="flex items-center pl-0.5 sm:pl-1">
-        <SwitchModeToggle theme={theme} toggleTheme={toggleTheme} />
       </div>
     </motion.nav>
   );

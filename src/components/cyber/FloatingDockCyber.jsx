@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Home, Layers, Mail, User, GraduationCap } from "lucide-react";
+import SwitchModeToggle from "../SwitchModeToggle";
 
 const NAV = [
   { id: "home", label: "Home", icon: Home },
@@ -10,7 +11,7 @@ const NAV = [
   { id: "contact", label: "Contact", icon: Mail },
 ];
 
-export default function FloatingDockCyber({ theme }) {
+export default function FloatingDockCyber({ theme, toggleTheme }) {
   const [active, setActive] = useState("home");
   const [isScrolled, setIsScrolled] = useState(false);
   const isLightMode = theme === "light";
@@ -69,7 +70,7 @@ export default function FloatingDockCyber({ theme }) {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ type: "spring", stiffness: 300, damping: 26 }}
-      className={`fixed left-1/2 top-3 sm:top-6 z-[60] flex -translate-x-1/2 items-center gap-0.5 sm:gap-1.5 rounded-full border backdrop-blur-2xl transition-all duration-500 max-w-[95vw] sm:max-w-none ${
+      className={`fixed left-1/2 top-3 sm:top-6 z-[60] flex -translate-x-1/2 items-center gap-0.5 sm:gap-1.5 rounded-full border backdrop-blur-2xl transition-all duration-500 max-w-[96vw] sm:max-w-none ${
         isLightMode
           ? isScrolled
             ? "px-2 sm:px-3 py-1 sm:py-1.5 shadow-[0_16px_40px_rgba(15,23,42,0.15)] bg-white/95 scale-95 border-slate-300"
@@ -87,7 +88,7 @@ export default function FloatingDockCyber({ theme }) {
             key={item.id}
             href={`#${item.id}`}
             aria-label={item.label}
-            className="relative flex items-center gap-1 sm:gap-1.5 rounded-full px-2.5 sm:px-3.5 py-1.5 sm:py-2 text-[11px] sm:text-xs font-medium transition-colors"
+            className="relative flex items-center gap-1 sm:gap-1.5 rounded-full px-2 sm:px-3.5 py-1.5 sm:py-2 text-[11px] sm:text-xs font-medium transition-colors"
           >
             {isActive && (
               <motion.span
@@ -147,6 +148,12 @@ export default function FloatingDockCyber({ theme }) {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Modern Animated Sun/Moon Switch Mode Slider */}
+      <div className="flex items-center pl-1 sm:pl-2">
+        <div className={`mr-1 sm:mr-2 h-4 w-px ${isLightMode ? "bg-slate-300" : "bg-white/15"}`} />
+        <SwitchModeToggle theme={theme} toggleTheme={toggleTheme} size="compact" />
+      </div>
     </motion.nav>
   );
 }

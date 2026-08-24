@@ -209,8 +209,8 @@ export default function App() {
       {/* Easter Eggs: tab title + Konami code confetti */}
       <EasterEggs />
 
-      {/* Floating Apple macOS Navigation Dock with True 3D Tilt Physics */}
-      <FloatingDockCyber theme={theme} />
+      {/* Floating Apple macOS Navigation Dock with Animated Sun/Moon Theme Switcher */}
+      <FloatingDockCyber theme={theme} toggleTheme={toggleTheme} />
 
       {/* Standalone Fixed 3D Floating Glass Orb Theme Switcher */}
       <FloatingOrbThemeToggle theme={theme} toggleTheme={toggleTheme} />

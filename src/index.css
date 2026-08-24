@@ -538,11 +538,9 @@ html, body {
 }
 
 /* ------------------------------------------------------------------
-   AUTO-HIDE FLOATING NAVBAR WHEN ANY MODAL / POPUP IS OPEN
+   AUTO-HIDE FLOATING NAVBAR ONLY WHEN A MODAL IS ACTIVELY OPEN
    ------------------------------------------------------------------ */
-body.modal-open nav,
-body:has([role="dialog"]) nav,
-body:has(.project-card-obsidian) nav {
+body.modal-open nav {
   opacity: 0 !important;
   pointer-events: none !important;
   transform: translate(-50%, -30px) !important;

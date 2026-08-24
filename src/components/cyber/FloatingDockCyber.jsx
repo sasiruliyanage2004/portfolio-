@@ -16,44 +16,39 @@ export default function FloatingDockCyber({ theme, toggleTheme }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const isLightMode = theme === "light";
 
-  // Bulletproof Scroll Spy for 100% Accurate Navbar Active Section Highlighting
+  // Precision Top-Down Scroll Spy
   useEffect(() => {
     const handleScrollSpy = () => {
       const scrollPosition = window.scrollY;
       setIsScrolled(scrollPosition > 20);
 
-      if (scrollPosition < 250) {
-        setActive("home");
-        return;
-      }
-
+      // Check if at the very bottom of the document
       const isAtBottom =
         window.innerHeight + window.scrollY >=
-        Math.max(document.body.scrollHeight, document.documentElement.scrollHeight) - 250;
+        Math.max(document.body.scrollHeight, document.documentElement.scrollHeight) - 180;
 
       if (isAtBottom) {
         setActive("contact");
         return;
       }
 
+      // Check if near top
+      if (scrollPosition < 150) {
+        setActive("home");
+        return;
+      }
+
+      // Threshold line at 240px from top of viewport
+      const threshold = 240;
       const sections = NAV_ITEMS.map((n) => document.getElementById(n.id)).filter(Boolean);
-      const viewportMiddle = window.innerHeight / 2;
 
       let currentActive = "home";
-      let minDistance = Infinity;
-
-      sections.forEach((section) => {
-        const rect = section.getBoundingClientRect();
-        const sectionCenter = rect.top + rect.height / 2;
-        const distance = Math.abs(sectionCenter - viewportMiddle);
-
-        if (rect.top <= viewportMiddle + 100 && rect.bottom >= 120) {
-          if (distance < minDistance) {
-            minDistance = distance;
-            currentActive = section.id;
-          }
+      for (let i = 0; i < sections.length; i++) {
+        const rect = sections[i].getBoundingClientRect();
+        if (rect.top <= threshold) {
+          currentActive = sections[i].id;
         }
-      });
+      }
 
       setActive(currentActive);
     };
@@ -62,6 +57,22 @@ export default function FloatingDockCyber({ theme, toggleTheme }) {
     handleScrollSpy();
     return () => window.removeEventListener("scroll", handleScrollSpy);
   }, []);
+
+  // Smooth programmatic scroll with instant tab highlight
+  const handleNavClick = (e, id) => {
+    e.preventDefault();
+    setActive(id);
+    const elem = document.getElementById(id);
+    if (elem) {
+      if (window.__lenis) {
+        window.__lenis.scrollTo(elem, { offset: -90, duration: 1.1 });
+      } else {
+        const yOffset = -90;
+        const y = elem.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        window.scrollTo({ top: y, behavior: "smooth" });
+      }
+    }
+  };
 
   return (
     <>
@@ -86,6 +97,7 @@ export default function FloatingDockCyber({ theme, toggleTheme }) {
         {/* Brand Avatar & Name */}
         <a
           href="#home"
+          onClick={(e) => handleNavClick(e, "home")}
           aria-label="Sasiru Liyanage Home"
           className="group flex items-center gap-2.5 pr-2.5 pl-1 py-1 transition-transform active:scale-95 cursor-pointer shrink-0"
         >
@@ -129,6 +141,7 @@ export default function FloatingDockCyber({ theme, toggleTheme }) {
               <motion.a
                 key={item.id}
                 href={`#${item.id}`}
+                onClick={(e) => handleNavClick(e, item.id)}
                 aria-label={item.label}
                 whileTap={{ scale: 0.92 }}
                 className={`relative flex items-center gap-2 h-10 px-3.5 rounded-xl text-xs font-mono font-medium transition-all duration-200 cursor-pointer select-none ${
@@ -240,6 +253,7 @@ export default function FloatingDockCyber({ theme, toggleTheme }) {
               <motion.a
                 key={item.id}
                 href={`#${item.id}`}
+                onClick={(e) => handleNavClick(e, item.id)}
                 aria-label={item.label}
                 whileTap={{ scale: 0.92 }}
                 className={`relative flex items-center justify-center h-11 w-11 rounded-xl transition-all duration-200 cursor-pointer select-none shrink-0 ${

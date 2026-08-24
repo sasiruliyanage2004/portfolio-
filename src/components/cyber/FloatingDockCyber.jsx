@@ -79,45 +79,27 @@ export default function FloatingDockCyber({ theme, toggleTheme }) {
             : "px-3 sm:px-4 py-1.5 sm:py-2.5 shadow-[0_20px_60px_rgba(0,0,0,0.85)] bg-[#0b0f17]/90 scale-100 border-white/20"
       }`}
     >
-      {/* 🚀 Watermelon-style Personal Brand Logo & Name */}
+      {/* 🚀 Personal Brand Avatar Logo & Name */}
       <a
         href="#home"
         aria-label="Sasiru Liyanage Home"
-        className="group flex items-center gap-2 pr-1.5 sm:pr-2.5 pl-1.5 py-1 transition-transform active:scale-95 cursor-pointer shrink-0"
+        className="group flex items-center gap-2 pr-1.5 sm:pr-2.5 pl-1 py-1 transition-transform active:scale-95 cursor-pointer shrink-0"
       >
-        {/* Layered Cyber Diamond Brand Logo */}
-        <div className="relative flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500/20 via-cyan-500/20 to-teal-500/20 border border-emerald-400/50 shadow-[0_0_12px_rgba(16,185,129,0.35)] group-hover:border-cyan-400 group-hover:shadow-[0_0_16px_rgba(6,182,212,0.5)] transition-all">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            className="h-4 w-4 sm:h-4.5 sm:w-4.5 text-emerald-400 group-hover:text-cyan-300 transition-colors"
-          >
-            <path
-              d="M12 2L3 7L12 12L21 7L12 2Z"
-              fill="currentColor"
-              fillOpacity="0.9"
-            />
-            <path
-              d="M3 12L12 17L21 12"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M3 17L12 22L21 17"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeOpacity="0.7"
-            />
-          </svg>
+        {/* Chrome Tab Favicon Avatar with Neon Border Glow */}
+        <div className="relative flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full p-0.5 bg-gradient-to-tr from-cyan-500 via-emerald-400 to-indigo-500 shadow-[0_0_12px_rgba(6,182,212,0.4)] group-hover:shadow-[0_0_16px_rgba(6,182,212,0.7)] transition-all">
+          <img
+            src="/profile.png"
+            alt="Sasiru Liyanage"
+            className="h-full w-full rounded-full object-cover border border-black/40"
+            onError={(e) => {
+              e.target.src = "/favicon.svg";
+            }}
+          />
         </div>
 
-        {/* Brand Name Text */}
+        {/* Brand Name Text: Sasiru Liyanage */}
         <span className="font-extrabold tracking-tight text-slate-900 dark:text-white font-mono text-xs sm:text-sm inline-block">
-          Sasiru<span className="text-cyan-400 font-bold">.dev</span>
+          Sasiru <span className="text-cyan-400 font-bold">Liyanage</span>
         </span>
       </a>
 

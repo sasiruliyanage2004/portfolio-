@@ -66,10 +66,10 @@ export default function FloatingDockCyber({ theme, toggleTheme }) {
   return (
     <motion.nav
       layout
-      initial={{ opacity: 0, y: -25 }}
-      animate={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
       transition={{ type: "spring", stiffness: 350, damping: 28 }}
-      className={`fixed left-1/2 top-3 sm:top-6 z-[60] flex -translate-x-1/2 items-center rounded-full border backdrop-blur-2xl transition-all duration-300 ring-1 shadow-2xl max-w-[98vw] sm:max-w-none ${
+      className={`fixed left-1/2 -translate-x-1/2 z-[60] flex items-center rounded-full border backdrop-blur-2xl transition-all duration-300 ring-1 shadow-2xl max-w-[98vw] sm:max-w-none bottom-3 sm:bottom-auto sm:top-6 ${
         isLightMode
           ? isScrolled
             ? "px-2 sm:px-3 py-1 sm:py-1.5 shadow-[0_16px_40px_rgba(15,23,42,0.18)] bg-white/95 ring-black/5 border-slate-300"

@@ -12,6 +12,7 @@ import FloatingDockCyber from "./components/cyber/FloatingDockCyber";
 import SwitchModeToggle from "./components/SwitchModeToggle";
 import CulturalPatternCanvas from "./components/CulturalPatternCanvas";
 import CommandPalette from "./components/CommandPalette";
+import ResumeModal from "./components/ResumeModal";
 import BackToTop from "./components/BackToTop";
 import HeroCyber from "./components/cyber/HeroCyber";
 import ProjectsCyber from "./components/cyber/ProjectsCyber";
@@ -28,6 +29,7 @@ export default function App() {
   });
 
   const [cmdOpen, setCmdOpen] = useState(false);
+  const [resumeOpen, setResumeOpen] = useState(false);
 
   // Show loader only once per session
   const [loaderDone, setLoaderDone] = useState(() => {
@@ -168,9 +170,15 @@ export default function App() {
         setOpen={setCmdOpen}
       />
 
+      {/* Interactive Resume Preview Modal */}
+      <ResumeModal
+        isOpen={resumeOpen}
+        onClose={() => setResumeOpen(false)}
+      />
+
       {/* Main Portfolio Page Content — Streamlined, Ultra-Clean & Fast Flow */}
       <main className="relative z-10 flex flex-col bg-transparent">
-        <HeroCyber />
+        <HeroCyber onOpenResume={() => setResumeOpen(true)} />
         <ProjectsCyber />
         <EducationCyber />
         <SkillsCyber />

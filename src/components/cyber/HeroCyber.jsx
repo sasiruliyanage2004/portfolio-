@@ -162,7 +162,7 @@ function UnifiedStatusBadge() {
   );
 }
 
-export default function HeroCyber() {
+export default function HeroCyber({ onOpenResume }) {
   const targetRef = useRef(null);
 
   const { scrollYProgress } = useScroll({
@@ -227,14 +227,14 @@ export default function HeroCyber() {
                 <span>Get in Touch</span>
               </MagneticButton>
 
-              <MagneticButton
-                href="/resume.pdf"
-                download="Sasiru_Liyanage_CV.pdf"
-                className="glass-panel inline-flex items-center gap-2 rounded-full px-4 py-3 sm:px-5 sm:py-3.5 font-mono text-xs font-medium text-slate-600 dark:text-slate-400 transition-all hover:border-cyan-400/50 hover:text-white cursor-pointer"
+              <button
+                type="button"
+                onClick={onOpenResume}
+                className="glass-panel inline-flex items-center gap-2 rounded-full px-4 py-3 sm:px-5 sm:py-3.5 font-mono text-xs font-medium text-slate-700 dark:text-slate-300 transition-all hover:border-cyan-400/50 hover:text-cyan-400 cursor-pointer shadow-lg active:scale-95"
               >
                 <FileText className="h-3.5 w-3.5 text-cyan-400" />
                 <span>Resume</span>
-              </MagneticButton>
+              </button>
             </div>
 
             {/* Animated Count-Up Stats */}

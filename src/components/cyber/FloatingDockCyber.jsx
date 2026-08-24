@@ -20,7 +20,7 @@ export default function FloatingDockCyber({ theme, toggleTheme }) {
   useEffect(() => {
     const handleScrollSpy = () => {
       const scrollPosition = window.scrollY;
-      setIsScrolled(scrollPosition > 15);
+      setIsScrolled(scrollPosition > 20);
 
       if (scrollPosition < 250) {
         setActive("home");
@@ -66,35 +66,36 @@ export default function FloatingDockCyber({ theme, toggleTheme }) {
   return (
     <motion.nav
       layout
-      initial={{ opacity: 0, y: -20 }}
+      initial={{ opacity: 0, y: -25 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ type: "spring", stiffness: 300, damping: 26 }}
-      className={`fixed left-1/2 top-3 sm:top-6 z-[60] flex -translate-x-1/2 items-center gap-1 sm:gap-1.5 rounded-full border backdrop-blur-2xl transition-all duration-500 max-w-[96vw] sm:max-w-none ${
+      transition={{ type: "spring", stiffness: 350, damping: 28 }}
+      className={`fixed left-1/2 top-3 sm:top-6 z-[60] flex -translate-x-1/2 items-center rounded-full border backdrop-blur-2xl transition-all duration-300 ring-1 shadow-2xl max-w-[98vw] sm:max-w-none ${
         isLightMode
           ? isScrolled
-            ? "px-2.5 sm:px-3.5 py-1 sm:py-1.5 shadow-[0_16px_40px_rgba(15,23,42,0.15)] bg-white/95 scale-95 border-slate-300"
-            : "px-3 sm:px-4 py-1.5 sm:py-2.5 shadow-[0_20px_50px_rgba(15,23,42,0.12)] bg-white/90 scale-100 border-slate-200"
+            ? "px-2 sm:px-3 py-1 sm:py-1.5 shadow-[0_16px_40px_rgba(15,23,42,0.18)] bg-white/95 ring-black/5 border-slate-300"
+            : "px-2.5 sm:px-4 py-1.5 sm:py-2.5 shadow-[0_20px_50px_rgba(15,23,42,0.14)] bg-white/90 ring-black/5 border-slate-200"
           : isScrolled
-            ? "px-2.5 sm:px-3.5 py-1 sm:py-1.5 shadow-[0_16px_50px_rgba(0,0,0,0.95)] bg-[#0b0f17]/95 scale-95 border-white/25"
-            : "px-3 sm:px-4 py-1.5 sm:py-2.5 shadow-[0_20px_60px_rgba(0,0,0,0.85)] bg-[#0b0f17]/90 scale-100 border-white/20"
+            ? "px-2 sm:px-3 py-1 sm:py-1.5 shadow-[0_20px_50px_rgba(0,0,0,0.95),0_0_20px_rgba(6,182,212,0.15)] bg-[#090d16]/95 ring-white/10 border-white/20"
+            : "px-2.5 sm:px-4 py-1.5 sm:py-2.5 shadow-[0_25px_60px_rgba(0,0,0,0.9),0_0_25px_rgba(6,182,212,0.12)] bg-[#090d16]/90 ring-white/10 border-white/15"
       }`}
     >
-      {/* 🚀 Personal Brand Avatar Logo & Name */}
+      {/* 🚀 Personal Brand Avatar & Active Indicator */}
       <a
         href="#home"
         aria-label="Sasiru Liyanage Home"
-        className="group flex items-center gap-1.5 sm:gap-2 pr-1 sm:pr-2.5 pl-0.5 sm:pl-1 py-1 transition-transform active:scale-95 cursor-pointer shrink-0"
+        className="group flex items-center gap-1.5 sm:gap-2.5 pr-1.5 sm:pr-2.5 pl-0.5 py-0.5 transition-transform active:scale-95 cursor-pointer shrink-0"
       >
-        {/* Chrome Tab Favicon Avatar with Neon Border Glow */}
-        <div className="relative flex h-6 w-6 sm:h-8 sm:w-8 items-center justify-center rounded-full p-0.5 bg-gradient-to-tr from-cyan-500 via-emerald-400 to-indigo-500 shadow-[0_0_12px_rgba(6,182,212,0.4)] group-hover:shadow-[0_0_16px_rgba(6,182,212,0.7)] transition-all shrink-0">
+        <div className="relative flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full p-[1.5px] bg-gradient-to-tr from-cyan-400 via-emerald-400 to-indigo-500 shadow-[0_0_14px_rgba(6,182,212,0.5)] group-hover:shadow-[0_0_20px_rgba(6,182,212,0.8)] group-hover:scale-105 transition-all shrink-0">
           <img
             src="/profile.png"
             alt="Sasiru Liyanage"
-            className="h-full w-full rounded-full object-cover border border-black/40"
+            className="h-full w-full rounded-full object-cover border border-black/50"
             onError={(e) => {
               e.target.src = "/favicon.svg";
             }}
           />
+          {/* Live Online Status Dot */}
+          <span className="absolute bottom-0 right-0 h-2 w-2 rounded-full bg-emerald-400 border-[1.5px] border-[#090d16] shadow-[0_0_6px_#10b981]" />
         </div>
 
         {/* Brand Name Text: Hidden on mobile (< sm), visible on sm+ screens */}
@@ -103,54 +104,61 @@ export default function FloatingDockCyber({ theme, toggleTheme }) {
         </span>
       </a>
 
-      {/* Brand Divider */}
-      <div className={`mx-0.5 sm:mx-1.5 h-4 sm:h-5 w-px ${isLightMode ? "bg-slate-300" : "bg-white/20"} shrink-0`} />
+      {/* Laser Vertical Divider */}
+      <div className="mx-0.5 sm:mx-1.5 h-4 sm:h-5 w-[1px] bg-gradient-to-b from-transparent via-white/20 dark:via-white/20 light-theme:via-slate-300 to-transparent shrink-0" />
 
-      {/* Navigation Links */}
-      {NAV.map((item) => {
-        const Icon = item.icon;
-        const isActive = active === item.id;
-        return (
-          <a
-            key={item.id}
-            href={`#${item.id}`}
-            aria-label={item.label}
-            className="relative flex items-center gap-1 sm:gap-1.5 rounded-full px-1.5 sm:px-3 py-1 sm:py-2 text-[11px] sm:text-xs font-medium transition-colors shrink-0"
-          >
-            {isActive && (
-              <motion.span
-                layoutId="activeDockCyberPill"
-                style={{ background: "linear-gradient(135deg, var(--grad-start), var(--grad-mid))" }}
-                className="absolute inset-0 rounded-full opacity-90 shadow-md"
-                transition={{ type: "spring", stiffness: 380, damping: 28 }}
-              />
-            )}
-
-            <Icon
-              className={`relative z-10 h-3.5 w-3.5 transition-transform duration-300 ${
-                isActive ? "text-white scale-110" : isLightMode ? "text-slate-600 hover:text-cyan-600" : "text-slate-400 hover:text-cyan-300"
+      {/* Navigation Icons Group */}
+      <div className="flex items-center gap-0.5 sm:gap-1">
+        {NAV.map((item) => {
+          const Icon = item.icon;
+          const isActive = active === item.id;
+          return (
+            <motion.a
+              key={item.id}
+              href={`#${item.id}`}
+              aria-label={item.label}
+              whileTap={{ scale: 0.92 }}
+              className={`relative flex items-center gap-1.5 rounded-full px-2.5 sm:px-3.5 py-1.5 sm:py-2 text-[11px] sm:text-xs font-medium transition-colors shrink-0 ${
+                isActive ? "text-white font-bold" : isLightMode ? "text-slate-600 hover:text-cyan-600" : "text-slate-400 hover:text-cyan-300"
               }`}
-            />
-
-            <AnimatePresence>
-              {(!isScrolled || isActive) && (
+            >
+              {/* Glowing High-Impact Active Pill */}
+              {isActive && (
                 <motion.span
-                  initial={{ opacity: 0, width: 0 }}
-                  animate={{ opacity: 1, width: "auto" }}
-                  exit={{ opacity: 0, width: 0 }}
-                  transition={{ duration: 0.2 }}
-                  className={`relative z-10 font-mono overflow-hidden whitespace-nowrap hidden md:inline-block ${
-                    isActive ? "text-white font-semibold" : isLightMode ? "text-slate-600" : "text-slate-300"
-                  }`}
-                >
-                  {item.label}
-                </motion.span>
+                  layoutId="activeDockCyberPill"
+                  style={{
+                    background: "linear-gradient(135deg, #06b6d4 0%, #10b981 100%)",
+                  }}
+                  className="absolute inset-0 rounded-full shadow-[0_0_18px_rgba(6,182,212,0.6),inset_0_1px_1px_rgba(255,255,255,0.4)]"
+                  transition={{ type: "spring", stiffness: 450, damping: 30 }}
+                />
               )}
-            </AnimatePresence>
-          </a>
-        );
-      })}
 
+              <Icon
+                className={`relative z-10 h-3.5 w-3.5 sm:h-4 sm:w-4 transition-transform duration-200 ${
+                  isActive ? "text-white scale-110 drop-shadow-[0_1px_2px_rgba(0,0,0,0.4)]" : ""
+                }`}
+              />
+
+              <AnimatePresence>
+                {(!isScrolled || isActive) && (
+                  <motion.span
+                    initial={{ opacity: 0, width: 0 }}
+                    animate={{ opacity: 1, width: "auto" }}
+                    exit={{ opacity: 0, width: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="relative z-10 font-mono overflow-hidden whitespace-nowrap hidden md:inline-block"
+                  >
+                    {item.label}
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </motion.a>
+          );
+        })}
+      </div>
+
+      {/* Available for Hire Badge (Desktop) */}
       <AnimatePresence>
         {!isScrolled && (
           <motion.div
@@ -160,25 +168,27 @@ export default function FloatingDockCyber({ theme, toggleTheme }) {
             transition={{ duration: 0.25 }}
             className="hidden items-center overflow-hidden lg:flex"
           >
-            <div className={`mx-1.5 h-5 w-px ${isLightMode ? "bg-slate-300" : "bg-white/15"}`} />
+            <div className="mx-1.5 h-4 w-[1px] bg-gradient-to-b from-transparent via-white/20 to-transparent" />
 
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1.5 font-mono text-[10px] font-medium text-emerald-600 dark:text-emerald-300 whitespace-nowrap">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1.5 font-mono text-[10px] font-medium text-emerald-600 dark:text-emerald-300 whitespace-nowrap shadow-inner">
               <span className="relative flex h-1.5 w-1.5">
                 <span className="pulse-dot absolute inline-flex h-full w-full rounded-full bg-emerald-500" />
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
               </span>
               Available for Hire
             </span>
-            <span className="ml-2 font-mono text-[9px] opacity-60 border border-white/15 rounded-lg px-2 py-1 whitespace-nowrap hidden sm:inline-block">
+            <span className="ml-2 font-mono text-[9px] opacity-60 border border-white/15 rounded-lg px-2 py-1 whitespace-nowrap">
               Ctrl+K
             </span>
           </motion.div>
         )}
       </AnimatePresence>
 
+      {/* Laser Vertical Divider */}
+      <div className="mx-0.5 sm:mx-1.5 h-4 sm:h-5 w-[1px] bg-gradient-to-b from-transparent via-white/20 dark:via-white/20 light-theme:via-slate-300 to-transparent shrink-0" />
+
       {/* Modern Animated Sun/Moon Switch Mode Slider */}
-      <div className="flex items-center pl-1 sm:pl-2">
-        <div className={`mr-1 sm:mr-2 h-5 w-px ${isLightMode ? "bg-slate-300" : "bg-white/15"}`} />
+      <div className="flex items-center pl-0.5 sm:pl-1">
         <SwitchModeToggle theme={theme} toggleTheme={toggleTheme} />
       </div>
     </motion.nav>

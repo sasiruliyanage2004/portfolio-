@@ -1,7 +1,8 @@
 import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Code2, Server, Cloud, Wrench, Sparkles, CheckCircle2 } from "lucide-react";
-import { TechIcons, TECH_RIBBON } from "../TechIcons";
+import { Code2, Server, Cloud, Wrench, Sparkles, CheckCircle2, Globe2 } from "lucide-react";
+import { TechIcons } from "../TechIcons";
+import InteractiveIconCloud from "../InteractiveIconCloud";
 
 const GROUPS = [
   {
@@ -12,7 +13,6 @@ const GROUPS = [
       {
         name: "React 19 & Web Architecture",
         logo: TechIcons.react,
-        brandColor: "#61DAFB",
         brandGlow: "rgba(97,218,251,0.25)",
         badge: "Production Core",
         badgeType: "cyan",
@@ -22,7 +22,6 @@ const GROUPS = [
       {
         name: "JavaScript (ES6+) & TypeScript",
         logo: TechIcons.typescript,
-        brandColor: "#3178C6",
         brandGlow: "rgba(49,120,198,0.25)",
         badge: "Daily Driver",
         badgeType: "cyan",
@@ -32,7 +31,6 @@ const GROUPS = [
       {
         name: "Tailwind CSS v4 & Motion UI",
         logo: TechIcons.tailwind,
-        brandColor: "#06B6D4",
         brandGlow: "rgba(6,182,212,0.25)",
         badge: "Design Architecture",
         badgeType: "cyan",
@@ -42,7 +40,6 @@ const GROUPS = [
       {
         name: "React Native (Mobile Apps)",
         logo: TechIcons.reactNative,
-        brandColor: "#61DAFB",
         brandGlow: "rgba(97,218,251,0.25)",
         badge: "Mobile Ecosystem",
         badgeType: "emerald",
@@ -52,7 +49,6 @@ const GROUPS = [
       {
         name: "HTML5 Canvas & Generative Math",
         logo: TechIcons.html5,
-        brandColor: "#E34F26",
         brandGlow: "rgba(227,79,38,0.25)",
         badge: "Cultural Tech",
         badgeType: "teal",
@@ -69,7 +65,6 @@ const GROUPS = [
       {
         name: "Node.js & Express.js",
         logo: TechIcons.node,
-        brandColor: "#5FA04E",
         brandGlow: "rgba(95,160,78,0.25)",
         badge: "Full-Stack API",
         badgeType: "emerald",
@@ -79,7 +74,6 @@ const GROUPS = [
       {
         name: "Java (OOP & System Design)",
         logo: TechIcons.java,
-        brandColor: "#ED8B00",
         brandGlow: "rgba(237,139,0,0.25)",
         badge: "Academic & Core",
         badgeType: "cyan",
@@ -89,7 +83,6 @@ const GROUPS = [
       {
         name: "Python & FastAPI",
         logo: TechIcons.python,
-        brandColor: "#3776AB",
         brandGlow: "rgba(55,118,171,0.25)",
         badge: "High-Throughput",
         badgeType: "emerald",
@@ -99,7 +92,6 @@ const GROUPS = [
       {
         name: "C Programming & Algorithms",
         logo: TechIcons.c,
-        brandColor: "#00599C",
         brandGlow: "rgba(0,89,156,0.25)",
         badge: "Systems Foundation",
         badgeType: "teal",
@@ -109,7 +101,6 @@ const GROUPS = [
       {
         name: "REST Architecture & Micro-APIs",
         logo: TechIcons.postman,
-        brandColor: "#FF6C37",
         brandGlow: "rgba(255,108,55,0.25)",
         badge: "Integration",
         badgeType: "cyan",
@@ -126,7 +117,6 @@ const GROUPS = [
       {
         name: "Computer Vision & YOLOv11",
         logo: TechIcons.yolo,
-        brandColor: "#06B6D4",
         brandGlow: "rgba(6,182,212,0.25)",
         badge: "AI Specialty",
         badgeType: "emerald",
@@ -136,7 +126,6 @@ const GROUPS = [
       {
         name: "face-api.js Neural Biometrics",
         logo: TechIcons.faceApi,
-        brandColor: "#10B981",
         brandGlow: "rgba(16,185,129,0.25)",
         badge: "Deep Learning",
         badgeType: "cyan",
@@ -146,7 +135,6 @@ const GROUPS = [
       {
         name: "MongoDB Atlas & NoSQL",
         logo: TechIcons.mongodb,
-        brandColor: "#47A248",
         brandGlow: "rgba(71,162,72,0.25)",
         badge: "Document DB",
         badgeType: "emerald",
@@ -156,7 +144,6 @@ const GROUPS = [
       {
         name: "MySQL & Relational DBMS",
         logo: TechIcons.mysql,
-        brandColor: "#00758F",
         brandGlow: "rgba(0,117,143,0.25)",
         badge: "Relational DB",
         badgeType: "teal",
@@ -173,7 +160,6 @@ const GROUPS = [
       {
         name: "Git, GitHub & Versioning",
         logo: TechIcons.git,
-        brandColor: "#F05032",
         brandGlow: "rgba(240,80,50,0.25)",
         badge: "Collaboration",
         badgeType: "cyan",
@@ -183,7 +169,6 @@ const GROUPS = [
       {
         name: "Docker & Containerization",
         logo: TechIcons.docker,
-        brandColor: "#2496ED",
         brandGlow: "rgba(36,150,237,0.25)",
         badge: "DevOps & Cloud",
         badgeType: "cyan",
@@ -193,7 +178,6 @@ const GROUPS = [
       {
         name: "Enterprise Admin & Data Audit",
         logo: TechIcons.express,
-        brandColor: "#FFFFFF",
         brandGlow: "rgba(255,255,255,0.2)",
         badge: "Management",
         badgeType: "emerald",
@@ -203,7 +187,6 @@ const GROUPS = [
       {
         name: "Agile & Team Engineering",
         logo: TechIcons.postman,
-        brandColor: "#FF6C37",
         brandGlow: "rgba(255,108,55,0.25)",
         badge: "Methodology",
         badgeType: "teal",
@@ -216,7 +199,6 @@ const GROUPS = [
 
 export default function SkillsCyber() {
   const [activeGroup, setActiveGroup] = useState("Frontend");
-  const [hoveredTech, setHoveredTech] = useState(null);
   const sectionRef = useRef(null);
 
   const activeData = GROUPS.find((g) => g.label === activeGroup) || GROUPS[0];
@@ -225,7 +207,7 @@ export default function SkillsCyber() {
     <section ref={sectionRef} id="skills" className="relative w-full bg-transparent overflow-hidden py-20 sm:py-28 px-4 sm:px-6 lg:px-10 scroll-mt-20">
       <div className="mx-auto max-w-7xl relative">
         {/* Section Header */}
-        <div className="relative flex flex-col md:flex-row md:items-end md:justify-between mb-8 sm:mb-10 gap-5 sm:gap-6 text-center md:text-left">
+        <div className="relative flex flex-col md:flex-row md:items-end md:justify-between mb-8 sm:mb-12 gap-5 sm:gap-6 text-center md:text-left">
           <div className="relative z-10">
             <p className="font-mono text-xs tracking-[0.3em] text-cyan-400 font-extrabold uppercase dark:drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
               VERIFIED ENGINEERING STACK
@@ -234,7 +216,7 @@ export default function SkillsCyber() {
               Skills <span className="text-gradient">Matrix</span>
             </h2>
             <p className="text-xs font-mono text-slate-400 mt-2">
-              ⚡ Production-ready technologies, frameworks &amp; AI vision pipelines
+              ⚡ Production-ready technologies, AI vision pipelines &amp; interactive 3D ecosystem
             </p>
           </div>
 
@@ -271,48 +253,48 @@ export default function SkillsCyber() {
           </div>
         </div>
 
-        {/* 🌟 Interactive Modern Tech Stack Ribbon (Visual Logo Cloud) */}
-        <div className="mb-10 sm:mb-12 relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 dark:bg-black/30 p-3 sm:p-4 backdrop-blur-xl shadow-lg">
-          <div className="flex items-center justify-between gap-2 mb-2.5 px-2">
-            <span className="font-mono text-[10px] sm:text-[11px] uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5">
-              <Sparkles className="h-3 w-3" />
-              Core Technology Ecosystem
-            </span>
-            <span className="font-mono text-[10px] text-slate-400">
-              {hoveredTech ? `⚡ ${hoveredTech}` : "Hover any icon to inspect"}
-            </span>
+        {/* 🌐 Interactive 3D Orbiting Magic UI Icon Cloud & Tech Highlights */}
+        <div className="mb-12 sm:mb-16 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center rounded-3xl border border-white/10 bg-white/5 dark:bg-black/30 p-6 sm:p-8 backdrop-blur-xl shadow-2xl relative overflow-hidden">
+          <span className="border-beam" aria-hidden="true" />
+
+          {/* Left Column: 3D Interactive Spinning Sphere */}
+          <div className="lg:col-span-5 flex flex-col items-center justify-center relative">
+            <InteractiveIconCloud size={340} />
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 py-1">
-            {TECH_RIBBON.map((t, idx) => {
-              const Icon = t.icon;
-              return (
-                <motion.div
-                  key={idx}
-                  whileHover={{ scale: 1.12, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                  onMouseEnter={() => setHoveredTech(t.name)}
-                  onMouseLeave={() => setHoveredTech(null)}
-                  className="group relative flex items-center justify-center rounded-xl p-2.5 sm:p-3 bg-white/5 hover:bg-white/10 dark:bg-white/[0.04] dark:hover:bg-white/[0.08] border border-white/10 transition-all cursor-pointer shadow-sm"
-                  style={{
-                    boxShadow: hoveredTech === t.name ? `0 0 16px ${t.glow}` : undefined,
-                    borderColor: hoveredTech === t.name ? t.color : undefined,
-                  }}
-                  title={t.name}
-                >
-                  <Icon className="h-5 w-5 sm:h-6 sm:w-6 transition-transform group-hover:scale-110" />
-                  
-                  {/* Subtle Tooltip Tag */}
-                  <span className="absolute -top-7 rounded-md bg-black/90 border border-white/20 px-2 py-0.5 font-mono text-[9px] text-white opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap shadow-xl z-20">
-                    {t.name}
-                  </span>
-                </motion.div>
-              );
-            })}
+          {/* Right Column: Ecosystem Highlights & Capability Snapshot */}
+          <div className="lg:col-span-7 flex flex-col justify-center space-y-5 text-left">
+            <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 font-mono text-xs font-bold text-cyan-400 w-fit">
+              <Globe2 className="h-3.5 w-3.5 animate-spin-slow" />
+              <span>Interactive 3D Technology Globe</span>
+            </div>
+
+            <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white leading-tight">
+              A comprehensive toolkit engineered for <span className="text-gradient">high-throughput scale</span>
+            </h3>
+
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
+              Specialized in modern client-side architectures, high-performance asynchronous backends, and low-latency computer vision pipelines. Drag the 3D sphere to explore live technologies.
+            </p>
+
+            <div className="grid grid-cols-3 gap-3 pt-2">
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-3.5 text-center">
+                <div className="font-mono text-base sm:text-xl font-bold text-cyan-400">20+</div>
+                <div className="text-[10px] sm:text-xs text-slate-400 mt-0.5">Core Technologies</div>
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-3.5 text-center">
+                <div className="font-mono text-base sm:text-xl font-bold text-emerald-400">&lt;30ms</div>
+                <div className="text-[10px] sm:text-xs text-slate-400 mt-0.5">Inference Speed</div>
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-3.5 text-center">
+                <div className="font-mono text-base sm:text-xl font-bold text-teal-400">100%</div>
+                <div className="text-[10px] sm:text-xs text-slate-400 mt-0.5">Verified Proof</div>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Detailed Authentic Engineering Matrix with Colorful Official Brand Logos */}
+        {/* Detailed Authentic Engineering Matrix Cards */}
         <AnimatePresence mode="wait">
           <motion.div
             key={activeGroup}
@@ -331,9 +313,6 @@ export default function SkillsCyber() {
                 <div
                   key={skill.name}
                   className="skill-card-bg noise-overlay relative flex flex-col justify-between rounded-3xl p-6 border border-white/10 hover:border-cyan-400/50 transition-all duration-300 shadow-xl z-10 group"
-                  style={{
-                    transition: "all 0.3s ease",
-                  }}
                 >
                   <div>
                     {/* Top Row: Official Brand Logo & Status Badge */}

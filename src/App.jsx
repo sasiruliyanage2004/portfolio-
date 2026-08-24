@@ -20,62 +20,6 @@ import ContactCyber from "./components/cyber/ContactCyber";
 import Footer from "./components/Footer";
 import "./index.css";
 
-// Standalone 3D Floating Glass Orb Theme Switcher with 100% Crisp High-Contrast Tooltip
-function FloatingOrbThemeToggle({ theme, toggleTheme }) {
-  const isLight = theme === "light";
-  return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
-      className="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 z-[70] group"
-    >
-      <motion.button
-        whileHover={{ scale: 1.1, rotate: 15 }}
-        whileTap={{ scale: 0.9 }}
-        onClick={toggleTheme}
-        aria-label="Toggle Light/Dark Theme (Press T)"
-        className={`relative flex h-11 w-11 sm:h-14 sm:w-14 items-center justify-center rounded-full border backdrop-blur-xl shadow-2xl transition-all duration-300 cursor-pointer ${
-          isLight
-            ? "bg-white/95 border-slate-300 text-cyan-600 shadow-slate-900/15 hover:shadow-cyan-500/30"
-            : "bg-[#0b0f17]/95 border-white/20 text-emerald-400 shadow-black/90 hover:shadow-cyan-500/30"
-        }`}
-      >
-        <span className="absolute inset-0 rounded-full bg-gradient-to-tr from-cyan-500/20 via-emerald-500/20 to-teal-500/20 animate-pulse-slow pointer-events-none" />
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={theme}
-            initial={{ opacity: 0, rotate: -90, scale: 0.5 }}
-            animate={{ opacity: 1, rotate: 0, scale: 1 }}
-            exit={{ opacity: 0, rotate: 90, scale: 0.5 }}
-            transition={{ duration: 0.3 }}
-            className="relative z-10"
-          >
-            {isLight ? <Moon className="h-6 w-6 text-cyan-700" /> : <Sun className="h-6 w-6 text-emerald-400" />}
-          </motion.div>
-        </AnimatePresence>
-      </motion.button>
-
-      {/* 100% Crisp High-Contrast Floating Tooltip Badge on Hover */}
-      <span
-        className={`absolute right-16 top-1/2 -translate-y-1/2 whitespace-nowrap rounded-full border px-4 py-2 font-mono text-xs font-extrabold shadow-2xl transition-all pointer-events-none opacity-0 group-hover:opacity-100 ${
-          isLight
-            ? "bg-white text-slate-900 border-slate-300 shadow-slate-900/20"
-            : "bg-[#090d16] text-white border-white/20 shadow-black/90"
-        }`}
-      >
-        Toggle Theme{" "}
-        <kbd
-          className={`ml-1.5 rounded px-1.5 py-0.5 text-[10px] font-bold ${
-            isLight ? "bg-cyan-100 text-cyan-800 border border-cyan-200" : "bg-cyan-500/20 text-cyan-300 border border-cyan-500/30"
-          }`}
-        >
-          T
-        </kbd>
-      </span>
-    </motion.div>
-  );
-}
-
 export default function App() {
   // Theme state persisted via localStorage
   const [theme, setTheme] = useState(() => {
@@ -211,9 +155,6 @@ export default function App() {
 
       {/* Floating Apple macOS Navigation Dock with Animated Sun/Moon Theme Switcher */}
       <FloatingDockCyber theme={theme} toggleTheme={toggleTheme} />
-
-      {/* Standalone Fixed 3D Floating Glass Orb Theme Switcher */}
-      <FloatingOrbThemeToggle theme={theme} toggleTheme={toggleTheme} />
 
       {/* Back To Top Floating Button */}
       <BackToTop />

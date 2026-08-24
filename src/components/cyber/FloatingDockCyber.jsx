@@ -150,9 +150,9 @@ export default function FloatingDockCyber({ theme, toggleTheme }) {
       </AnimatePresence>
 
       {/* Modern Animated Sun/Moon Switch Mode Slider */}
-      <div className="flex items-center pl-1 sm:pl-2">
-        <div className={`mr-1 sm:mr-2 h-4 w-px ${isLightMode ? "bg-slate-300" : "bg-white/15"}`} />
-        <SwitchModeToggle theme={theme} toggleTheme={toggleTheme} size="compact" />
+      <div className="flex items-center pl-1.5 sm:pl-2.5">
+        <div className={`mr-1.5 sm:mr-2.5 h-5 w-px ${isLightMode ? "bg-slate-300" : "bg-white/15"}`} />
+        <SwitchModeToggle theme={theme} toggleTheme={toggleTheme} />
       </div>
     </motion.nav>
   );

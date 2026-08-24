@@ -98,14 +98,27 @@ export default function FloatingDockCyber({ theme, toggleTheme }) {
           <span className="absolute bottom-0 right-0 h-2 w-2 rounded-full bg-emerald-400 border-[1.5px] border-[#090d16] shadow-[0_0_6px_#10b981]" />
         </div>
 
-        {/* Brand Name Text: Hidden on mobile (< sm), visible on sm+ screens */}
-        <span className="font-extrabold tracking-tight text-slate-900 dark:text-white font-mono text-xs sm:text-sm hidden sm:inline-block whitespace-nowrap">
-          Sasiru <span className="text-cyan-400 font-bold">Liyanage</span>
+        {/* Brand Name Text: High-contrast in both Light & Dark themes */}
+        <span
+          className={`font-extrabold tracking-tight font-mono text-xs sm:text-sm hidden sm:inline-block whitespace-nowrap ${
+            isLightMode ? "text-slate-900" : "text-white"
+          }`}
+        >
+          Sasiru{" "}
+          <span className={isLightMode ? "text-cyan-700 font-bold" : "text-cyan-400 font-bold"}>
+            Liyanage
+          </span>
         </span>
       </a>
 
       {/* Laser Vertical Divider */}
-      <div className="mx-0.5 sm:mx-1.5 h-4 sm:h-5 w-[1px] bg-gradient-to-b from-transparent via-white/20 dark:via-white/20 light-theme:via-slate-300 to-transparent shrink-0" />
+      <div
+        className={`mx-0.5 sm:mx-1.5 h-4 sm:h-5 w-[1px] ${
+          isLightMode
+            ? "bg-gradient-to-b from-transparent via-slate-300 to-transparent"
+            : "bg-gradient-to-b from-transparent via-white/20 to-transparent"
+        } shrink-0`}
+      />
 
       {/* Navigation Icons Group */}
       <div className="flex items-center gap-0.5 sm:gap-1">

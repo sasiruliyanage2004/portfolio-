@@ -180,7 +180,7 @@ export default function ContactCyber() {
       <div className="relative mx-auto max-w-4xl">
         {/* Aceternity Cyan/Emerald Lamp Spotlight Header */}
         <LampContainer className="mb-2">
-          <p className="font-mono text-xs tracking-[0.3em] text-cyan-400 font-extrabold uppercase drop-shadow-[0_0_12px_rgba(6,182,212,0.8)]">
+          <p className="font-mono text-xs tracking-[0.3em] text-cyan-700 dark:text-cyan-400 font-extrabold uppercase drop-shadow-sm dark:drop-shadow-[0_0_12px_rgba(6,182,212,0.8)]">
             GET IN TOUCH
           </p>
           <motion.h2

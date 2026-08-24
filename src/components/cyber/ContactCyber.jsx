@@ -1,7 +1,6 @@
 import { useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { CheckCircle2, Send, Mail, Phone, MapPin, AlertCircle, Copy, Check, Terminal as TerminalIcon } from "lucide-react";
-import { LampContainer } from "../LampContainer";
 
 const WhatsAppIcon = (props) => (
   <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" {...props}>
@@ -176,49 +175,37 @@ export default function ContactCyber() {
   };
 
   return (
-    <section ref={sectionRef} id="contact" className="relative w-full overflow-hidden bg-transparent pt-8 sm:pt-14 pb-20 sm:pb-28 px-4 sm:px-6 lg:px-10 scroll-mt-20">
-      <div className="relative mx-auto max-w-4xl">
-        {/* Aceternity Cyan/Emerald Lamp Spotlight Header */}
-        <LampContainer className="mb-2">
-          <p className="font-mono text-xs tracking-[0.3em] text-cyan-700 dark:text-cyan-400 font-extrabold uppercase drop-shadow-sm dark:drop-shadow-[0_0_12px_rgba(6,182,212,0.8)]">
+    <section ref={sectionRef} id="contact" className="relative w-full overflow-hidden bg-transparent py-16 sm:py-24 px-4 sm:px-6 lg:px-10 scroll-mt-20">
+      <div className="relative mx-auto max-w-3xl">
+        {/* Crisp, High-Contrast Section Header */}
+        <div className="mb-8 sm:mb-12 text-center relative z-10">
+          <p className="font-mono text-xs tracking-[0.3em] text-cyan-700 dark:text-cyan-400 font-extrabold uppercase">
             GET IN TOUCH
           </p>
-          <motion.h2
-            initial={{ opacity: 0.5, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.25, duration: 0.8, ease: "easeInOut" }}
-            className="mt-3 sm:mt-4 text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white text-center leading-tight tracking-tight drop-shadow-2xl"
-          >
+          <h2 className="mt-2.5 sm:mt-3 text-3xl sm:text-5xl font-extrabold text-slate-900 dark:text-white leading-tight tracking-tight">
             Let's build something <span className="text-gradient">worth shipping</span>
-          </motion.h2>
+          </h2>
 
           {/* Interactive Copy-to-Clipboard Badges & WhatsApp Quick Link */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.35, duration: 0.8 }}
-            className="mt-5 sm:mt-6 flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 font-mono text-xs"
-          >
+          <div className="mt-5 sm:mt-6 flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 font-mono text-xs">
             <CopyBadge value="liyanagesasiru@gmail.com" icon={Mail} label="liyanagesasiru@gmail.com" />
             <a
               href="https://wa.me/94715700953?text=Hi%20Sasiru,%20I%20visited%20your%20portfolio%20and%20would%20like%20to%20connect!"
               target="_blank"
               rel="noopener noreferrer"
-              className="glass-panel inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 sm:px-4 sm:py-2 hover:border-emerald-400/50 hover:text-emerald-400 transition-all cursor-pointer text-xs"
+              className="glass-panel inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 sm:px-4 sm:py-2 hover:border-emerald-400/50 hover:text-emerald-600 dark:hover:text-emerald-400 transition-all cursor-pointer text-xs"
             >
-              <WhatsAppIcon className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
+              <WhatsAppIcon className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
               <span>+94 71 57 00 953</span>
             </a>
             <span className="glass-panel inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 sm:px-4 sm:py-2 text-xs">
-              <MapPin className="h-3.5 w-3.5 text-cyan-400 shrink-0" />
+              <MapPin className="h-3.5 w-3.5 text-cyan-700 dark:text-cyan-400 shrink-0" />
               Makola, Western Province, LK
             </span>
-          </motion.div>
-        </LampContainer>
+          </div>
+        </div>
 
-        <div className="contact-terminal-box noise-overlay relative overflow-hidden rounded-3xl backdrop-blur-2xl shadow-2xl z-10 mt-6 sm:mt-8 max-w-3xl mx-auto">
+        <div className="contact-terminal-box noise-overlay relative overflow-hidden rounded-3xl backdrop-blur-2xl shadow-2xl z-10">
           <span className="border-beam" aria-hidden="true" />
 
           {/* Terminal Window Header with Interactive Mode Tabs */}

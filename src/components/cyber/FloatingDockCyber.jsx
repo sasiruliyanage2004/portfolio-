@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Home, Layers, Mail, User, GraduationCap } from "lucide-react";
+import { Home, Layers, Mail, Code2, GraduationCap } from "lucide-react";
 import SwitchModeToggle from "../SwitchModeToggle";
 
 // Full Desktop Navigation (5 sections)
@@ -8,15 +8,16 @@ const DESKTOP_NAV = [
   { id: "home", label: "Home", icon: Home },
   { id: "projects", label: "Projects", icon: Layers },
   { id: "education", label: "Education", icon: GraduationCap },
-  { id: "skills", label: "Skills", icon: User },
+  { id: "skills", label: "Skills", icon: Code2 },
   { id: "contact", label: "Contact", icon: Mail },
 ];
 
-// Pure 4 Navigation Items + Avatar for Mobile (Exactly 5 Touch Targets total)
+// Complete Mobile Navigation (All 5 Sections + Avatar)
 const MOBILE_NAV = [
   { id: "home", label: "Home", icon: Home },
   { id: "projects", label: "Projects", icon: Layers },
-  { id: "education", label: "About", icon: GraduationCap },
+  { id: "education", label: "Education", icon: GraduationCap },
+  { id: "skills", label: "Skills", icon: Code2 },
   { id: "contact", label: "Contact", icon: Mail },
 ];
 
@@ -225,7 +226,7 @@ export default function FloatingDockCyber({ theme, toggleTheme }) {
         initial={{ opacity: 0, y: 30, scale: 0.9 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ type: "spring", stiffness: 400, damping: 30 }}
-        className={`fixed bottom-4 left-1/2 z-[60] -translate-x-1/2 flex md:hidden items-center justify-around h-[64px] px-3 rounded-2xl border backdrop-blur-2xl transition-all duration-300 shadow-2xl w-[92vw] max-w-[380px] ${
+        className={`fixed bottom-3.5 left-1/2 z-[60] -translate-x-1/2 flex md:hidden items-center justify-around h-[62px] px-2.5 rounded-2xl border backdrop-blur-2xl transition-all duration-300 shadow-2xl w-[94vw] max-w-[410px] ${
           isLightMode
             ? "bg-white/95 border-slate-300 shadow-[0_16px_40px_rgba(15,23,42,0.2)]"
             : "bg-[#090d16]/95 border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.95),0_0_25px_rgba(13,148,136,0.2)]"

@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 
 // ------------------------------------------------------------------
-// DUMBARA GEOMETRIC MAT CANVAS — ADAPTIVE DESKTOP & MOBILE AMBIENT ENGINE
+// LUXURY CULTURAL TECH AMBIENT CANVAS (Subtle Dumbara Weave + Deep Mesh Glow)
 // ------------------------------------------------------------------
 export default function CulturalPatternCanvas() {
   const canvasRef = useRef(null);
@@ -41,7 +41,6 @@ export default function CulturalPatternCanvas() {
     };
 
     const handleTouchEnd = () => {
-      // After finger is lifted, smoothly blend back to autonomous ambient wave after 2.5s
       clearTimeout(touchTimeout);
       touchTimeout = setTimeout(() => {
         isTouchActive = false;
@@ -68,11 +67,10 @@ export default function CulturalPatternCanvas() {
 
       const isTouchDevice = window.matchMedia("(pointer: coarse)").matches || "ontouchstart" in window;
 
-      // On touch devices when user is not actively pressing, engage Autonomous Living Ambient Wave
+      // Subtle living orbital light
       if (isTouchDevice && !isTouchActive) {
-        // Graceful harmonic Lissajous orbital path illuminating the Dumbara diamonds
-        const orbitalX = w * 0.5 + Math.cos(time * 0.015) * (w * 0.38);
-        const orbitalY = h * 0.45 + Math.sin(time * 0.022) * (h * 0.32);
+        const orbitalX = w * 0.5 + Math.cos(time * 0.012) * (w * 0.35);
+        const orbitalY = h * 0.45 + Math.sin(time * 0.018) * (h * 0.28);
         mouse.targetX = orbitalX;
         mouse.targetY = orbitalY;
       }
@@ -82,28 +80,28 @@ export default function CulturalPatternCanvas() {
         mouse.x = mouse.targetX;
         mouse.y = mouse.targetY;
       } else {
-        mouse.x += (mouse.targetX - mouse.x) * 0.08;
-        mouse.y += (mouse.targetY - mouse.y) * 0.08;
+        mouse.x += (mouse.targetX - mouse.x) * 0.06;
+        mouse.y += (mouse.targetY - mouse.y) * 0.06;
       }
 
       const isLight = document.documentElement.classList.contains("light-theme");
 
-      // Tall Upright Dumbara Diamond Grid Dimensions (Traditional Sri Lankan Geometry)
-      const sizeX = 85;
-      const sizeY = 120;
-      const rowHeight = sizeY / 2; // 60px row spacing for interlocking upright diamonds
+      // Tall Upright Dumbara Diamond Grid Dimensions
+      const sizeX = 90;
+      const sizeY = 130;
+      const rowHeight = sizeY / 2;
       const cols = Math.ceil(w / sizeX) + 4;
       const rows = Math.ceil(h / rowHeight) + 4;
-      const maxDist = isTouchDevice ? 280 : 340;
+      const maxDist = isTouchDevice ? 260 : 320;
 
-      // Draw Radiant Spotlight Glow Aura
+      // Draw Soft Volumetric Spotlight Glow Aura
       if (mouse.x > -200 && mouse.y > -200) {
         const glowGrad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, maxDist);
         if (isLight) {
-          glowGrad.addColorStop(0, isTouchDevice ? "rgba(14, 116, 144, 0.12)" : "rgba(14, 116, 144, 0.09)");
+          glowGrad.addColorStop(0, "rgba(14, 116, 144, 0.06)");
           glowGrad.addColorStop(1, "rgba(14, 116, 144, 0)");
         } else {
-          glowGrad.addColorStop(0, isTouchDevice ? "rgba(6, 182, 212, 0.24)" : "rgba(6, 182, 212, 0.20)");
+          glowGrad.addColorStop(0, "rgba(6, 182, 212, 0.12)");
           glowGrad.addColorStop(1, "rgba(6, 182, 212, 0)");
         }
         ctx.fillStyle = glowGrad;
@@ -116,23 +114,23 @@ export default function CulturalPatternCanvas() {
         for (let c = -2; c < cols; c++) {
           const x = c * sizeX + (Math.abs(r) % 2 === 0 ? 0 : sizeX / 2);
           const y = r * rowHeight;
-          const wave = Math.sin(time * 0.02 + (c + r) * 0.4) * 3;
+          const wave = Math.sin(time * 0.015 + (c + r) * 0.3) * 2;
 
           const dist = Math.hypot(x - mouse.x, y + wave - mouse.y);
           const glow = dist < maxDist ? Math.pow(1 - dist / maxDist, 2) : 0;
-          const scale = 1 + glow * 0.18;
+          const scale = 1 + glow * 0.1;
 
-          // Upright Dumbara Mat settings matching traditional Sri Lankan weave
-          const baseOuterOpacity = isLight ? 0.08 : 0.20;
-          const baseInnerOpacity = isLight ? 0.06 : 0.15;
-          const outerOpacity = Math.min(isLight ? 0.45 : 0.80, baseOuterOpacity + glow * (isLight ? 0.32 : 0.58));
-          const innerOpacity = Math.min(isLight ? 0.38 : 0.70, baseInnerOpacity + glow * (isLight ? 0.28 : 0.50));
+          // 💎 Luxury Ultra-Subtle Watermark Opacity (0.04 - 0.07 Base)
+          const baseOuterOpacity = isLight ? 0.035 : 0.065;
+          const baseInnerOpacity = isLight ? 0.025 : 0.045;
+          const outerOpacity = Math.min(isLight ? 0.18 : 0.28, baseOuterOpacity + glow * (isLight ? 0.12 : 0.22));
+          const innerOpacity = Math.min(isLight ? 0.14 : 0.22, baseInnerOpacity + glow * (isLight ? 0.10 : 0.18));
 
-          // Outer Diamond Border (Ceylon Sapphire Cyan / Teal)
+          // Outer Diamond Border (Precision Hairline CAD Stroke)
           ctx.strokeStyle = isLight
             ? `rgba(14, 116, 144, ${outerOpacity})`
             : `rgba(6, 182, 212, ${outerOpacity})`;
-          ctx.lineWidth = isLight ? 1.2 + glow * 0.6 : 1.4 + glow * 1.0;
+          ctx.lineWidth = isLight ? 0.8 + glow * 0.3 : 0.85 + glow * 0.4;
           ctx.beginPath();
           ctx.moveTo(x, y - (sizeY / 2) * scale + wave);
           ctx.lineTo(x + (sizeX / 2) * scale, y + wave);
@@ -141,11 +139,11 @@ export default function CulturalPatternCanvas() {
           ctx.closePath();
           ctx.stroke();
 
-          // Inner Concentric Diamond (Emerald Green / Cyan)
+          // Inner Concentric Diamond
           ctx.strokeStyle = isLight
             ? `rgba(16, 185, 129, ${innerOpacity})`
             : `rgba(16, 185, 129, ${innerOpacity})`;
-          ctx.lineWidth = isLight ? 0.9 + glow * 0.4 : 1.0 + glow * 0.7;
+          ctx.lineWidth = isLight ? 0.6 + glow * 0.2 : 0.7 + glow * 0.3;
           ctx.beginPath();
           ctx.moveTo(x, y - (sizeY / 3.5) * scale + wave);
           ctx.lineTo(x + (sizeX / 3.5) * scale, y + wave);
@@ -154,14 +152,14 @@ export default function CulturalPatternCanvas() {
           ctx.closePath();
           ctx.stroke();
 
-          // Dumbara Center Lotus Dots (Pure Teal / Emerald)
+          // Micro Lotus Center Dots
           if ((c + r) % 2 === 0) {
-            const dotOpacity = Math.min(isLight ? 0.45 : 0.80, (isLight ? 0.10 : 0.22) + glow * (isLight ? 0.28 : 0.52));
+            const dotOpacity = Math.min(isLight ? 0.20 : 0.32, (isLight ? 0.04 : 0.08) + glow * (isLight ? 0.14 : 0.24));
             ctx.fillStyle = isLight
               ? `rgba(13, 148, 136, ${dotOpacity})`
               : `rgba(6, 182, 212, ${dotOpacity})`;
             ctx.beginPath();
-            ctx.arc(x, y + wave, isLight ? 2.8 + glow * 1.2 : 3.5 + glow * 1.5, 0, Math.PI * 2);
+            ctx.arc(x, y + wave, isLight ? 1.8 + glow * 0.8 : 2.2 + glow * 1.0, 0, Math.PI * 2);
             ctx.fill();
           }
         }
@@ -185,7 +183,12 @@ export default function CulturalPatternCanvas() {
 
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden w-full h-full">
-      <canvas ref={canvasRef} className="w-full h-full opacity-90" />
+      {/* 🌌 Deep Volumetric Ambient Breathing Mesh Glow Orbs (Silicon Valley / Linear Look) */}
+      <div className="absolute top-[10%] left-[15%] h-[500px] w-[500px] rounded-full bg-cyan-500/10 dark:bg-cyan-500/12 blur-[140px] pointer-events-none animate-pulse duration-[8000ms]" />
+      <div className="absolute top-[45%] right-[10%] h-[550px] w-[550px] rounded-full bg-indigo-500/8 dark:bg-indigo-500/10 blur-[160px] pointer-events-none" />
+      <div className="absolute top-[75%] left-[20%] h-[450px] w-[450px] rounded-full bg-emerald-500/8 dark:bg-emerald-500/10 blur-[140px] pointer-events-none" />
+
+      <canvas ref={canvasRef} className="relative z-10 w-full h-full" />
     </div>
   );
 }

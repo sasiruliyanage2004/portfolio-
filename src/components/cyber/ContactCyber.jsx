@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { CheckCircle2, Send, Mail, Phone, MapPin, AlertCircle, Copy, Check, Terminal as TerminalIcon } from "lucide-react";
+import { LampContainer } from "../LampContainer";
 
 const WhatsAppIcon = (props) => (
   <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" {...props}>
@@ -175,19 +176,31 @@ export default function ContactCyber() {
   };
 
   return (
-    <section ref={sectionRef} id="contact" className="relative w-full overflow-hidden bg-transparent py-16 sm:py-24 px-4 sm:px-6 lg:px-10 scroll-mt-20">
-      <div className="relative mx-auto max-w-3xl">
-        {/* Crisp, World-Class Section Header (Zero Shapes / Zero Blobs) */}
-        <div className="mb-8 sm:mb-12 text-center relative z-10">
-          <p className="font-mono text-xs tracking-[0.3em] text-cyan-700 dark:text-cyan-400 font-extrabold uppercase">
+    <section ref={sectionRef} id="contact" className="relative w-full overflow-hidden bg-transparent pt-6 sm:pt-10 pb-20 sm:pb-28 px-4 sm:px-6 lg:px-10 scroll-mt-20">
+      <div className="relative mx-auto max-w-4xl">
+        {/* Aceternity Cyan/Emerald Lamp Spotlight Header */}
+        <LampContainer className="mb-4">
+          <p className="font-mono text-xs tracking-[0.3em] text-cyan-700 dark:text-cyan-400 font-extrabold uppercase drop-shadow-sm dark:drop-shadow-[0_0_12px_rgba(6,182,212,0.8)]">
             GET IN TOUCH
           </p>
-          <h2 className="mt-2.5 sm:mt-3 text-3xl sm:text-5xl font-extrabold text-slate-900 dark:text-white leading-tight tracking-tight">
+          <motion.h2
+            initial={{ opacity: 0.5, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2, duration: 0.8, ease: "easeInOut" }}
+            className="mt-2.5 sm:mt-3 text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white text-center leading-tight tracking-tight drop-shadow-xl"
+          >
             Let's build something <span className="text-gradient">worth shipping</span>
-          </h2>
+          </motion.h2>
 
           {/* Interactive Copy-to-Clipboard Badges & WhatsApp Quick Link */}
-          <div className="mt-5 sm:mt-6 flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 font-mono text-xs">
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3, duration: 0.8 }}
+            className="mt-5 sm:mt-6 flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 font-mono text-xs"
+          >
             <CopyBadge value="liyanagesasiru@gmail.com" icon={Mail} label="liyanagesasiru@gmail.com" />
             <a
               href="https://wa.me/94715700953?text=Hi%20Sasiru,%20I%20visited%20your%20portfolio%20and%20would%20like%20to%20connect!"
@@ -202,10 +215,10 @@ export default function ContactCyber() {
               <MapPin className="h-3.5 w-3.5 text-cyan-700 dark:text-cyan-400 shrink-0" />
               Makola, Western Province, LK
             </span>
-          </div>
-        </div>
+          </motion.div>
+        </LampContainer>
 
-        <div className="contact-terminal-box noise-overlay relative overflow-hidden rounded-3xl backdrop-blur-2xl shadow-2xl z-10">
+        <div className="contact-terminal-box noise-overlay relative overflow-hidden rounded-3xl backdrop-blur-2xl shadow-2xl z-10 max-w-3xl mx-auto">
           <span className="border-beam" aria-hidden="true" />
 
           {/* Terminal Window Header with Interactive Mode Tabs */}

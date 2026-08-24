@@ -154,13 +154,8 @@ export default function App() {
       {/* Easter Eggs: tab title + Konami code confetti */}
       <EasterEggs />
 
-      {/* Top-Right Corner Floating Theme Switcher */}
-      <div className="fixed top-3.5 right-3.5 sm:top-5 sm:right-6 z-[70]">
-        <SwitchModeToggle theme={theme} toggleTheme={toggleTheme} />
-      </div>
-
-      {/* Modern 5-Item Floating Bottom Navigation Dock */}
-      <FloatingDockCyber theme={theme} />
+      {/* Modern Adaptive Navigation Dock (Desktop Top / Mobile Bottom with Integrated Theme Switcher) */}
+      <FloatingDockCyber theme={theme} toggleTheme={toggleTheme} />
 
       {/* Back To Top Floating Button */}
       <BackToTop />

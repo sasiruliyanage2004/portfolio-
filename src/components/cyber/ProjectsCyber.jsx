@@ -12,10 +12,7 @@ import {
   Sparkles,
   CheckCircle2,
   Maximize2,
-  LayoutGrid,
-  Box,
 } from "lucide-react";
-import ThreeDMarquee from "../ThreeDMarquee";
 
 const GithubIcon = (props) => (
   <svg
@@ -583,7 +580,6 @@ function ExpandableProjectCard({ project, isExpanded, onSelect, onInspect }) {
 // MAIN PROJECTS SECTION
 // ------------------------------------------------------------------
 export default function ProjectsCyber() {
-  const [viewMode, setViewMode] = useState("grid"); // "grid" | "3d"
   const [cat, setCat] = useState("All");
   const [activeId, setActiveId] = useState(PROJECTS[0].id);
   const [selectedProject, setSelectedProject] = useState(null);
@@ -646,98 +642,48 @@ export default function ProjectsCyber() {
               Projects &amp; <span className="text-gradient">Builds</span>
             </h2>
             <p className="text-xs font-mono text-slate-400 mt-2">
-              💡 {viewMode === "grid" ? "Select any card to expand its live spotlight & telemetry" : "3D Isometric Wall • Hover any card to pause animation"}
+              💡 Select any card to expand its live spotlight &amp; telemetry engine
             </p>
           </div>
 
-          {/* Dual Controls: Category Tabs + 3D View Mode Switcher */}
-          <div className="flex flex-wrap items-center justify-center md:justify-end gap-2.5 self-center md:self-auto z-10">
-            {/* View Mode Toggle (Grid vs 3D Marquee Horizon) */}
-            <div className="theme-switcher-bar flex items-center rounded-full p-1 backdrop-blur-md shadow-lg border">
+          {/* Category Tab Switcher */}
+          <div className="theme-switcher-bar relative z-10 flex flex-wrap justify-center gap-1 rounded-full p-1.5 backdrop-blur-md shadow-lg border self-center md:self-auto max-w-full">
+            {CATEGORIES.map((c) => (
               <button
-                onClick={() => setViewMode("grid")}
-                title="Bento Grid View"
-                className={`relative flex items-center gap-1.5 rounded-full px-3 py-1 font-mono text-xs font-medium transition-colors cursor-pointer ${
-                  viewMode === "grid" ? "text-white font-semibold" : "opacity-70 hover:opacity-100 text-slate-300"
-                }`}
+                key={c}
+                onClick={() => setCat(c)}
+                className="relative rounded-full px-3 sm:px-4 py-1 sm:py-1.5 font-mono text-[11px] sm:text-xs font-medium transition-colors cursor-pointer"
               >
-                {viewMode === "grid" && (
+                {cat === c && (
                   <motion.span
-                    layoutId="activeViewModePill"
+                    layoutId="activeCategoryPill"
                     style={{ background: "linear-gradient(135deg, var(--grad-start), var(--grad-mid))" }}
                     className="absolute inset-0 rounded-full shadow-md"
                     transition={{ type: "spring", stiffness: 400, damping: 30 }}
                   />
                 )}
-                <LayoutGrid className="relative z-10 h-3.5 w-3.5" />
-                <span className="relative z-10">Grid</span>
+                <span className={`relative z-10 ${cat === c ? "text-white font-semibold" : "opacity-70 hover:opacity-100"}`}>
+                  {c}
+                </span>
               </button>
-
-              <button
-                onClick={() => setViewMode("3d")}
-                title="3D Isometric Wall View"
-                className={`relative flex items-center gap-1.5 rounded-full px-3 py-1 font-mono text-xs font-medium transition-colors cursor-pointer ${
-                  viewMode === "3d" ? "text-white font-semibold" : "opacity-70 hover:opacity-100 text-slate-300"
-                }`}
-              >
-                {viewMode === "3d" && (
-                  <motion.span
-                    layoutId="activeViewModePill"
-                    style={{ background: "linear-gradient(135deg, var(--grad-start), var(--grad-mid))" }}
-                    className="absolute inset-0 rounded-full shadow-md"
-                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                  />
-                )}
-                <Box className="relative z-10 h-3.5 w-3.5 text-cyan-400" />
-                <span className="relative z-10">3D Wall</span>
-              </button>
-            </div>
-
-            {/* Category Tab Switcher (Visible in Grid Mode) */}
-            {viewMode === "grid" && (
-              <div className="theme-switcher-bar flex flex-wrap justify-center gap-1 rounded-full p-1 backdrop-blur-md shadow-lg border">
-                {CATEGORIES.map((c) => (
-                  <button
-                    key={c}
-                    onClick={() => setCat(c)}
-                    className="relative rounded-full px-3 py-1 font-mono text-[11px] font-medium transition-colors cursor-pointer"
-                  >
-                    {cat === c && (
-                      <motion.span
-                        layoutId="activeCategoryPill"
-                        style={{ background: "linear-gradient(135deg, var(--grad-start), var(--grad-mid))" }}
-                        className="absolute inset-0 rounded-full shadow-md"
-                        transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                      />
-                    )}
-                    <span className={`relative z-10 ${cat === c ? "text-white font-semibold" : "opacity-70 hover:opacity-100"}`}>
-                      {c}
-                    </span>
-                  </button>
-                ))}
-              </div>
-            )}
+            ))}
           </div>
         </div>
 
-        {/* View Switcher: Dynamic Expandable Bento Grid OR 3D Isometric Marquee Horizon */}
-        {viewMode === "3d" ? (
-          <ThreeDMarquee />
-        ) : (
-          <motion.div layout className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 relative z-10">
-            <AnimatePresence mode="popLayout">
-              {list.map((project) => (
-                <ExpandableProjectCard
-                  key={project.id}
-                  project={project}
-                  isExpanded={activeId === project.id}
-                  onSelect={(id) => setActiveId(id)}
-                  onInspect={(p) => setSelectedProject(p)}
-                />
-              ))}
-            </AnimatePresence>
-          </motion.div>
-        )}
+        {/* Dynamic Expandable Bento Grid */}
+        <motion.div layout className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 relative z-10">
+          <AnimatePresence mode="popLayout">
+            {list.map((project) => (
+              <ExpandableProjectCard
+                key={project.id}
+                project={project}
+                isExpanded={activeId === project.id}
+                onSelect={(id) => setActiveId(id)}
+                onInspect={(p) => setSelectedProject(p)}
+              />
+            ))}
+          </AnimatePresence>
+        </motion.div>
       </div>
 
       {/* Interactive Project Deep-Dive Modal */}

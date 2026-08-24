@@ -218,7 +218,7 @@ export default function ContactCyber() {
           </motion.div>
         </LampContainer>
 
-        <div className="contact-terminal-box noise-overlay relative overflow-hidden rounded-3xl backdrop-blur-2xl shadow-2xl z-10 -mt-16 sm:-mt-20 max-w-3xl mx-auto">
+        <div className="contact-terminal-box noise-overlay relative overflow-hidden rounded-3xl backdrop-blur-2xl shadow-2xl z-10 mt-6 sm:mt-8 max-w-3xl mx-auto">
           <span className="border-beam" aria-hidden="true" />
 
           {/* Terminal Window Header with Interactive Mode Tabs */}

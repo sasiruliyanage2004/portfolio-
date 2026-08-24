@@ -83,10 +83,10 @@ export default function FloatingDockCyber({ theme, toggleTheme }) {
       <a
         href="#home"
         aria-label="Sasiru Liyanage Home"
-        className="group flex items-center gap-2 pr-1.5 sm:pr-2.5 pl-1 py-1 transition-transform active:scale-95 cursor-pointer shrink-0"
+        className="group flex items-center gap-1.5 sm:gap-2 pr-1 sm:pr-2.5 pl-0.5 sm:pl-1 py-1 transition-transform active:scale-95 cursor-pointer shrink-0"
       >
         {/* Chrome Tab Favicon Avatar with Neon Border Glow */}
-        <div className="relative flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full p-0.5 bg-gradient-to-tr from-cyan-500 via-emerald-400 to-indigo-500 shadow-[0_0_12px_rgba(6,182,212,0.4)] group-hover:shadow-[0_0_16px_rgba(6,182,212,0.7)] transition-all">
+        <div className="relative flex h-6 w-6 sm:h-8 sm:w-8 items-center justify-center rounded-full p-0.5 bg-gradient-to-tr from-cyan-500 via-emerald-400 to-indigo-500 shadow-[0_0_12px_rgba(6,182,212,0.4)] group-hover:shadow-[0_0_16px_rgba(6,182,212,0.7)] transition-all shrink-0">
           <img
             src="/profile.png"
             alt="Sasiru Liyanage"
@@ -97,14 +97,14 @@ export default function FloatingDockCyber({ theme, toggleTheme }) {
           />
         </div>
 
-        {/* Brand Name Text: Sasiru Liyanage */}
-        <span className="font-extrabold tracking-tight text-slate-900 dark:text-white font-mono text-xs sm:text-sm inline-block">
+        {/* Brand Name Text: Hidden on mobile (< sm), visible on sm+ screens */}
+        <span className="font-extrabold tracking-tight text-slate-900 dark:text-white font-mono text-xs sm:text-sm hidden sm:inline-block whitespace-nowrap">
           Sasiru <span className="text-cyan-400 font-bold">Liyanage</span>
         </span>
       </a>
 
       {/* Brand Divider */}
-      <div className={`mx-1 sm:mx-1.5 h-5 w-px ${isLightMode ? "bg-slate-300" : "bg-white/20"}`} />
+      <div className={`mx-0.5 sm:mx-1.5 h-4 sm:h-5 w-px ${isLightMode ? "bg-slate-300" : "bg-white/20"} shrink-0`} />
 
       {/* Navigation Links */}
       {NAV.map((item) => {
@@ -115,7 +115,7 @@ export default function FloatingDockCyber({ theme, toggleTheme }) {
             key={item.id}
             href={`#${item.id}`}
             aria-label={item.label}
-            className="relative flex items-center gap-1 sm:gap-1.5 rounded-full px-2.5 sm:px-3 py-1.5 sm:py-2 text-[11px] sm:text-xs font-medium transition-colors"
+            className="relative flex items-center gap-1 sm:gap-1.5 rounded-full px-1.5 sm:px-3 py-1 sm:py-2 text-[11px] sm:text-xs font-medium transition-colors shrink-0"
           >
             {isActive && (
               <motion.span

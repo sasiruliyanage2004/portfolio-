@@ -3,79 +3,39 @@ import { motion } from "framer-motion";
 export function LampContainer({ children, className = "" }) {
   return (
     <div
-      className={`relative flex min-h-[360px] sm:min-h-[420px] flex-col items-center justify-center overflow-hidden bg-transparent w-full z-0 ${className}`}
+      className={`relative flex flex-col items-center justify-center overflow-hidden bg-transparent w-full pt-10 sm:pt-16 pb-6 ${className}`}
     >
-      <div className="relative flex w-full flex-1 scale-y-125 items-center justify-center isolate z-0">
-        {/* Left Conic Light Beam */}
+      {/* 🌟 100% Organic Downward Spotlight Beam (Zero Box Artifacts) */}
+      <div className="absolute top-0 inset-x-0 flex flex-col items-center justify-start pointer-events-none z-0">
+        {/* Top Horizontal Laser Beam Emitter */}
         <motion.div
-          initial={{ opacity: 0.5, width: "12rem" }}
-          whileInView={{ opacity: 1, width: "28rem" }}
+          initial={{ opacity: 0, width: "30%" }}
+          whileInView={{ opacity: 1, width: "70%" }}
           viewport={{ once: true }}
-          transition={{
-            delay: 0.2,
-            duration: 0.9,
-            ease: "easeInOut",
-          }}
-          style={{
-            backgroundImage: `conic-gradient(var(--conic-position), var(--tw-gradient-stops))`,
-          }}
-          className="absolute inset-auto right-1/2 h-56 overflow-visible w-[28rem] bg-gradient-conic from-cyan-500 via-transparent to-transparent text-white [--conic-position:from_70deg_at_center_top]"
-        >
-          <div className="absolute w-[100%] left-0 bg-transparent h-40 bottom-0 z-20 [mask-image:linear-gradient(to_top,white,transparent)]" />
-          <div className="absolute w-40 h-[100%] left-0 bg-transparent bottom-0 z-20 [mask-image:linear-gradient(to_right,white,transparent)]" />
-        </motion.div>
-
-        {/* Right Conic Light Beam */}
-        <motion.div
-          initial={{ opacity: 0.5, width: "12rem" }}
-          whileInView={{ opacity: 1, width: "28rem" }}
-          viewport={{ once: true }}
-          transition={{
-            delay: 0.2,
-            duration: 0.9,
-            ease: "easeInOut",
-          }}
-          style={{
-            backgroundImage: `conic-gradient(var(--conic-position), var(--tw-gradient-stops))`,
-          }}
-          className="absolute inset-auto left-1/2 h-56 w-[28rem] bg-gradient-conic from-transparent via-transparent to-cyan-500 text-white [--conic-position:from_290deg_at_center_top]"
-        >
-          <div className="absolute w-40 h-[100%] right-0 bg-transparent bottom-0 z-20 [mask-image:linear-gradient(to_left,white,transparent)]" />
-          <div className="absolute w-[100%] right-0 bg-transparent h-40 bottom-0 z-20 [mask-image:linear-gradient(to_top,white,transparent)]" />
-        </motion.div>
-
-        {/* Ambient Radial Glowing Halo */}
-        <div className="absolute inset-auto z-50 h-36 w-[26rem] -translate-y-1/2 rounded-full bg-cyan-500 opacity-40 blur-3xl" />
-
-        {/* Pulsing Central Cyan Light Orb */}
-        <motion.div
-          initial={{ width: "8rem" }}
-          whileInView={{ width: "16rem" }}
-          viewport={{ once: true }}
-          transition={{
-            delay: 0.2,
-            duration: 0.9,
-            ease: "easeInOut",
-          }}
-          className="absolute inset-auto z-30 h-32 w-64 -translate-y-[5rem] rounded-full bg-cyan-400/80 blur-2xl"
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="h-[2px] max-w-[500px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_20px_#06b6d4,0_0_40px_#10b981]"
         />
 
-        {/* Central Glowing Laser Line */}
+        {/* Downward Conical Light Flare Curtain with Radial Mask */}
         <motion.div
-          initial={{ width: "12rem" }}
-          whileInView={{ width: "28rem" }}
+          initial={{ opacity: 0, scaleY: 0.5 }}
+          whileInView={{ opacity: 1, scaleY: 1 }}
           viewport={{ once: true }}
-          transition={{
-            delay: 0.2,
-            duration: 0.9,
-            ease: "easeInOut",
+          transition={{ duration: 0.9, delay: 0.1, ease: "easeOut" }}
+          className="relative w-full max-w-[650px] h-[180px] sm:h-[240px] -mt-[1px] origin-top"
+          style={{
+            background: "radial-gradient(50% 100% at 50% 0%, rgba(6,182,212,0.35) 0%, rgba(16,185,129,0.12) 50%, transparent 100%)",
+            maskImage: "radial-gradient(ellipse 60% 80% at 50% 10%, black 30%, transparent 100%)",
+            WebkitMaskImage: "radial-gradient(ellipse 60% 80% at 50% 10%, black 30%, transparent 100%)",
           }}
-          className="absolute inset-auto z-50 h-0.5 w-[28rem] -translate-y-[6rem] bg-cyan-400 shadow-[0_0_24px_#06b6d4]"
         />
+
+        {/* Ambient Central Glow Ball */}
+        <div className="absolute top-4 h-24 w-48 sm:w-72 rounded-full bg-cyan-400/25 blur-3xl" />
       </div>
 
-      {/* Content Container Illuminated under the Lamp */}
-      <div className="relative z-50 flex -translate-y-36 sm:-translate-y-40 flex-col items-center px-4 w-full">
+      {/* Content Container Illuminated Naturally by the Lamp */}
+      <div className="relative z-10 flex flex-col items-center px-2 sm:px-4 w-full">
         {children}
       </div>
     </div>

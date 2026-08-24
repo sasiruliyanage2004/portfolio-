@@ -11,6 +11,7 @@ import {
   X,
   Sparkles,
   CheckCircle2,
+  Maximize2,
 } from "lucide-react";
 
 const GithubIcon = (props) => (
@@ -39,8 +40,6 @@ const PROJECTS = [
     longDescription: "An enterprise-grade autonomous surveillance system engineered to detect lethal weapons (firearms, bladed weapons) and abnormal aggressive behavioral anomalies in real-time. Built with a high-throughput FastAPI asynchronous gateway and optimized YOLOv11 tensor graphs running over WebSockets.",
     category: "AI Solutions",
     tech: ["YOLOv11", "FastAPI", "Python", "React", "OpenCV", "PTZ Camera"],
-    span: "lg:col-span-2 lg:row-span-2",
-    featured: true,
     live: true,
     github: "https://github.com/sasiruliyanage2004/Suspicious-Activity-Detection",
     demo: "https://github.com/sasiruliyanage2004/Suspicious-Activity-Detection",
@@ -72,8 +71,6 @@ const PROJECTS = [
     longDescription: "A comprehensive digital health ecosystem modernizing traditional Sri Lankan Ayurvedic medical practice. Incorporates patient diagnostic search, doctor booking schedules, herbal inventory management, and an administrative knowledge base.",
     category: "Web Apps",
     tech: ["React 19", "Node.js", "Express", "MongoDB", "Tailwind CSS", "React Native"],
-    span: "lg:col-span-1 lg:row-span-1",
-    featured: false,
     live: true,
     github: "https://github.com/sasiruliyanage2004/AyurLife---Integrated-Ayurvedic-Herbal-Medicine-Platform",
     demo: "https://github.com/sasiruliyanage2004/AyurLife---Integrated-Ayurvedic-Herbal-Medicine-Platform",
@@ -84,6 +81,8 @@ const PROJECTS = [
     ],
     status: "v2.4.0 • ONLINE",
     engineTitle: "Ayurvedic Herbal Portal Engine",
+    sync: "Express RESTful API",
+    badge: "Healthcare Portal",
     architecture: [
       { step: "01. Client Layers", title: "React 19 Web + React Native App", desc: "Cross-platform mobile & responsive desktop user interfaces" },
       { step: "02. API Gateway", title: "Express.js RESTful Micro-routes", desc: "JWT authenticated doctor scheduling & medicine ordering endpoints" },
@@ -102,8 +101,6 @@ const PROJECTS = [
     longDescription: "An intelligent autonomous workspace that abstracts git complexity using localized semantic snapshots, automatic code diff analysis, and intelligent pull-request code reviewer agents.",
     category: "AI Solutions",
     tech: ["TypeScript", "React", "Node.js", "AI Agent", "Tailwind CSS"],
-    span: "lg:col-span-1 lg:row-span-1",
-    featured: false,
     live: true,
     github: "https://github.com/sasiruliyanage2004/GitBrain",
     demo: "https://github.com/sasiruliyanage2004/GitBrain",
@@ -114,6 +111,8 @@ const PROJECTS = [
     ],
     status: "v1.0.0 • ACTIVE",
     engineTitle: "GitBrain Autonomous Code Agent",
+    sync: "Virtual Workspace Engine",
+    badge: "AI Developer Tool",
     architecture: [
       { step: "01. File Watcher", title: "Local Virtual Workspace", desc: "In-memory file tree tracker observing delta modifications" },
       { step: "02. AI Reasoning", title: "Semantic Commit Agent", desc: "LLM agent synthesizing structured commit summaries and PR reviews" },
@@ -132,8 +131,6 @@ const PROJECTS = [
     longDescription: "Neural network-based facial landmark extraction and biometric verification platform. Designed for contact-less attendance and enterprise security clearance with real-time liveness verification.",
     category: "AI Solutions",
     tech: ["face-api.js", "React", "Node.js", "MongoDB", "Computer Vision"],
-    span: "lg:col-span-1 lg:row-span-1",
-    featured: false,
     live: true,
     github: "https://github.com/sasiruliyanage2004/Real-time-Biometrics-Platform",
     demo: "https://github.com/sasiruliyanage2004/Real-time-Biometrics-Platform",
@@ -144,6 +141,8 @@ const PROJECTS = [
     ],
     status: "v1.1.0 • ONLINE",
     engineTitle: "Neural Biometric Pipeline",
+    sync: "SSD MobileNet V1",
+    badge: "Biometric Auth",
     architecture: [
       { step: "01. Camera Stream", title: "Webcam Video Buffer", desc: "Browser canvas capture with lighting normalization" },
       { step: "02. Landmark Engine", title: "SSD MobileNet V1", desc: "68-point facial landmark detector computing 128-dimensional embedding vectors" },
@@ -162,8 +161,6 @@ const PROJECTS = [
     longDescription: "A comprehensive remote employee management suite enabling managers and remote workers to maintain transparent, automated productivity records, active work duration metrics, and task audits.",
     category: "Web Apps",
     tech: ["TypeScript", "React", "Node.js", "MongoDB", "Productivity Engine"],
-    span: "lg:col-span-1 lg:row-span-1",
-    featured: false,
     live: true,
     github: "https://github.com/sasiruliyanage2004/WFH-Tracking",
     demo: "https://github.com/sasiruliyanage2004/WFH-Tracking",
@@ -174,6 +171,8 @@ const PROJECTS = [
     ],
     status: "v2.0.0 • ACTIVE",
     engineTitle: "WorkforceOS Productivity Daemon",
+    sync: "Heartbeat Activity Ping",
+    badge: "Enterprise Workforce",
     architecture: [
       { step: "01. Client Agent", title: "Work Session Tracker", desc: "Automated work duration timers and activity heartbeat pings" },
       { step: "02. Aggregation Hub", title: "Node.js Analytics Worker", desc: "Computes active vs idle hours, break durations, and project allocations" },
@@ -192,8 +191,6 @@ const PROJECTS = [
     longDescription: "A commercial digital agency portal designed to showcase high-impact creative campaigns, calculate dynamic client advertising rate quotes, and manage prospective lead inquiries.",
     category: "UI/UX",
     tech: ["JavaScript", "HTML5", "CSS3", "PHP", "MySQL"],
-    span: "lg:col-span-1 lg:row-span-1",
-    featured: false,
     live: true,
     github: "https://github.com/sasiruliyanage2004/Web-Based-Advertising-Agency",
     demo: "https://github.com/sasiruliyanage2004/Web-Based-Advertising-Agency",
@@ -204,6 +201,8 @@ const PROJECTS = [
     ],
     status: "v1.0.0 • PRODUCTION",
     engineTitle: "AdVantage Campaign Gateway",
+    sync: "PHP Service Engine",
+    badge: "Marketing Platform",
     architecture: [
       { step: "01. Frontend", title: "Dynamic Marketing Interface", desc: "Custom CSS3 animated project portfolios with rich media carousels" },
       { step: "02. Backend Logic", title: "PHP Service Engine", desc: "Processes client quotation requests, contact inquiries & service catalogues" },
@@ -380,7 +379,7 @@ function ProjectDeepDiveModal({ project, onClose }) {
           </div>
         </div>
 
-        {/* Modal Action Buttons (Fixed Pin at Bottom of Card) */}
+        {/* Modal Action Buttons */}
         <div className="flex flex-wrap items-center justify-between gap-3 p-4 sm:p-6 border-t border-white/10 shrink-0 bg-[#090d16]/95 backdrop-blur-md">
           <a
             href={project.github}
@@ -406,48 +405,90 @@ function ProjectDeepDiveModal({ project, onClose }) {
 }
 
 // ------------------------------------------------------------------
-// SOLID PROJECT CARD (Zero 3D Tilt - 100% Flat & Stable)
+// INTERACTIVE EXPANDABLE PROJECT CARD (Click to Expand / Focus)
 // ------------------------------------------------------------------
-function ProjectCard({ project, onInspect }) {
-  const isFeatured = project.featured || (project.span && project.span.includes("row-span-2"));
-
+function ExpandableProjectCard({ project, isExpanded, onSelect, onInspect }) {
   return (
     <motion.div
       layout
-      initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -16 }}
-      transition={{ duration: 0.3 }}
-      className={`group relative ${project.span}`}
+      transition={{ type: "spring", stiffness: 350, damping: 30 }}
+      className={`group relative transition-all duration-500 ${
+        isExpanded ? "lg:col-span-2 lg:row-span-2" : "lg:col-span-1 lg:row-span-1"
+      }`}
     >
       <div
-        className={`project-card-obsidian noise-overlay relative flex h-full min-h-[260px] flex-col justify-between overflow-hidden rounded-3xl p-6 sm:p-8 transition-all duration-300 shadow-xl z-10 border ${
-          isFeatured
-            ? "border-cyan-500/40 hover:border-cyan-400 hover:shadow-[0_15px_35px_rgba(6,182,212,0.15)]"
-            : "border-white/10 hover:border-cyan-400/50 hover:shadow-[0_15px_35px_rgba(0,0,0,0.4)]"
+        onClick={() => {
+          if (!isExpanded) onSelect(project.id);
+        }}
+        className={`project-card-obsidian noise-overlay relative flex h-full flex-col justify-between overflow-hidden rounded-3xl p-6 sm:p-8 transition-all duration-300 shadow-xl z-10 border ${
+          isExpanded
+            ? "border-cyan-400/80 shadow-[0_20px_50px_rgba(6,182,212,0.2)] bg-[#0c1220]/95"
+            : "border-white/10 hover:border-cyan-400/50 hover:shadow-[0_15px_35px_rgba(0,0,0,0.4)] cursor-pointer"
         }`}
       >
+        {isExpanded && <span className="border-beam" aria-hidden="true" />}
+
         {/* Top Header Block */}
         <div>
-          <div className="flex items-start justify-between gap-4">
-            <h3 className="text-xl sm:text-2xl font-bold transition-colors">
-              {project.title}
-            </h3>
-            {project.live && (
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/50 bg-emerald-500/20 px-3 py-1 font-mono text-xs font-semibold text-emerald-300 shrink-0">
-                <Radio className="h-3 w-3" />
-                LIVE
+          <div className="flex items-start justify-between gap-3 mb-2">
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className={`inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 font-mono text-[10px] font-bold ${
+                isExpanded
+                  ? "border border-cyan-500/40 bg-cyan-500/20 text-cyan-300"
+                  : "border border-white/15 bg-white/5 text-slate-300"
+              }`}>
+                <Sparkles className="h-2.5 w-2.5" />
+                {project.category}
               </span>
-            )}
+
+              {isExpanded && (
+                <span className="inline-flex items-center gap-1 rounded-full border border-emerald-500/40 bg-emerald-500/20 px-2.5 py-0.5 font-mono text-[10px] font-bold text-emerald-400 animate-pulse">
+                  <Radio className="h-2.5 w-2.5" />
+                  ACTIVE FOCUS
+                </span>
+              )}
+            </div>
+
+            <div className="flex items-center gap-2 shrink-0">
+              {!isExpanded ? (
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onSelect(project.id);
+                  }}
+                  title="Expand to Spotlight"
+                  className="rounded-full bg-white/5 hover:bg-cyan-500/20 text-slate-400 hover:text-cyan-300 p-1.5 transition-all border border-white/10 cursor-pointer"
+                >
+                  <Maximize2 className="h-3.5 w-3.5" />
+                </button>
+              ) : (
+                project.live && (
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/50 bg-emerald-500/20 px-3 py-1 font-mono text-xs font-semibold text-emerald-300 shrink-0">
+                    <Radio className="h-3 w-3" />
+                    LIVE
+                  </span>
+                )
+              )}
+            </div>
           </div>
 
-          <p className="mt-3 sm:mt-4 text-sm sm:text-base leading-relaxed font-normal">
+          <h3 className={`font-bold transition-colors ${isExpanded ? "text-2xl sm:text-3xl text-cyan-300 mt-2" : "text-lg sm:text-xl text-white group-hover:text-cyan-400"}`}>
+            {project.title}
+          </h3>
+
+          <p className="mt-3 text-xs sm:text-sm sm:leading-relaxed font-normal text-slate-300">
             {project.blurb}
           </p>
 
-          {/* Featured Metrics Box */}
-          {isFeatured && project.metrics && (
-            <div className="bento-ui-preview-frame my-5 sm:my-6 rounded-2xl p-4 sm:p-5 font-mono text-xs shadow-inner">
+          {/* Expanded Live Telemetry Frame */}
+          {isExpanded && project.metrics && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              transition={{ duration: 0.35 }}
+              className="bento-ui-preview-frame my-5 rounded-2xl p-4 sm:p-5 font-mono text-xs shadow-inner"
+            >
               <div className="flex items-center justify-between border-b border-white/10 pb-2.5 mb-2">
                 <div className="flex items-center gap-2 text-cyan-400 font-semibold text-xs sm:text-sm">
                   <Activity className="h-4 w-4 animate-pulse text-cyan-300" />
@@ -473,25 +514,17 @@ function ProjectCard({ project, onInspect }) {
                   <ShieldCheck className="h-3.5 w-3.5" /> {project.badge}
                 </span>
               </div>
-            </div>
+            </motion.div>
           )}
 
-          {/* Mini Metrics Preview for non-featured card */}
-          {!isFeatured && project.metrics && (
-            <div className="bento-ui-preview-frame my-4 rounded-2xl p-3.5 font-mono text-xs shadow-inner">
-              <div className="flex items-center justify-between border-b border-white/10 pb-2 mb-2">
-                <div className="flex items-center gap-1.5 text-cyan-400 font-semibold text-[11px]">
-                  <Activity className="h-3.5 w-3.5 animate-pulse text-cyan-300" />
-                  <span>{project.engineTitle || "System Engine"}</span>
-                </div>
-                <span className="text-[10px] opacity-70">{project.status}</span>
-              </div>
-
-              <div className="grid grid-cols-3 gap-2 my-2 text-center">
+          {/* Mini Metrics for Compact Cards */}
+          {!isExpanded && project.metrics && (
+            <div className="bento-ui-preview-frame my-3 rounded-xl p-2.5 font-mono text-xs shadow-inner">
+              <div className="grid grid-cols-3 gap-1.5 text-center">
                 {project.metrics.map((m, i) => (
-                  <div key={i} className="rounded-xl bg-white/5 p-2 border border-white/10">
-                    <div className="text-cyan-400 font-bold text-xs sm:text-sm">{m.val}</div>
-                    <div className="text-[9px] opacity-70 mt-0.5">{m.label}</div>
+                  <div key={i} className="rounded-lg bg-white/5 p-1.5 border border-white/10">
+                    <div className="text-cyan-400 font-bold text-xs">{m.val}</div>
+                    <div className="text-[8px] opacity-70 truncate">{m.label}</div>
                   </div>
                 ))}
               </div>
@@ -499,22 +532,26 @@ function ProjectCard({ project, onInspect }) {
           )}
         </div>
 
-        {/* Bottom Block */}
+        {/* Bottom Actions Block */}
         <div className="mt-auto pt-4">
-          <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4 sm:mb-5">
+          <div className="flex flex-wrap gap-1.5 mb-4">
             {project.tech.map((t) => (
               <span
                 key={t}
-                className="tech-badge rounded-lg px-2.5 sm:px-3 py-0.5 sm:py-1 font-mono text-[11px] sm:text-xs font-semibold"
+                className="tech-badge rounded-lg px-2.5 py-0.5 font-mono text-[10px] sm:text-[11px] font-semibold"
               >
                 {t}
               </span>
             ))}
           </div>
 
-          <div className="flex items-center justify-between gap-3 pt-2 border-t border-white/10">
+          <div className="flex items-center justify-between gap-3 pt-2.5 border-t border-white/10">
             <button
-              onClick={() => onInspect(project)}
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                onInspect(project);
+              }}
               className="inline-flex items-center gap-1.5 font-mono text-xs font-bold text-cyan-400 hover:text-emerald-400 transition-colors cursor-pointer"
             >
               <Layers className="h-3.5 w-3.5" />
@@ -525,6 +562,7 @@ function ProjectCard({ project, onInspect }) {
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
               className="inline-flex items-center gap-1.5 font-mono text-xs font-bold opacity-80 hover:text-cyan-400 transition-colors"
             >
               <GithubIcon className="h-3.5 w-3.5" />
@@ -543,6 +581,7 @@ function ProjectCard({ project, onInspect }) {
 // ------------------------------------------------------------------
 export default function ProjectsCyber() {
   const [cat, setCat] = useState("All");
+  const [activeId, setActiveId] = useState(PROJECTS[0].id);
   const [selectedProject, setSelectedProject] = useState(null);
   const [githubStats, setGithubStats] = useState({ repos: 11, updated: "Active" });
   const sectionRef = useRef(null);
@@ -566,6 +605,13 @@ export default function ProjectsCyber() {
     if (cat === "All") return PROJECTS;
     return PROJECTS.filter((p) => p.category === cat);
   }, [cat]);
+
+  // When changing category, auto-focus first project in that category if active is hidden
+  useEffect(() => {
+    if (list.length > 0 && !list.find((p) => p.id === activeId)) {
+      setActiveId(list[0].id);
+    }
+  }, [cat, list, activeId]);
 
   return (
     <section id="projects" ref={sectionRef} className="relative overflow-hidden bg-transparent px-4 sm:px-6 py-20 sm:py-28 lg:px-10 scroll-mt-20">
@@ -595,6 +641,9 @@ export default function ProjectsCyber() {
             <h2 className="mt-2 text-4xl font-extrabold text-slate-900 dark:text-white sm:text-6xl dark:drop-shadow-[0_4px_16px_rgba(0,0,0,0.8)]">
               Projects &amp; <span className="text-gradient">Builds</span>
             </h2>
+            <p className="text-xs font-mono text-slate-400 mt-2">
+              💡 Select any card to expand its live spotlight &amp; telemetry engine
+            </p>
           </div>
 
           {/* Category Tab Switcher */}
@@ -621,11 +670,17 @@ export default function ProjectsCyber() {
           </div>
         </div>
 
-        {/* Bento Grid Layout */}
+        {/* Dynamic Expandable Bento Grid */}
         <motion.div layout className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 relative z-10">
           <AnimatePresence mode="popLayout">
             {list.map((project) => (
-              <ProjectCard key={project.id} project={project} onInspect={(p) => setSelectedProject(p)} />
+              <ExpandableProjectCard
+                key={project.id}
+                project={project}
+                isExpanded={activeId === project.id}
+                onSelect={(id) => setActiveId(id)}
+                onInspect={(p) => setSelectedProject(p)}
+              />
             ))}
           </AnimatePresence>
         </motion.div>

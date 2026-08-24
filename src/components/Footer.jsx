@@ -52,7 +52,7 @@ export default function Footer({ onOpenCommandPalette }) {
   };
 
   return (
-    <footer className="sticky bottom-0 min-h-[92vh] sm:h-screen w-full flex flex-col justify-between p-5 sm:p-12 lg:p-16 bg-[#05070e] dark:bg-[#05070e] light-theme:bg-[#F7F5F1] text-slate-100 dark:text-slate-100 light-theme:text-slate-900 z-0 overflow-hidden">
+    <footer className="sticky bottom-0 min-h-[92vh] sm:h-screen w-full flex flex-col justify-between p-5 sm:p-12 lg:p-16 pb-28 sm:pb-12 bg-[#05070e] dark:bg-[#05070e] light-theme:bg-[#F7F5F1] text-slate-100 dark:text-slate-100 light-theme:text-slate-900 z-0 overflow-hidden">
       {/* Volumetric Ambient Mesh Glow Orbs */}
       <div className="absolute top-1/4 left-1/4 h-64 sm:h-96 w-64 sm:w-96 rounded-full bg-cyan-500/10 blur-[100px] sm:blur-[140px] pointer-events-none" />
       <div className="absolute bottom-10 right-1/4 h-64 sm:h-96 w-64 sm:w-96 rounded-full bg-emerald-500/10 blur-[100px] sm:blur-[140px] pointer-events-none" />

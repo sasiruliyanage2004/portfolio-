@@ -33,7 +33,7 @@ export default function InteractiveIconCloud({ size = 380 }) {
   const [hoveredIcon, setHoveredIcon] = useState(null);
   const rotationRef = useRef({ x: 0, y: 0, vx: 0.003, vy: 0.004 });
   const isInteracting = useRef(false);
-  const lastMousePos = useRef({ x: 0, y: 0 });
+  const isVisibleRef = useRef(false);
 
   // Generate 3D Fibonacci sphere distribution points
   const points = useRef(
@@ -54,8 +54,22 @@ export default function InteractiveIconCloud({ size = 380 }) {
     let animId;
     const radius = size * 0.42;
 
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisibleRef.current = entry.isIntersecting;
+        if (entry.isIntersecting) {
+          animId = requestAnimationFrame(render);
+        }
+      },
+      { threshold: 0.05 }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
     const render = () => {
-      if (!containerRef.current) return;
+      if (!isVisibleRef.current || !containerRef.current) return;
       const nodes = containerRef.current.children;
 
       // Auto rotation physics
@@ -94,28 +108,14 @@ export default function InteractiveIconCloud({ size = 380 }) {
       animId = requestAnimationFrame(render);
     };
 
-    animId = requestAnimationFrame(render);
-    return () => cancelAnimationFrame(animId);
+    return () => {
+      observer.disconnect();
+      cancelAnimationFrame(animId);
+    };
   }, [size, points]);
 
-  // Mouse / Touch Drag Handlers for 3D Orbit Control
   const handlePointerDown = (e) => {
     isInteracting.current = true;
-    const clientX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
-    const clientY = e.clientY || (e.touches && e.touches[0].clientY) || 0;
-    lastMousePos.current = { x: clientX, y: clientY };
-  };
-
-  const handlePointerMove = (e) => {
-    if (!isInteracting.current) return;
-    const clientX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
-    const clientY = e.clientY || (e.touches && e.touches[0].clientY) || 0;
-    const dx = clientX - lastMousePos.current.x;
-    const dy = clientY - lastMousePos.current.y;
-
-    rotationRef.current.y += dx * 0.006;
-    rotationRef.current.x -= dy * 0.006;
-    lastMousePos.current = { x: clientX, y: clientY };
   };
 
   const handlePointerUp = () => {
@@ -123,54 +123,48 @@ export default function InteractiveIconCloud({ size = 380 }) {
   };
 
   return (
-    <div
-      className="relative flex items-center justify-center select-none cursor-grab active:cursor-grabbing mx-auto"
-      style={{ width: size, height: size, maxWidth: "100%" }}
-      onMouseDown={handlePointerDown}
-      onMouseMove={handlePointerMove}
-      onMouseUp={handlePointerUp}
-      onTouchStart={handlePointerDown}
-      onTouchMove={handlePointerMove}
-      onTouchEnd={handlePointerUp}
-    >
-      {/* Luminous Celestial Background Halo */}
-      <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-cyan-500/10 via-emerald-500/5 to-teal-500/10 blur-2xl pointer-events-none" />
-      <div className="absolute inset-4 rounded-full border border-white/5 dark:border-cyan-500/10 pointer-events-none" />
-
-      {/* 3D Sphere Container */}
-      <div ref={containerRef} className="absolute inset-0 flex items-center justify-center">
+    <div className="relative flex items-center justify-center select-none py-4">
+      {/* 3D Interactive Fibonacci Cloud Container */}
+      <div
+        ref={containerRef}
+        onPointerDown={handlePointerDown}
+        onPointerUp={handlePointerUp}
+        style={{ width: size, height: size }}
+        className="relative cursor-grab active:cursor-grabbing touch-none transform-gpu will-change-transform"
+      >
         {points.map((tech) => (
           <div
-            key={tech.name}
+            key={tech.slug}
             onMouseEnter={() => setHoveredIcon(tech.name)}
             onMouseLeave={() => setHoveredIcon(null)}
-            className="absolute left-1/2 top-1/2 flex items-center justify-center rounded-2xl p-2.5 bg-white/10 dark:bg-black/60 border border-white/15 dark:border-white/10 backdrop-blur-md transition-shadow duration-300 group hover:border-cyan-400 hover:shadow-[0_0_16px_rgba(6,182,212,0.6)] cursor-pointer"
-            style={{
-              boxShadow: hoveredIcon === tech.name ? `0 0 20px ${tech.color}` : undefined,
-            }}
+            className="absolute left-1/2 top-1/2 flex items-center justify-center p-2 rounded-2xl bg-white/5 dark:bg-white/5 light-theme:bg-slate-100/80 border border-white/10 dark:border-white/10 light-theme:border-slate-300/80 backdrop-blur-md transition-shadow hover:shadow-[0_0_15px_rgba(6,182,212,0.6)] cursor-pointer"
+            style={{ width: 44, height: 44 }}
+            title={tech.name}
           >
             <img
               src={tech.imgUrl}
               alt={tech.name}
               loading="lazy"
-              className="h-6 w-6 sm:h-7 sm:w-7 object-contain pointer-events-none filter drop-shadow"
+              decoding="async"
+              className="h-6 w-6 object-contain pointer-events-none drop-shadow-sm"
               onError={(e) => {
                 e.target.style.display = "none";
               }}
             />
-
-            {/* Micro Hover Badge Tooltip */}
-            <span className="absolute -bottom-6 rounded-md bg-black/95 border border-white/20 px-2 py-0.5 font-mono text-[9px] text-white opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap shadow-xl z-30">
-              {tech.name}
-            </span>
           </div>
         ))}
       </div>
 
-      {/* Central Interactive Status Pill */}
-      <div className="absolute bottom-2 rounded-full border border-white/15 bg-black/70 px-3 py-1 font-mono text-[10px] text-cyan-300 backdrop-blur-md pointer-events-none shadow-lg">
-        {hoveredIcon ? `✨ ${hoveredIcon}` : "3D Sphere • Drag to Orbit"}
-      </div>
+      {/* Active Icon Floating Badge */}
+      {hoveredIcon && (
+        <motion.div
+          initial={{ opacity: 0, y: 5 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="absolute -bottom-4 z-50 rounded-full border border-cyan-500/30 bg-[#090d16]/95 px-3 py-1 font-mono text-xs font-bold text-cyan-400 shadow-xl backdrop-blur-md pointer-events-none"
+        >
+          {hoveredIcon}
+        </motion.div>
+      )}
     </div>
   );
 }

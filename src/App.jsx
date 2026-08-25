@@ -60,10 +60,14 @@ export default function App() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-  // Lenis smooth scroll — buttery-smooth inertia scroll with modal lock support
+  // Lenis smooth scroll — buttery-smooth inertia scroll on desktop, native on mobile
   useEffect(() => {
+    // Check if mobile / touch device
+    const isTouch = window.matchMedia("(pointer: coarse)").matches || "ontouchstart" in window;
+    if (isTouch) return; // Allow native 120Hz mobile compositor scrolling with zero overhead
+
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: 1.1,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smooth: true,
       prevent: (node) => Boolean(node.hasAttribute?.("data-lenis-prevent") || node.closest?.("[data-lenis-prevent]")),
@@ -145,8 +149,7 @@ export default function App() {
       {/* Full-Page Real-time Procedural HTML5 Signature Dumbara Canvas */}
       <CulturalPatternCanvas />
 
-      {/* STITCH Particle Background & Custom Glow Cursor */}
-      <ParticleBackground />
+      {/* Custom Glow Cursor (Auto-disabled on mobile) */}
       <CustomCursor />
       <CursorTrail />
 

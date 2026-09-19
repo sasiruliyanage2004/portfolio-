@@ -34,8 +34,9 @@ function CopyBadge({ value, icon: Icon, label }) {
 
 export default function ContactCyber() {
   const [activeTab, setActiveTab] = useState("form"); // "form" | "cli"
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", message: "", botcheck: "" });
   const [status, setStatus] = useState("idle");
+  const lastSubmitTime = useRef(0);
 
   // CLI Command Executor States
   const [cmdInput, setCmdInput] = useState("");
@@ -93,7 +94,7 @@ export default function ContactCyber() {
           text: "✨ ACCESS GRANTED! Priority hiring protocol initiated.\nRedirecting to WhatsApp to start the conversation...",
         });
         setTimeout(() => {
-          window.open("https://wa.me/94715700953?text=Hi%20Sasiru,%20I%20would%20like%20to%20discuss%20a%20job/project%20opportunity%20with%20you!", "_blank");
+          window.open("https://wa.me/94715700953?text=Hi%20Sasiru,%20I%20would%20like%20to%20discuss%20a%20job/project%20opportunity%20with%20you!", "_blank", "noopener,noreferrer");
         }, 800);
         break;
       case "stats":
@@ -119,11 +120,11 @@ export default function ContactCyber() {
         break;
       case "whatsapp":
         newHistory.push({ type: "out", text: "Opening WhatsApp chat..." });
-        window.open("https://wa.me/94715700953?text=Hi%20Sasiru,%20I%20visited%20your%20portfolio%20and%20would%20like%20to%20connect!", "_blank");
+        window.open("https://wa.me/94715700953?text=Hi%20Sasiru,%20I%20visited%20your%20portfolio%20and%20would%20like%20to%20connect!", "_blank", "noopener,noreferrer");
         break;
       case "github":
         newHistory.push({ type: "out", text: "Opening https://github.com/sasiruliyanage2004..." });
-        window.open("https://github.com/sasiruliyanage2004", "_blank");
+        window.open("https://github.com/sasiruliyanage2004", "_blank", "noopener,noreferrer");
         break;
       case "clear":
         setCmdHistory([]);
@@ -140,7 +141,28 @@ export default function ContactCyber() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!form.name || !form.email || !form.message) return;
+    const cleanName = (form.name || "").trim().slice(0, 100);
+    const cleanEmail = (form.email || "").trim().slice(0, 150);
+    const cleanMessage = (form.message || "").trim().slice(0, 3000);
+
+    if (!cleanName || !cleanEmail || !cleanMessage) return;
+
+    // Honeypot spam bot check
+    if (form.botcheck) {
+      setStatus("sent");
+      setForm({ name: "", email: "", message: "", botcheck: "" });
+      return;
+    }
+
+    // Rate limiting cooldown (6 seconds)
+    const now = Date.now();
+    if (now - lastSubmitTime.current < 6000) {
+      setStatus("error");
+      setTimeout(() => setStatus("idle"), 3000);
+      return;
+    }
+    lastSubmitTime.current = now;
+
     setStatus("sending");
 
     try {
@@ -152,17 +174,17 @@ export default function ContactCyber() {
         },
         body: JSON.stringify({
           access_key: "6e01e3e1-e476-48bc-a687-c330d87209c5",
-          name: form.name,
-          email: form.email,
-          message: form.message,
-          subject: `New Portfolio Message from ${form.name}`,
+          name: cleanName,
+          email: cleanEmail,
+          message: cleanMessage,
+          subject: `New Portfolio Message from ${cleanName}`,
         }),
       });
 
       const result = await response.json();
       if (result.success) {
         setStatus("sent");
-        setForm({ name: "", email: "", message: "" });
+        setForm({ name: "", email: "", message: "", botcheck: "" });
         setTimeout(() => setStatus("idle"), 4000);
       } else {
         setStatus("error");
@@ -254,6 +276,17 @@ export default function ContactCyber() {
           {/* Tab 1: Standard GUI Contact Form */}
           {activeTab === "form" ? (
             <form onSubmit={handleSubmit} className="space-y-6 p-7 sm:p-9">
+              {/* Invisible Honeypot Anti-Bot Shield */}
+              <input
+                type="checkbox"
+                name="botcheck"
+                className="hidden"
+                style={{ display: "none" }}
+                tabIndex={-1}
+                autoComplete="off"
+                onChange={(e) => setForm({ ...form, botcheck: e.target.checked ? "bot" : "" })}
+              />
+
               <div>
                 <label htmlFor="name" className="mb-2 block font-mono text-xs uppercase tracking-wider">
                   // YOUR_NAME
@@ -262,6 +295,7 @@ export default function ContactCyber() {
                   id="name"
                   type="text"
                   required
+                  maxLength={100}
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
                   placeholder="e.g. John Doe / Hiring Manager"
@@ -277,6 +311,7 @@ export default function ContactCyber() {
                   id="email"
                   type="email"
                   required
+                  maxLength={150}
                   value={form.email}
                   onChange={(e) => setForm({ ...form, email: e.target.value })}
                   placeholder="e.g. recruiter@company.com"
@@ -292,6 +327,7 @@ export default function ContactCyber() {
                   id="message"
                   rows={5}
                   required
+                  maxLength={3000}
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
                   placeholder="Tell me about your project idea, job opportunity, or inquiry..."

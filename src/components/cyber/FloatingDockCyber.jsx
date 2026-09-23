@@ -191,7 +191,7 @@ export default function FloatingDockCyber({ theme, toggleTheme }) {
               transition={{ duration: 0.25 }}
               className="flex items-center overflow-hidden"
             >
-              <div className="mx-1.5 h-6 w-[1px] bg-white/15" />
+              <div className={`mx-1.5 h-6 w-[1px] ${isLightMode ? "bg-slate-300" : "bg-white/15"}`} />
 
               <span className="inline-flex items-center gap-1.5 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-3 py-1.5 font-mono text-[10px] font-medium text-emerald-600 dark:text-emerald-300 whitespace-nowrap shadow-inner">
                 <span className="relative flex h-1.5 w-1.5">
@@ -200,9 +200,15 @@ export default function FloatingDockCyber({ theme, toggleTheme }) {
                 </span>
                 Available for Hire
               </span>
-              <span className="ml-2 font-mono text-[9px] opacity-60 border border-white/15 rounded-lg px-2 py-1 whitespace-nowrap">
+              <kbd
+                className={`ml-2 inline-flex items-center font-mono text-[9.5px] font-bold rounded-lg px-2 py-1 whitespace-nowrap border shadow-xs transition-colors ${
+                  isLightMode
+                    ? "bg-slate-100 text-slate-700 border-slate-300/90"
+                    : "bg-white/10 text-slate-200 border-white/20"
+                }`}
+              >
                 Ctrl+K
-              </span>
+              </kbd>
             </motion.div>
           )}
         </AnimatePresence>

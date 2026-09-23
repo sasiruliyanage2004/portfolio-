@@ -159,7 +159,7 @@ npm run build
 ## 👤 Author
 
 **Sasiru Nethvidu Liyanage**
-* 🎓 2nd Year Undergraduate — BSc (Hons) in Information Technology at **SLIIT**
+* 🎓 3rd Year Undergraduate — BSc (Hons) in Information Technology at **SLIIT**
 * 📍 Western Province, Sri Lanka
 * 📧 Email: [liyanagesasiru@gmail.com](mailto:liyanagesasiru@gmail.com)
 * 💼 LinkedIn: [@sasiruliyanage](https://www.linkedin.com/in/sasiruliyanage)

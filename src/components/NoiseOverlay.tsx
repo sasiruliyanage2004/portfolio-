@@ -3,20 +3,20 @@ import React from "react";
 /**
  * NoiseOverlay Component (TypeScript / React)
  * Renders a subtle, high-performance SVG film grain / static noise overlay
- * over the entire viewport to give a luxurious "Matte Pitch-Black" texture.
+ * over the entire viewport in Dark Mode to give a luxurious "Matte Pitch-Black" texture.
  */
 export default function NoiseOverlay(): React.JSX.Element {
   return (
     <div
       aria-hidden="true"
-      className="fixed inset-0 pointer-events-none z-50 opacity-[0.04] mix-blend-screen select-none"
+      className="fixed inset-0 pointer-events-none z-50 dark:opacity-[0.04] opacity-0 mix-blend-screen select-none transition-opacity duration-300"
     >
       <svg className="h-full w-full" xmlns="http://www.w3.org/2000/svg">
         <filter id="film-grain-noise">
           <feTurbulence
             type="fractalNoise"
             baseFrequency="0.80"
-            numOctaves={3}
+            numOctaves="3"
             stitchTiles="stitch"
           />
           <feColorMatrix type="saturate" values="0" />

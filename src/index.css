@@ -40,7 +40,7 @@ html.light-theme {
 }
 
 html {
-  background: #000000;
+  background: var(--bg-obsidian);
   color-scheme: dark;
   scroll-behavior: smooth;
   width: 100%;
@@ -50,8 +50,8 @@ html {
 }
 
 body {
-  background: #000000;
-  color: #F8FAFC;
+  background: var(--bg-obsidian);
+  color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   width: 100%;

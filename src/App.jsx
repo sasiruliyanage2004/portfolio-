@@ -143,8 +143,8 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-[#F8FAFC] font-body selection:bg-cyan-500/30 selection:text-white relative">
-      {/* Global SVG Noise Overlay (Film Grain for Matte Pitch-Black Texture) */}
+    <div className="min-h-screen bg-transparent text-slate-100 font-body selection:bg-cyan-500/30 selection:text-white relative">
+      {/* Global SVG Noise Overlay (Film Grain for Matte Pitch-Black Texture in Dark Mode) */}
       <NoiseOverlay />
 
       {/* Cinematic Intro Loader — shown once per session */}

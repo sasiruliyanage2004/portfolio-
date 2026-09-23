@@ -42,7 +42,7 @@ function StatsRow() {
           <span className="font-mono text-2xl font-extrabold" style={{ background: "linear-gradient(135deg, var(--grad-start), var(--grad-mid), var(--grad-end))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
             {s.value}{s.suffix}
           </span>
-          <span className="font-mono text-[10px] uppercase tracking-widest text-slate-500 mt-0.5">{s.label}</span>
+          <span className="font-mono text-[10px] uppercase tracking-widest text-slate-700 dark:text-slate-300 font-semibold mt-0.5">{s.label}</span>
         </div>
       ))}
     </div>
@@ -286,12 +286,12 @@ export default function HeroCyber({ onOpenResume }) {
         transition={{ delay: 1, duration: 1 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
       >
-        <span className="font-mono text-xs opacity-50 text-slate-900 dark:text-white">Scroll to explore</span>
+        <span className="font-mono text-xs text-slate-700 dark:text-slate-200 font-medium">Scroll to explore</span>
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
         >
-          <ChevronDown className="h-5 w-5 opacity-50 text-slate-900 dark:text-white" />
+          <ChevronDown className="h-5 w-5 text-slate-700 dark:text-slate-200" />
         </motion.div>
       </motion.div>
     </section>

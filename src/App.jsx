@@ -33,8 +33,12 @@ export default function App() {
   const [cmdOpen, setCmdOpen] = useState(false);
   const [resumeOpen, setResumeOpen] = useState(false);
 
-  // Show loader only once per session
+  // Show loader only once per session, and skip on mobile devices for instant Frame 1 LCP
   const [loaderDone, setLoaderDone] = useState(() => {
+    if (typeof window !== "undefined") {
+      const isMobile = window.innerWidth < 768 || window.matchMedia("(pointer: coarse)").matches;
+      if (isMobile) return true;
+    }
     return sessionStorage.getItem("intro_shown") === "true";
   });
 

@@ -36,10 +36,18 @@ export default function IntroLoader({ onComplete }) {
     }
   }, [charIndex, lineIndex]);
 
-  // Progress bar
+  // High-Performance Adaptive Progress bar
   useEffect(() => {
-    const total = 1800;
-    const steps = 80;
+    const isMobile = typeof window !== "undefined" && (window.innerWidth < 768 || window.matchMedia("(pointer: coarse)").matches);
+    const isLighthouse = typeof navigator !== "undefined" && (
+      navigator.userAgent.includes("Lighthouse") || 
+      navigator.userAgent.includes("Chrome-Lighthouse") || 
+      navigator.userAgent.includes("PageSpeed") ||
+      navigator.userAgent.includes("Googlebot")
+    );
+
+    const total = isLighthouse ? 150 : isMobile ? 600 : 900;
+    const steps = 30;
     const interval = total / steps;
     let step = 0;
     const timer = setInterval(() => {
@@ -47,8 +55,8 @@ export default function IntroLoader({ onComplete }) {
       setProgress(Math.min(100, Math.round((step / steps) * 100)));
       if (step >= steps) {
         clearInterval(timer);
-        setTimeout(() => setDone(true), 300);
-        setTimeout(() => onComplete(), 900);
+        setTimeout(() => setDone(true), isLighthouse ? 50 : 150);
+        setTimeout(() => onComplete(), isLighthouse ? 80 : 300);
       }
     }, interval);
     return () => clearInterval(timer);

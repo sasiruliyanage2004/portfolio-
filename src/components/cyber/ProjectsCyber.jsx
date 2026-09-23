@@ -271,7 +271,7 @@ function ProjectDeepDiveModal({ project, onClose }) {
         <span className="border-beam" aria-hidden="true" />
 
         {/* Modal Header */}
-        <div className="flex items-start justify-between gap-4 border-b border-white/10 p-5 sm:p-7 pb-4 shrink-0 bg-[#090d16]/95 backdrop-blur-md">
+        <div className="flex items-start justify-between gap-4 border-b border-white/10 p-5 sm:p-7 pb-4 shrink-0 bg-black/80 backdrop-blur-xl">
           <div>
             <div className="flex items-center gap-2 mb-1.5 flex-wrap">
               <span className="inline-flex items-center gap-1 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-2.5 py-0.5 font-mono text-[10px] font-bold text-cyan-400">
@@ -382,7 +382,7 @@ function ProjectDeepDiveModal({ project, onClose }) {
         </div>
 
         {/* Modal Action Buttons */}
-        <div className="flex flex-wrap items-center justify-between gap-3 p-4 sm:p-6 border-t border-white/10 shrink-0 bg-[#090d16]/95 backdrop-blur-md">
+        <div className="flex flex-wrap items-center justify-between gap-3 p-4 sm:p-6 border-t border-white/10 shrink-0 bg-black/80 backdrop-blur-xl">
           <a
             href={project.github}
             target="_blank"

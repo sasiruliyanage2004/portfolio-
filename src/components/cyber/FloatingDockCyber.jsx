@@ -84,14 +84,14 @@ export default function FloatingDockCyber({ theme, toggleTheme }) {
         initial={{ opacity: 0, y: -25 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ type: "spring", stiffness: 350, damping: 28 }}
-        className={`fixed left-1/2 top-6 z-[60] -translate-x-1/2 hidden md:flex items-center rounded-2xl border backdrop-blur-2xl transition-all duration-300 shadow-2xl ${
+        className={`fixed left-1/2 top-6 z-[60] -translate-x-1/2 hidden md:flex items-center rounded-2xl border backdrop-blur-xl transition-all duration-300 shadow-2xl ${
           isLightMode
             ? isScrolled
               ? "px-3 py-1.5 shadow-[0_16px_40px_rgba(15,23,42,0.18)] bg-white/95 border-slate-300"
               : "px-3.5 py-2 shadow-[0_20px_50px_rgba(15,23,42,0.14)] bg-white/90 border-slate-200"
             : isScrolled
-              ? "px-3 py-1.5 shadow-[0_20px_50px_rgba(0,0,0,0.95),0_0_20px_rgba(6,182,212,0.15)] bg-[#090d16]/95 border-white/20"
-              : "px-3.5 py-2 shadow-[0_25px_60px_rgba(0,0,0,0.9),0_0_25px_rgba(6,182,212,0.12)] bg-[#090d16]/90 border-white/15"
+              ? "px-3 py-1.5 shadow-[0_20px_50px_rgba(0,0,0,0.95)] bg-black/40 border-white/10"
+              : "px-3.5 py-2 shadow-[0_25px_60px_rgba(0,0,0,0.9)] bg-black/40 border-white/10"
         }`}
       >
         {/* Brand Avatar & Name */}
@@ -238,10 +238,10 @@ export default function FloatingDockCyber({ theme, toggleTheme }) {
         initial={{ opacity: 0, y: 30, scale: 0.9 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ type: "spring", stiffness: 400, damping: 30 }}
-        className={`fixed bottom-3.5 left-1/2 z-[60] -translate-x-1/2 flex md:hidden items-center justify-between h-[60px] p-1.5 rounded-2xl border backdrop-blur-2xl transition-all duration-300 shadow-2xl w-[94vw] max-w-[420px] ${
+        className={`fixed bottom-3.5 left-1/2 z-[60] -translate-x-1/2 flex md:hidden items-center justify-between h-[60px] p-1.5 rounded-2xl border backdrop-blur-xl transition-all duration-300 shadow-2xl w-[94vw] max-w-[420px] ${
           isLightMode
             ? "bg-white/95 border-slate-300 shadow-[0_16px_40px_rgba(15,23,42,0.2)]"
-            : "bg-[#090d16]/95 border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.95),0_0_25px_rgba(6,182,212,0.2)]"
+            : "bg-black/40 border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.95)]"
         }`}
       >
         {/* Navigation Buttons Group */}

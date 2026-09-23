@@ -14,6 +14,7 @@ import CulturalPatternCanvas from "./components/CulturalPatternCanvas";
 import CommandPalette from "./components/CommandPalette";
 import ResumeModal from "./components/ResumeModal";
 import BackToTop from "./components/BackToTop";
+import NoiseOverlay from "./components/NoiseOverlay";
 import HeroCyber from "./components/cyber/HeroCyber";
 import ProjectsCyber from "./components/cyber/ProjectsCyber";
 import EducationCyber from "./components/cyber/EducationCyber";
@@ -142,7 +143,10 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen mesh-bg text-slate-200 font-body selection:bg-cyan-500/30 selection:text-white relative">
+    <div className="min-h-screen bg-black text-[#F8FAFC] font-body selection:bg-cyan-500/30 selection:text-white relative">
+      {/* Global SVG Noise Overlay (Film Grain for Matte Pitch-Black Texture) */}
+      <NoiseOverlay />
+
       {/* Cinematic Intro Loader — shown once per session */}
       {!loaderDone && <IntroLoader onComplete={handleLoaderComplete} />}
 

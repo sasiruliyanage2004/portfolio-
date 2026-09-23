@@ -66,7 +66,7 @@ export default function ResumeModal({ isOpen, onClose }) {
           className={`relative flex flex-col w-full max-w-4xl max-h-[90vh] rounded-3xl border shadow-2xl z-10 overflow-hidden ${
             isLight
               ? "bg-[#faf9f6] text-slate-900 border-slate-300 shadow-[0_25px_70px_rgba(15,23,42,0.25)]"
-              : "bg-[#090d16]/98 text-slate-100 border-cyan-500/30 shadow-[0_25px_70px_rgba(0,0,0,0.95),0_0_30px_rgba(6,182,212,0.2)]"
+              : "bg-black/90 backdrop-blur-xl text-[#F8FAFC] border-white/10 shadow-[0_25px_70px_rgba(0,0,0,0.95)]"
           }`}
         >
           <span className="border-beam" aria-hidden="true" />
@@ -76,7 +76,7 @@ export default function ResumeModal({ isOpen, onClose }) {
             className={`flex items-center justify-between border-b px-4 sm:px-7 py-3.5 sm:py-4 backdrop-blur-md shrink-0 ${
               isLight
                 ? "bg-white/95 border-slate-200 text-slate-900"
-                : "bg-[#0b101a]/95 border-white/10 text-white"
+                : "bg-black/80 border-white/10 text-white"
             }`}
           >
             <div className="flex items-center gap-3">

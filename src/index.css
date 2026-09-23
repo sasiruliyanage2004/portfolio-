@@ -6,8 +6,8 @@
    Light Mode: "Royal Porcelain, Ceylon Sapphire & Temple Brass"
    ------------------------------------------------------------------ */
 :root {
-  --bg-obsidian: #05070e;
-  --bg-obsidian-raised: #090d16;
+  --bg-obsidian: #000000;
+  --bg-obsidian-raised: #0a0a0a;
   --cyan: #06b6d4;
   --amber: #f59e0b;
   --indigo: #6366f1;
@@ -18,14 +18,14 @@
   --grad-mid: #10b981;
   --grad-end: #0d9488;
 
-  --glass-bg: rgba(255, 255, 255, 0.035);
-  --glass-bg-hover: rgba(255, 255, 255, 0.06);
-  --glass-border: rgba(255, 255, 255, 0.09);
-  --glass-border-hover: rgba(255, 255, 255, 0.16);
+  --glass-bg: rgba(0, 0, 0, 0.40);
+  --glass-bg-hover: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.10);
+  --glass-border-hover: rgba(255, 255, 255, 0.20);
 
-  --text-primary: #e8ebf3;
-  --text-muted: #8992a8;
-  --text-dim: #565f75;
+  --text-primary: #F8FAFC;
+  --text-muted: #94A3B8;
+  --text-dim: #64748B;
 
   font-family: "Inter", "Space Grotesk", system-ui, sans-serif;
 }
@@ -40,7 +40,7 @@ html.light-theme {
 }
 
 html {
-  background: var(--bg-obsidian);
+  background: #000000;
   color-scheme: dark;
   scroll-behavior: smooth;
   width: 100%;
@@ -50,8 +50,8 @@ html {
 }
 
 body {
-  background: var(--bg-obsidian);
-  color: var(--text-primary);
+  background: #000000;
+  color: #F8FAFC;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   width: 100%;
@@ -153,8 +153,11 @@ body.light-theme,
    LIGHT THEME CONTACT TERMINAL BOX OVERRIDES
    ------------------------------------------------------------------ */
 .contact-terminal-box {
-  background-color: rgba(9, 13, 22, 0.95);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background-color: rgba(0, 0, 0, 0.50);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
 }
 
 .light-theme .contact-terminal-box {
@@ -190,8 +193,8 @@ body.light-theme,
    HEADING ABSORBER AURA (Theme-Aware)
    ------------------------------------------------------------------ */
 .heading-absorber-aura {
-  background-color: #05070e;
-  opacity: 0.90;
+  background-color: #000000;
+  opacity: 0.95;
 }
 .light-theme .heading-absorber-aura {
   background-color: #f8f6f0 !important;
@@ -202,8 +205,10 @@ body.light-theme,
    TAB SWITCHER BAR (Theme-Aware)
    ------------------------------------------------------------------ */
 .theme-switcher-bar {
-  background-color: #090d16;
-  border-color: rgba(255, 255, 255, 0.15);
+  background-color: rgba(0, 0, 0, 0.50);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.10);
 }
 .light-theme .theme-switcher-bar {
   background-color: #ffffff !important;
@@ -212,27 +217,29 @@ body.light-theme,
 }
 
 /* ------------------------------------------------------------------
-   PROJECT CARD HIGH-CONTRAST SOLID BACKING
+   PROJECT CARD FROSTED MATTE GLASS (Vercel / Linear Style)
    ------------------------------------------------------------------ */
 .project-card-obsidian {
-  background-color: #090d16 !important;
-  border: 2px solid rgba(255, 255, 255, 0.20) !important;
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6) !important;
+  background-color: rgba(0, 0, 0, 0.45) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8) !important;
 }
 
 .project-card-obsidian h3 {
-  color: #ffffff !important;
+  color: #F8FAFC !important;
   font-weight: 700 !important;
 }
 
 .project-card-obsidian p {
-  color: #e2e8f0 !important;
+  color: #CBD5E1 !important;
   opacity: 1 !important;
 }
 
 .project-card-obsidian .tech-badge {
-  background-color: rgba(8, 51, 68, 0.8) !important;
-  border: 1px solid rgba(6, 182, 212, 0.4) !important;
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
   color: #67e8f9 !important;
 }
 
@@ -282,8 +289,11 @@ body.light-theme,
 
 /* Skills Matrix Cards (Theme-Aware) */
 .skill-card-bg {
-  background-color: rgba(9, 13, 22, 0.92);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background-color: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
 }
 
 .light-theme .skill-card-bg {
@@ -301,18 +311,18 @@ body.light-theme,
 }
 
 /* ------------------------------------------------------------------
-   HERO PORTRAIT CARD — TRANSLUCENT GLASS FLOATING FRAME (1-2px subtle edge)
+   HERO PORTRAIT CARD — FROSTED MATTE GLASS (Vercel / Linear Style)
    ------------------------------------------------------------------ */
 .hero-portrait-card {
-  background-color: rgba(5, 7, 14, 0.35) !important;
-  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  background-color: rgba(0, 0, 0, 0.40) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
   backdrop-filter: blur(24px) saturate(180%) !important;
   -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(6, 182, 212, 0.15) !important;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(6, 182, 212, 0.10) !important;
 }
 
 .hero-portrait-frame {
-  background-color: rgba(0, 0, 0, 0.20);
+  background-color: rgba(0, 0, 0, 0.30);
   border: 1px solid rgba(255, 255, 255, 0.10);
 }
 

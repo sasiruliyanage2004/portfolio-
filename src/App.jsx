@@ -1,18 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sun, Moon } from "lucide-react";
 import Lenis from "lenis";
-import ParticleBackground from "./components/ParticleBackground";
 import CustomCursor from "./components/CustomCursor";
 import CursorTrail from "./components/CursorTrail";
 import IntroLoader from "./components/IntroLoader";
-import EasterEggs from "./components/EasterEggs";
 import ScrollProgressBar from "./components/ScrollProgressBar";
 import FloatingDockCyber from "./components/cyber/FloatingDockCyber";
 import SwitchModeToggle from "./components/SwitchModeToggle";
 import CulturalPatternCanvas from "./components/CulturalPatternCanvas";
-import CommandPalette from "./components/CommandPalette";
-import ResumeModal from "./components/ResumeModal";
 import BackToTop from "./components/BackToTop";
 import NoiseOverlay from "./components/NoiseOverlay";
 import HeroCyber from "./components/cyber/HeroCyber";
@@ -22,6 +18,11 @@ import SkillsCyber from "./components/cyber/SkillsCyber";
 import ContactCyber from "./components/cyber/ContactCyber";
 import Footer from "./components/Footer";
 import "./index.css";
+
+// Lazy-load non-critical heavy modals & easter eggs for instantaneous initial page load
+const EasterEggs = lazy(() => import("./components/EasterEggs"));
+const CommandPalette = lazy(() => import("./components/CommandPalette"));
+const ResumeModal = lazy(() => import("./components/ResumeModal"));
 
 export default function App() {
   // Theme state persisted via localStorage
@@ -160,28 +161,35 @@ export default function App() {
       {/* Scroll Progress Bar — thin brand gradient at top */}
       <ScrollProgressBar />
 
-      {/* Easter Eggs: tab title + Konami code confetti */}
-      <EasterEggs />
+      {/* Suspense Container for Lazy-Loaded Modals & Widgets */}
+      <Suspense fallback={null}>
+        {/* Easter Eggs: tab title + Konami code confetti */}
+        <EasterEggs />
+
+        {/* Command Palette (Ctrl + K) */}
+        {cmdOpen && (
+          <CommandPalette
+            theme={theme}
+            toggleTheme={toggleTheme}
+            open={cmdOpen}
+            setOpen={setCmdOpen}
+          />
+        )}
+
+        {/* Interactive Resume Preview Modal */}
+        {resumeOpen && (
+          <ResumeModal
+            isOpen={resumeOpen}
+            onClose={() => setResumeOpen(false)}
+          />
+        )}
+      </Suspense>
 
       {/* Magic UI Gradient Button Group Dock (Unified Navigation & Theme Switcher) */}
       <FloatingDockCyber theme={theme} toggleTheme={toggleTheme} />
 
       {/* Back To Top Floating Button */}
       <BackToTop />
-
-      {/* Command Palette (Ctrl + K) */}
-      <CommandPalette
-        theme={theme}
-        toggleTheme={toggleTheme}
-        open={cmdOpen}
-        setOpen={setCmdOpen}
-      />
-
-      {/* Interactive Resume Preview Modal */}
-      <ResumeModal
-        isOpen={resumeOpen}
-        onClose={() => setResumeOpen(false)}
-      />
 
       {/* Main Portfolio Page Content — Streamlined, Ultra-Clean & Fast Flow */}
       <main className="relative z-10 flex flex-col bg-transparent">

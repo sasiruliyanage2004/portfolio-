@@ -35,12 +35,15 @@ const CATEGORIES = ["All", "AI Solutions", "Web Apps", "UI/UX"];
 const PROJECTS = [
   {
     id: "suspicious-activity-detection",
-    title: "AI Suspicious Activity & Weapon Detection System",
+    title: "Aethra Vision — AI Command Grid & Threat Detection System",
     blurb: "Computer Vision anomaly & weapon detection pipeline processing live PTZ camera streams with under 30ms latency for automated security monitoring.",
     longDescription: "An enterprise-grade autonomous surveillance system engineered to detect lethal weapons (firearms, bladed weapons) and abnormal aggressive behavioral anomalies in real-time. Built with a high-throughput FastAPI asynchronous gateway and optimized YOLOv11 tensor graphs running over WebSockets.",
     category: "AI Solutions",
     tech: ["YOLOv11", "FastAPI", "Python", "React", "OpenCV", "PTZ Camera"],
     live: true,
+    image: "/projects/aethra-vision.webp",
+    imageFallback: "/projects/aethra-vision.png",
+    imageAlt: "Aethra Vision Command Grid live surveillance interface with YOLO threat bounding boxes and real-time target Re-ID tracking",
     github: "https://github.com/sasiruliyanage2004/Suspicious-Activity-Detection",
     demo: "https://github.com/sasiruliyanage2004/Suspicious-Activity-Detection",
     metrics: [
@@ -49,17 +52,18 @@ const PROJECTS = [
       { label: "Detection Acc", val: "98.4%" },
     ],
     status: "v1.2.0 • REAL-TIME FEED ACTIVE",
-    engineTitle: "YOLOv11 Neural Inference Engine",
+    engineTitle: "Aethra Vision Neural Command Grid",
     sync: "FastAPI WebSocket Stream",
     badge: "Real-time AI Security",
     architecture: [
       { step: "01. Input Stream", title: "PTZ Live RTSP Feeds", desc: "Multi-camera H.264 stream ingestion with OpenCV hardware acceleration" },
       { step: "02. Inference", title: "YOLOv11 Neural Core", desc: "FP16 optimized tensor pipeline detecting weapons & aggressive motion vectors" },
       { step: "03. Asynchronous Bus", title: "FastAPI WebSocket Hub", desc: "Sub-30ms bidirectional broadcast layer delivering alert payloads" },
-      { step: "04. Client Dashboard", title: "React Cyber Monitor", desc: "Real-time bounding box rendering, instant incident logging & sound alarms" },
+      { step: "04. Client Dashboard", title: "React Cyber Command Grid", desc: "Real-time bounding box rendering, instant incident logging & sound alarms" },
     ],
     highlights: [
       "Sub-30ms real-time weapon & anomalous behavior bounding-box tracking",
+      "Multi-target Re-ID tracking across live PTZ camera feeds",
       "Asynchronous frame-dropping prevention queue for 60fps continuous streams",
       "Automated incident alert dispatch with snapshot audit logs",
     ],
@@ -306,6 +310,54 @@ function ProjectDeepDiveModal({ project, onClose }) {
             </p>
           </div>
 
+          {/* Project Real Live Interface / Command Grid Snapshot */}
+          {project.image && (
+            <div className="relative rounded-2xl overflow-hidden border border-cyan-500/30 bg-black/80 shadow-2xl group">
+              {/* Command Grid Status Bar */}
+              <div className="flex items-center justify-between px-3.5 sm:px-4 py-2 sm:py-2.5 bg-black/90 backdrop-blur-md border-b border-white/10 text-xs font-mono">
+                <div className="flex items-center gap-2">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500" />
+                  </span>
+                  <span className="text-red-400 font-bold uppercase tracking-wider text-[10px] sm:text-[11px]">
+                    LIVE THREAT FEED // AETHRA COMMAND GRID
+                  </span>
+                </div>
+                <div className="flex items-center gap-2 sm:gap-4 text-[9px] sm:text-[10px] text-slate-400">
+                  <span className="text-cyan-300 hidden sm:inline">Target Re-ID: Active</span>
+                  <span className="text-emerald-400 font-bold">FPS: 60.0</span>
+                </div>
+              </div>
+
+              {/* High-res Image with HUD Brackets */}
+              <div className="relative aspect-[16/9] sm:aspect-[16/8] overflow-hidden bg-black/40">
+                <picture>
+                  <source srcSet={project.image} type="image/webp" />
+                  <img
+                    src={project.imageFallback || project.image}
+                    alt={project.imageAlt || project.title}
+                    className="w-full h-full object-cover object-top transform group-hover:scale-[1.02] transition-transform duration-500"
+                    loading="lazy"
+                  />
+                </picture>
+
+                {/* HUD Surveillance Overlay Brackets */}
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                <div className="pointer-events-none absolute top-2.5 left-2.5 w-3 h-3 border-t-2 border-l-2 border-cyan-400" />
+                <div className="pointer-events-none absolute top-2.5 right-2.5 w-3 h-3 border-t-2 border-r-2 border-cyan-400" />
+                <div className="pointer-events-none absolute bottom-2.5 left-2.5 w-3 h-3 border-b-2 border-l-2 border-cyan-400" />
+                <div className="pointer-events-none absolute bottom-2.5 right-2.5 w-3 h-3 border-b-2 border-r-2 border-cyan-400" />
+              </div>
+
+              {/* Command Grid Footer Bar */}
+              <div className="px-3.5 sm:px-4 py-2 bg-black/80 backdrop-blur-sm border-t border-white/10 flex items-center justify-between text-[10px] sm:text-[11px] font-mono text-slate-400">
+                <span className="truncate">AETHRA VISION COMMAND GRID // Autonomous Neural Defense Interface</span>
+                <span className="text-cyan-400 shrink-0 font-semibold ml-2">YOLOv11 TensorCore</span>
+              </div>
+            </div>
+          )}
+
           {/* Metrics Bar */}
           {project.metrics && (
             <div className="grid grid-cols-3 gap-2.5 sm:gap-4">
@@ -482,6 +534,47 @@ function ExpandableProjectCard({ project, isExpanded, onSelect, onInspect }) {
           <p className="mt-3 text-xs sm:text-sm sm:leading-relaxed font-normal text-slate-300">
             {project.blurb}
           </p>
+
+          {/* Project Real Live Interface / Command Grid Frame */}
+          {project.image && (
+            <div className={`relative rounded-2xl overflow-hidden border border-cyan-500/25 bg-black/70 shadow-lg group/img ${isExpanded ? "my-4" : "my-3"}`}>
+              {/* Surveillance Header Strip */}
+              <div className="flex items-center justify-between px-3 py-1.5 bg-black/85 backdrop-blur-md border-b border-white/10 text-[10px] font-mono">
+                <div className="flex items-center gap-1.5">
+                  <span className="relative flex h-1.5 w-1.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
+                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500" />
+                  </span>
+                  <span className="text-red-400 font-semibold tracking-wider">AETHRA VISION // CAM-01</span>
+                </div>
+                <span className="text-cyan-400 text-[9px] uppercase tracking-wider font-semibold">Armed &amp; Live</span>
+              </div>
+
+              {/* Viewport Frame with Cyber Accents */}
+              <div className={`relative overflow-hidden ${isExpanded ? "aspect-[16/9] sm:aspect-[21/9]" : "aspect-[16/9]"}`}>
+                <picture>
+                  <source srcSet={project.image} type="image/webp" />
+                  <img
+                    src={project.imageFallback || project.image}
+                    alt={project.imageAlt || project.title}
+                    className="w-full h-full object-cover object-top transform group-hover/img:scale-105 transition-transform duration-700 ease-out"
+                    loading="lazy"
+                  />
+                </picture>
+
+                {/* HUD Vignette & Corner Accents */}
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/25" />
+                <div className="pointer-events-none absolute top-2 left-2 w-2.5 h-2.5 border-t border-l border-cyan-400/90" />
+                <div className="pointer-events-none absolute top-2 right-2 w-2.5 h-2.5 border-t border-r border-cyan-400/90" />
+                <div className="pointer-events-none absolute bottom-2 left-2 w-2.5 h-2.5 border-b border-l border-cyan-400/90" />
+                <div className="pointer-events-none absolute bottom-2 right-2 w-2.5 h-2.5 border-b border-r border-cyan-400/90" />
+
+                <div className="absolute bottom-2 right-2 px-2 py-0.5 rounded-md bg-black/85 backdrop-blur-md border border-cyan-500/30 text-[9px] font-mono text-cyan-300 font-medium">
+                  Live Feed Snapshot
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* Expanded Live Telemetry Frame */}
           {isExpanded && project.metrics && (

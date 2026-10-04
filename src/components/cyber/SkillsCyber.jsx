@@ -136,10 +136,10 @@ const GROUPS = [
         name: "MongoDB Atlas & NoSQL",
         logo: TechIcons.mongodb,
         brandGlow: "rgba(71,162,72,0.25)",
-        badge: "Document DB",
+        badge: "MongoDB Certified",
         badgeType: "emerald",
-        scope: ["Document Schemas", "Aggregation Pipelines", "Indexing", "Mongoose ODM"],
-        proof: "AyurLife & WorkforceOS",
+        scope: ["Data Modeling Path", "Advanced Schema Patterns", "Indexing Topologies", "Performance Tuning"],
+        proof: "Official MongoDB Inc. Credential",
       },
       {
         name: "MySQL & Relational DBMS",

@@ -1,6 +1,20 @@
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { GraduationCap, Award, BookOpen, Calendar, MapPin, Sparkles, CheckCircle2, Briefcase } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import {
+  GraduationCap,
+  Award,
+  BookOpen,
+  Calendar,
+  MapPin,
+  Sparkles,
+  CheckCircle2,
+  Briefcase,
+  ShieldCheck,
+  Download,
+  ExternalLink,
+  Eye,
+  X,
+} from "lucide-react";
 
 const EDUCATION_DATA = [
   {
@@ -13,14 +27,14 @@ const EDUCATION_DATA = [
     highlights: [
       "Developing production-ready web solutions with React, Node.js, and modern tech stacks",
       "Collaborating with engineering teams on database workflows, REST APIs, and UI architecture",
-      "Actively participating in agile development sprints, code quality reviews, and testing"
+      "Actively participating in agile development sprints, code quality reviews, and testing",
     ],
     icon: Briefcase,
-    status: "active"
+    status: "active",
   },
   {
     period: "2024 — 2028 (Expected)",
-    badge: "Undergraduate • 2nd Year",
+    badge: "Undergraduate • 3rd Year",
     title: "BSc (Hons) in Information Technology",
     institution: "Sri Lanka Institute of Information Technology (SLIIT)",
     location: "Malabe, Western Province, Sri Lanka",
@@ -28,10 +42,10 @@ const EDUCATION_DATA = [
     highlights: [
       "Core modules: OOP (Java), DBMS (MySQL/SQL), Web Development, DSA, C",
       "Building practical enterprise web architectures, Computer Vision & AI algorithms",
-      "Active participant in software development hackathons & project showcases"
+      "Active participant in software development hackathons & project showcases",
     ],
     icon: GraduationCap,
-    status: "active"
+    status: "active",
   },
   {
     period: "May 2024 — July 2024",
@@ -43,10 +57,10 @@ const EDUCATION_DATA = [
     highlights: [
       "Assisted senior accounting teams in transaction logging and daily reconciliation",
       "Applied structured data management, numerical accuracy, and spreadsheet automation",
-      "Developed professional teamwork, corporate communications, and multitasking skills"
+      "Developed professional teamwork, corporate communications, and multitasking skills",
     ],
     icon: Briefcase,
-    status: "completed"
+    status: "completed",
   },
   {
     period: "2023 — 2024",
@@ -59,10 +73,10 @@ const EDUCATION_DATA = [
       "Accounting — A (Distinction)",
       "Business Studies — B",
       "Economics — B",
-      "Built strong foundation in quantitative analysis, business logic & logical reasoning"
+      "Built strong foundation in quantitative analysis, business logic & logical reasoning",
     ],
     icon: Award,
-    status: "completed"
+    status: "completed",
   },
   {
     period: "2020 — 2021",
@@ -74,18 +88,167 @@ const EDUCATION_DATA = [
     highlights: [
       "Mathematics — A (Distinction)",
       "Health & Physical Education — A (Distinction)",
-      "Early leadership in school clubs and academic competitions"
+      "Early leadership in school clubs and academic competitions",
     ],
     icon: BookOpen,
-    status: "completed"
-  }
+    status: "completed",
+  },
 ];
 
+const MONGODB_CERTIFICATIONS = [
+  {
+    id: "MDBwsxpdpul98",
+    title: "MongoDB Data Modeling Path",
+    category: "Master Credential",
+    date: "October 03, 2026",
+    issuer: "MongoDB, Inc.",
+    image: "/certificates/cert-page-9.webp",
+    skills: ["Data Modeling", "Schema Optimization", "Aggregation Pipelines", "Indexing Strategy"],
+    featured: true,
+  },
+  {
+    id: "MDBxn0iwfuazm",
+    title: "Advanced Schema Patterns and Anti-patterns",
+    category: "Architecture",
+    date: "October 02, 2026",
+    issuer: "MongoDB, Inc.",
+    image: "/certificates/cert-page-1.webp",
+  },
+  {
+    id: "MDBgvf913c7o8",
+    title: "Schema Design Optimization",
+    category: "Performance",
+    date: "October 03, 2026",
+    issuer: "MongoDB, Inc.",
+    image: "/certificates/cert-page-2.webp",
+  },
+  {
+    id: "MDBwfsxqxdp4g",
+    title: "Indexing Design Fundamentals",
+    category: "Indexing",
+    date: "October 03, 2026",
+    issuer: "MongoDB, Inc.",
+    image: "/certificates/cert-page-4.webp",
+  },
+  {
+    id: "MDBy6wuSnlixz",
+    title: "Performance Tools and Techniques",
+    category: "Diagnostics",
+    date: "October 03, 2026",
+    issuer: "MongoDB, Inc.",
+    image: "/certificates/cert-page-5.webp",
+  },
+  {
+    id: "MDBcgsymixb7l",
+    title: "Relational to Document Model",
+    category: "Data Migration",
+    date: "October 01, 2026",
+    issuer: "MongoDB, Inc.",
+    image: "/certificates/cert-page-6.webp",
+  },
+  {
+    id: "MDBykbdv8x7x3",
+    title: "Fundamentals of Data Transformation",
+    category: "Pipelines",
+    date: "October 03, 2026",
+    issuer: "MongoDB, Inc.",
+    image: "/certificates/cert-page-3.webp",
+  },
+  {
+    id: "MDBmwrzx5e4wp",
+    title: "Schema Patterns and Anti-patterns",
+    category: "Design",
+    date: "October 01, 2026",
+    issuer: "MongoDB, Inc.",
+    image: "/certificates/cert-page-8.webp",
+  },
+  {
+    id: "MDBa39zjxbafir",
+    title: "CRUD Operations",
+    category: "Core DB",
+    date: "October 01, 2026",
+    issuer: "MongoDB, Inc.",
+    image: "/certificates/cert-page-7.webp",
+  },
+];
+
+function CertificateModal({ cert, onClose }) {
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [onClose]);
+
+  if (!cert) return null;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onClick={onClose}
+      className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-2xl overflow-hidden"
+    >
+      <motion.div
+        initial={{ scale: 0.95, y: 15, opacity: 0 }}
+        animate={{ scale: 1, y: 0, opacity: 1 }}
+        exit={{ scale: 0.95, y: 15, opacity: 0 }}
+        onClick={(e) => e.stopPropagation()}
+        className="project-card-obsidian noise-overlay relative flex flex-col w-full max-w-3xl max-h-[90vh] rounded-3xl border border-emerald-500/40 shadow-2xl z-10 overflow-hidden"
+      >
+        <div className="flex items-center justify-between border-b border-white/10 p-4 sm:p-5 shrink-0 bg-black/85 backdrop-blur-xl">
+          <div>
+            <span className="text-[10px] font-mono font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
+              <CheckCircle2 className="h-3 w-3" />
+              Official Proof of Completion // ID: {cert.id}
+            </span>
+            <h4 className="text-base sm:text-lg font-extrabold text-white mt-0.5">{cert.title}</h4>
+          </div>
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close Certificate Preview"
+            className="rounded-full bg-white/10 p-2 text-slate-400 hover:bg-white/20 hover:text-white transition-colors cursor-pointer"
+          >
+            <X className="h-5 w-5" />
+          </button>
+        </div>
+
+        <div className="overflow-y-auto p-4 sm:p-6 flex items-center justify-center bg-black/60">
+          <img
+            src={cert.image}
+            alt={cert.title}
+            className="w-full h-auto rounded-xl border border-white/15 shadow-2xl object-contain max-h-[62vh]"
+          />
+        </div>
+
+        <div className="flex items-center justify-between p-4 border-t border-white/10 shrink-0 bg-black/85 backdrop-blur-xl font-mono text-xs">
+          <span className="text-slate-400 text-[11px] truncate">
+            Issued by MongoDB, Inc. • VP Raghu Viswanathan
+          </span>
+          <a
+            href="/certificates/mongodb-certifications.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-emerald-400 hover:text-emerald-300 font-bold ml-2 shrink-0 cursor-pointer"
+          >
+            <Download className="h-3.5 w-3.5" />
+            <span>Open Verified PDF</span>
+          </a>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
 export default function EducationCyber() {
+  const [selectedCert, setSelectedCert] = useState(null);
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start end", "end start"]
+    offset: ["start end", "end start"],
   });
 
   const pathHeight = useTransform(scrollYProgress, [0.1, 0.9], ["0%", "100%"]);
@@ -101,13 +264,13 @@ export default function EducationCyber() {
         <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
           <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 dark:border-white/10 bg-cyan-500/10 dark:bg-white/5 px-3.5 py-1 sm:px-4 sm:py-1.5 font-mono text-[11px] sm:text-xs text-cyan-600 dark:text-cyan-400 mb-3 sm:mb-4 backdrop-blur-md">
             <Sparkles className="h-3.5 w-3.5" />
-            <span>ACADEMIC FOUNDATION</span>
+            <span>ACADEMIC FOUNDATION &amp; CERTIFICATIONS</span>
           </div>
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white">
             Education &amp; <span className="text-gradient">Journey</span>
           </h2>
           <p className="mt-3 sm:mt-4 text-base sm:text-lg text-slate-600 dark:text-slate-400 font-normal leading-relaxed">
-            The academic rigor and structured computer science disciplines shaping my engineering philosophy.
+            The academic rigor, software engineering disciplines, and verified industry credentials shaping my technical expertise.
           </p>
         </div>
 
@@ -195,7 +358,162 @@ export default function EducationCyber() {
             })}
           </div>
         </div>
+
+        {/* ============================================================= */}
+        {/* 🏆 VERIFIED PROFESSIONAL CERTIFICATIONS & ACCREDITATIONS      */}
+        {/* ============================================================= */}
+        <div className="mt-20 sm:mt-28 pt-12 sm:pt-16 border-t border-slate-200 dark:border-white/10">
+          <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14">
+            <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 dark:border-emerald-500/20 bg-emerald-500/10 dark:bg-emerald-500/5 px-3.5 py-1 sm:px-4 sm:py-1.5 font-mono text-[11px] sm:text-xs text-emerald-600 dark:text-emerald-400 mb-3 backdrop-blur-md">
+              <ShieldCheck className="h-3.5 w-3.5 text-emerald-500" />
+              <span>OFFICIAL INDUSTRY ACCREDITATIONS</span>
+            </div>
+            <h3 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+              Verified Database <span className="text-gradient">Certifications</span>
+            </h3>
+            <p className="mt-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed font-normal">
+              Official industry certifications issued by MongoDB, Inc. verifying advanced competency in schema architecture, query optimization, and enterprise document modeling.
+            </p>
+          </div>
+
+          {/* Featured Master Credential Banner */}
+          <div className="project-card-obsidian noise-overlay rounded-3xl p-5 sm:p-8 border border-emerald-500/30 shadow-2xl relative overflow-hidden mb-8 group">
+            <span className="border-beam" aria-hidden="true" />
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
+              {/* Certificate High-Res Thumbnail Preview */}
+              <div
+                onClick={() => setSelectedCert(MONGODB_CERTIFICATIONS[0])}
+                className="lg:col-span-5 relative rounded-2xl overflow-hidden border border-white/15 bg-black/40 shadow-xl cursor-pointer group/thumb aspect-[4/3] flex items-center justify-center"
+              >
+                <img
+                  src="/certificates/cert-page-9.webp"
+                  alt="MongoDB Data Modeling Path Certification"
+                  className="w-full h-full object-cover object-center transform group-hover/thumb:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end p-4">
+                  <span className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-cyan-300 bg-black/70 px-3 py-1.5 rounded-lg border border-cyan-500/30 backdrop-blur-md">
+                    <Eye className="h-3.5 w-3.5" />
+                    <span>Click to Inspect Certificate</span>
+                  </span>
+                </div>
+              </div>
+
+              {/* Credential Details */}
+              <div className="lg:col-span-7 flex flex-col justify-between space-y-4">
+                <div>
+                  <div className="flex items-center gap-2 mb-2 flex-wrap">
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/40 bg-emerald-500/10 px-2.5 py-0.5 font-mono text-[10px] font-bold text-emerald-600 dark:text-emerald-400">
+                      <CheckCircle2 className="h-3 w-3 text-emerald-500" />
+                      VERIFIED BY MONGODB, INC.
+                    </span>
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-cyan-500/40 bg-cyan-500/10 px-2.5 py-0.5 font-mono text-[10px] font-bold text-cyan-600 dark:text-cyan-400">
+                      <Award className="h-3 w-3" />
+                      MASTER PATH CREDENTIAL
+                    </span>
+                  </div>
+
+                  <h4 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white">
+                    MongoDB Certified: Data Modeling Path
+                  </h4>
+                  <p className="mt-2 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
+                    Comprehensive professional certification validating mastery in document schema design, anti-pattern mitigation, indexing strategies, data transformation pipelines, and relational-to-document database migrations.
+                  </p>
+                </div>
+
+                {/* Metadata Bar */}
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 pt-2">
+                  <div className="rounded-xl bg-white/5 border border-white/10 p-2.5 text-center">
+                    <div className="text-[10px] uppercase font-mono opacity-60">Credential ID</div>
+                    <div className="text-xs sm:text-sm font-mono font-bold text-emerald-400 truncate">
+                      MDBwsxpdpul98
+                    </div>
+                  </div>
+                  <div className="rounded-xl bg-white/5 border border-white/10 p-2.5 text-center">
+                    <div className="text-[10px] uppercase font-mono opacity-60">Issue Date</div>
+                    <div className="text-xs sm:text-sm font-mono font-bold text-cyan-400">October 2026</div>
+                  </div>
+                  <div className="col-span-2 sm:col-span-1 rounded-xl bg-white/5 border border-white/10 p-2.5 text-center">
+                    <div className="text-[10px] uppercase font-mono opacity-60">Modules Completed</div>
+                    <div className="text-xs sm:text-sm font-mono font-bold text-amber-400">8 Specialized Tracks</div>
+                  </div>
+                </div>
+
+                {/* Action Buttons */}
+                <div className="flex flex-wrap items-center gap-3 pt-2">
+                  <a
+                    href="/certificates/mongodb-certifications.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-xl bg-emerald-500 px-4 py-2.5 font-mono text-xs font-bold text-black hover:bg-emerald-400 transition-all cursor-pointer shadow-lg hover:shadow-emerald-500/25"
+                  >
+                    <Download className="h-4 w-4" />
+                    <span>Download Official PDF (All 9 Proofs)</span>
+                    <ExternalLink className="h-3.5 w-3.5" />
+                  </a>
+
+                  <button
+                    type="button"
+                    onClick={() => setSelectedCert(MONGODB_CERTIFICATIONS[0])}
+                    className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/5 px-4 py-2.5 font-mono text-xs font-semibold text-slate-200 hover:text-white hover:border-cyan-400/50 hover:bg-white/10 transition-all cursor-pointer"
+                  >
+                    <Eye className="h-4 w-4 text-cyan-400" />
+                    <span>View Certificate</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Specialized Modules Grid */}
+          <div className="space-y-3">
+            <div className="flex items-center justify-between">
+              <span className="font-mono text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                Completed Specialization Modules ({MONGODB_CERTIFICATIONS.length - 1})
+              </span>
+              <span className="font-mono text-[11px] text-emerald-500 font-bold flex items-center gap-1">
+                <CheckCircle2 className="h-3.5 w-3.5" />
+                100% Accredited
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+              {MONGODB_CERTIFICATIONS.slice(1).map((cert) => (
+                <div
+                  key={cert.id}
+                  onClick={() => setSelectedCert(cert)}
+                  className="group/item project-card-obsidian noise-overlay rounded-2xl p-4 border border-white/10 hover:border-emerald-500/40 transition-all duration-300 shadow-md cursor-pointer flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="flex items-center justify-between gap-2 mb-2">
+                      <span className="inline-flex items-center gap-1 font-mono text-[10px] text-emerald-400 font-semibold bg-emerald-500/10 px-2 py-0.5 rounded-md border border-emerald-500/20">
+                        <CheckCircle2 className="h-2.5 w-2.5" />
+                        Verified
+                      </span>
+                      <span className="font-mono text-[9px] opacity-60 text-slate-400">{cert.category}</span>
+                    </div>
+                    <h5 className="font-bold text-xs sm:text-sm text-slate-800 dark:text-slate-100 group-hover/item:text-emerald-400 transition-colors line-clamp-2">
+                      {cert.title}
+                    </h5>
+                  </div>
+
+                  <div className="mt-3 pt-2.5 border-t border-white/10 flex items-center justify-between text-[10px] font-mono text-slate-400">
+                    <span className="truncate">ID: {cert.id}</span>
+                    <Eye className="h-3 w-3 text-cyan-400 opacity-70 group-hover/item:opacity-100 shrink-0" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
+
+      {/* Interactive Certificate Preview Modal */}
+      <AnimatePresence>
+        {selectedCert && (
+          <CertificateModal cert={selectedCert} onClose={() => setSelectedCert(null)} />
+        )}
+      </AnimatePresence>
     </section>
   );
 }

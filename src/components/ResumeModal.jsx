@@ -370,6 +370,51 @@ export default function ResumeModal({ isOpen, onClose }) {
               </div>
             </div>
 
+            {/* 🏆 Professional Certifications & Accreditations */}
+            <div>
+              <h2
+                className={`flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-widest mb-3 ${
+                  isLight ? "text-emerald-800 font-extrabold" : "text-emerald-400"
+                }`}
+              >
+                <Award className="h-3.5 w-3.5" /> Professional Certifications &amp; Accreditations
+              </h2>
+              <div
+                className={`rounded-2xl border p-4 sm:p-5 ${
+                  isLight
+                    ? "bg-white border-slate-200 shadow-sm"
+                    : "bg-white/[0.02] border-white/10"
+                }`}
+              >
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5">
+                  <div>
+                    <h3 className="font-bold text-sm sm:text-base">
+                      MongoDB Certified: Data Modeling Path
+                    </h3>
+                    <p className="text-[11px] font-mono opacity-75">
+                      MongoDB, Inc. • Issued Oct 2026 • Credential ID: MDBwsxpdpul98
+                    </p>
+                  </div>
+                  <a
+                    href="/certificates/mongodb-certifications.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`font-mono text-[10px] px-2.5 py-1 rounded-full w-fit font-bold flex items-center gap-1.5 transition-colors ${
+                      isLight
+                        ? "bg-emerald-100 text-emerald-800 hover:bg-emerald-200 border border-emerald-300"
+                        : "bg-emerald-500/10 text-emerald-300 hover:bg-emerald-500/20 border border-emerald-500/30"
+                    }`}
+                  >
+                    <span>View Official PDF (9 Proofs)</span>
+                    <Download className="h-3 w-3" />
+                  </a>
+                </div>
+                <p className={`text-xs mt-2.5 leading-relaxed font-sans ${isLight ? "text-slate-700" : "text-slate-300"}`}>
+                  Completed 8 comprehensive specialization modules in Schema Design Optimization, Advanced Anti-pattern Mitigation, Indexing Architectures, Data Transformation Pipelines, and Relational-to-Document Migration.
+                </p>
+              </div>
+            </div>
+
             {/* 🏆 Honors & Activities */}
             <div>
               <h2

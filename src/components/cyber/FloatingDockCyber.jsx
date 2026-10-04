@@ -11,7 +11,7 @@ const NAV_ITEMS = [
   { id: "contact", label: "Contact", icon: Mail },
 ];
 
-export default function FloatingDockCyber({ theme, toggleTheme }) {
+export default function FloatingDockCyber({ theme, toggleTheme, onOpenCommandPalette }) {
   const [active, setActive] = useState("home");
   const [isScrolled, setIsScrolled] = useState(false);
   const isLightMode = theme === "light";
@@ -200,15 +200,18 @@ export default function FloatingDockCyber({ theme, toggleTheme }) {
                 </span>
                 Available for Hire
               </span>
-              <kbd
-                className={`ml-2 inline-flex items-center font-mono text-[9.5px] font-bold rounded-lg px-2 py-1 whitespace-nowrap border shadow-xs transition-colors ${
+              <button
+                type="button"
+                onClick={onOpenCommandPalette}
+                title="Open Command Palette (Ctrl+K)"
+                className={`ml-2 inline-flex items-center font-mono text-[9.5px] font-bold rounded-lg px-2 py-1 whitespace-nowrap border shadow-xs transition-all cursor-pointer ${
                   isLightMode
-                    ? "bg-slate-100 text-slate-700 border-slate-300/90"
-                    : "bg-white/10 text-slate-200 border-white/20"
+                    ? "bg-slate-100 hover:bg-slate-200 text-slate-700 hover:text-cyan-800 border-slate-300/90 hover:border-cyan-500"
+                    : "bg-white/10 hover:bg-white/20 text-slate-200 hover:text-cyan-300 border-white/20 hover:border-cyan-400/50"
                 }`}
               >
                 Ctrl+K
-              </kbd>
+              </button>
             </motion.div>
           )}
         </AnimatePresence>

@@ -54,9 +54,16 @@ export default function App() {
     localStorage.setItem("portfolio_theme", theme);
   }, [theme]);
 
-  // Global Keyboard Shortcut ('T' key listener) for instant Theme Toggle
+  // Global Keyboard Shortcuts (Ctrl/Cmd+K for Command Palette, 'T' for Theme Toggle)
   useEffect(() => {
     const handleKeyDown = (e) => {
+      // Intercept Ctrl+K or Cmd+K so browser search bar doesn't open
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        setCmdOpen((prev) => !prev);
+        return;
+      }
+
       if (["INPUT", "TEXTAREA"].includes(document.activeElement?.tagName)) return;
       if (e.key === "t" || e.key === "T") {
         setTheme((prev) => (prev === "dark" ? "light" : "dark"));
@@ -190,7 +197,11 @@ export default function App() {
       </Suspense>
 
       {/* Magic UI Gradient Button Group Dock (Unified Navigation & Theme Switcher) */}
-      <FloatingDockCyber theme={theme} toggleTheme={toggleTheme} />
+      <FloatingDockCyber
+        theme={theme}
+        toggleTheme={toggleTheme}
+        onOpenCommandPalette={() => setCmdOpen(true)}
+      />
 
       {/* Back To Top Floating Button */}
       <BackToTop />

@@ -201,7 +201,7 @@ export default function HeroCyber({ onOpenResume }) {
 
             {/* Main Headline */}
             <h1 className="text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-6xl lg:text-7xl leading-[1.1] sm:leading-[1.08]">
-              Building interfaces for the <span className="text-gradient">next web</span>
+              <span className="sr-only">Sasiru Liyanage — </span>Building interfaces for the <span className="text-gradient">next web</span>
             </h1>
 
             {/* Bio Subtitle */}

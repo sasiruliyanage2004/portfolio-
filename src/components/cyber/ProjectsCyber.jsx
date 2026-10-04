@@ -678,7 +678,7 @@ export default function ProjectsCyber() {
   const [cat, setCat] = useState("All");
   const [activeId, setActiveId] = useState(PROJECTS[0].id);
   const [selectedProject, setSelectedProject] = useState(null);
-  const [githubStats, setGithubStats] = useState({ repos: 11, updated: "Active" });
+  const [githubStats, setGithubStats] = useState({ repos: 15, updated: "Active" });
   const sectionRef = useRef(null);
 
   useEffect(() => {

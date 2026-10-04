@@ -23,10 +23,10 @@ function useCountUp(target, inView, duration = 1600) {
 function StatsRow() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
-  const projects = useCountUp(10, inView);
-  const commits = useCountUp(50, inView);
-  const techs = useCountUp(12, inView);
-  const years = useCountUp(2, inView);
+  const projects = useCountUp(15, inView);
+  const commits = useCountUp(100, inView);
+  const techs = useCountUp(18, inView);
+  const years = useCountUp(3, inView);
 
   const stats = [
     { value: projects, suffix: "+", label: "Projects" },
@@ -42,7 +42,7 @@ function StatsRow() {
           <span className="font-mono text-2xl font-extrabold" style={{ background: "linear-gradient(135deg, var(--grad-start), var(--grad-mid), var(--grad-end))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
             {s.value}{s.suffix}
           </span>
-          <span className="font-mono text-[10px] uppercase tracking-widest text-slate-700 dark:text-slate-300 font-semibold mt-0.5">{s.label}</span>
+          <span className="font-mono text-[10px] uppercase tracking-widest text-slate-800 dark:text-slate-200 font-bold mt-0.5">{s.label}</span>
         </div>
       ))}
     </div>
@@ -123,7 +123,7 @@ function TiltCard({ children, className = "" }) {
 const LIVE_STATUSES = [
   { text: "Available for Hire", icon: CheckCircle2, color: "text-emerald-400 dark:text-emerald-400 light-theme:text-emerald-600", dot: "bg-emerald-500" },
   { text: "Coding: React 19 + Node", icon: Activity, color: "text-cyan-400 dark:text-cyan-400 light-theme:text-cyan-600", dot: "bg-cyan-500" },
-  { text: "50+ Commits This Month", icon: Sparkles, color: "text-indigo-400 dark:text-indigo-400 light-theme:text-indigo-600", dot: "bg-indigo-500" },
+  { text: "100+ Commits & Builds", icon: Sparkles, color: "text-indigo-400 dark:text-indigo-400 light-theme:text-indigo-600", dot: "bg-indigo-500" },
 ];
 
 function UnifiedStatusBadge() {

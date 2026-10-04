@@ -383,7 +383,7 @@ export default function EducationCyber() {
               {/* Certificate High-Res Thumbnail Preview */}
               <div
                 onClick={() => setSelectedCert(MONGODB_CERTIFICATIONS[0])}
-                className="lg:col-span-5 relative rounded-2xl overflow-hidden border border-white/15 bg-black/40 shadow-xl cursor-pointer group/thumb aspect-[4/3] flex items-center justify-center"
+                className="lg:col-span-5 relative rounded-2xl overflow-hidden border border-slate-300 dark:border-white/15 bg-slate-900 shadow-xl cursor-pointer group/thumb aspect-[4/3] flex items-center justify-center"
               >
                 <img
                   src="/certificates/cert-page-9.webp"
@@ -391,9 +391,9 @@ export default function EducationCyber() {
                   className="w-full h-full object-cover object-center transform group-hover/thumb:scale-105 transition-transform duration-500"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end p-4">
-                  <span className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-cyan-300 bg-black/70 px-3 py-1.5 rounded-lg border border-cyan-500/30 backdrop-blur-md">
-                    <Eye className="h-3.5 w-3.5" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent flex items-end p-4">
+                  <span className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-cyan-300 bg-black/80 px-3 py-1.5 rounded-lg border border-cyan-500/40 backdrop-blur-md shadow-lg">
+                    <Eye className="h-3.5 w-3.5 text-cyan-400" />
                     <span>Click to Inspect Certificate</span>
                   </span>
                 </div>
@@ -416,26 +416,26 @@ export default function EducationCyber() {
                   <h4 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white">
                     MongoDB Certified: Data Modeling Path
                   </h4>
-                  <p className="mt-2 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
+                  <p className="mt-2 text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-normal">
                     Comprehensive professional certification validating mastery in document schema design, anti-pattern mitigation, indexing strategies, data transformation pipelines, and relational-to-document database migrations.
                   </p>
                 </div>
 
                 {/* Metadata Bar */}
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 pt-2">
-                  <div className="rounded-xl bg-white/5 border border-white/10 p-2.5 text-center">
-                    <div className="text-[10px] uppercase font-mono opacity-60">Credential ID</div>
-                    <div className="text-xs sm:text-sm font-mono font-bold text-emerald-400 truncate">
+                  <div className="rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-300 dark:border-white/10 p-2.5 text-center shadow-sm">
+                    <div className="text-[10px] uppercase font-mono font-bold text-slate-500 dark:text-slate-400">Credential ID</div>
+                    <div className="text-xs sm:text-sm font-mono font-bold text-emerald-600 dark:text-emerald-400 truncate">
                       MDBwsxpdpul98
                     </div>
                   </div>
-                  <div className="rounded-xl bg-white/5 border border-white/10 p-2.5 text-center">
-                    <div className="text-[10px] uppercase font-mono opacity-60">Issue Date</div>
-                    <div className="text-xs sm:text-sm font-mono font-bold text-cyan-400">October 2026</div>
+                  <div className="rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-300 dark:border-white/10 p-2.5 text-center shadow-sm">
+                    <div className="text-[10px] uppercase font-mono font-bold text-slate-500 dark:text-slate-400">Issue Date</div>
+                    <div className="text-xs sm:text-sm font-mono font-bold text-cyan-600 dark:text-cyan-400">October 2026</div>
                   </div>
-                  <div className="col-span-2 sm:col-span-1 rounded-xl bg-white/5 border border-white/10 p-2.5 text-center">
-                    <div className="text-[10px] uppercase font-mono opacity-60">Modules Completed</div>
-                    <div className="text-xs sm:text-sm font-mono font-bold text-amber-400">8 Specialized Tracks</div>
+                  <div className="col-span-2 sm:col-span-1 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-300 dark:border-white/10 p-2.5 text-center shadow-sm">
+                    <div className="text-[10px] uppercase font-mono font-bold text-slate-500 dark:text-slate-400">Modules Completed</div>
+                    <div className="text-xs sm:text-sm font-mono font-bold text-amber-600 dark:text-amber-400">8 Specialized Tracks</div>
                   </div>
                 </div>
 
@@ -455,9 +455,9 @@ export default function EducationCyber() {
                   <button
                     type="button"
                     onClick={() => setSelectedCert(MONGODB_CERTIFICATIONS[0])}
-                    className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/5 px-4 py-2.5 font-mono text-xs font-semibold text-slate-200 hover:text-white hover:border-cyan-400/50 hover:bg-white/10 transition-all cursor-pointer"
+                    className="inline-flex items-center gap-2 rounded-xl border border-slate-300 dark:border-white/20 bg-slate-100 dark:bg-white/5 px-4 py-2.5 font-mono text-xs font-bold text-slate-800 dark:text-slate-200 hover:text-cyan-600 dark:hover:text-white hover:border-cyan-500/50 hover:bg-slate-200/80 dark:hover:bg-white/10 transition-all cursor-pointer shadow-sm"
                   >
-                    <Eye className="h-4 w-4 text-cyan-400" />
+                    <Eye className="h-4 w-4 text-cyan-600 dark:text-cyan-400" />
                     <span>View Certificate</span>
                   </button>
                 </div>
@@ -468,10 +468,10 @@ export default function EducationCyber() {
           {/* Specialized Modules Grid */}
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <span className="font-mono text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+              <span className="font-mono text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-400">
                 Completed Specialization Modules ({MONGODB_CERTIFICATIONS.length - 1})
               </span>
-              <span className="font-mono text-[11px] text-emerald-500 font-bold flex items-center gap-1">
+              <span className="font-mono text-[11px] text-emerald-600 dark:text-emerald-400 font-bold flex items-center gap-1">
                 <CheckCircle2 className="h-3.5 w-3.5" />
                 100% Accredited
               </span>
@@ -482,24 +482,24 @@ export default function EducationCyber() {
                 <div
                   key={cert.id}
                   onClick={() => setSelectedCert(cert)}
-                  className="group/item project-card-obsidian noise-overlay rounded-2xl p-4 border border-white/10 hover:border-emerald-500/40 transition-all duration-300 shadow-md cursor-pointer flex flex-col justify-between"
+                  className="group/item project-card-obsidian noise-overlay rounded-2xl p-4 border border-slate-300 dark:border-white/10 hover:border-emerald-500/60 dark:hover:border-emerald-500/40 transition-all duration-300 shadow-md hover:shadow-lg cursor-pointer flex flex-col justify-between"
                 >
                   <div>
                     <div className="flex items-center justify-between gap-2 mb-2">
-                      <span className="inline-flex items-center gap-1 font-mono text-[10px] text-emerald-400 font-semibold bg-emerald-500/10 px-2 py-0.5 rounded-md border border-emerald-500/20">
+                      <span className="inline-flex items-center gap-1 font-mono text-[10px] text-emerald-700 dark:text-emerald-400 font-bold bg-emerald-500/15 dark:bg-emerald-500/10 px-2 py-0.5 rounded-md border border-emerald-500/30 dark:border-emerald-500/20">
                         <CheckCircle2 className="h-2.5 w-2.5" />
                         Verified
                       </span>
-                      <span className="font-mono text-[9px] opacity-60 text-slate-400">{cert.category}</span>
+                      <span className="font-mono text-[10px] font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wide">{cert.category}</span>
                     </div>
-                    <h5 className="font-bold text-xs sm:text-sm text-slate-800 dark:text-slate-100 group-hover/item:text-emerald-400 transition-colors line-clamp-2">
+                    <h5 className="font-bold text-xs sm:text-sm text-slate-900 dark:text-white group-hover/item:text-emerald-600 dark:group-hover/item:text-emerald-400 transition-colors line-clamp-2 leading-snug">
                       {cert.title}
                     </h5>
                   </div>
 
-                  <div className="mt-3 pt-2.5 border-t border-white/10 flex items-center justify-between text-[10px] font-mono text-slate-400">
-                    <span className="truncate">ID: {cert.id}</span>
-                    <Eye className="h-3 w-3 text-cyan-400 opacity-70 group-hover/item:opacity-100 shrink-0" />
+                  <div className="mt-3.5 pt-2.5 border-t border-slate-200 dark:border-white/10 flex items-center justify-between text-[11px] font-mono text-slate-600 dark:text-slate-400">
+                    <span className="truncate font-medium">ID: <span className="text-slate-900 dark:text-slate-200 font-bold">{cert.id}</span></span>
+                    <Eye className="h-3.5 w-3.5 text-cyan-600 dark:text-cyan-400 opacity-80 group-hover/item:opacity-100 shrink-0 ml-1.5 transition-transform group-hover/item:scale-110" />
                   </div>
                 </div>
               ))}

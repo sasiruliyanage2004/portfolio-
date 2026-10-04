@@ -250,12 +250,27 @@ body.light-theme,
   box-shadow: 0 20px 45px rgba(15, 23, 42, 0.08) !important;
 }
 
-.light-theme .project-card-obsidian h3 {
+.light-theme .project-card-obsidian h3,
+.light-theme .project-card-obsidian h4,
+.light-theme .project-card-obsidian h5,
+.light-theme .project-card-obsidian h6 {
   color: #0f172a !important;
 }
 
 .light-theme .project-card-obsidian p {
   color: #334155 !important;
+}
+
+.light-theme .project-card-obsidian .bg-white\/5 {
+  background-color: #f1f5f9 !important;
+  border-color: rgba(30, 41, 59, 0.15) !important;
+  color: #0f172a !important;
+}
+
+.light-theme .project-card-obsidian .border-white\/10,
+.light-theme .project-card-obsidian .border-white\/15,
+.light-theme .project-card-obsidian .border-white\/20 {
+  border-color: rgba(30, 41, 59, 0.15) !important;
 }
 
 .light-theme .project-card-obsidian .tech-badge {
@@ -342,7 +357,9 @@ body.light-theme,
 .light-theme h1, 
 .light-theme h2, 
 .light-theme h3, 
-.light-theme h4 {
+.light-theme h4,
+.light-theme h5,
+.light-theme h6 {
   color: #0f172a !important;
 }
 
@@ -359,6 +376,7 @@ body.light-theme,
   color: #64748b !important;
 }
 
+.light-theme .text-slate-100,
 .light-theme .text-slate-200,
 .light-theme .text-white {
   color: #0f172a !important;

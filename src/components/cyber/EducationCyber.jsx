@@ -177,8 +177,14 @@ function CertificateModal({ cert, onClose }) {
     const handleKeyDown = (e) => {
       if (e.key === "Escape") onClose();
     };
+    document.body.style.overflow = "hidden";
+    if (window.__lenis) window.__lenis.stop();
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    return () => {
+      document.body.style.overflow = "";
+      if (window.__lenis) window.__lenis.start();
+      window.removeEventListener("keydown", handleKeyDown);
+    };
   }, [onClose]);
 
   if (!cert) return null;
@@ -189,50 +195,55 @@ function CertificateModal({ cert, onClose }) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       onClick={onClose}
-      className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-2xl overflow-hidden"
+      data-lenis-prevent="true"
+      className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-6 bg-black/75 dark:bg-black/85 backdrop-blur-2xl overflow-hidden"
     >
       <motion.div
         initial={{ scale: 0.95, y: 15, opacity: 0 }}
         animate={{ scale: 1, y: 0, opacity: 1 }}
         exit={{ scale: 0.95, y: 15, opacity: 0 }}
         onClick={(e) => e.stopPropagation()}
-        className="project-card-obsidian noise-overlay relative flex flex-col w-full max-w-3xl max-h-[90vh] rounded-3xl border border-emerald-500/40 shadow-2xl z-10 overflow-hidden"
+        data-lenis-prevent="true"
+        className="certificate-modal-box noise-overlay relative flex flex-col w-full max-w-3xl max-h-[90vh] rounded-3xl border border-slate-300 dark:border-emerald-500/40 bg-[#faf9f6] dark:bg-[#0b101b] shadow-2xl z-10 overflow-hidden"
       >
-        <div className="flex items-center justify-between border-b border-white/10 p-4 sm:p-5 shrink-0 bg-black/85 backdrop-blur-xl">
+        {/* Header */}
+        <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/10 p-4 sm:p-5 shrink-0 bg-white/95 dark:bg-black/85 backdrop-blur-xl">
           <div>
-            <span className="text-[10px] font-mono font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
-              <CheckCircle2 className="h-3 w-3" />
+            <span className="text-[10px] font-mono font-bold text-emerald-700 dark:text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
+              <CheckCircle2 className="h-3 w-3 text-emerald-600 dark:text-emerald-400" />
               Official Proof of Completion // ID: {cert.id}
             </span>
-            <h4 className="text-base sm:text-lg font-extrabold text-white mt-0.5">{cert.title}</h4>
+            <h4 className="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white mt-0.5">{cert.title}</h4>
           </div>
           <button
             type="button"
             onClick={onClose}
             aria-label="Close Certificate Preview"
-            className="rounded-full bg-white/10 p-2 text-slate-400 hover:bg-white/20 hover:text-white transition-colors cursor-pointer"
+            className="rounded-full bg-slate-100 dark:bg-white/10 p-2 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-white/20 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer"
           >
             <X className="h-5 w-5" />
           </button>
         </div>
 
-        <div className="overflow-y-auto p-4 sm:p-6 flex items-center justify-center bg-black/60">
+        {/* Certificate Display Canvas */}
+        <div className="overflow-y-auto p-4 sm:p-6 flex items-center justify-center bg-slate-100/90 dark:bg-black/60">
           <img
             src={cert.image}
             alt={cert.title}
-            className="w-full h-auto rounded-xl border border-white/15 shadow-2xl object-contain max-h-[62vh]"
+            className="w-full h-auto rounded-xl border border-slate-300 dark:border-white/15 shadow-xl object-contain max-h-[62vh]"
           />
         </div>
 
-        <div className="flex items-center justify-between p-4 border-t border-white/10 shrink-0 bg-black/85 backdrop-blur-xl font-mono text-xs">
-          <span className="text-slate-400 text-[11px] truncate">
+        {/* Footer */}
+        <div className="flex items-center justify-between p-4 border-t border-slate-200 dark:border-white/10 shrink-0 bg-white/95 dark:bg-black/85 backdrop-blur-xl font-mono text-xs">
+          <span className="text-slate-600 dark:text-slate-400 text-[11px] truncate font-medium">
             Issued by MongoDB, Inc. • VP Raghu Viswanathan
           </span>
           <a
             href="/certificates/mongodb-certifications.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-emerald-400 hover:text-emerald-300 font-bold ml-2 shrink-0 cursor-pointer"
+            className="inline-flex items-center gap-1.5 text-emerald-700 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300 font-bold ml-2 shrink-0 cursor-pointer"
           >
             <Download className="h-3.5 w-3.5" />
             <span>Open Verified PDF</span>

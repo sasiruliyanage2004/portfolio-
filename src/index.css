@@ -279,6 +279,25 @@ body.light-theme,
   color: #0e7490 !important;
 }
 
+/* Certificate Lightbox Modal (Theme-Aware) */
+.certificate-modal-box {
+  background-color: #0b101b;
+  border-color: rgba(16, 185, 129, 0.40);
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.95);
+  color: #F8FAFC;
+}
+
+.light-theme .certificate-modal-box {
+  background-color: #faf9f6 !important;
+  border-color: rgba(30, 41, 59, 0.20) !important;
+  box-shadow: 0 25px 70px rgba(15, 23, 42, 0.25) !important;
+  color: #0f172a !important;
+}
+
+.light-theme .certificate-modal-box h4 {
+  color: #0f172a !important;
+}
+
 /* Bento Hero UI Preview Frame (Theme-Aware) */
 .bento-ui-preview-frame {
   background-color: rgba(0, 0, 0, 0.50);

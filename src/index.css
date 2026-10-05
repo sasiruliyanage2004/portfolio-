@@ -594,3 +594,79 @@ body.modal-open nav {
   transition: opacity 0.2s ease, transform 0.2s ease !important;
 }
 
+/* ==================================================================
+   PRINT STYLESHEET — FLAWLESS HIGH-RES RESUME PRINTING & PDF EXPORT
+   ================================================================== */
+@media print {
+  @page {
+    size: A4;
+    margin: 10mm 12mm;
+  }
+
+  html, body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    font-size: 10pt !important;
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  /* Hide background elements, navigation docks, footers, buttons, and animations */
+  nav, footer, .resume-no-print, button, .border-beam, .pulse-dot, #cursor-dot, #cursor-trail {
+    display: none !important;
+  }
+
+  /* Printable Sheet Setup */
+  .resume-printable-sheet {
+    display: block !important;
+    position: static !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    background: #ffffff !important;
+    color: #0f172a !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .resume-printable-sheet * {
+    color: #0f172a !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  .resume-printable-sheet a {
+    color: #0e7490 !important;
+    text-decoration: underline !important;
+  }
+
+  .resume-printable-sheet .border,
+  .resume-printable-sheet .border-b,
+  .resume-printable-sheet .border-t {
+    border-color: #cbd5e1 !important;
+  }
+
+  .resume-printable-sheet h1 {
+    color: #0f172a !important;
+    font-size: 20pt !important;
+    page-break-after: avoid;
+  }
+
+  .resume-printable-sheet h2,
+  .resume-printable-sheet h3,
+  .resume-printable-sheet h4 {
+    color: #0369a1 !important;
+    page-break-after: avoid;
+  }
+
+  .page-break-inside-avoid {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+}
+

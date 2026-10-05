@@ -33,13 +33,12 @@ export default function App() {
   const [cmdOpen, setCmdOpen] = useState(false);
   const [resumeOpen, setResumeOpen] = useState(false);
 
-  // Show loader only once per session, and skip on mobile devices for instant Frame 1 LCP
+  // Show loader once per session (snappy on mobile, cinematic on desktop)
   const [loaderDone, setLoaderDone] = useState(() => {
     if (typeof window !== "undefined") {
-      const isMobile = window.innerWidth < 768 || window.matchMedia("(pointer: coarse)").matches;
-      if (isMobile) return true;
+      return sessionStorage.getItem("intro_shown_v2") === "true";
     }
-    return sessionStorage.getItem("intro_shown") === "true";
+    return false;
   });
 
   // Sync theme changes with DOM documentElement & localStorage
@@ -150,7 +149,7 @@ export default function App() {
   };
 
   const handleLoaderComplete = () => {
-    sessionStorage.setItem("intro_shown", "true");
+    sessionStorage.setItem("intro_shown_v2", "true");
     setLoaderDone(true);
   };
 

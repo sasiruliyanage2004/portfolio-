@@ -15,8 +15,9 @@ import {
   Sparkles,
   Award,
   CheckCircle2,
-  ShieldCheck,
-  Terminal,
+  Calendar,
+  Layers,
+  Zap,
 } from "lucide-react";
 
 const GithubIcon = (props) => (
@@ -73,7 +74,7 @@ export default function ResumeModal({ isOpen, onClose }) {
         exit={{ opacity: 0 }}
         onClick={onClose}
         data-lenis-prevent="true"
-        className="fixed inset-0 z-[99999] flex items-center justify-center p-2.5 sm:p-6 bg-black/80 backdrop-blur-2xl overflow-hidden"
+        className="fixed inset-0 z-[99999] flex items-center justify-center p-2 sm:p-5 md:p-6 bg-black/80 backdrop-blur-2xl overflow-hidden"
       >
         <motion.div
           initial={{ scale: 0.94, y: 20, opacity: 0 }}
@@ -82,44 +83,30 @@ export default function ResumeModal({ isOpen, onClose }) {
           transition={{ type: "spring", damping: 26, stiffness: 320 }}
           onClick={(e) => e.stopPropagation()}
           data-lenis-prevent="true"
-          className={`relative flex flex-col w-full max-w-4xl max-h-[92vh] rounded-3xl border shadow-2xl z-10 overflow-hidden ${
+          className={`relative flex flex-col w-full max-w-4xl max-h-[94vh] rounded-3xl border shadow-2xl z-10 overflow-hidden ${
             isLight
-              ? "bg-[#faf9f6] text-slate-900 border-slate-300 shadow-[0_25px_70px_rgba(15,23,42,0.25)]"
-              : "bg-[#0a0f1d]/95 backdrop-blur-xl text-[#F8FAFC] border-white/10 shadow-[0_25px_70px_rgba(0,0,0,0.95)]"
+              ? "bg-[#ffffff] text-slate-900 border-slate-300 shadow-[0_25px_70px_rgba(15,23,42,0.25)]"
+              : "bg-[#0b101d] text-[#F8FAFC] border-white/10 shadow-[0_25px_70px_rgba(0,0,0,0.95)]"
           }`}
         >
           <span className="border-beam resume-no-print" aria-hidden="true" />
 
-          {/* 🌟 Modal Sticky Top Action Bar */}
+          {/* 🌟 Modal Sticky Top Action Bar (Web Controls) */}
           <div
-            className={`resume-no-print flex items-center justify-between border-b px-4 sm:px-7 py-3.5 sm:py-4 backdrop-blur-md shrink-0 ${
+            className={`resume-no-print flex items-center justify-between border-b px-4 sm:px-6 py-3 backdrop-blur-md shrink-0 ${
               isLight
                 ? "bg-white/95 border-slate-200 text-slate-900"
-                : "bg-black/80 border-white/10 text-white"
+                : "bg-[#080d1a]/95 border-white/10 text-white"
             }`}
           >
-            <div className="flex items-center gap-3">
-              <div className="relative h-9 w-9 sm:h-10 sm:w-10 rounded-full p-[1.5px] bg-gradient-to-tr from-cyan-500 to-emerald-400 shrink-0">
-                <img
-                  src="/profile.png"
-                  alt="Sasiru Liyanage"
-                  className="h-full w-full rounded-full object-cover border border-black/20"
-                  onError={(e) => {
-                    e.target.src = "/favicon.svg";
-                  }}
-                />
-              </div>
-              <div>
-                <h3 className="font-extrabold text-sm sm:text-base tracking-tight font-mono">
-                  Sasiru Liyanage{" "}
-                  <span className={isLight ? "text-cyan-700 font-bold" : "text-cyan-400 font-bold"}>
-                    · Verified CV
-                  </span>
-                </h3>
-                <p className="text-[10px] sm:text-xs opacity-75 font-mono">
-                  Full-Stack Software Engineer &amp; UI Architect • SLIIT '26
-                </p>
-              </div>
+            <div className="flex items-center gap-2.5">
+              <span className="relative flex h-2 w-2">
+                <span className="pulse-dot absolute inline-flex h-full w-full rounded-full bg-emerald-500" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+              </span>
+              <span className="font-mono text-xs font-bold uppercase tracking-wider">
+                Official Curriculum Vitae (A4 Executive Format)
+              </span>
             </div>
 
             {/* Actions: Download PDF, Print / Save PDF, Close */}
@@ -127,11 +114,7 @@ export default function ResumeModal({ isOpen, onClose }) {
               <a
                 href="/resume.pdf"
                 download="Sasiru_Liyanage_CV.pdf"
-                className={`inline-flex items-center gap-1.5 rounded-xl px-3 py-1.5 font-mono text-xs font-bold transition-all cursor-pointer shadow-sm ${
-                  isLight
-                    ? "bg-cyan-600 text-white hover:bg-cyan-700 shadow-md"
-                    : "bg-cyan-500/15 border border-cyan-500/40 text-cyan-300 hover:bg-cyan-500/25"
-                }`}
+                className="inline-flex items-center gap-1.5 rounded-xl px-3 py-1.5 font-mono text-xs font-bold transition-all cursor-pointer shadow-sm bg-cyan-600 text-white hover:bg-cyan-700 shadow-md"
                 title="Download Official PDF Document"
               >
                 <Download className="h-3.5 w-3.5" />
@@ -157,7 +140,7 @@ export default function ResumeModal({ isOpen, onClose }) {
                 onClick={onClose}
                 className={`rounded-full p-2 transition-colors cursor-pointer shrink-0 ${
                   isLight
-                    ? "bg-slate-200 text-slate-700 hover:bg-slate-300"
+                    ? "bg-slate-100 text-slate-700 hover:bg-slate-200"
                     : "bg-white/10 text-slate-300 hover:bg-white/20 hover:text-white"
                 }`}
                 aria-label="Close modal"
@@ -167,551 +150,467 @@ export default function ResumeModal({ isOpen, onClose }) {
             </div>
           </div>
 
-          {/* 📄 Scrollable Formatted Resume Sheet */}
-          <div className="resume-printable-sheet overflow-y-auto p-5 sm:p-9 space-y-7 overscroll-contain text-xs sm:text-sm">
-            {/* Header / Contact Overview with Direct Portfolio Link */}
-            <div className={`border-b pb-6 ${isLight ? "border-slate-200" : "border-white/10"}`}>
-              <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+          {/* 📄 Scrollable Executive 2-Column Designer Sheet */}
+          <div className="resume-printable-sheet overflow-y-auto overscroll-contain flex-1">
+            <div className="grid grid-cols-1 md:grid-cols-12 min-h-full">
+              
+              {/* ========================================================= */}
+              {/* 🎨 LEFT COLUMN: PROFILE, EDUCATION, SKILLS, CONTACT       */}
+              {/* ========================================================= */}
+              <div
+                className={`md:col-span-4 p-6 sm:p-7 space-y-6 flex flex-col justify-between border-r ${
+                  isLight
+                    ? "bg-[#e8e6e1] border-slate-300 text-slate-800"
+                    : "bg-[#0d1424] border-white/10 text-slate-200"
+                }`}
+              >
                 <div>
-                  <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight">
-                    Sasiru Nethvidu Liyanage
-                  </h1>
-                  <p
-                    className={`font-mono font-semibold text-xs sm:text-sm mt-1.5 ${
-                      isLight ? "text-cyan-700 font-bold" : "text-cyan-400"
-                    }`}
-                  >
-                    Full-Stack Software Engineer • 3rd-Year Undergraduate at SLIIT Malabe
-                  </p>
-                  <p className="text-[11px] font-mono opacity-70 mt-0.5">
-                    Specializing in React 19, TypeScript, Python FastAPI, WebSockets &amp; Database Architecture
-                  </p>
-                </div>
-
-                {/* Direct Contact Links */}
-                <div className="flex flex-wrap sm:flex-col items-start sm:items-end gap-1.5 font-mono text-[11px]">
-                  <a
-                    href="mailto:liyanagesasiru@gmail.com"
-                    className="flex items-center gap-1.5 hover:text-cyan-500 transition-colors"
-                  >
-                    <Mail className={`h-3.5 w-3.5 ${isLight ? "text-cyan-700" : "text-cyan-400"}`} />
-                    <span>liyanagesasiru@gmail.com</span>
-                  </a>
-                  <a
-                    href="tel:+94715700953"
-                    className="flex items-center gap-1.5 hover:text-emerald-500 transition-colors"
-                  >
-                    <Phone className={`h-3.5 w-3.5 ${isLight ? "text-emerald-700" : "text-emerald-400"}`} />
-                    <span>+94 71 57 00 953</span>
-                  </a>
-                  <span className="flex items-center gap-1.5 opacity-80">
-                    <MapPin className={`h-3.5 w-3.5 ${isLight ? "text-indigo-700" : "text-indigo-400"}`} />
-                    <span>Makola, Western Province, Sri Lanka</span>
-                  </span>
-                </div>
-              </div>
-
-              {/* 🌐 Digital Presence Quick-Access Bar (Portfolio, GitHub, LinkedIn) */}
-              <div className="mt-4 pt-3.5 border-t border-dashed border-slate-200 dark:border-white/10 flex flex-wrap items-center justify-between gap-2.5">
-                <div className="flex flex-wrap items-center gap-2">
-                  {/* Live Web Portfolio Anchor Badge */}
-                  <a
-                    href="https://sasiruliyanage.vercel.app/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`inline-flex items-center gap-2 rounded-xl px-3 py-1.5 font-mono text-[11px] font-bold transition-all shadow-xs group ${
-                      isLight
-                        ? "bg-cyan-50 text-cyan-800 border border-cyan-300 hover:bg-cyan-100 hover:border-cyan-400"
-                        : "bg-cyan-500/10 text-cyan-300 border border-cyan-500/30 hover:bg-cyan-500/20 hover:border-cyan-400"
-                    }`}
-                    title="Click to visit live interactive web portfolio"
-                  >
-                    <Globe className="h-3.5 w-3.5 text-cyan-500 group-hover:scale-110 transition-transform" />
-                    <span>Live Portfolio: <strong className="underline underline-offset-2">sasiruliyanage.vercel.app</strong></span>
-                    <ExternalLink className="h-3 w-3 opacity-70 group-hover:opacity-100" />
-                  </a>
-
-                  {/* GitHub Profile */}
-                  <a
-                    href="https://github.com/sasiruliyanage2004"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`inline-flex items-center gap-1.5 rounded-xl px-2.5 py-1.5 font-mono text-[11px] font-semibold transition-all ${
-                      isLight
-                        ? "bg-slate-100 text-slate-800 border border-slate-200 hover:bg-slate-200"
-                        : "bg-white/5 text-slate-200 border border-white/10 hover:bg-white/10"
-                    }`}
-                  >
-                    <GithubIcon className="h-3.5 w-3.5" />
-                    <span>github.com/sasiruliyanage2004</span>
-                  </a>
-
-                  {/* LinkedIn Profile */}
-                  <a
-                    href="https://www.linkedin.com/in/sasiruliyanage"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`inline-flex items-center gap-1.5 rounded-xl px-2.5 py-1.5 font-mono text-[11px] font-semibold transition-all ${
-                      isLight
-                        ? "bg-slate-100 text-slate-800 border border-slate-200 hover:bg-slate-200"
-                        : "bg-white/5 text-slate-200 border border-white/10 hover:bg-white/10"
-                    }`}
-                  >
-                    <LinkedinIcon className="h-3.5 w-3.5 text-blue-500" />
-                    <span>linkedin.com/in/sasiruliyanage</span>
-                  </a>
-                </div>
-
-                <span className="font-mono text-[10px] text-emerald-600 dark:text-emerald-400 font-bold flex items-center gap-1 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-md">
-                  <CheckCircle2 className="h-3 w-3 text-emerald-500" />
-                  Available for Hire 2026
-                </span>
-              </div>
-            </div>
-
-            {/* 🎯 Executive Summary */}
-            <div className="page-break-inside-avoid">
-              <h2
-                className={`flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-widest mb-2.5 ${
-                  isLight ? "text-cyan-800 font-extrabold" : "text-cyan-400"
-                }`}
-              >
-                <Sparkles className="h-3.5 w-3.5" /> Executive Summary
-              </h2>
-              <p className={`leading-relaxed font-normal ${isLight ? "text-slate-700" : "text-slate-300"}`}>
-                High-impact Full-Stack Software Engineer and 3rd-Year Information Technology Undergraduate at SLIIT Malabe. Proven engineering competency across modern React 19 ecosystems, TypeScript, Python FastAPI microservices, and high-performance WebGL graphics. Creator of autonomous AI computer vision surveillance pipelines and cloud web architectures. MongoDB Certified in Data Modeling &amp; Enterprise Architecture, with proven capability in delivering low-latency WebSockets, clean architecture, and modern cyber-minimalist UI/UX.
-              </p>
-            </div>
-
-            {/* 🎓 Education & Academic Rigor */}
-            <div className="page-break-inside-avoid">
-              <h2
-                className={`flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-widest mb-3 ${
-                  isLight ? "text-emerald-800 font-extrabold" : "text-emerald-400"
-                }`}
-              >
-                <GraduationCap className="h-3.5 w-3.5" /> Education &amp; Academic Qualifications
-              </h2>
-              <div className="space-y-3">
-                {/* SLIIT */}
-                <div
-                  className={`rounded-2xl border p-4 sm:p-5 ${
-                    isLight
-                      ? "bg-white border-slate-200 shadow-sm text-slate-900"
-                      : "bg-white/[0.02] border-white/10 text-slate-100"
-                  }`}
-                >
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
-                    <h3 className="font-bold text-sm sm:text-base">
-                      BSc (Hons) in Information Technology — Software Engineering Specialization
-                    </h3>
-                    <span
-                      className={`font-mono text-[11px] px-2.5 py-0.5 rounded-full w-fit font-bold ${
-                        isLight
-                          ? "bg-cyan-100 text-cyan-800 border border-cyan-300"
-                          : "bg-cyan-500/10 text-cyan-400 border border-cyan-500/20"
-                      }`}
-                    >
-                      2024 – 2028 (Expected) • 3rd Year
-                    </span>
+                  {/* Arched Portrait Headshot */}
+                  <div className="flex flex-col items-center mb-6">
+                    <div className="relative w-36 h-44 sm:w-40 sm:h-48 rounded-t-full rounded-b-2xl overflow-hidden p-1.5 bg-gradient-to-b from-slate-400/30 to-transparent shadow-xl">
+                      <img
+                        src="/profile.png"
+                        alt="Sasiru Liyanage"
+                        className="w-full h-full object-cover rounded-t-full rounded-b-xl"
+                        onError={(e) => {
+                          e.target.src = "/favicon.svg";
+                        }}
+                      />
+                    </div>
                   </div>
-                  <p className="opacity-75 text-xs font-mono mt-1 font-semibold">
-                    Sri Lanka Institute of Information Technology (SLIIT), Malabe
-                  </p>
-                  <p className={`text-xs mt-2 leading-relaxed ${isLight ? "text-slate-600" : "text-slate-300"}`}>
-                    Core Modules: Data Structures &amp; Algorithms, Object-Oriented Software Engineering (Java), Database Management Systems (MySQL, MongoDB), Web Application Development, Computer Networks, Operating Systems, and Cloud Architectures.
-                  </p>
-                </div>
 
-                {/* Secondary Education - Gurukula College */}
-                <div
-                  className={`rounded-2xl border p-3.5 sm:p-4 ${
-                    isLight
-                      ? "bg-white border-slate-200 shadow-sm text-slate-900"
-                      : "bg-white/[0.02] border-white/10 text-slate-100"
-                  }`}
-                >
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
-                    <h3 className="font-bold text-xs sm:text-sm">
-                      GCE Advanced Level &amp; Ordinary Level Examinations
-                    </h3>
-                    <span className="font-mono text-[10px] text-slate-500 dark:text-slate-400">
-                      Gurukula College, Kelaniya (2020 – 2024)
-                    </span>
+                  {/* Section: Education */}
+                  <div className="mb-6">
+                    <div className="flex items-center gap-2 mb-3">
+                      <h4 className="font-extrabold font-mono text-xs uppercase tracking-[0.2em] text-slate-900 dark:text-white">
+                        EDUCATION
+                      </h4>
+                      <div className="flex-1 h-[1.5px] bg-slate-400/60 dark:bg-white/20" />
+                    </div>
+
+                    <div className="space-y-3.5 text-xs">
+                      <div>
+                        <span className="font-mono text-[10px] font-semibold text-slate-600 dark:text-slate-400 block">
+                          2024 — 2028 (Expected) • 3rd Year
+                        </span>
+                        <h5 className="font-bold text-xs leading-snug text-slate-900 dark:text-white">
+                          BSc (Hons) in Information Technology
+                        </h5>
+                        <p className="font-medium text-[11px] text-cyan-800 dark:text-cyan-400">
+                          SLIIT, Malabe
+                        </p>
+                        <ul className="list-disc list-inside text-[10.5px] text-slate-600 dark:text-slate-300 mt-1 space-y-0.5">
+                          <li>Full-Stack Software Engineering</li>
+                          <li>OOP (Java), DBMS (MySQL, MongoDB)</li>
+                          <li>Advanced DSA &amp; Computer Networks</li>
+                        </ul>
+                      </div>
+
+                      <div>
+                        <span className="font-mono text-[10px] font-semibold text-slate-600 dark:text-slate-400 block">
+                          2023 — 2024
+                        </span>
+                        <h5 className="font-bold text-xs leading-snug text-slate-900 dark:text-white">
+                          GCE Advanced Level (Commerce)
+                        </h5>
+                        <p className="font-medium text-[11px] text-slate-700 dark:text-slate-300">
+                          Gurukula College, Kelaniya
+                        </p>
+                        <p className="text-[10.5px] text-slate-600 dark:text-slate-400 mt-0.5">
+                          Accounting (A Distinction) • Business Studies (B) • Economics (B)
+                        </p>
+                      </div>
+
+                      <div>
+                        <span className="font-mono text-[10px] font-semibold text-slate-600 dark:text-slate-400 block">
+                          2020 — 2021
+                        </span>
+                        <h5 className="font-bold text-xs leading-snug text-slate-900 dark:text-white">
+                          GCE Ordinary Level Examination
+                        </h5>
+                        <p className="text-[10.5px] text-slate-600 dark:text-slate-400">
+                          Mathematics: A Distinction • 9 Distinctions
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                  <p className={`text-xs mt-1.5 leading-relaxed font-mono ${isLight ? "text-slate-600" : "text-slate-300"}`}>
-                    Advanced Level: Accounting (A Distinction), Business Studies (B), Economics (B) • Built strong foundation in quantitative analysis, business logic, and algorithm design.
-                  </p>
-                </div>
-              </div>
-            </div>
 
-            {/* 💻 Core Technical Competencies */}
-            <div className="page-break-inside-avoid">
-              <h2
-                className={`flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-widest mb-3 ${
-                  isLight ? "text-indigo-800 font-extrabold" : "text-indigo-400"
-                }`}
-              >
-                <Code2 className="h-3.5 w-3.5" /> Technical Skills &amp; Technology Stack
-              </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 font-mono text-xs">
-                <div
-                  className={`rounded-xl border p-3.5 ${
-                    isLight
-                      ? "bg-white border-slate-200 shadow-sm"
-                      : "bg-white/[0.02] border-white/10"
-                  }`}
-                >
-                  <span className={`font-bold block mb-1.5 ${isLight ? "text-cyan-800" : "text-cyan-400"}`}>
-                    Frontend &amp; UI Architecture
-                  </span>
-                  <p className={`font-sans text-xs ${isLight ? "text-slate-700" : "text-slate-300"}`}>
-                    React 19, Next.js 15, TypeScript, JavaScript (ES2024), Tailwind CSS v4, Framer Motion, HTML5 Canvas, WebGL, Vite, PWA, Responsive UI/UX.
-                  </p>
-                </div>
-                <div
-                  className={`rounded-xl border p-3.5 ${
-                    isLight
-                      ? "bg-white border-slate-200 shadow-sm"
-                      : "bg-white/[0.02] border-white/10"
-                  }`}
-                >
-                  <span className={`font-bold block mb-1.5 ${isLight ? "text-emerald-800" : "text-emerald-400"}`}>
-                    Backend &amp; Distributed Systems
-                  </span>
-                  <p className={`font-sans text-xs ${isLight ? "text-slate-700" : "text-slate-300"}`}>
-                    Node.js, Express.js, Python (FastAPI, Flask), RESTful APIs, WebSockets (real-time telemetry), Microservices, Firebase Cloud Functions.
-                  </p>
-                </div>
-                <div
-                  className={`rounded-xl border p-3.5 ${
-                    isLight
-                      ? "bg-white border-slate-200 shadow-sm"
-                      : "bg-white/[0.02] border-white/10"
-                  }`}
-                >
-                  <span className={`font-bold block mb-1.5 ${isLight ? "text-amber-800" : "text-amber-400"}`}>
-                    Database Architecture &amp; Modeling
-                  </span>
-                  <p className={`font-sans text-xs ${isLight ? "text-slate-700" : "text-slate-300"}`}>
-                    MongoDB (Certified Data Modeling Path, Schema Optimization, Aggregations), PostgreSQL, MySQL, Redis Caching, ACID Transactions.
-                  </p>
-                </div>
-                <div
-                  className={`rounded-xl border p-3.5 ${
-                    isLight
-                      ? "bg-white border-slate-200 shadow-sm"
-                      : "bg-white/[0.02] border-white/10"
-                  }`}
-                >
-                  <span className={`font-bold block mb-1.5 ${isLight ? "text-violet-800" : "text-violet-400"}`}>
-                    AI, DevOps &amp; Engineering Tools
-                  </span>
-                  <p className={`font-sans text-xs ${isLight ? "text-slate-700" : "text-slate-300"}`}>
-                    YOLOv11, OpenCV, Git, GitHub Actions (CI/CD), Docker, Linux/Bash, Postman, Vercel, Figma, Clean Architecture.
-                  </p>
-                </div>
-              </div>
-            </div>
+                  {/* Section: Technical Skills */}
+                  <div className="mb-6">
+                    <div className="flex items-center gap-2 mb-3">
+                      <h4 className="font-extrabold font-mono text-xs uppercase tracking-[0.2em] text-slate-900 dark:text-white">
+                        TECHNICAL SKILLS
+                      </h4>
+                      <div className="flex-1 h-[1.5px] bg-slate-400/60 dark:bg-white/20" />
+                    </div>
 
-            {/* 🚀 Featured Key Projects */}
-            <div className="page-break-inside-avoid">
-              <h2
-                className={`flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-widest mb-3 ${
-                  isLight ? "text-cyan-800 font-extrabold" : "text-cyan-400"
-                }`}
-              >
-                <Briefcase className="h-3.5 w-3.5" /> Featured Engineering Projects
-              </h2>
-              <div className="space-y-3">
-                {/* Project 1: AI Weapon & Suspicious Activity */}
-                <div
-                  className={`rounded-2xl border p-4 sm:p-5 ${
-                    isLight
-                      ? "bg-white border-slate-200 shadow-sm"
-                      : "bg-white/[0.02] border-white/10"
-                  }`}
-                >
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
-                    <h3 className="font-bold text-sm sm:text-base">
-                      AI Suspicious Activity &amp; Weapon Detection Pipeline
-                    </h3>
-                    <span
-                      className={`font-mono text-[10px] px-2.5 py-0.5 rounded-full w-fit font-bold ${
-                        isLight
-                          ? "bg-emerald-100 text-emerald-800 border border-emerald-300"
-                          : "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
-                      }`}
-                    >
-                      FastAPI • YOLOv11 • WebSockets • React 19
-                    </span>
+                    <div className="space-y-2.5 text-xs font-mono">
+                      <div>
+                        <span className="font-bold text-[10px] uppercase text-cyan-800 dark:text-cyan-400 block mb-1">
+                          Languages
+                        </span>
+                        <div className="flex flex-wrap gap-1">
+                          {["JavaScript", "TypeScript", "Python", "Java", "C", "SQL"].map((lang) => (
+                            <span key={lang} className="px-1.5 py-0.5 rounded bg-white/70 dark:bg-white/10 text-[10px] font-semibold border border-slate-300 dark:border-white/15">
+                              {lang}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div>
+                        <span className="font-bold text-[10px] uppercase text-emerald-800 dark:text-emerald-400 block mb-1">
+                          Web &amp; Mobile
+                        </span>
+                        <div className="flex flex-wrap gap-1">
+                          {["React 19", "Next.js", "Node.js", "FastAPI", "Tailwind v4", "Flutter", "WebSockets"].map((fw) => (
+                            <span key={fw} className="px-1.5 py-0.5 rounded bg-white/70 dark:bg-white/10 text-[10px] font-semibold border border-slate-300 dark:border-white/15">
+                              {fw}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div>
+                        <span className="font-bold text-[10px] uppercase text-indigo-800 dark:text-indigo-400 block mb-1">
+                          Databases &amp; AI
+                        </span>
+                        <div className="flex flex-wrap gap-1">
+                          {["MongoDB", "PostgreSQL", "MySQL", "YOLOv11", "OpenCV", "Redis"].map((db) => (
+                            <span key={db} className="px-1.5 py-0.5 rounded bg-white/70 dark:bg-white/10 text-[10px] font-semibold border border-slate-300 dark:border-white/15">
+                              {db}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <p className={`text-xs mt-2 leading-relaxed font-sans ${isLight ? "text-slate-700" : "text-slate-300"}`}>
-                    Autonomous computer vision security pipeline delivering real-time frame inference (<strong className="font-mono">&lt;30ms latency</strong>) over WebSockets to detect weapons, physical altercations, and perimeter intrusions with automated alert dispatching.
-                  </p>
-                </div>
 
-                {/* Project 2: Interactive Cyber Portfolio */}
-                <div
-                  className={`rounded-2xl border p-4 sm:p-5 ${
-                    isLight
-                      ? "bg-white border-slate-200 shadow-sm"
-                      : "bg-white/[0.02] border-white/10"
-                  }`}
-                >
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
-                    <div className="flex items-center gap-2 flex-wrap">
-                      <h3 className="font-bold text-sm sm:text-base">
-                        Interactive Cyber-Portfolio &amp; Cultural Motif Engine
-                      </h3>
+                  {/* Section: Core Strengths */}
+                  <div className="mb-6">
+                    <div className="flex items-center gap-2 mb-2.5">
+                      <h4 className="font-extrabold font-mono text-xs uppercase tracking-[0.2em] text-slate-900 dark:text-white">
+                        CORE STRENGTHS
+                      </h4>
+                      <div className="flex-1 h-[1.5px] bg-slate-400/60 dark:bg-white/20" />
+                    </div>
+                    <ul className="list-disc list-inside text-[11px] space-y-1 text-slate-700 dark:text-slate-300 font-sans">
+                      <li>Analytical Problem Solving &amp; DSA</li>
+                      <li>Real-time WebSockets &amp; Computer Vision</li>
+                      <li>High-concurrency Microservices</li>
+                      <li>Clean Code &amp; Test-Driven Architecture</li>
+                      <li>Agile / Scrum Sprint Leadership</li>
+                    </ul>
+                  </div>
+
+                  {/* Section: Contact & Online Web Presence */}
+                  <div>
+                    <div className="flex items-center gap-2 mb-3">
+                      <h4 className="font-extrabold font-mono text-xs uppercase tracking-[0.2em] text-slate-900 dark:text-white">
+                        CONTACT DETAILS
+                      </h4>
+                      <div className="flex-1 h-[1.5px] bg-slate-400/60 dark:bg-white/20" />
+                    </div>
+
+                    <div className="space-y-2 text-xs font-mono">
+                      {/* Live Portfolio Web Link */}
                       <a
                         href="https://sasiruliyanage.vercel.app/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 font-mono text-[10px] text-cyan-600 dark:text-cyan-400 hover:underline"
+                        className="flex items-center gap-2 font-bold text-cyan-800 dark:text-cyan-400 hover:underline break-all"
                       >
-                        <ExternalLink className="h-3 w-3" />
+                        <Globe className="h-3.5 w-3.5 shrink-0 text-cyan-600 dark:text-cyan-400" />
                         <span>sasiruliyanage.vercel.app</span>
                       </a>
+
+                      <a
+                        href="tel:+94715700953"
+                        className="flex items-center gap-2 hover:text-cyan-600 transition-colors"
+                      >
+                        <Phone className="h-3.5 w-3.5 shrink-0 text-emerald-600" />
+                        <span>+94 71 57 00 953</span>
+                      </a>
+
+                      <a
+                        href="mailto:liyanagesasiru@gmail.com"
+                        className="flex items-center gap-2 hover:text-cyan-600 transition-colors break-all"
+                      >
+                        <Mail className="h-3.5 w-3.5 shrink-0 text-indigo-600" />
+                        <span>liyanagesasiru@gmail.com</span>
+                      </a>
+
+                      <a
+                        href="https://github.com/sasiruliyanage2004"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 hover:text-cyan-600 transition-colors"
+                      >
+                        <GithubIcon className="h-3.5 w-3.5 shrink-0" />
+                        <span>github.com/sasiruliyanage2004</span>
+                      </a>
+
+                      <a
+                        href="https://www.linkedin.com/in/sasiruliyanage"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 hover:text-cyan-600 transition-colors"
+                      >
+                        <LinkedinIcon className="h-3.5 w-3.5 shrink-0 text-blue-600" />
+                        <span>linkedin.com/in/sasiruliyanage</span>
+                      </a>
+
+                      <div className="flex items-start gap-2 opacity-80 text-[10.5px]">
+                        <MapPin className="h-3.5 w-3.5 shrink-0 text-rose-500 mt-0.5" />
+                        <span>96/2 Makola South, Makola, Sri Lanka</span>
+                      </div>
                     </div>
-                    <span
-                      className={`font-mono text-[10px] px-2.5 py-0.5 rounded-full w-fit font-bold ${
-                        isLight
-                          ? "bg-cyan-100 text-cyan-800 border border-cyan-300"
-                          : "bg-cyan-500/10 text-cyan-400 border border-cyan-500/20"
-                      }`}
-                    >
-                      React 19 • Tailwind v4 • WebGL • Framer Motion
-                    </span>
                   </div>
-                  <p className={`text-xs mt-2 leading-relaxed font-sans ${isLight ? "text-slate-700" : "text-slate-300"}`}>
-                    Awwwards-caliber digital experience engineered with custom mathematical particle canvas, dynamic light-tracing glassmorphism, bilingual accessibility, Command Palette, and 98+ Google Lighthouse scores across all Core Web Vitals.
-                  </p>
-                </div>
-
-                {/* Project 3: AyurLife */}
-                <div
-                  className={`rounded-2xl border p-4 sm:p-5 ${
-                    isLight
-                      ? "bg-white border-slate-200 shadow-sm"
-                      : "bg-white/[0.02] border-white/10"
-                  }`}
-                >
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
-                    <h3 className="font-bold text-sm sm:text-base">
-                      AyurLife — Ayurvedic Healthcare &amp; Telemedicine Companion
-                    </h3>
-                    <span
-                      className={`font-mono text-[10px] px-2.5 py-0.5 rounded-full w-fit font-bold ${
-                        isLight
-                          ? "bg-amber-100 text-amber-800 border border-amber-300"
-                          : "bg-amber-500/10 text-amber-400 border border-amber-500/20"
-                      }`}
-                    >
-                      Flutter • Firebase • Health Telemetry
-                    </span>
-                  </div>
-                  <p className={`text-xs mt-2 leading-relaxed font-sans ${isLight ? "text-slate-700" : "text-slate-300"}`}>
-                    Cross-platform mobile telemedicine system connecting patients with certified Ayurvedic doctors, featuring digital prescription management, real-time dosage scheduling, and personalized herbal remedy algorithms.
-                  </p>
-                </div>
-
-                {/* Project 4: High-Throughput Distributed Transaction Engine */}
-                <div
-                  className={`rounded-2xl border p-4 sm:p-5 ${
-                    isLight
-                      ? "bg-white border-slate-200 shadow-sm"
-                      : "bg-white/[0.02] border-white/10"
-                  }`}
-                >
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
-                    <h3 className="font-bold text-sm sm:text-base">
-                      Distributed Inventory &amp; Transaction Engine
-                    </h3>
-                    <span
-                      className={`font-mono text-[10px] px-2.5 py-0.5 rounded-full w-fit font-bold ${
-                        isLight
-                          ? "bg-violet-100 text-violet-800 border border-violet-300"
-                          : "bg-violet-500/10 text-violet-400 border border-violet-500/20"
-                      }`}
-                    >
-                      Node.js • Express • PostgreSQL • MongoDB • Redis
-                    </span>
-                  </div>
-                  <p className={`text-xs mt-2 leading-relaxed font-sans ${isLight ? "text-slate-700" : "text-slate-300"}`}>
-                    High-concurrency microservice handling automated inventory settlements, ACID transactions, optimistic concurrency control, and JWT-authenticated role-based access control.
-                  </p>
                 </div>
               </div>
-            </div>
 
-            {/* 🏆 Verified Professional Certifications & Accreditations */}
-            <div className="page-break-inside-avoid">
-              <h2
-                className={`flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-widest mb-3 ${
-                  isLight ? "text-emerald-800 font-extrabold" : "text-emerald-400"
-                }`}
-              >
-                <Award className="h-3.5 w-3.5" /> Verified Industry Accreditations &amp; Certifications
-              </h2>
-              <div
-                className={`rounded-2xl border p-4 sm:p-5 ${
-                  isLight
-                    ? "bg-white border-slate-200 shadow-sm"
-                    : "bg-white/[0.02] border-white/10"
-                }`}
-              >
-                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
+              {/* ========================================================= */}
+              {/* 💼 RIGHT COLUMN: HEADER BANNER, PROFILE, EXPERIENCE,      */}
+              {/*    PROJECTS, CERTIFICATIONS & ACHIEVEMENTS                */}
+              {/* ========================================================= */}
+              <div className="md:col-span-8 flex flex-col">
+                
+                {/* 🌟 Top Dark Charcoal Banner (Like Jonathan Patterson in Image 2) */}
+                <div
+                  className={`p-6 sm:p-8 flex flex-col justify-center ${
+                    isLight ? "bg-[#33353b] text-white" : "bg-[#090d16] text-white border-b border-white/10"
+                  }`}
+                >
+                  <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight uppercase font-sans">
+                    SASIRU NETHVIDU LIYANAGE
+                  </h1>
+                  <p className="mt-1 font-mono text-xs sm:text-sm font-semibold tracking-wider text-cyan-300">
+                    FULL-STACK SOFTWARE ENGINEER • COMPUTER VISION &amp; AI ARCHITECT
+                  </p>
+                  <div className="mt-3 flex items-center gap-3 text-[11px] font-mono opacity-80">
+                    <span>SLIIT 3rd Year</span>
+                    <span>•</span>
+                    <a
+                      href="https://sasiruliyanage.vercel.app/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline underline-offset-2 text-cyan-300 font-bold hover:text-cyan-200"
+                    >
+                      🌐 sasiruliyanage.vercel.app
+                    </a>
+                  </div>
+                </div>
+
+                {/* Right Body Content */}
+                <div className="p-6 sm:p-8 space-y-6 flex-1 text-xs sm:text-sm">
+                  
+                  {/* 1. Profile Info (Executive Summary) */}
                   <div>
-                    <div className="flex items-center gap-2 mb-1 flex-wrap">
-                      <span className="font-bold text-sm sm:text-base text-slate-900 dark:text-white">
-                        MongoDB Certified: Data Modeling Path
-                      </span>
-                      <span className="font-mono text-[10px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-md">
-                        Master Credential // ID: MDBwsxpdpul98
-                      </span>
+                    <div className="flex items-center gap-3 mb-2.5">
+                      <h3 className="font-extrabold font-mono text-xs sm:text-sm uppercase tracking-[0.2em] text-slate-900 dark:text-white">
+                        PROFILE INFO
+                      </h3>
+                      <div className="flex-1 h-[1.5px] bg-slate-300 dark:bg-white/20" />
                     </div>
-                    <p className="text-[11px] font-mono opacity-80">
-                      Issued by MongoDB, Inc. (VP Raghu Viswanathan) • October 2026
+                    <p className={`leading-relaxed ${isLight ? "text-slate-700" : "text-slate-300"}`}>
+                      Analytical 3rd-Year Information Technology Undergraduate at SLIIT specializing in Full-Stack Web Architectures, Real-Time Computer Vision (YOLOv11), and distributed systems. MongoDB Certified Data Modeler with deep experience architecting sub-30ms WebSocket pipelines, low-latency microservices, and cyber-minimalist UI/UX. Passionate about building high-impact production software with zero compromises on performance and code quality.
                     </p>
                   </div>
-                  <a
-                    href="/certificates/mongodb-certifications.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`font-mono text-[10px] px-3 py-1.5 rounded-xl w-fit font-bold flex items-center gap-1.5 transition-all shadow-xs shrink-0 ${
-                      isLight
-                        ? "bg-emerald-600 text-white hover:bg-emerald-700"
-                        : "bg-emerald-500/15 text-emerald-300 hover:bg-emerald-500/25 border border-emerald-500/40"
-                    }`}
-                  >
-                    <span>View Official PDF (9 Proofs)</span>
-                    <Download className="h-3 w-3" />
-                  </a>
-                </div>
 
-                <p className={`text-xs mt-3 leading-relaxed font-sans ${isLight ? "text-slate-700" : "text-slate-300"}`}>
-                  Completed 8 comprehensive specialization modules in document schema design, anti-pattern mitigation, indexing strategies, data transformation pipelines, and relational-to-document database migrations:
-                </p>
+                  {/* 2. Work Experience (Vertical Timeline with Nodes from Image 2) */}
+                  <div>
+                    <div className="flex items-center gap-3 mb-4">
+                      <h3 className="font-extrabold font-mono text-xs sm:text-sm uppercase tracking-[0.2em] text-slate-900 dark:text-white">
+                        WORK EXPERIENCE
+                      </h3>
+                      <div className="flex-1 h-[1.5px] bg-slate-300 dark:bg-white/20" />
+                    </div>
 
-                {/* 8 Tracks Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-3 font-mono text-[11px]">
-                  <div className="flex items-center gap-1.5">
-                    <CheckCircle2 className="h-3 w-3 text-emerald-500 shrink-0" />
-                    <span>Advanced Schema Patterns &amp; Anti-patterns</span>
+                    <div className="relative pl-6 space-y-5 border-l-2 border-slate-300 dark:border-white/20 ml-2">
+                      {/* Experience Node 1 */}
+                      <div className="relative">
+                        <span className="absolute -left-[31px] top-1 h-3.5 w-3.5 rounded-full border-2 border-cyan-500 bg-white dark:bg-[#0b101d]" />
+                        <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+                          <h4 className="font-bold text-xs sm:text-sm text-slate-900 dark:text-white uppercase tracking-wide">
+                            Software Engineering Intern
+                          </h4>
+                          <span className="font-mono text-[10px] font-semibold text-slate-500 dark:text-slate-400">
+                            Jun 2026 — Present
+                          </span>
+                        </div>
+                        <p className="font-mono text-[11px] font-semibold text-cyan-800 dark:text-cyan-400 mb-1">
+                          Multi Talent Technology
+                        </p>
+                        <ul className={`list-disc list-inside text-xs space-y-0.5 leading-relaxed ${isLight ? "text-slate-700" : "text-slate-300"}`}>
+                          <li>Developing production-ready web solutions with React, Node.js, and modern tech stacks.</li>
+                          <li>Collaborating with engineering teams on database workflows, REST APIs, and UI architecture.</li>
+                        </ul>
+                      </div>
+
+                      {/* Experience Node 2 */}
+                      <div className="relative">
+                        <span className="absolute -left-[31px] top-1 h-3.5 w-3.5 rounded-full border-2 border-slate-400 bg-white dark:bg-[#0b101d]" />
+                        <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+                          <h4 className="font-bold text-xs sm:text-sm text-slate-900 dark:text-white uppercase tracking-wide">
+                            Trainee Account Assistant
+                          </h4>
+                          <span className="font-mono text-[10px] font-semibold text-slate-500 dark:text-slate-400">
+                            May 2024 — Jul 2024
+                          </span>
+                        </div>
+                        <p className="font-mono text-[11px] font-semibold text-slate-700 dark:text-slate-400 mb-1">
+                          Liberty Motor Associates
+                        </p>
+                        <ul className={`list-disc list-inside text-xs space-y-0.5 leading-relaxed ${isLight ? "text-slate-700" : "text-slate-300"}`}>
+                          <li>Audited daily transactional records and conducted digital financial reconciliations.</li>
+                          <li>Implemented automated spreadsheet records for billing, inventory, and ledger accuracy.</li>
+                        </ul>
+                      </div>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-1.5">
-                    <CheckCircle2 className="h-3 w-3 text-emerald-500 shrink-0" />
-                    <span>Schema Design Optimization</span>
+
+                  {/* 3. Technical Projects (Clean Showcase from Image 1 & 2) */}
+                  <div>
+                    <div className="flex items-center gap-3 mb-3.5">
+                      <h3 className="font-extrabold font-mono text-xs sm:text-sm uppercase tracking-[0.2em] text-slate-900 dark:text-white">
+                        TECHNICAL PROJECTS
+                      </h3>
+                      <div className="flex-1 h-[1.5px] bg-slate-300 dark:bg-white/20" />
+                    </div>
+
+                    <div className="space-y-3">
+                      {/* Project 1 */}
+                      <div className={`p-3.5 rounded-xl border ${isLight ? "bg-slate-50 border-slate-200" : "bg-white/[0.02] border-white/10"}`}>
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                          <h4 className="font-bold text-xs sm:text-sm text-slate-900 dark:text-white">
+                            AI Suspicious Activity &amp; Weapon Detection
+                          </h4>
+                          <span className="font-mono text-[10px] font-bold text-cyan-800 dark:text-cyan-400">
+                            YOLOv11 • FASTAPI • WEBSOCKETS
+                          </span>
+                        </div>
+                        <p className={`text-xs mt-1 leading-relaxed ${isLight ? "text-slate-700" : "text-slate-300"}`}>
+                          Real-time computer vision security pipeline detecting weapons (guns, knives) and aggressive behavioral anomalies over live PTZ feeds with &lt;30ms latency.
+                        </p>
+                        <div className="flex flex-wrap gap-1 mt-1.5 font-mono text-[9.5px]">
+                          {["Python", "YOLOv11", "FastAPI", "React 19", "OpenCV", "WebSockets"].map((t) => (
+                            <span key={t} className="px-1.5 py-0.5 rounded bg-white dark:bg-white/10 border border-slate-200 dark:border-white/10 font-semibold">
+                              {t}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Project 2 */}
+                      <div className={`p-3.5 rounded-xl border ${isLight ? "bg-slate-50 border-slate-200" : "bg-white/[0.02] border-white/10"}`}>
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                          <div className="flex items-center gap-2">
+                            <h4 className="font-bold text-xs sm:text-sm text-slate-900 dark:text-white">
+                              Interactive Cyber-Portfolio &amp; Cultural Engine
+                            </h4>
+                            <a
+                              href="https://sasiruliyanage.vercel.app/"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-cyan-700 dark:text-cyan-400 hover:underline font-mono text-[10px] flex items-center gap-0.5"
+                            >
+                              <ExternalLink className="h-2.5 w-2.5" />
+                              <span>Live</span>
+                            </a>
+                          </div>
+                          <span className="font-mono text-[10px] font-bold text-emerald-800 dark:text-emerald-400">
+                            REACT 19 • VITE • TAILWIND V4
+                          </span>
+                        </div>
+                        <p className={`text-xs mt-1 leading-relaxed ${isLight ? "text-slate-700" : "text-slate-300"}`}>
+                          Ultra-fast personal portfolio with WebGL canvas, mathematical particle physics, bilingual SEO, and 98+ Lighthouse scores across Core Web Vitals.
+                        </p>
+                        <div className="flex flex-wrap gap-1 mt-1.5 font-mono text-[9.5px]">
+                          {["React 19", "Vite", "Tailwind v4", "WebGL", "Framer Motion", "SEO"].map((t) => (
+                            <span key={t} className="px-1.5 py-0.5 rounded bg-white dark:bg-white/10 border border-slate-200 dark:border-white/10 font-semibold">
+                              {t}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Project 3 */}
+                      <div className={`p-3.5 rounded-xl border ${isLight ? "bg-slate-50 border-slate-200" : "bg-white/[0.02] border-white/10"}`}>
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                          <h4 className="font-bold text-xs sm:text-sm text-slate-900 dark:text-white">
+                            AyurLife: Integrated Ayurvedic Healthcare Ecosystem
+                          </h4>
+                          <span className="font-mono text-[10px] font-bold text-indigo-800 dark:text-indigo-400">
+                            FULL-STACK • MERN • FLUTTER
+                          </span>
+                        </div>
+                        <p className={`text-xs mt-1 leading-relaxed ${isLight ? "text-slate-700" : "text-slate-300"}`}>
+                          Full-admin healthcare portal &amp; mobile app with diagnostic search, doctor booking, and herbal inventory knowledge base management.
+                        </p>
+                        <div className="flex flex-wrap gap-1 mt-1.5 font-mono text-[9.5px]">
+                          {["Flutter", "React Native", "Node.js", "Express", "MongoDB", "Firebase"].map((t) => (
+                            <span key={t} className="px-1.5 py-0.5 rounded bg-white dark:bg-white/10 border border-slate-200 dark:border-white/10 font-semibold">
+                              {t}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-1.5">
-                    <CheckCircle2 className="h-3 w-3 text-emerald-500 shrink-0" />
-                    <span>Indexing Design Fundamentals</span>
+
+                  {/* 4. Verified Industry Certifications (MongoDB) */}
+                  <div>
+                    <div className="flex items-center gap-3 mb-3">
+                      <h3 className="font-extrabold font-mono text-xs sm:text-sm uppercase tracking-[0.2em] text-slate-900 dark:text-white">
+                        VERIFIED INDUSTRY CERTIFICATIONS
+                      </h3>
+                      <div className="flex-1 h-[1.5px] bg-slate-300 dark:bg-white/20" />
+                    </div>
+
+                    <div className={`p-3.5 rounded-xl border ${isLight ? "bg-emerald-50/60 border-emerald-300" : "bg-emerald-500/5 border-emerald-500/20"}`}>
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                        <div>
+                          <h4 className="font-bold text-xs sm:text-sm text-slate-900 dark:text-white flex items-center gap-1.5">
+                            <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" />
+                            <span>MongoDB Certified: Data Modeling Path</span>
+                          </h4>
+                          <span className="font-mono text-[10px] text-slate-600 dark:text-slate-400">
+                            Issued by MongoDB, Inc. • Oct 2026 • Credential ID: MDBwsxpdpul98
+                          </span>
+                        </div>
+                        <a
+                          href="/certificates/mongodb-certifications.pdf"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="font-mono text-[10px] font-bold text-emerald-700 dark:text-emerald-400 underline underline-offset-2 flex items-center gap-1 w-fit"
+                        >
+                          <Download className="h-3 w-3" />
+                          <span>View Official PDF (9 Proofs)</span>
+                        </a>
+                      </div>
+                      <p className={`text-[11px] mt-1.5 leading-relaxed ${isLight ? "text-slate-700" : "text-slate-300"}`}>
+                        Completed 8 specialized modules: Schema Design Optimization, Advanced Schema Anti-patterns, Indexing Fundamentals, Performance Tools, Relational to Document Model, Data Transformation, Schema Patterns, and CRUD Operations.
+                      </p>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-1.5">
-                    <CheckCircle2 className="h-3 w-3 text-emerald-500 shrink-0" />
-                    <span>Performance Tools and Techniques</span>
+
+                  {/* 5. Achievements & Extracurriculars */}
+                  <div>
+                    <div className="flex items-center gap-3 mb-2.5">
+                      <h3 className="font-extrabold font-mono text-xs sm:text-sm uppercase tracking-[0.2em] text-slate-900 dark:text-white">
+                        ACHIEVEMENTS &amp; CONTRIBUTIONS
+                      </h3>
+                      <div className="flex-1 h-[1.5px] bg-slate-300 dark:bg-white/20" />
+                    </div>
+                    <ul className={`list-disc list-inside text-xs space-y-1 ${isLight ? "text-slate-700" : "text-slate-300"}`}>
+                      <li>Active contributor to university technical workshops and competitive algorithmic hackathons at SLIIT.</li>
+                      <li>Selected member of SLIIT Faculty of Computing Tech Community &amp; open-source research projects.</li>
+                    </ul>
                   </div>
-                  <div className="flex items-center gap-1.5">
-                    <CheckCircle2 className="h-3 w-3 text-emerald-500 shrink-0" />
-                    <span>Relational to Document Model</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <CheckCircle2 className="h-3 w-3 text-emerald-500 shrink-0" />
-                    <span>Fundamentals of Data Transformation</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <CheckCircle2 className="h-3 w-3 text-emerald-500 shrink-0" />
-                    <span>Schema Patterns and Anti-patterns</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <CheckCircle2 className="h-3 w-3 text-emerald-500 shrink-0" />
-                    <span>CRUD Operations</span>
-                  </div>
+
                 </div>
               </div>
             </div>
-
-            {/* 🏆 Honors, Contributions & Industry Experience */}
-            <div className="page-break-inside-avoid">
-              <h2
-                className={`flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-widest mb-2.5 ${
-                  isLight ? "text-emerald-800 font-extrabold" : "text-emerald-400"
-                }`}
-              >
-                <Award className="h-3.5 w-3.5" /> Industry Experience &amp; Contributions
-              </h2>
-              <div className="space-y-2.5">
-                <div className={`p-3 rounded-xl border ${isLight ? "bg-white border-slate-200" : "bg-white/[0.02] border-white/10"}`}>
-                  <div className="flex items-center justify-between font-mono text-xs">
-                    <span className="font-bold text-slate-900 dark:text-white">Trainee Account Assistant — Liberty Motor Associates</span>
-                    <span className="opacity-70 text-[10px]">May 2024 – July 2024</span>
-                  </div>
-                  <p className={`text-xs mt-1 leading-relaxed ${isLight ? "text-slate-600" : "text-slate-300"}`}>
-                    Assisted accounting teams in transaction logging, transactional reconciliation, structured numerical auditing, and spreadsheet automation.
-                  </p>
-                </div>
-                <div className={`p-3 rounded-xl border ${isLight ? "bg-white border-slate-200" : "bg-white/[0.02] border-white/10"}`}>
-                  <div className="flex items-center justify-between font-mono text-xs">
-                    <span className="font-bold text-slate-900 dark:text-white">SLIIT Faculty of Computing Tech Community</span>
-                    <span className="opacity-70 text-[10px]">2024 – Present</span>
-                  </div>
-                  <p className={`text-xs mt-1 leading-relaxed ${isLight ? "text-slate-600" : "text-slate-300"}`}>
-                    Active contributor to university technical workshops, open-source project development, and competitive programming hackathons.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* 🌐 Print & Digital Live Link Banner at Bottom of Sheet */}
-            <div className={`p-4 rounded-2xl border text-center font-mono ${
-              isLight ? "bg-cyan-50/80 border-cyan-200 text-cyan-900" : "bg-cyan-500/5 border-cyan-500/20 text-cyan-300"
-            }`}>
-              <div className="flex items-center justify-center gap-2 text-xs font-bold">
-                <Globe className="h-4 w-4 text-cyan-500" />
-                <span>INTERACTIVE DIGITAL PORTFOLIO &amp; REPOSITORIES</span>
-              </div>
-              <p className="text-[11px] mt-1 opacity-80">
-                To inspect live interactive 3D demos, GitHub commits, and source code, visit:
-              </p>
-              <a
-                href="https://sasiruliyanage.vercel.app/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block mt-1 text-xs font-extrabold underline underline-offset-4 text-cyan-600 dark:text-cyan-300 hover:text-cyan-500"
-              >
-                https://sasiruliyanage.vercel.app/
-              </a>
-            </div>
-          </div>
-
-          {/* 🌟 Modal Footer Bar */}
-          <div
-            className={`resume-no-print border-t px-6 py-3 flex items-center justify-between font-mono text-xs shrink-0 ${
-              isLight
-                ? "bg-slate-100/95 border-slate-200 text-slate-600"
-                : "bg-[#0b101a]/80 border-white/10 text-slate-400"
-            }`}
-          >
-            <div className="flex items-center gap-2">
-              <span className="relative flex h-2 w-2">
-                <span className="pulse-dot absolute inline-flex h-full w-full rounded-full bg-emerald-500" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-              </span>
-              <span>Available for Full-Stack Roles &amp; Internships</span>
-            </div>
-            <a
-              href="https://sasiruliyanage.vercel.app/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`hover:underline flex items-center gap-1 font-bold ${
-                isLight ? "text-cyan-800" : "text-cyan-400"
-              }`}
-            >
-              <span>sasiruliyanage.vercel.app</span>
-              <ExternalLink className="h-3 w-3" />
-            </a>
           </div>
         </motion.div>
       </motion.div>

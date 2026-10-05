@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sasiru Nethvidu Liyanage — Curriculum Vitae</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #1e293b;
+      background: #ffffff;
+      -webkit-font-smoothing: antialiased;
+      width: 210mm;
+      min-height: 297mm;
+      margin: 0 auto;
+    }
+
+    .resume-wrapper {
+      display: grid;
+      grid-template-columns: 74mm 136mm;
+      min-height: 297mm;
+      width: 210mm;
+    }
+
+    /* LEFT SIDEBAR */
+    .sidebar {
+      background: #e8e6e1;
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      border-right: 1.5px solid #d4d0c8;
+    }
+
+    .photo-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .photo-arch {
+      width: 140px;
+      height: 175px;
+      border-top-left-radius: 9999px;
+      border-top-right-radius: 9999px;
+      border-bottom-left-radius: 18px;
+      border-bottom-right-radius: 18px;
+      overflow: hidden;
+      border: 3px solid #ffffff;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      background: #ffffff;
+    }
+
+    .photo-arch img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .sidebar-section {
+      margin-bottom: 20px;
+    }
+
+    .section-header-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .section-title-left {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #0f172a;
+    }
+
+    .line-left {
+      flex: 1;
+      height: 1.5px;
+      background: #94a3b8;
+    }
+
+    .edu-item {
+      margin-bottom: 12px;
+      font-size: 11px;
+    }
+
+    .edu-year {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5px;
+      font-weight: 600;
+      color: #475569;
+      display: block;
+    }
+
+    .edu-title {
+      font-weight: 800;
+      font-size: 11px;
+      color: #0f172a;
+      line-height: 1.3;
+    }
+
+    .edu-school {
+      font-size: 10.5px;
+      color: #0369a1;
+      font-weight: 600;
+    }
+
+    .edu-bullets {
+      list-style-type: disc;
+      list-style-position: inside;
+      font-size: 10px;
+      color: #334155;
+      margin-top: 3px;
+      line-height: 1.4;
+    }
+
+    .skills-group {
+      margin-bottom: 8px;
+    }
+
+    .skills-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: #0369a1;
+      margin-bottom: 4px;
+      display: block;
+    }
+
+    .skill-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    .badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      font-weight: 600;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #1e293b;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5px;
+      color: #1e293b;
+      margin-bottom: 7px;
+      text-decoration: none;
+      word-break: break-all;
+    }
+
+    .contact-item.portfolio {
+      color: #0369a1;
+      font-weight: 800;
+      background: rgba(14, 116, 144, 0.08);
+      padding: 4px 6px;
+      border-radius: 6px;
+      border: 1px solid rgba(14, 116, 144, 0.25);
+    }
+
+    .bullet-list {
+      list-style-type: disc;
+      list-style-position: inside;
+      font-size: 10px;
+      color: #334155;
+      line-height: 1.45;
+    }
+
+    /* RIGHT MAIN CONTENT */
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      background: #ffffff;
+    }
+
+    /* TOP HEADER BLOCK */
+    .top-header {
+      background: #2d313a;
+      color: #ffffff;
+      padding: 26px 28px;
+    }
+
+    .main-name {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      line-height: 1.1;
+      color: #ffffff;
+    }
+
+    .main-subtitle {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      color: #67e8f9;
+      margin-top: 5px;
+    }
+
+    .header-link {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: #a5f3fc;
+      margin-top: 6px;
+      display: inline-block;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .content-body {
+      padding: 22px 28px;
+      flex: 1;
+    }
+
+    .section-right {
+      margin-bottom: 18px;
+    }
+
+    .section-header-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .section-title-right {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #0f172a;
+    }
+
+    .line-right {
+      flex: 1;
+      height: 1.5px;
+      background: #cbd5e1;
+    }
+
+    .profile-text {
+      font-size: 10.5px;
+      line-height: 1.55;
+      color: #334155;
+    }
+
+    /* EXPERIENCE TIMELINE */
+    .timeline {
+      position: relative;
+      padding-left: 20px;
+      border-left: 2px solid #cbd5e1;
+      margin-left: 6px;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 12px;
+    }
+
+    .timeline-node {
+      position: absolute;
+      left: -26px;
+      top: 2px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 2px solid #0284c7;
+    }
+
+    .role-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .role-title {
+      font-size: 11.5px;
+      font-weight: 800;
+      color: #0f172a;
+      text-transform: uppercase;
+    }
+
+    .role-dates {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5px;
+      color: #64748b;
+      font-weight: 600;
+    }
+
+    .role-company {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: #0369a1;
+      font-weight: 700;
+      margin-bottom: 3px;
+    }
+
+    .role-desc {
+      font-size: 10px;
+      color: #475569;
+      line-height: 1.45;
+    }
+
+    /* PROJECT CARDS */
+    .project-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 9px 12px;
+      margin-bottom: 9px;
+    }
+
+    .project-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 3px;
+    }
+
+    .project-title {
+      font-size: 11px;
+      font-weight: 800;
+      color: #0f172a;
+    }
+
+    .project-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8.5px;
+      font-weight: 700;
+      color: #0369a1;
+      background: #e0f2fe;
+      padding: 1.5px 6px;
+      border-radius: 4px;
+    }
+
+    .project-desc {
+      font-size: 10px;
+      color: #475569;
+      line-height: 1.4;
+      margin-bottom: 4px;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3px;
+    }
+
+    .project-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8px;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      padding: 1px 4px;
+      border-radius: 3px;
+      color: #334155;
+      font-weight: 600;
+    }
+
+    /* CERTIFICATION BOX */
+    .cert-box {
+      background: #ecfdf5;
+      border: 1px solid #a7f3d0;
+      border-radius: 8px;
+      padding: 9px 12px;
+      margin-bottom: 12px;
+    }
+
+    .cert-title {
+      font-size: 11px;
+      font-weight: 800;
+      color: #065f46;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .cert-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      color: #047857;
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+
+    .cert-desc {
+      font-size: 9.5px;
+      color: #064e3b;
+      line-height: 1.4;
+    }
+
+    .cert-tracks {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px 8px;
+      margin-top: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8.5px;
+      color: #047857;
+    }
+
+    .achieve-list {
+      list-style-type: disc;
+      list-style-position: inside;
+      font-size: 10px;
+      color: #334155;
+      line-height: 1.45;
+    }
+  </style>
+</head>
+<body>
+  <div class="resume-wrapper">
+    
+    <!-- LEFT SIDEBAR -->
+    <div class="sidebar">
+      <!-- Arched Photo -->
+      <div class="photo-container">
+        <div class="photo-arch">
+          <img src="file:///C:/projects/Portfollo/public/profile.png" alt="Sasiru Liyanage">
+        </div>
+      </div>
+
+      <!-- EDUCATION -->
+      <div class="sidebar-section">
+        <div class="section-header-left">
+          <span class="section-title-left">EDUCATION</span>
+          <div class="line-left"></div>
+        </div>
+
+        <div class="edu-item">
+          <span class="edu-year">2024 — 2028 (Expected)</span>
+          <div class="edu-title">BSc (Hons) in Information Technology</div>
+          <div class="edu-school">SLIIT, Malabe • 3rd Year</div>
+          <ul class="edu-bullets">
+            <li>Software Engineering Specialization</li>
+            <li>OOP (Java), DBMS (MySQL, MongoDB)</li>
+            <li>DSA, Computer Networks, Web Tech</li>
+          </ul>
+        </div>
+
+        <div class="edu-item">
+          <span class="edu-year">2023 — 2024</span>
+          <div class="edu-title">GCE Advanced Level (Commerce)</div>
+          <div class="edu-school">Gurukula College, Kelaniya</div>
+          <p class="edu-bullets" style="list-style: none; margin-top: 2px;">
+            Accounting: A Distinction | Business: B | Econ: B
+          </p>
+        </div>
+
+        <div class="edu-item">
+          <span class="edu-year">2020 — 2021</span>
+          <div class="edu-title">GCE Ordinary Level Examination</div>
+          <div class="edu-school">Gurukula College, Kelaniya</div>
+          <p class="edu-bullets" style="list-style: none; margin-top: 2px;">
+            Mathematics: A Distinction • 9 Distinctions
+          </p>
+        </div>
+      </div>
+
+      <!-- TECHNICAL SKILLS -->
+      <div class="sidebar-section">
+        <div class="section-header-left">
+          <span class="section-title-left">SKILLS</span>
+          <div class="line-left"></div>
+        </div>
+
+        <div class="skills-group">
+          <span class="skills-label">Languages</span>
+          <div class="skill-badges">
+            <span class="badge">TypeScript</span>
+            <span class="badge">JavaScript</span>
+            <span class="badge">Python</span>
+            <span class="badge">Java</span>
+            <span class="badge">SQL</span>
+            <span class="badge">C</span>
+          </div>
+        </div>
+
+        <div class="skills-group">
+          <span class="skills-label">Web &amp; Mobile</span>
+          <div class="skill-badges">
+            <span class="badge">React 19</span>
+            <span class="badge">Next.js</span>
+            <span class="badge">Node.js</span>
+            <span class="badge">FastAPI</span>
+            <span class="badge">Tailwind v4</span>
+            <span class="badge">Flutter</span>
+            <span class="badge">WebSockets</span>
+          </div>
+        </div>
+
+        <div class="skills-group">
+          <span class="skills-label">AI &amp; Databases</span>
+          <div class="skill-badges">
+            <span class="badge">MongoDB</span>
+            <span class="badge">PostgreSQL</span>
+            <span class="badge">MySQL</span>
+            <span class="badge">YOLOv11</span>
+            <span class="badge">OpenCV</span>
+            <span class="badge">Redis</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CORE STRENGTHS -->
+      <div class="sidebar-section">
+        <div class="section-header-left">
+          <span class="section-title-left">CORE STRENGTHS</span>
+          <div class="line-left"></div>
+        </div>
+        <ul class="bullet-list">
+          <li>Analytical Problem Solving &amp; DSA</li>
+          <li>Real-time WebSockets &amp; Vision Pipelines</li>
+          <li>High-concurrency Microservices</li>
+          <li>Clean Code Architecture</li>
+          <li>Agile/Scrum Team Collaboration</li>
+        </ul>
+      </div>
+
+      <!-- CONTACT -->
+      <div class="sidebar-section" style="margin-bottom: 0;">
+        <div class="section-header-left">
+          <span class="section-title-left">CONTACT</span>
+          <div class="line-left"></div>
+        </div>
+
+        <a href="https://sasiruliyanage.vercel.app/" class="contact-item portfolio">
+          <span>🌐 sasiruliyanage.vercel.app</span>
+        </a>
+        <div class="contact-item">
+          <span>📞 +94 71 57 00 953</span>
+        </div>
+        <div class="contact-item">
+          <span>✉️ liyanagesasiru@gmail.com</span>
+        </div>
+        <div class="contact-item">
+          <span>💻 github.com/sasiruliyanage2004</span>
+        </div>
+        <div class="contact-item">
+          <span>🔗 linkedin.com/in/sasiruliyanage</span>
+        </div>
+        <div class="contact-item" style="opacity: 0.85; font-size: 8.5px;">
+          <span>📍 Makola, Western Province, LK</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT MAIN CONTENT -->
+    <div class="main-content">
+      <!-- TOP HEADER BANNER -->
+      <div class="top-header">
+        <h1 class="main-name">SASIRU NETHVIDU LIYANAGE</h1>
+        <p class="main-subtitle">FULL-STACK SOFTWARE ENGINEER • COMPUTER VISION &amp; AI ARCHITECT</p>
+        <a href="https://sasiruliyanage.vercel.app/" class="header-link">🌐 Live Portfolio: sasiruliyanage.vercel.app</a>
+      </div>
+
+      <div class="content-body">
+        
+        <!-- PROFILE INFO -->
+        <div class="section-right">
+          <div class="section-header-right">
+            <span class="section-title-right">PROFILE INFO</span>
+            <div class="line-right"></div>
+          </div>
+          <p class="profile-text">
+            Analytical 3rd-Year Information Technology Undergraduate at SLIIT Malabe specializing in Full-Stack Web Architectures, Real-Time Computer Vision (YOLOv11), and high-concurrency microservices. MongoDB Certified Data Modeler experienced in architecting sub-30ms WebSocket pipelines, relational-to-document migrations, and modern cyber-minimalist UI/UX. Committed to engineering scalable, high-performance software with zero compromises on code quality.
+          </p>
+        </div>
+
+        <!-- WORK EXPERIENCE -->
+        <div class="section-right">
+          <div class="section-header-right">
+            <span class="section-title-right">EXPERIENCE</span>
+            <div class="line-right"></div>
+          </div>
+
+          <div class="timeline">
+            <div class="timeline-item">
+              <span class="timeline-node"></span>
+              <div class="role-row">
+                <span class="role-title">Software Engineering Intern</span>
+                <span class="role-dates">Jun 2026 — Present</span>
+              </div>
+              <div class="role-company">Multi Talent Technology</div>
+              <p class="role-desc">
+                Developing production-ready web solutions with React, Node.js, and modern tech stacks. Collaborating with engineering teams on database workflows, REST APIs, and UI architecture.
+              </p>
+            </div>
+
+            <div class="timeline-item" style="margin-bottom: 0;">
+              <span class="timeline-node" style="border-color: #64748b;"></span>
+              <div class="role-row">
+                <span class="role-title">Trainee Account Assistant</span>
+                <span class="role-dates">May 2024 — Jul 2024</span>
+              </div>
+              <div class="role-company">Liberty Motor Associates</div>
+              <p class="role-desc">
+                Audited daily transactional records, conducted financial reconciliations, and implemented automated spreadsheet systems for billing accuracy and inventory control.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- TECHNICAL PROJECTS -->
+        <div class="section-right">
+          <div class="section-header-right">
+            <span class="section-title-right">TECHNICAL PROJECTS</span>
+            <div class="line-right"></div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-top">
+              <span class="project-title">AI Suspicious Activity &amp; Weapon Detection</span>
+              <span class="project-badge">YOLOv11 • FASTAPI • WEBSOCKETS</span>
+            </div>
+            <p class="project-desc">
+              Real-time Computer Vision security surveillance detecting weapons (guns, knives) and aggressive behavioral anomalies over live PTZ feeds with &lt;30ms latency.
+            </p>
+            <div class="project-tags">
+              <span class="project-tag">Python</span>
+              <span class="project-tag">YOLOv11</span>
+              <span class="project-tag">FastAPI</span>
+              <span class="project-tag">React 19</span>
+              <span class="project-tag">OpenCV</span>
+              <span class="project-tag">WebSockets</span>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-top">
+              <span class="project-title">Interactive Cyber-Portfolio &amp; Cultural Engine</span>
+              <span class="project-badge" style="color: #065f46; background: #d1fae5;">REACT 19 • VITE • TAILWIND V4</span>
+            </div>
+            <p class="project-desc">
+              Ultra-fast personal portfolio with WebGL canvas, mathematical particle physics, bilingual SEO, and 98+ Lighthouse scores across Core Web Vitals. Live at sasiruliyanage.vercel.app.
+            </p>
+            <div class="project-tags">
+              <span class="project-tag">React 19</span>
+              <span class="project-tag">Vite</span>
+              <span class="project-tag">Tailwind v4</span>
+              <span class="project-tag">WebGL</span>
+              <span class="project-tag">Framer Motion</span>
+            </div>
+          </div>
+
+          <div class="project-card" style="margin-bottom: 0;">
+            <div class="project-top">
+              <span class="project-title">AyurLife: Ayurvedic Healthcare Ecosystem</span>
+              <span class="project-badge" style="color: #4338ca; background: #e0e7ff;">FULL-STACK • MERN • FLUTTER</span>
+            </div>
+            <p class="project-desc">
+              Full-admin healthcare portal &amp; mobile app featuring diagnostic symptom search, doctor appointment booking, and herbal inventory knowledge base management.
+            </p>
+            <div class="project-tags">
+              <span class="project-tag">Flutter</span>
+              <span class="project-tag">React Native</span>
+              <span class="project-tag">Node.js</span>
+              <span class="project-tag">Express</span>
+              <span class="project-tag">MongoDB</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CERTIFICATIONS -->
+        <div class="section-right">
+          <div class="section-header-right">
+            <span class="section-title-right">INDUSTRY CERTIFICATIONS</span>
+            <div class="line-right"></div>
+          </div>
+
+          <div class="cert-box">
+            <div class="cert-title">
+              <span>MongoDB Certified: Data Modeling Path</span>
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700;">ID: MDBwsxpdpul98</span>
+            </div>
+            <div class="cert-meta">MongoDB, Inc. • VP Raghu Viswanathan • October 2026</div>
+            <p class="cert-desc">
+              Completed 8 specialized modules validating schema design optimization, anti-pattern mitigation, indexing architectures, data transformation pipelines, and relational-to-document migrations.
+            </p>
+            <div class="cert-tracks">
+              <span>✓ Advanced Schema Patterns</span>
+              <span>✓ Relational to Document Model</span>
+              <span>✓ Schema Design Optimization</span>
+              <span>✓ Data Transformation Pipelines</span>
+              <span>✓ Indexing Design Fundamentals</span>
+              <span>✓ Schema Anti-patterns</span>
+              <span>✓ Performance Techniques</span>
+              <span>✓ CRUD Operations</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ACHIEVEMENTS -->
+        <div class="section-right" style="margin-bottom: 0;">
+          <div class="section-header-right">
+            <span class="section-title-right">ACHIEVEMENTS</span>
+            <div class="line-right"></div>
+          </div>
+          <ul class="achieve-list">
+            <li>Active contributor to university technical workshops and competitive algorithmic hackathons at SLIIT.</li>
+            <li>Selected member of SLIIT Faculty of Computing Tech Community &amp; open-source research projects.</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

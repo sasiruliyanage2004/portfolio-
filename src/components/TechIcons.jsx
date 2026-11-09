@@ -146,20 +146,65 @@ export const TechIcons = {
       <path d="M3 2L4.8 20.2L12 22.2L19.2 20.2L21 2H3ZM17.4 6.8H8.1L8.3 9.2H17.2L16.7 14.4L12 15.7L7.3 14.4L7.1 11.8H9.5L9.6 13.1L12 13.8L14.4 13.1L14.6 11.2H7L6.4 4.8H17.6L17.4 6.8Z" />
     </svg>
   ),
+
+  nextjs: ({ className = "h-6 w-6" }) => (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.676 17.514L9.844 7.2H8.4v9.6h1.543v-7.24l7.147 9.47a10.457 10.457 0 0 0 .586-.516zM14.4 7.2v5.829l1.543 2.057V7.2H14.4z" />
+    </svg>
+  ),
+
+  postgresql: ({ className = "h-6 w-6" }) => (
+    <svg className={className} viewBox="0 0 24 24" fill="#4169E1">
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm3.8 15.6c-.5.4-1.2.6-1.9.6-1.6 0-2.8-1.2-2.8-3.1 0-1.8 1.1-3.2 2.7-3.2 1.3 0 2.2.8 2.5 1.9h-1.4c-.2-.6-.6-.9-1.1-.9-.8 0-1.3.8-1.3 2.2 0 1.2.6 2 1.5 2 .5 0 .9-.2 1.2-.5v-1.1h-1.3v-1.2h2.6v3.3z" />
+    </svg>
+  ),
+
+  redis: ({ className = "h-6 w-6" }) => (
+    <svg className={className} viewBox="0 0 24 24" fill="#DC382D">
+      <path d="M2.5 6.25L12 1.75l9.5 4.5v11.5L12 22.25 2.5 17.75V6.25zm9.5 7.5l6.5-3.08V8.17L12 11.25l-6.5-3.08v2.5L12 13.75z" />
+    </svg>
+  ),
+
+  websocket: ({ className = "h-6 w-6" }) => (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="3" fill="#06B6D4" />
+      <path d="M7.05 7.05a7 7 0 0 0 0 9.9M16.95 7.05a7 7 0 0 1 0 9.9" />
+      <path d="M3.51 3.51a12 12 0 0 0 0 16.98M20.49 3.51a12 12 0 0 1 0 16.98" />
+    </svg>
+  ),
+
+  mongodbCert: ({ className = "h-6 w-6" }) => (
+    <svg className={className} viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="11" fill="#00ED64" fillOpacity="0.18" stroke="#00ED64" strokeWidth="1.5" />
+      <path d="M12 3C11.5 4.1 7.5 8.2 7.5 13.2c0 3.7 2.3 6.7 4.1 7.7 1.9-1 4.1-4 4.1-7.7C15.7 8.2 12.5 4.1 12 3z" fill="#00ED64" />
+      <path d="M11.6 13.2V20.4c.1.1.6.1.8 0V13.2h-.8z" fill="#001E2B" />
+      <circle cx="18" cy="6" r="3" fill="#10B981" />
+      <path d="M17 6l.7.7 1.5-1.5" stroke="#FFFFFF" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  ),
+
+  githubActions: ({ className = "h-6 w-6" }) => (
+    <svg className={className} viewBox="0 0 24 24" fill="#2088FF">
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14.5v-3h3v-2h-3v-3h-2v3H8v2h3v3h2z" />
+    </svg>
+  ),
 };
 
 export const TECH_RIBBON = [
   { name: "React 19", icon: TechIcons.react, color: "#61DAFB", glow: "rgba(97,218,251,0.4)" },
+  { name: "Next.js 15", icon: TechIcons.nextjs, color: "#FFFFFF", glow: "rgba(255,255,255,0.4)" },
   { name: "TypeScript", icon: TechIcons.typescript, color: "#3178C6", glow: "rgba(49,120,198,0.4)" },
-  { name: "Python", icon: TechIcons.python, color: "#3776AB", glow: "rgba(55,118,171,0.4)" },
+  { name: "MongoDB (Certified)", icon: TechIcons.mongodbCert, color: "#00ED64", glow: "rgba(0,237,100,0.5)" },
   { name: "Node.js", icon: TechIcons.node, color: "#5FA04E", glow: "rgba(95,160,78,0.4)" },
-  { name: "YOLOv11", icon: TechIcons.yolo, color: "#06B6D4", glow: "rgba(6,182,212,0.4)" },
+  { name: "Python", icon: TechIcons.python, color: "#3776AB", glow: "rgba(55,118,171,0.4)" },
+  { name: "YOLOv11 AI", icon: TechIcons.yolo, color: "#06B6D4", glow: "rgba(6,182,212,0.4)" },
+  { name: "PostgreSQL", icon: TechIcons.postgresql, color: "#4169E1", glow: "rgba(65,105,225,0.4)" },
   { name: "Java", icon: TechIcons.java, color: "#ED8B00", glow: "rgba(237,139,0,0.4)" },
-  { name: "MongoDB", icon: TechIcons.mongodb, color: "#47A248", glow: "rgba(71,162,72,0.4)" },
-  { name: "Tailwind CSS", icon: TechIcons.tailwind, color: "#06B6D4", glow: "rgba(6,182,212,0.4)" },
+  { name: "Tailwind CSS v4", icon: TechIcons.tailwind, color: "#06B6D4", glow: "rgba(6,182,212,0.4)" },
   { name: "FastAPI", icon: TechIcons.fastapi, color: "#009688", glow: "rgba(0,150,136,0.4)" },
-  { name: "Git", icon: TechIcons.git, color: "#F05032", glow: "rgba(240,80,50,0.4)" },
   { name: "Docker", icon: TechIcons.docker, color: "#2496ED", glow: "rgba(36,150,237,0.4)" },
+  { name: "WebSockets", icon: TechIcons.websocket, color: "#06B6D4", glow: "rgba(6,182,212,0.4)" },
+  { name: "Git & CI/CD", icon: TechIcons.git, color: "#F05032", glow: "rgba(240,80,50,0.4)" },
   { name: "MySQL", icon: TechIcons.mysql, color: "#00758F", glow: "rgba(0,117,143,0.4)" },
   { name: "JavaScript", icon: TechIcons.javascript, color: "#F7DF1E", glow: "rgba(247,223,30,0.4)" },
   { name: "React Native", icon: TechIcons.reactNative, color: "#61DAFB", glow: "rgba(97,218,251,0.4)" },

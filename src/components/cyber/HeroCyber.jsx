@@ -122,8 +122,9 @@ function TiltCard({ children, className = "" }) {
 
 const LIVE_STATUSES = [
   { text: "Available for Hire", icon: CheckCircle2, color: "text-emerald-400 dark:text-emerald-400 light-theme:text-emerald-600", dot: "bg-emerald-500" },
-  { text: "Coding: React 19 + Node", icon: Activity, color: "text-cyan-400 dark:text-cyan-400 light-theme:text-cyan-600", dot: "bg-cyan-500" },
-  { text: "100+ Commits & Builds", icon: Sparkles, color: "text-indigo-400 dark:text-indigo-400 light-theme:text-indigo-600", dot: "bg-indigo-500" },
+  { text: "MongoDB Certified (ID: MDBwsxpdpul98)", icon: Sparkles, color: "text-emerald-400 dark:text-emerald-400 light-theme:text-emerald-600", dot: "bg-emerald-500" },
+  { text: "Building: React 19 • Next.js • FastAPI", icon: Activity, color: "text-cyan-400 dark:text-cyan-400 light-theme:text-cyan-600", dot: "bg-cyan-500" },
+  { text: "15+ High-Impact Production Projects", icon: Sparkles, color: "text-indigo-400 dark:text-indigo-400 light-theme:text-indigo-600", dot: "bg-indigo-500" },
 ];
 
 function UnifiedStatusBadge() {

@@ -59,8 +59,18 @@ export default function CommandPalette({ theme, toggleTheme, open, setOpen }) {
     {
       id: "skills",
       category: "Navigation",
-      label: "Jump to Skills Matrix",
+      label: "Jump to Skills Matrix & 25+ Tech",
       icon: Terminal,
+      run: () => {
+        document.getElementById("skills")?.scrollIntoView({ behavior: "smooth" });
+        setOpen(false);
+      },
+    },
+    {
+      id: "cert-mongodb",
+      category: "Credentials",
+      label: "View MongoDB Certified Data Modeler (ID: MDBwsxpdpul98)",
+      icon: Check,
       run: () => {
         document.getElementById("skills")?.scrollIntoView({ behavior: "smooth" });
         setOpen(false);

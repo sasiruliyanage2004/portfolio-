@@ -121,10 +121,10 @@ function TiltCard({ children, className = "" }) {
 }
 
 const LIVE_STATUSES = [
-  { text: "Available for Hire", icon: CheckCircle2, color: "text-emerald-400 dark:text-emerald-400 light-theme:text-emerald-600", dot: "bg-emerald-500" },
-  { text: "MongoDB Certified (ID: MDBwsxpdpul98)", icon: Sparkles, color: "text-emerald-400 dark:text-emerald-400 light-theme:text-emerald-600", dot: "bg-emerald-500" },
-  { text: "Building: React 19 • Next.js • FastAPI", icon: Activity, color: "text-cyan-400 dark:text-cyan-400 light-theme:text-cyan-600", dot: "bg-cyan-500" },
-  { text: "15+ High-Impact Production Projects", icon: Sparkles, color: "text-indigo-400 dark:text-indigo-400 light-theme:text-indigo-600", dot: "bg-indigo-500" },
+  { text: "Available for Hire", icon: CheckCircle2, color: "text-emerald-400", dot: "bg-emerald-500" },
+  { text: "MongoDB Certified (ID: MDBwsxpdpul98)", icon: Sparkles, color: "text-emerald-400", dot: "bg-emerald-500" },
+  { text: "Building: React 19 • Next.js • FastAPI", icon: Activity, color: "text-cyan-400", dot: "bg-cyan-500" },
+  { text: "15+ High-Impact Production Projects", icon: Sparkles, color: "text-indigo-300", dot: "bg-indigo-400" },
 ];
 
 function UnifiedStatusBadge() {
@@ -141,7 +141,7 @@ function UnifiedStatusBadge() {
   const IconComponent = current.icon;
 
   return (
-    <div className="absolute bottom-4 right-4 z-20 overflow-hidden rounded-full border border-white/20 dark:border-white/20 light-theme:border-slate-300 bg-[#090d16]/90 dark:bg-[#090d16]/90 light-theme:bg-white/95 px-4 py-2 backdrop-blur-md shadow-2xl">
+    <div className="absolute bottom-4 right-4 max-w-[calc(100%-2rem)] z-20 overflow-hidden rounded-full border border-white/20 bg-black/75 backdrop-blur-xl px-4 py-2 shadow-2xl">
       <AnimatePresence mode="wait">
         <motion.div
           key={current.text}
@@ -244,7 +244,7 @@ export default function HeroCyber({ onOpenResume }) {
             </div>
           </motion.div>
 
-          {/* Right Column — Portrait Image Card */}
+          {/* Right Column — Frameless Modern Portrait Card */}
           <motion.div
             style={{ scale: avatarScale, y: avatarY, opacity: avatarOpacity }}
             initial={{ opacity: 0, y: 24, scale: 0.95 }}
@@ -252,26 +252,30 @@ export default function HeroCyber({ onOpenResume }) {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="lg:col-span-5 group relative flex justify-center [perspective:1000px] py-2 px-2 sm:px-4"
           >
-            {/* Main 3D Card Container */}
-            <TiltCard className="hero-portrait-card noise-overlay relative w-full max-w-[340px] sm:max-w-[420px] rounded-[1.75rem] sm:rounded-[2rem] p-3 sm:p-5 shadow-2xl transition-all duration-500">
-              <span className="border-beam" aria-hidden="true" />
+            {/* Ambient Backlight Glow for Frameless Depth */}
+            <div 
+              aria-hidden="true" 
+              className="absolute -inset-1 sm:-inset-2 rounded-[2.5rem] bg-gradient-to-tr from-cyan-500/25 via-emerald-500/15 to-transparent blur-2xl opacity-60 dark:opacity-40 group-hover:opacity-90 transition-opacity duration-700 pointer-events-none" 
+            />
 
-              {/* Profile Image Frame */}
-              <div className="hero-portrait-frame relative h-[320px] sm:h-[440px] lg:h-[480px] w-full overflow-hidden rounded-[1.25rem] sm:rounded-[1.5rem] shadow-inner">
-                <picture className="h-full w-full">
-                  <source srcSet="/profile.webp" type="image/webp" />
-                  <img
-                    src="/profile.png"
-                    alt="Sasiru Nethvidu Liyanage Portrait"
-                    width={420}
-                    height={480}
-                    loading="eager"
-                    fetchPriority="high"
-                    className="h-full w-full object-cover object-center group-hover:scale-105 transition-all duration-700 ease-out drop-shadow-md"
-                  />
-                </picture>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-20 md:opacity-40 group-hover:opacity-10 transition-opacity duration-700" />
-              </div>
+            {/* Frameless Modern 3D Tilt Container */}
+            <TiltCard className="relative w-full max-w-[340px] sm:max-w-[420px] h-[350px] sm:h-[460px] lg:h-[500px] overflow-hidden rounded-[2rem] sm:rounded-[2.25rem] border border-white/20 dark:border-white/10 light-theme:border-slate-200/90 shadow-[0_20px_50px_rgba(15,23,42,0.12)] dark:shadow-[0_30px_80px_rgba(0,0,0,0.85)] transition-all duration-500 group-hover:shadow-[0_30px_70px_rgba(6,182,212,0.25)]">
+              {/* Edge-to-Edge Picture without Frame/Bezels */}
+              <picture className="h-full w-full block">
+                <source srcSet="/profile.webp" type="image/webp" />
+                <img
+                  src="/profile.png"
+                  alt="Sasiru Nethvidu Liyanage Portrait"
+                  width={420}
+                  height={500}
+                  loading="eager"
+                  fetchPriority="high"
+                  className="h-full w-full object-cover object-center group-hover:scale-105 transition-all duration-700 ease-out"
+                />
+              </picture>
+
+              {/* Seamless Bottom Vignette for Status Badge Contrast */}
+              <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-black/75 via-black/25 to-transparent pointer-events-none transition-opacity duration-500" />
 
               {/* Unified Single Dynamic Status Badge */}
               <UnifiedStatusBadge />

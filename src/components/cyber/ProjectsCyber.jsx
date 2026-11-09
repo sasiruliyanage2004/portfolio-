@@ -35,35 +35,35 @@ const CATEGORIES = ["All", "AI Solutions", "Web Apps", "UI/UX"];
 const PROJECTS = [
   {
     id: "suspicious-activity-detection",
-    title: "Aethra Vision — 9-Camera AI Command Grid & Threat Detection",
-    blurb: "9-camera Computer Vision threat detection & target Re-ID command grid processing live surveillance feeds with 12ms latency, YOLOv11 pose estimation, and automated alerts.",
-    longDescription: "An enterprise-grade autonomous surveillance system engineered to detect lethal weapons (firearms, bladed weapons), luggage anomalies, and aggressive behavioral anomalies in real-time across 9 live camera streams. Built with a high-throughput FastAPI asynchronous gateway and optimized YOLOv11 tensor graphs running over WebSockets with 12ms ultra-low latency.",
+    title: "Aethra Vision — Multi-Camera AI Command Grid & Threat Detection",
+    blurb: "Multi-camera Computer Vision threat detection & target Re-ID command grid processing live surveillance feeds with 12ms latency, YOLOv11 pose estimation, and automated alerts.",
+    longDescription: "An enterprise-grade autonomous surveillance system engineered to detect lethal weapons (firearms, bladed weapons), luggage anomalies, and aggressive behavioral anomalies in real-time across scalable live camera streams. Built with a high-throughput FastAPI asynchronous gateway and optimized YOLOv11 tensor graphs running over WebSockets with 12ms ultra-low latency.",
     category: "AI Solutions",
     tech: ["YOLOv11", "FastAPI", "Python", "React", "OpenCV", "PTZ Camera", "AES-256"],
     live: true,
     image: "/projects/aethra-vision.webp",
     imageFallback: "/projects/aethra-vision.png",
-    imageAlt: "Aethra Vision Command Grid 9-camera live surveillance interface with YOLO threat bounding boxes and real-time target Re-ID tracking",
+    imageAlt: "Aethra Vision Command Grid multi-camera live surveillance interface with YOLO threat bounding boxes and real-time target Re-ID tracking",
     github: "https://github.com/sasiruliyanage2004/Suspicious-Activity-Detection",
     demo: "https://github.com/sasiruliyanage2004/Suspicious-Activity-Detection",
     metrics: [
       { label: "Latency", val: "12ms" },
-      { label: "Cameras", val: "9/9 Active" },
+      { label: "Cameras", val: "Multi-Feed" },
       { label: "Re-ID Acc", val: "99.1%" },
     ],
-    status: "v1.2.0 • 9/9 FEEDS ACTIVE",
-    engineTitle: "Aethra Vision 9-Feed Command Grid // YOLOv11 TensorCore",
+    status: "v1.2.0 • MULTI-STREAM ACTIVE",
+    engineTitle: "Aethra Vision Multi-Feed Command Grid // YOLOv11 TensorCore",
     sync: "FastAPI WebSocket Stream • AES-256",
     badge: "Real-time AI Security",
     architecture: [
-      { step: "01. Input Stream", title: "9x PTZ RTSP Feeds", desc: "Multi-camera H.264 stream ingestion with OpenCV hardware acceleration & geofencing" },
+      { step: "01. Input Stream", title: "Scalable PTZ RTSP Feeds", desc: "Multi-camera H.264 stream ingestion with OpenCV hardware acceleration & geofencing" },
       { step: "02. Inference", title: "YOLOv11 Neural Core", desc: "FP16 optimized tensor pipeline detecting weapons, luggage & pose motion vectors" },
       { step: "03. Re-ID Engine", title: "Cross-Camera Target Tracking", desc: "99.1% handoff accuracy tracking targets across spatial camera transitions" },
       { step: "04. Asynchronous Bus", title: "FastAPI WebSocket Hub", desc: "12ms bidirectional broadcast layer delivering alert payloads & face match scores" },
     ],
     highlights: [
       "12ms ultra-low latency real-time weapon, luggage & anomaly detection",
-      "Multi-camera Target Re-ID tracking across 9 concurrent live RTSP feeds",
+      "Multi-camera Target Re-ID tracking across scalable live RTSP feeds",
       "AI pose estimation, trajectory trail analytics & biometric face match database",
       "Automated incident alert dispatch with encrypted AES-256 snapshot audit logs",
     ],
@@ -321,7 +321,7 @@ function ProjectDeepDiveModal({ project, onClose }) {
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500" />
                   </span>
                   <span className="text-red-400 font-bold uppercase tracking-wider text-[10px] sm:text-[11px]">
-                    LIVE THREAT FEED // 9-CAMERA COMMAND GRID
+                    LIVE THREAT FEED // MULTI-CAMERA COMMAND GRID
                   </span>
                 </div>
                 <div className="flex items-center gap-2 sm:gap-4 text-[9px] sm:text-[10px] text-slate-400">
@@ -352,7 +352,7 @@ function ProjectDeepDiveModal({ project, onClose }) {
 
               {/* Command Grid Footer Bar */}
               <div className="px-3.5 sm:px-4 py-2 bg-black/80 backdrop-blur-sm border-t border-white/10 flex items-center justify-between text-[10px] sm:text-[11px] font-mono text-slate-400">
-                <span className="truncate">AETHRA VISION COMMAND GRID // 9-Feed Autonomous AI Defense</span>
+                <span className="truncate">AETHRA VISION COMMAND GRID // Multi-Feed Autonomous AI Defense</span>
                 <span className="text-cyan-400 shrink-0 font-semibold ml-2">AES-256 • YOLOv11</span>
               </div>
             </div>
@@ -545,7 +545,7 @@ function ExpandableProjectCard({ project, isExpanded, onSelect, onInspect }) {
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
                     <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500" />
                   </span>
-                  <span className="text-red-400 font-semibold tracking-wider">AETHRA VISION // 9/9 FEEDS</span>
+                  <span className="text-red-400 font-semibold tracking-wider">AETHRA VISION // MULTI-FEED ACTIVE</span>
                 </div>
                 <span className="text-cyan-400 text-[9px] uppercase tracking-wider font-semibold">12ms • Armed</span>
               </div>

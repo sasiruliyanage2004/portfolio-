@@ -621,53 +621,22 @@ function ExpandableProjectCard({ project, isExpanded, onSelect, onInspect }) {
             );
           })()}
 
-          {/* Expanded Live Telemetry Frame */}
-          {isExpanded && project.metrics && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              transition={{ duration: 0.35 }}
-              className="bento-ui-preview-frame my-5 rounded-2xl p-4 sm:p-5 font-mono text-xs shadow-inner"
-            >
-              <div className="flex items-center justify-between border-b border-white/10 pb-2.5 mb-2">
-                <div className="flex items-center gap-2 text-cyan-400 font-semibold text-xs sm:text-sm">
-                  <Activity className="h-4 w-4 animate-pulse text-cyan-300" />
-                  <span>{project.engineTitle || "Live Telemetry"}</span>
+          {/* Clean Modern Bento Stat Pills (Replaces Heavy Clunky Telemetry Box) */}
+          {project.metrics && (
+            <div className="my-4 grid grid-cols-3 gap-2 sm:gap-3">
+              {project.metrics.map((m, i) => (
+                <div
+                  key={i}
+                  className="group/stat relative overflow-hidden rounded-2xl bg-white/[0.04] dark:bg-white/[0.04] light-theme:bg-slate-100/80 p-2.5 sm:p-3 text-center border border-white/10 dark:border-white/10 light-theme:border-slate-200/80 hover:border-cyan-400/50 transition-all duration-300 shadow-sm"
+                >
+                  <div className="text-sm sm:text-base font-extrabold font-mono tracking-tight text-cyan-400 dark:text-cyan-400 light-theme:text-cyan-600 group-hover/stat:text-cyan-300 transition-colors">
+                    {m.val}
+                  </div>
+                  <div className="text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-400 light-theme:text-slate-600 mt-0.5 truncate">
+                    {m.label}
+                  </div>
                 </div>
-                <span className="text-[10px] opacity-70">{project.status}</span>
-              </div>
-
-              <div className="grid grid-cols-3 gap-2 sm:gap-3 my-3 sm:my-4 text-center">
-                {project.metrics.map((m, i) => (
-                  <div key={i} className="rounded-xl bg-white/5 p-2 sm:p-3 border border-white/10">
-                    <div className="text-cyan-400 font-bold text-sm sm:text-lg">{m.val}</div>
-                    <div className="text-[9px] sm:text-xs opacity-70 mt-0.5">{m.label}</div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="flex items-center justify-between text-[10px] sm:text-[11px] opacity-80 pt-2 border-t border-white/10">
-                <span className="flex items-center gap-1.5">
-                  <Database className="h-3.5 w-3.5 text-indigo-400" /> {project.sync}
-                </span>
-                <span className="flex items-center gap-1.5 text-emerald-500">
-                  <ShieldCheck className="h-3.5 w-3.5" /> {project.badge}
-                </span>
-              </div>
-            </motion.div>
-          )}
-
-          {/* Mini Metrics for Compact Cards */}
-          {!isExpanded && project.metrics && (
-            <div className="bento-ui-preview-frame my-3 rounded-xl p-2.5 font-mono text-xs shadow-inner">
-              <div className="grid grid-cols-3 gap-1.5 text-center">
-                {project.metrics.map((m, i) => (
-                  <div key={i} className="rounded-lg bg-white/5 p-1.5 border border-white/10">
-                    <div className="text-cyan-400 font-bold text-xs">{m.val}</div>
-                    <div className="text-[8px] opacity-70 truncate">{m.label}</div>
-                  </div>
-                ))}
-              </div>
+              ))}
             </div>
           )}
         </div>

@@ -515,8 +515,8 @@ function ExpandableProjectCard({ project, isExpanded, onSelect, onInspect }) {
             <div className="flex items-center gap-2 flex-wrap">
               <span className={`inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 font-mono text-[10px] font-bold ${
                 isExpanded
-                  ? "border border-cyan-500/40 bg-cyan-500/20 text-cyan-300"
-                  : "border border-white/15 bg-white/5 text-slate-300"
+                  ? "border border-cyan-500/40 bg-cyan-500/10 dark:bg-cyan-500/20 text-cyan-700 dark:text-cyan-300"
+                  : "border border-slate-200 dark:border-white/15 bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-slate-300"
               }`}>
                 <Sparkles className="h-2.5 w-2.5" />
                 {project.category}
@@ -545,7 +545,7 @@ function ExpandableProjectCard({ project, isExpanded, onSelect, onInspect }) {
                 </button>
               ) : (
                 project.live && (
-                  <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/50 bg-emerald-500/20 px-3 py-1 font-mono text-xs font-semibold text-emerald-300 shrink-0">
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/40 bg-emerald-50 dark:bg-emerald-500/20 px-3 py-1 font-mono text-xs font-semibold text-emerald-700 dark:text-emerald-300 shrink-0">
                     <Radio className="h-3 w-3" />
                     LIVE
                   </span>
@@ -554,11 +554,11 @@ function ExpandableProjectCard({ project, isExpanded, onSelect, onInspect }) {
             </div>
           </div>
 
-          <h3 className={`font-bold transition-colors ${isExpanded ? "text-2xl sm:text-3xl text-cyan-300 mt-2" : "text-lg sm:text-xl text-white group-hover:text-cyan-400"}`}>
+          <h3 className={`font-bold transition-colors ${isExpanded ? "text-2xl sm:text-3xl text-cyan-600 dark:text-cyan-300 mt-2" : "text-lg sm:text-xl text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-400"}`}>
             {project.title}
           </h3>
 
-          <p className="mt-3 text-xs sm:text-sm sm:leading-relaxed font-normal text-slate-300">
+          <p className="mt-3 text-xs sm:text-sm sm:leading-relaxed font-normal text-slate-600 dark:text-slate-300">
             {project.blurb}
           </p>
 
@@ -566,7 +566,7 @@ function ExpandableProjectCard({ project, isExpanded, onSelect, onInspect }) {
           {project.image && (() => {
             const isSecurity = project.id === "suspicious-activity-detection";
             return (
-              <div className={`relative rounded-2xl overflow-hidden border border-cyan-500/25 bg-black/70 shadow-lg group/img ${isExpanded ? "my-4" : "my-3"}`}>
+              <div className={`relative rounded-2xl overflow-hidden border border-slate-200 dark:border-cyan-500/25 bg-slate-100 dark:bg-black/70 shadow-md group/img ${isExpanded ? "my-4" : "my-3"}`}>
                 {/* Header Strip */}
                 {isSecurity ? (
                   <div className="flex items-center justify-between px-3 py-1.5 bg-black/85 backdrop-blur-md border-b border-white/10 text-[10px] font-mono">
@@ -580,11 +580,11 @@ function ExpandableProjectCard({ project, isExpanded, onSelect, onInspect }) {
                     <span className="text-cyan-400 text-[9px] uppercase tracking-wider font-semibold">12ms • Armed</span>
                   </div>
                 ) : (
-                  <div className="flex items-center justify-between px-3.5 py-2 bg-slate-900/95 dark:bg-black/95 backdrop-blur-md border-b border-white/10 text-[10px] font-mono">
-                    <span className="text-slate-200 font-semibold tracking-wider text-[10px]">
+                  <div className="flex items-center justify-between px-3.5 py-2 bg-slate-100 dark:bg-black/90 backdrop-blur-md border-b border-slate-200 dark:border-white/10 text-[10px] font-mono transition-colors">
+                    <span className="text-slate-800 dark:text-slate-200 font-semibold tracking-wider text-[10px]">
                       MOVI COFFEE — LUXURY SPECIALTY ROASTERY
                     </span>
-                    <span className="text-emerald-400 text-[9px] uppercase tracking-wider font-semibold">
+                    <span className="text-emerald-700 dark:text-emerald-400 text-[9px] uppercase tracking-wider font-semibold">
                       Live UI/UX
                     </span>
                   </div>
@@ -661,7 +661,7 @@ function ExpandableProjectCard({ project, isExpanded, onSelect, onInspect }) {
                 e.stopPropagation();
                 onInspect(project);
               }}
-              className="inline-flex items-center gap-1.5 font-mono text-xs font-bold text-cyan-400 hover:text-emerald-400 transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1.5 font-mono text-xs font-bold text-cyan-600 dark:text-cyan-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors cursor-pointer"
             >
               <Layers className="h-3.5 w-3.5" />
               <span>Inspect Architecture</span>
@@ -672,7 +672,7 @@ function ExpandableProjectCard({ project, isExpanded, onSelect, onInspect }) {
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}
-              className="inline-flex items-center gap-1.5 font-mono text-xs font-bold opacity-80 hover:text-cyan-400 transition-colors"
+              className="inline-flex items-center gap-1.5 font-mono text-xs font-bold text-slate-600 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors"
             >
               <GithubIcon className="h-3.5 w-3.5" />
               <span>GitHub</span>
@@ -735,7 +735,7 @@ export default function ProjectsCyber() {
           >
             <span className="h-2 w-2 rounded-full bg-emerald-400 animate-ping" />
             <span className="h-2 w-2 -ml-3.5 rounded-full bg-emerald-400" />
-            <span className="font-bold text-white">Live GitHub Stream:</span>
+            <span className="font-bold text-slate-900 dark:text-white">Live GitHub Stream:</span>
             <span className="text-cyan-400">{githubStats.repos} Public Repositories</span>
             <span className="opacity-50">• Synced {githubStats.updated}</span>
           </a>
@@ -771,7 +771,7 @@ export default function ProjectsCyber() {
                     transition={{ type: "spring", stiffness: 400, damping: 30 }}
                   />
                 )}
-                <span className={`relative z-10 ${cat === c ? "text-white font-semibold" : "opacity-70 hover:opacity-100"}`}>
+                <span className={`relative z-10 ${cat === c ? "text-white font-semibold" : "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white font-medium"}`}>
                   {c}
                 </span>
               </button>

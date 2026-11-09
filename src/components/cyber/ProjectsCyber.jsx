@@ -275,7 +275,7 @@ function ProjectDeepDiveModal({ project, onClose }) {
         <span className="border-beam" aria-hidden="true" />
 
         {/* Modal Header */}
-        <div className="flex items-start justify-between gap-4 border-b border-white/10 p-5 sm:p-7 pb-4 shrink-0 bg-black/80 backdrop-blur-xl">
+        <div className="flex items-start justify-between gap-4 border-b border-slate-200 dark:border-white/10 p-5 sm:p-7 pb-4 shrink-0 bg-white/95 dark:bg-black/80 backdrop-blur-xl">
           <div>
             <div className="flex items-center gap-2 mb-1.5 flex-wrap">
               <span className="inline-flex items-center gap-1 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-2.5 py-0.5 font-mono text-[10px] font-bold text-cyan-400">
@@ -362,7 +362,7 @@ function ProjectDeepDiveModal({ project, onClose }) {
           {project.metrics && (
             <div className="grid grid-cols-3 gap-2.5 sm:gap-4">
               {project.metrics.map((m, i) => (
-                <div key={i} className="rounded-2xl bg-white/5 p-3 text-center border border-white/10">
+                <div key={i} className="rounded-2xl bg-slate-50 dark:bg-white/5 p-3 text-center border border-slate-200 dark:border-white/10">
                   <div className="text-cyan-400 font-bold text-base sm:text-xl font-mono">{m.val}</div>
                   <div className="text-[10px] sm:text-xs opacity-70 mt-0.5">{m.label}</div>
                 </div>
@@ -381,7 +381,7 @@ function ProjectDeepDiveModal({ project, onClose }) {
                 {project.architecture.map((arch, idx) => (
                   <div
                     key={idx}
-                    className="rounded-xl border border-white/10 bg-black/30 p-3 flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-4"
+                    className="rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-black/30 p-3 flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-4"
                   >
                     <div className="flex items-center gap-2 font-mono text-xs text-cyan-300 font-semibold">
                       <span className="text-[10px] opacity-60">{arch.step}</span>
@@ -434,7 +434,7 @@ function ProjectDeepDiveModal({ project, onClose }) {
         </div>
 
         {/* Modal Action Buttons */}
-        <div className="flex flex-wrap items-center justify-between gap-3 p-4 sm:p-6 border-t border-white/10 shrink-0 bg-black/80 backdrop-blur-xl">
+        <div className="flex flex-wrap items-center justify-between gap-3 p-4 sm:p-6 border-t border-slate-200 dark:border-white/10 shrink-0 bg-white/95 dark:bg-black/80 backdrop-blur-xl">
           <a
             href={project.github}
             target="_blank"

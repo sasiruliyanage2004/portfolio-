@@ -61,53 +61,59 @@ body {
 }
 
 /* ------------------------------------------------------------------
-   LIGHT THEME — "Royal Porcelain & Ceylon Sapphire-Gold Circuit"
+   LIGHT THEME — "Luminous Platinum, Ceylon Sapphire & Emerald Circuit"
    ------------------------------------------------------------------ */
 html.light-theme,
 body.light-theme,
 .light-theme {
-  --bg-obsidian: #f8f6f0;
-  --bg-obsidian-raised: #f3efe6;
-  --cyan: #0e7490;
-  --amber: #b45309;
-  --indigo: #3730a3;
-  --violet: #7e22ce;
+  --bg-obsidian: #f8fafc;
+  --bg-obsidian-raised: #ffffff;
+  --cyan: #0284c7;
+  --amber: #d97706;
+  --indigo: #4f46e5;
+  --violet: #7c3aed;
 
-  --glass-bg: rgba(255, 255, 255, 0.85);
-  --glass-bg-hover: rgba(255, 255, 255, 0.95);
-  --glass-border: rgba(30, 41, 59, 0.12);
-  --glass-border-hover: rgba(55, 48, 163, 0.28);
+  --grad-start: #0284c7;
+  --grad-mid: #0d9488;
+  --grad-end: #10b981;
+
+  --glass-bg: rgba(255, 255, 255, 0.88);
+  --glass-bg-hover: rgba(255, 255, 255, 0.98);
+  --glass-border: rgba(226, 232, 240, 0.85);
+  --glass-border-hover: rgba(2, 132, 199, 0.35);
 
   --text-primary: #0f172a;
-  --text-muted: #475569;
+  --text-muted: #334155;
   --text-dim: #64748b;
 
   color-scheme: light;
-  background-color: #f8f6f0 !important;
+  background-color: #f8fafc !important;
   color: #0f172a !important;
 }
 
 .light-theme body {
-  background-color: #f8f6f0 !important;
+  background-color: #f8fafc !important;
   color: #0f172a !important;
 }
 
 .light-theme .mesh-bg {
-  background-color: #f8f6f0 !important;
-  background-image: none !important;
+  background-color: #f8fafc !important;
+  background-image: radial-gradient(at 50% 0%, rgba(6, 182, 212, 0.12) 0px, transparent 65%),
+                    radial-gradient(at 100% 35%, rgba(99, 102, 241, 0.08) 0px, transparent 55%),
+                    radial-gradient(at 0% 70%, rgba(16, 185, 129, 0.08) 0px, transparent 55%) !important;
 }
 
 .light-theme .glass-panel {
   background: rgba(255, 255, 255, 0.88) !important;
-  border: 1px solid rgba(30, 41, 59, 0.12) !important;
-  box-shadow: 0 12px 36px rgba(15, 23, 42, 0.08) !important;
+  border: 1px solid rgba(226, 232, 240, 0.85) !important;
+  box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.95) !important;
   color: #0f172a !important;
 }
 
 .light-theme .glass-panel:hover {
   background: rgba(255, 255, 255, 0.98) !important;
-  border-color: rgba(55, 48, 163, 0.28) !important;
-  box-shadow: 0 16px 45px rgba(15, 23, 42, 0.12) !important;
+  border-color: rgba(2, 132, 199, 0.35) !important;
+  box-shadow: 0 16px 40px -10px rgba(2, 132, 199, 0.15) !important;
 }
 
 /* ------------------------------------------------------------------
@@ -129,8 +135,9 @@ body.light-theme,
    LIGHT THEME FOOTER OVERRIDES
    ------------------------------------------------------------------ */
 .light-theme footer {
-  background-color: #f8f6f0 !important;
+  background-color: #f8fafc !important;
   color: #0f172a !important;
+  border-top: 1px solid rgba(226, 232, 240, 0.8) !important;
 }
 
 .light-theme footer h2,
@@ -145,7 +152,8 @@ body.light-theme,
 
 .light-theme footer .bg-white\/5 {
   background-color: #ffffff !important;
-  border-color: rgba(30, 41, 59, 0.15) !important;
+  border-color: rgba(226, 232, 240, 0.9) !important;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04) !important;
   color: #0f172a !important;
 }
 
@@ -162,8 +170,8 @@ body.light-theme,
 
 .light-theme .contact-terminal-box {
   background-color: #ffffff !important;
-  border: 2px solid rgba(30, 41, 59, 0.18) !important;
-  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08) !important;
+  border: 1px solid rgba(226, 232, 240, 0.9) !important;
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.06) !important;
   color: #0f172a !important;
 }
 
@@ -174,7 +182,7 @@ body.light-theme,
 .light-theme .contact-terminal-box input,
 .light-theme .contact-terminal-box textarea {
   background-color: #f8fafc !important;
-  border-color: rgba(30, 41, 59, 0.18) !important;
+  border-color: rgba(226, 232, 240, 0.9) !important;
   color: #0f172a !important;
 }
 
@@ -185,7 +193,7 @@ body.light-theme,
 
 .light-theme .contact-terminal-box .bg-black\/40 {
   background-color: #f1f5f9 !important;
-  border-color: rgba(30, 41, 59, 0.12) !important;
+  border-color: rgba(226, 232, 240, 0.8) !important;
   color: #0f172a !important;
 }
 
@@ -197,7 +205,7 @@ body.light-theme,
   opacity: 0.95;
 }
 .light-theme .heading-absorber-aura {
-  background-color: #f8f6f0 !important;
+  background-color: #f8fafc !important;
   opacity: 0.95 !important;
 }
 
@@ -212,8 +220,8 @@ body.light-theme,
 }
 .light-theme .theme-switcher-bar {
   background-color: #ffffff !important;
-  border-color: rgba(30, 41, 59, 0.15) !important;
-  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08) !important;
+  border-color: rgba(226, 232, 240, 0.9) !important;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06) !important;
 }
 
 /* ------------------------------------------------------------------

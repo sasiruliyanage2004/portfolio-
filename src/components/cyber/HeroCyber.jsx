@@ -267,7 +267,7 @@ export default function HeroCyber({ onOpenResume }) {
                     height={480}
                     loading="eager"
                     fetchPriority="high"
-                    className="h-full w-full object-cover object-top filter md:grayscale md:contrast-110 md:brightness-115 group-hover:grayscale-0 group-hover:brightness-110 group-hover:scale-105 transition-all duration-700 ease-out"
+                    className="h-full w-full object-cover object-top group-hover:scale-105 transition-all duration-700 ease-out drop-shadow-md"
                   />
                 </picture>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-20 md:opacity-40 group-hover:opacity-10 transition-opacity duration-700" />

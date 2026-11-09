@@ -838,35 +838,35 @@ export default function SkillsCyber() {
             ========================================================================= */}
         <AnimatePresence>
           {selectedSkill && (
-            <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+            <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/60 dark:bg-black/80 backdrop-blur-md">
               <motion.div
                 initial={{ opacity: 0, scale: 0.95, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                className="relative w-full max-w-xl rounded-3xl border border-cyan-500/30 bg-[#090d16] p-6 sm:p-8 shadow-2xl text-left overflow-hidden"
+                className="relative w-full max-w-xl rounded-3xl border border-slate-200 dark:border-cyan-500/30 bg-white dark:bg-[#090d16] p-6 sm:p-8 shadow-2xl text-left overflow-hidden text-slate-900 dark:text-white"
               >
                 <div className="absolute top-0 right-0 -mr-20 -mt-20 w-56 h-56 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
 
                 <div className="flex items-start justify-between gap-4 mb-6">
                   <div className="flex items-center gap-3">
                     <div
-                      className="h-14 w-14 rounded-2xl bg-white/5 border border-white/10 p-2.5 flex items-center justify-center shadow-inner"
+                      className="h-14 w-14 rounded-2xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 p-2.5 flex items-center justify-center shadow-inner"
                       style={{ boxShadow: `0 0 20px ${selectedSkill.brandGlow}` }}
                     >
                       {selectedSkill.logo && <selectedSkill.logo className="h-8 w-8" />}
                     </div>
                     <div>
-                      <span className="font-mono text-[10px] text-cyan-400 font-bold uppercase tracking-widest">
+                      <span className="font-mono text-[10px] text-cyan-600 dark:text-cyan-400 font-bold uppercase tracking-widest">
                         TECHNOLOGY SPECIFICATION
                       </span>
-                      <h3 className="text-xl sm:text-2xl font-extrabold text-white">
+                      <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white">
                         {selectedSkill.name}
                       </h3>
                     </div>
                   </div>
                   <button
                     onClick={() => setSelectedSkill(null)}
-                    className="p-1.5 rounded-full bg-white/5 border border-white/10 text-slate-400 hover:text-white transition-colors cursor-pointer"
+                    className="p-1.5 rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer"
                   >
                     <X className="h-4 w-4" />
                   </button>
@@ -874,23 +874,23 @@ export default function SkillsCyber() {
 
                 <div className="space-y-4">
                   {/* Experience & Level */}
-                  <div className="grid grid-cols-2 gap-3 p-3.5 rounded-2xl bg-white/5 border border-white/10 font-mono text-xs">
+                  <div className="grid grid-cols-2 gap-3 p-3.5 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 font-mono text-xs">
                     <div>
-                      <span className="text-slate-400 block text-[10px]">EXPERIENCE</span>
-                      <span className="text-white font-bold">{selectedSkill.experience || "2+ Years Production"}</span>
+                      <span className="text-slate-500 dark:text-slate-400 block text-[10px]">EXPERIENCE</span>
+                      <span className="text-slate-900 dark:text-white font-bold">{selectedSkill.experience || "2+ Years Production"}</span>
                     </div>
                     <div>
-                      <span className="text-slate-400 block text-[10px]">MASTERY LEVEL</span>
-                      <span className="text-emerald-400 font-bold">{selectedSkill.level || 94}% Production Core</span>
+                      <span className="text-slate-500 dark:text-slate-400 block text-[10px]">MASTERY LEVEL</span>
+                      <span className="text-emerald-600 dark:text-emerald-400 font-bold">{selectedSkill.level || 94}% Production Core</span>
                     </div>
                   </div>
 
                   {/* Deep Description */}
                   <div>
-                    <h4 className="font-mono text-xs text-slate-400 uppercase tracking-wider mb-1.5 font-bold">
+                    <h4 className="font-mono text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1.5 font-bold">
                       ARCHITECTURAL CAPABILITY
                     </h4>
-                    <p className="text-xs sm:text-sm text-slate-200 leading-relaxed font-normal">
+                    <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-200 leading-relaxed font-normal">
                       {selectedSkill.details ||
                         `Production engineering with ${selectedSkill.name}, implementing high-performance pipelines, clean modular design, and robust error boundaries.`}
                     </p>
@@ -898,16 +898,16 @@ export default function SkillsCyber() {
 
                   {/* Core Scopes */}
                   <div>
-                    <h4 className="font-mono text-xs text-slate-400 uppercase tracking-wider mb-2 font-bold">
+                    <h4 className="font-mono text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2 font-bold">
                       VERIFIED COMPETENCIES
                     </h4>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       {selectedSkill.scope.map((item, idx) => (
                         <div
                           key={idx}
-                          className="flex items-center gap-2 p-2 rounded-xl bg-white/5 border border-white/5 text-xs text-slate-300 font-mono"
+                          className="flex items-center gap-2 p-2 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/5 text-xs text-slate-700 dark:text-slate-300 font-mono"
                         >
-                          <Check className="h-3.5 w-3.5 text-cyan-400 shrink-0" />
+                          <Check className="h-3.5 w-3.5 text-cyan-600 dark:text-cyan-400 shrink-0" />
                           <span>{item}</span>
                         </div>
                       ))}
@@ -915,16 +915,16 @@ export default function SkillsCyber() {
                   </div>
 
                   {/* Production Proof */}
-                  <div className="pt-2 border-t border-white/10 flex items-center justify-between text-xs font-mono">
-                    <span className="text-slate-400">Deployed In Production:</span>
-                    <span className="text-emerald-400 font-bold">{selectedSkill.proof}</span>
+                  <div className="pt-2 border-t border-slate-200 dark:border-white/10 flex items-center justify-between text-xs font-mono">
+                    <span className="text-slate-500 dark:text-slate-400">Deployed In Production:</span>
+                    <span className="text-emerald-600 dark:text-emerald-400 font-bold">{selectedSkill.proof}</span>
                   </div>
                 </div>
 
                 <div className="mt-6 flex justify-end">
                   <button
                     onClick={() => setSelectedSkill(null)}
-                    className="px-5 py-2.5 rounded-full border border-white/20 bg-white/10 font-mono text-xs font-bold text-white hover:bg-white/20 transition-all cursor-pointer"
+                    className="px-5 py-2.5 rounded-full border border-slate-300 dark:border-white/20 bg-slate-100 dark:bg-white/10 font-mono text-xs font-bold text-slate-800 dark:text-white hover:bg-slate-200 dark:hover:bg-white/20 transition-all cursor-pointer"
                   >
                     Close Inspector
                   </button>
@@ -939,37 +939,37 @@ export default function SkillsCyber() {
             ========================================================================= */}
         <AnimatePresence>
           {selectedCert && (
-            <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+            <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/60 dark:bg-black/80 backdrop-blur-md">
               <motion.div
                 initial={{ opacity: 0, scale: 0.95, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                className="relative w-full max-w-xl rounded-3xl border border-emerald-500/40 bg-[#090d16] p-6 sm:p-8 shadow-2xl text-left overflow-hidden"
+                className="relative w-full max-w-xl rounded-3xl border border-emerald-500/30 dark:border-emerald-500/40 bg-white dark:bg-[#090d16] p-6 sm:p-8 shadow-2xl text-left overflow-hidden text-slate-900 dark:text-white"
               >
                 <div className="absolute top-0 right-0 -mr-20 -mt-20 w-56 h-56 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
 
                 <div className="flex items-start justify-between gap-4 mb-6">
                   <div className="flex items-center gap-3.5">
                     <div
-                      className="h-16 w-16 rounded-2xl bg-[#001E2B] border border-emerald-500/40 p-2.5 flex items-center justify-center shadow-[0_0_25px_rgba(0,237,100,0.3)] shrink-0"
+                      className="h-16 w-16 rounded-2xl bg-emerald-950/10 dark:bg-[#001E2B] border border-emerald-500/40 p-2.5 flex items-center justify-center shadow-[0_0_25px_rgba(0,237,100,0.25)] shrink-0"
                     >
                       {selectedCert.logo && <selectedCert.logo className="h-10 w-10" />}
                     </div>
                     <div>
-                      <span className="inline-flex items-center gap-1 font-mono text-[10px] text-emerald-400 font-bold uppercase tracking-widest">
+                      <span className="inline-flex items-center gap-1 font-mono text-[10px] text-emerald-600 dark:text-emerald-400 font-bold uppercase tracking-widest">
                         <ShieldCheck className="h-3 w-3" /> VERIFIED CREDENTIAL
                       </span>
-                      <h3 className="text-xl sm:text-2xl font-extrabold text-white">
+                      <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white">
                         {selectedCert.title}
                       </h3>
-                      <p className="font-mono text-xs text-slate-400">
+                      <p className="font-mono text-xs text-slate-500 dark:text-slate-400">
                         {selectedCert.issuer} • {selectedCert.year}
                       </p>
                     </div>
                   </div>
                   <button
                     onClick={() => setSelectedCert(null)}
-                    className="p-1.5 rounded-full bg-white/5 border border-white/10 text-slate-400 hover:text-white transition-colors cursor-pointer"
+                    className="p-1.5 rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer"
                   >
                     <X className="h-4 w-4" />
                   </button>
@@ -977,14 +977,14 @@ export default function SkillsCyber() {
 
                 <div className="space-y-4">
                   {/* Credential ID Card */}
-                  <div className="flex items-center justify-between p-3.5 rounded-2xl bg-black/40 border border-emerald-500/30 font-mono text-xs">
+                  <div className="flex items-center justify-between p-3.5 rounded-2xl bg-slate-50 dark:bg-black/40 border border-slate-200 dark:border-emerald-500/30 font-mono text-xs">
                     <div>
-                      <span className="text-slate-400 block text-[10px]">VERIFIED CREDENTIAL ID</span>
-                      <span className="text-emerald-300 font-bold text-sm">{selectedCert.credentialId}</span>
+                      <span className="text-slate-500 dark:text-slate-400 block text-[10px]">VERIFIED CREDENTIAL ID</span>
+                      <span className="text-emerald-600 dark:text-emerald-300 font-bold text-sm">{selectedCert.credentialId}</span>
                     </div>
                     <button
                       onClick={() => handleCopyCredential(selectedCert.credentialId)}
-                      className="px-3 py-1.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 font-bold text-xs hover:bg-emerald-500/25 transition-all cursor-pointer flex items-center gap-1.5"
+                      className="px-3 py-1.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300 font-bold text-xs hover:bg-emerald-500/25 transition-all cursor-pointer flex items-center gap-1.5"
                     >
                       {copiedId ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
                       <span>{copiedId ? "Copied" : "Copy ID"}</span>
@@ -992,22 +992,22 @@ export default function SkillsCyber() {
                   </div>
 
                   {/* Description */}
-                  <p className="text-xs sm:text-sm text-slate-200 leading-relaxed font-normal">
+                  <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-200 leading-relaxed font-normal">
                     {selectedCert.description}
                   </p>
 
                   {/* Key Highlights */}
                   <div>
-                    <h4 className="font-mono text-xs text-slate-400 uppercase tracking-wider mb-2 font-bold">
+                    <h4 className="font-mono text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2 font-bold">
                       VERIFIED COMPETENCY TRACKS
                     </h4>
                     <div className="space-y-2">
                       {selectedCert.highlights.map((h, i) => (
                         <div
                           key={i}
-                          className="flex items-start gap-2.5 p-2.5 rounded-xl bg-white/5 border border-white/5 text-xs text-slate-300 font-mono"
+                          className="flex items-start gap-2.5 p-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/5 text-xs text-slate-700 dark:text-slate-300 font-mono"
                         >
-                          <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
+                          <CheckCircle2 className="h-4 w-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
                           <span>{h}</span>
                         </div>
                       ))}
@@ -1015,16 +1015,16 @@ export default function SkillsCyber() {
                   </div>
 
                   {/* Production Proof */}
-                  <div className="pt-2 border-t border-white/10 flex items-center justify-between text-xs font-mono">
-                    <span className="text-slate-400">Deployed In Production:</span>
-                    <span className="text-emerald-400 font-bold">{selectedCert.productionProof}</span>
+                  <div className="pt-2 border-t border-slate-200 dark:border-white/10 flex items-center justify-between text-xs font-mono">
+                    <span className="text-slate-500 dark:text-slate-400">Deployed In Production:</span>
+                    <span className="text-emerald-600 dark:text-emerald-400 font-bold">{selectedCert.productionProof}</span>
                   </div>
                 </div>
 
                 <div className="mt-6 flex justify-end">
                   <button
                     onClick={() => setSelectedCert(null)}
-                    className="px-5 py-2.5 rounded-full border border-emerald-500/40 bg-emerald-500/20 font-mono text-xs font-bold text-emerald-300 hover:bg-emerald-500/30 transition-all cursor-pointer"
+                    className="px-5 py-2.5 rounded-full border border-emerald-500/40 bg-emerald-500/10 dark:bg-emerald-500/20 font-mono text-xs font-bold text-emerald-700 dark:text-emerald-300 hover:bg-emerald-500/20 dark:hover:bg-emerald-500/30 transition-all cursor-pointer"
                   >
                     Close Inspector
                   </button>

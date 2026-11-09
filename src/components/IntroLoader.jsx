@@ -14,6 +14,13 @@ export default function IntroLoader({ onComplete }) {
   const [isFinished, setIsFinished] = useState(false);
   const exitTriggered = useRef(false);
 
+  // Check if active theme is light or dark
+  const isLight =
+    typeof document !== "undefined"
+      ? document.documentElement.classList.contains("light-theme") ||
+        localStorage.getItem("portfolio_theme") !== "dark"
+      : true;
+
   // Smooth exit handler (split shutters slide apart)
   const triggerExit = useCallback(() => {
     if (exitTriggered.current) return;
@@ -35,7 +42,7 @@ export default function IntroLoader({ onComplete }) {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [triggerExit]);
 
-  // High-performance kinetic counter (0 -> 100 in ~1200ms)
+  // High-performance kinetic counter (0 -> 100 in ~1100ms)
   useEffect(() => {
     const isMobile =
       typeof window !== "undefined" &&
@@ -47,8 +54,8 @@ export default function IntroLoader({ onComplete }) {
         navigator.userAgent.includes("PageSpeed") ||
         navigator.userAgent.includes("Googlebot"));
 
-    // Lighthouse: almost instant. Mobile: snappy 600ms. Desktop: cinematic 1200ms.
-    const duration = isLighthouse ? 120 : isMobile ? 650 : 1250;
+    // Lighthouse: almost instant. Mobile: snappy 600ms. Desktop: cinematic 1150ms.
+    const duration = isLighthouse ? 120 : isMobile ? 650 : 1150;
     const startTime = performance.now();
 
     let animationFrameId;
@@ -91,7 +98,9 @@ export default function IntroLoader({ onComplete }) {
       {!isFinished && (
         <div
           onClick={triggerExit}
-          className="fixed inset-0 z-[99999] overflow-hidden select-none cursor-pointer bg-black"
+          className={`fixed inset-0 z-[99999] overflow-hidden select-none cursor-pointer ${
+            isLight ? "bg-[#f8fafc]" : "bg-black"
+          }`}
           title="Click anywhere to enter"
           role="region"
           aria-label="Portfolio Introduction Loader"
@@ -100,48 +109,92 @@ export default function IntroLoader({ onComplete }) {
               TOP ARCHITECTURAL SHUTTER
               ========================================================================= */}
           <motion.div
-            className="absolute top-0 left-0 right-0 h-1/2 bg-[#04060b] border-b border-white/[0.08] shadow-[0_15px_40px_rgba(0,0,0,0.8)] z-10 flex flex-col justify-between p-6 sm:p-10 md:p-14 overflow-hidden"
+            className={`absolute top-0 left-0 right-0 h-1/2 z-10 flex flex-col justify-between p-6 sm:p-10 md:p-14 overflow-hidden ${
+              isLight
+                ? "bg-white/98 border-b border-slate-200/90 shadow-[0_15px_40px_rgba(15,23,42,0.06)]"
+                : "bg-[#04060b] border-b border-white/[0.08] shadow-[0_15px_40px_rgba(0,0,0,0.8)]"
+            }`}
             initial={{ y: 0 }}
             animate={isExiting ? { y: "-100%" } : { y: 0 }}
             transition={{ duration: 0.75, ease: [0.83, 0, 0.17, 1] }}
           >
             {/* Subtle cyber grid backdrop */}
-            <div className="absolute inset-0 opacity-[0.035] bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
-            <div className="absolute inset-0 bg-gradient-to-b from-cyan-950/20 via-transparent to-transparent pointer-events-none" />
+            <div
+              className={`absolute inset-0 pointer-events-none ${
+                isLight
+                  ? "opacity-[0.10] bg-[radial-gradient(#94a3b8_1px,transparent_1px)] [background-size:24px_24px]"
+                  : "opacity-[0.035] bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:24px_24px]"
+              }`}
+            />
+            <div
+              className={`absolute inset-0 pointer-events-none ${
+                isLight
+                  ? "bg-gradient-to-b from-cyan-500/10 via-transparent to-transparent"
+                  : "bg-gradient-to-b from-cyan-950/20 via-transparent to-transparent"
+              }`}
+            />
 
             {/* Top HUD Row */}
             <div className="relative flex items-center justify-between w-full pointer-events-none">
               {/* Brand & Monogram Identity */}
               <div className="flex items-center gap-3.5">
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-500/20 to-emerald-500/10 border border-cyan-500/30 flex items-center justify-center shadow-[0_0_15px_rgba(6,182,212,0.2)]">
-                  <span className="font-mono text-xs font-black tracking-widest text-cyan-300">
+                <div
+                  className={`w-8 h-8 rounded-lg flex items-center justify-center shadow-md ${
+                    isLight
+                      ? "bg-gradient-to-br from-cyan-500/15 to-emerald-500/15 border border-cyan-500/30 text-cyan-700 shadow-[0_0_15px_rgba(6,182,212,0.15)]"
+                      : "bg-gradient-to-br from-cyan-500/20 to-emerald-500/10 border border-cyan-500/30 text-cyan-300 shadow-[0_0_15px_rgba(6,182,212,0.2)]"
+                  }`}
+                >
+                  <span className="font-mono text-xs font-black tracking-widest">
                     SL
                   </span>
                 </div>
                 <div className="flex flex-col">
-                  <span className="font-mono text-[11px] sm:text-xs font-bold tracking-[0.25em] text-slate-100 uppercase">
+                  <span
+                    className={`font-mono text-[11px] sm:text-xs font-bold tracking-[0.25em] uppercase ${
+                      isLight ? "text-slate-900" : "text-slate-100"
+                    }`}
+                  >
                     SASIRU LIYANAGE
                   </span>
-                  <span className="font-mono text-[9px] tracking-wider text-slate-400 uppercase">
-                    SYSTEM ARCHITECT // 2026
+                  <span
+                    className={`font-mono text-[9px] tracking-wider uppercase ${
+                      isLight ? "text-slate-500" : "text-slate-400"
+                    }`}
+                  >
+                    FULL-STACK ARCHITECT // 2026
                   </span>
                 </div>
               </div>
 
               {/* Coordinates & Live Status Badge */}
               <div className="flex items-center gap-4 sm:gap-6 font-mono text-[10px]">
-                <span className="hidden sm:inline-block tracking-widest text-slate-400">
+                <span
+                  className={`hidden sm:inline-block tracking-widest ${
+                    isLight ? "text-slate-500" : "text-slate-400"
+                  }`}
+                >
                   6°55'55"N 79°51'52"E
                 </span>
-                <div className="flex items-center gap-1.5 px-3 py-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-300 backdrop-blur-md">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+                <div
+                  className={`flex items-center gap-1.5 px-3 py-1 rounded-full border backdrop-blur-md ${
+                    isLight
+                      ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-700 font-semibold"
+                      : "border-emerald-500/30 bg-emerald-500/10 text-emerald-300"
+                  }`}
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />
                   <span className="font-semibold tracking-wider">LIVE</span>
                 </div>
               </div>
             </div>
 
             {/* Top Shutter Bottom Guide */}
-            <div className="relative w-full flex items-center justify-between text-slate-400 font-mono text-[9px] tracking-[0.2em] uppercase pointer-events-none opacity-80">
+            <div
+              className={`relative w-full flex items-center justify-between font-mono text-[9px] tracking-[0.2em] uppercase pointer-events-none ${
+                isLight ? "text-slate-400" : "text-slate-400 opacity-80"
+              }`}
+            >
               <span>SYS.SEC // LEVEL 01</span>
               <span>DUMBARA KINETIC ENGINE</span>
             </div>
@@ -151,17 +204,37 @@ export default function IntroLoader({ onComplete }) {
               BOTTOM ARCHITECTURAL SHUTTER
               ========================================================================= */}
           <motion.div
-            className="absolute bottom-0 left-0 right-0 h-1/2 bg-[#04060b] border-t border-white/[0.08] shadow-[0_-15px_40px_rgba(0,0,0,0.8)] z-10 flex flex-col justify-between p-6 sm:p-10 md:p-14 overflow-hidden"
+            className={`absolute bottom-0 left-0 right-0 h-1/2 z-10 flex flex-col justify-between p-6 sm:p-10 md:p-14 overflow-hidden ${
+              isLight
+                ? "bg-white/98 border-t border-slate-200/90 shadow-[0_-15px_40px_rgba(15,23,42,0.06)]"
+                : "bg-[#04060b] border-t border-white/[0.08] shadow-[0_-15px_40px_rgba(0,0,0,0.8)]"
+            }`}
             initial={{ y: 0 }}
             animate={isExiting ? { y: "100%" } : { y: 0 }}
             transition={{ duration: 0.75, ease: [0.83, 0, 0.17, 1] }}
           >
             {/* Subtle cyber grid backdrop */}
-            <div className="absolute inset-0 opacity-[0.035] bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
-            <div className="absolute inset-0 bg-gradient-to-t from-cyan-950/20 via-transparent to-transparent pointer-events-none" />
+            <div
+              className={`absolute inset-0 pointer-events-none ${
+                isLight
+                  ? "opacity-[0.10] bg-[radial-gradient(#94a3b8_1px,transparent_1px)] [background-size:24px_24px]"
+                  : "opacity-[0.035] bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:24px_24px]"
+              }`}
+            />
+            <div
+              className={`absolute inset-0 pointer-events-none ${
+                isLight
+                  ? "bg-gradient-to-t from-cyan-500/10 via-transparent to-transparent"
+                  : "bg-gradient-to-t from-cyan-950/20 via-transparent to-transparent"
+              }`}
+            />
 
             {/* Bottom Shutter Top Guide */}
-            <div className="relative w-full flex items-center justify-between text-slate-400 font-mono text-[9px] tracking-[0.2em] uppercase pointer-events-none opacity-80">
+            <div
+              className={`relative w-full flex items-center justify-between font-mono text-[9px] tracking-[0.2em] uppercase pointer-events-none ${
+                isLight ? "text-slate-400" : "text-slate-400 opacity-80"
+              }`}
+            >
               <span>LATENCY // &lt;16MS</span>
               <span>CULTURAL CYBER ALGORITHMS</span>
             </div>
@@ -169,16 +242,30 @@ export default function IntroLoader({ onComplete }) {
             {/* Bottom HUD Row */}
             <div className="relative flex flex-col sm:flex-row sm:items-center justify-between gap-3 w-full pointer-events-none">
               <div className="flex flex-col">
-                <span className="font-mono text-[10px] sm:text-[11px] tracking-wider text-slate-300 font-medium">
+                <span
+                  className={`font-mono text-[10px] sm:text-[11px] tracking-wider font-semibold ${
+                    isLight ? "text-slate-800" : "text-slate-300"
+                  }`}
+                >
                   SLIIT UNDERGRADUATE • FULL-STACK SOFTWARE ENGINEER
                 </span>
-                <span className="font-mono text-[9px] text-slate-400 tracking-wider">
+                <span
+                  className={`font-mono text-[9px] tracking-wider ${
+                    isLight ? "text-slate-500" : "text-slate-400"
+                  }`}
+                >
                   COLOMBO, SRI LANKA • UTC+05:30
                 </span>
               </div>
 
               {/* Click to Skip Affordance */}
-              <div className="flex items-center gap-2 self-start sm:self-auto font-mono text-[10px] tracking-widest text-cyan-300 bg-cyan-500/10 border border-cyan-500/25 px-3.5 py-1.5 rounded-full hover:bg-cyan-500/20 transition-all shadow-[0_0_15px_rgba(6,182,212,0.15)]">
+              <div
+                className={`flex items-center gap-2 self-start sm:self-auto font-mono text-[10px] tracking-widest px-3.5 py-1.5 rounded-full transition-all ${
+                  isLight
+                    ? "text-cyan-700 bg-cyan-50 border border-cyan-300 shadow-[0_0_15px_rgba(6,182,212,0.15)] hover:bg-cyan-100"
+                    : "text-cyan-300 bg-cyan-500/10 border border-cyan-500/25 shadow-[0_0_15px_rgba(6,182,212,0.15)] hover:bg-cyan-500/20"
+                }`}
+              >
                 <span>CLICK ANYWHERE TO ENTER</span>
                 <span className="animate-pulse">→</span>
               </div>
@@ -198,36 +285,62 @@ export default function IntroLoader({ onComplete }) {
             transition={{ duration: 0.45, ease: "easeOut" }}
           >
             {/* Ambient Multi-Chromatic Aura Glow */}
-            <div className="absolute w-72 sm:w-[480px] h-72 sm:h-[480px] bg-gradient-to-r from-cyan-500/20 via-emerald-500/15 to-indigo-500/20 rounded-full blur-[110px] -z-10 pointer-events-none" />
+            <div
+              className={`absolute w-72 sm:w-[480px] h-72 sm:h-[480px] rounded-full blur-[110px] -z-10 pointer-events-none ${
+                isLight
+                  ? "bg-gradient-to-r from-cyan-400/20 via-emerald-400/20 to-indigo-400/20"
+                  : "bg-gradient-to-r from-cyan-500/20 via-emerald-500/15 to-indigo-500/20"
+              }`}
+            />
 
             <div className="flex flex-col items-center text-center px-4">
               {/* Ultra-Large Modernist Kinetic Counter */}
               <div className="flex items-baseline justify-center">
                 <span
-                  className="font-mono text-8xl sm:text-[9.5rem] md:text-[11.5rem] font-black tracking-tighter leading-none select-none text-transparent bg-clip-text bg-gradient-to-b from-white via-slate-100 to-slate-400 drop-shadow-[0_10px_35px_rgba(0,0,0,0.9)]"
+                  className={`font-mono text-8xl sm:text-[9.5rem] md:text-[11.5rem] font-black tracking-tighter leading-none select-none text-transparent bg-clip-text ${
+                    isLight
+                      ? "bg-gradient-to-b from-slate-950 via-slate-800 to-cyan-700 drop-shadow-[0_10px_25px_rgba(15,23,42,0.12)]"
+                      : "bg-gradient-to-b from-white via-slate-100 to-slate-400 drop-shadow-[0_10px_35px_rgba(0,0,0,0.9)]"
+                  }`}
                   style={{
                     fontVariantNumeric: "tabular-nums",
                   }}
                 >
                   {String(progress).padStart(2, "0")}
                 </span>
-                <span className="font-mono text-2xl sm:text-4xl md:text-5xl font-light text-cyan-400/80 ml-2 select-none">
+                <span
+                  className={`font-mono text-2xl sm:text-4xl md:text-5xl font-light ml-2 select-none ${
+                    isLight ? "text-cyan-600 font-semibold" : "text-cyan-400/80"
+                  }`}
+                >
                   %
                 </span>
               </div>
 
               {/* Dynamic Phase Status Indicator */}
               <div className="mt-3 sm:mt-5 flex items-center gap-2.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#06b6d4] animate-pulse" />
-                <p className="font-mono text-[11px] sm:text-xs tracking-[0.22em] uppercase text-cyan-200 font-semibold drop-shadow-sm">
+                <span
+                  className={`w-1.5 h-1.5 rounded-full animate-pulse ${
+                    isLight ? "bg-cyan-600 shadow-[0_0_8px_#0284c7]" : "bg-cyan-400 shadow-[0_0_8px_#06b6d4]"
+                  }`}
+                />
+                <p
+                  className={`font-mono text-[11px] sm:text-xs tracking-[0.22em] uppercase font-bold drop-shadow-sm ${
+                    isLight ? "text-cyan-700" : "text-cyan-200"
+                  }`}
+                >
                   {currentPhase}
                 </p>
               </div>
 
               {/* Razor-Thin Precision Laser Seam Progress Line */}
-              <div className="mt-6 sm:mt-8 relative w-56 sm:w-80 md:w-96 h-[2px] bg-white/[0.08] rounded-full overflow-hidden backdrop-blur-sm">
+              <div
+                className={`mt-6 sm:mt-8 relative w-56 sm:w-80 md:w-96 h-[2.5px] rounded-full overflow-hidden backdrop-blur-sm ${
+                  isLight ? "bg-slate-200" : "bg-white/[0.08]"
+                }`}
+              >
                 <motion.div
-                  className="absolute top-0 bottom-0 left-0 bg-gradient-to-r from-cyan-400 via-teal-300 to-emerald-400 shadow-[0_0_12px_rgba(6,182,212,0.9)]"
+                  className="absolute top-0 bottom-0 left-0 bg-gradient-to-r from-cyan-500 via-teal-400 to-emerald-400 shadow-[0_0_12px_rgba(6,182,212,0.9)]"
                   style={{
                     width: `${progress}%`,
                     transition: "width 0.05s linear",
@@ -242,7 +355,7 @@ export default function IntroLoader({ onComplete }) {
               ========================================================================= */}
           {isExiting && (
             <motion.div
-              className="absolute top-1/2 left-0 right-0 h-[2px] -translate-y-1/2 bg-gradient-to-r from-transparent via-cyan-300 to-transparent shadow-[0_0_30px_#06b6d4,0_0_10px_#10b981] z-30 pointer-events-none"
+              className="absolute top-1/2 left-0 right-0 h-[2px] -translate-y-1/2 bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_30px_#06b6d4,0_0_10px_#10b981] z-30 pointer-events-none"
               initial={{ scaleX: 0, opacity: 1 }}
               animate={{ scaleX: 1, opacity: 0 }}
               transition={{ duration: 0.5, ease: "easeOut" }}

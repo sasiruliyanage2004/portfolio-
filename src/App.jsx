@@ -25,9 +25,9 @@ const CommandPalette = lazy(() => import("./components/CommandPalette"));
 const ResumeModal = lazy(() => import("./components/ResumeModal"));
 
 export default function App() {
-  // Theme state persisted via localStorage
+  // Theme state persisted via localStorage (defaults to modern luminous light theme)
   const [theme, setTheme] = useState(() => {
-    return localStorage.getItem("portfolio_theme") || "dark";
+    return localStorage.getItem("portfolio_theme_v2") || "light";
   });
 
   const [cmdOpen, setCmdOpen] = useState(false);
@@ -50,7 +50,7 @@ export default function App() {
       document.documentElement.classList.remove("light-theme");
       document.body.classList.remove("light-theme");
     }
-    localStorage.setItem("portfolio_theme", theme);
+    localStorage.setItem("portfolio_theme_v2", theme);
   }, [theme]);
 
   // Global Keyboard Shortcuts (Ctrl/Cmd+K for Command Palette, 'T' for Theme Toggle)
@@ -154,7 +154,15 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-transparent text-slate-100 font-body selection:bg-cyan-500/30 selection:text-white relative">
+    <div className="min-h-screen bg-transparent text-slate-900 dark:text-slate-100 font-body selection:bg-cyan-500/30 selection:text-cyan-900 dark:selection:text-white relative">
+      {/* Ambient Radiant Aurora Mesh Background Orbs */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10" aria-hidden="true">
+        <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[550px] bg-gradient-to-b from-cyan-400/20 via-indigo-400/12 to-transparent rounded-full blur-[120px] dark:from-cyan-600/10 dark:via-indigo-600/5 dark:to-transparent" />
+        <div className="absolute top-[30%] -left-32 w-[550px] h-[550px] bg-emerald-400/15 rounded-full blur-[140px] dark:bg-emerald-600/5" />
+        <div className="absolute top-[55%] -right-32 w-[600px] h-[600px] bg-cyan-400/15 rounded-full blur-[140px] dark:bg-cyan-600/5" />
+        <div className="absolute bottom-10 left-1/3 w-[550px] h-[550px] bg-indigo-400/12 rounded-full blur-[130px] dark:bg-indigo-600/5" />
+      </div>
+
       {/* Global SVG Noise Overlay (Film Grain for Matte Pitch-Black Texture in Dark Mode) */}
       <NoiseOverlay />
 

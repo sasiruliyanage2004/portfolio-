@@ -190,35 +190,35 @@ const PROJECTS = [
   },
   {
     id: "movi-coffee",
-    title: "Movi Coffee — Specialty Coffee & AI Experience Platform",
-    blurb: "Editorial hospitality web experience featuring an interactive table reservation engine, dynamic dietary menu explorer, and an integrated AI barista concierge ('Ask Movi AI').",
-    longDescription: "A bespoke, high-end digital hospitality experience created for Movi Coffee specialty roastery. Moves beyond generic café layouts into warm editorial typography, atmospheric photography reveals, real-time live operational status, Supabase-backed table booking, and a conversational AI concierge for coffee pairings.",
+    title: "Movi Coffee — Luxury Specialty Roastery & Hospitality Web Experience",
+    blurb: "Editorial digital hospitality platform featuring an interactive table reservation engine, curated visual journal, dynamic dietary menu explorer, and bespoke typography.",
+    longDescription: "A bespoke, editorial digital hospitality experience crafted for Movi Coffee specialty roastery. Combines warm editorial typography, atmospheric photography reveals, real-time operating hours, and an effortless table booking engine with seamless mobile-first responsiveness.",
     category: "UI/UX",
-    tech: ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS v4", "Framer Motion", "Supabase", "AI Concierge"],
+    tech: ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS v4", "Framer Motion", "Supabase", "UI/UX Design"],
     live: true,
     image: "/projects/movi-coffee.webp",
     imageFallback: "/projects/movi-coffee.jpg",
-    imageAlt: "Movi Coffee Luxury Specialty Coffee Platform Hero with Warm Espresso tones and Ask Movi AI Assistant",
+    imageAlt: "Movi Coffee Luxury Specialty Roastery Web Experience Hero with Warm Espresso tones",
     github: "https://github.com/sasiruliyanage2004/movi-cofee",
     demo: "https://github.com/sasiruliyanage2004/movi-cofee",
     metrics: [
       { label: "Design System", val: "Editorial" },
-      { label: "AI Concierge", val: "Ask Movi" },
-      { label: "Booking Latency", val: "<1.2s" },
+      { label: "Performance", val: "100/100" },
+      { label: "Table Booking", val: "Instant" },
     ],
-    status: "v1.0.0 • PRODUCTION READY",
+    status: "v1.0.0 • PRODUCTION LIVE",
     engineTitle: "Movi Coffee Hospitality Experience Engine // Next.js 16 & Supabase",
-    sync: "Supabase Realtime • AI Concierge Agent",
+    sync: "Supabase Realtime Cloud Database",
     badge: "Editorial UI/UX Design",
     architecture: [
-      { step: "01. Editorial UX", title: "Cormorant & Manrope Typographic System", desc: "Atmospheric luxury palette grounded in warm cream (#F5F0E8), espresso (#1B1410), and muted gold (#B79A67)" },
-      { step: "02. AI Assistant", title: "'Ask Movi AI' Virtual Barista", desc: "Interactive concierge providing personalized origin notes, brewing guidance, and food pairings" },
-      { step: "03. Realtime Engine", title: "Supabase Slot Reservation & Menu Filters", desc: "Live table booking with instant confirmation and dietary filterable 7-category menu explorer" },
+      { step: "01. Visual System", title: "Cormorant & Manrope Typographic System", desc: "Atmospheric luxury palette grounded in warm cream (#F5F0E8), espresso (#1B1410), and brushed muted gold" },
+      { step: "02. Guest Flow", title: "Real-Time Table Reservation Engine", desc: "Interactive slot booking engine with automated validation and instant guest confirmation via Supabase" },
+      { step: "03. Interactive Menu", title: "Dynamic 7-Category Menu & Lightbox Gallery", desc: "Dietary-filterable catalog spanning artisan roasts, pour-overs, pastries, and fullscreen visual journal" },
     ],
     highlights: [
       "Bespoke editorial hospitality design tailored for slow afternoons and specialty coffee culture",
-      "Interactive 'Ask Movi AI' concierge assisting customers with brewing methods and menu recommendations",
-      "Full-stack Next.js 16 & Supabase architecture with live operating status and reservation engine",
+      "Real-time table reservation workflow with live operating status and automated confirmation",
+      "Full-stack Next.js 16 & Supabase architecture with 100/100 Lighthouse performance metrics",
     ],
   },
 ];
@@ -338,7 +338,7 @@ function ProjectDeepDiveModal({ project, onClose }) {
                 ) : (
                   <div className="flex items-center justify-between px-3.5 sm:px-4 py-2 sm:py-2.5 bg-slate-900/95 dark:bg-black/95 backdrop-blur-md border-b border-white/10 text-xs font-mono">
                     <span className="text-slate-200 font-bold uppercase tracking-wider text-[11px]">
-                      MOVI COFFEE // SPECIALTY ROASTERY & AI PLATFORM
+                      MOVI COFFEE — LUXURY SPECIALTY ROASTERY
                     </span>
                     <span className="text-cyan-400 font-semibold text-[10px] uppercase tracking-wider">
                       Next.js 16 / Supabase
@@ -582,7 +582,7 @@ function ExpandableProjectCard({ project, isExpanded, onSelect, onInspect }) {
                 ) : (
                   <div className="flex items-center justify-between px-3.5 py-2 bg-slate-900/95 dark:bg-black/95 backdrop-blur-md border-b border-white/10 text-[10px] font-mono">
                     <span className="text-slate-200 font-semibold tracking-wider text-[10px]">
-                      MOVI COFFEE // SPECIALTY ROASTERY & AI PLATFORM
+                      MOVI COFFEE — LUXURY SPECIALTY ROASTERY
                     </span>
                     <span className="text-emerald-400 text-[9px] uppercase tracking-wider font-semibold">
                       Live UI/UX

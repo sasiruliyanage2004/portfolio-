@@ -2,7 +2,6 @@ import { useState, useEffect, lazy, Suspense } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sun, Moon } from "lucide-react";
 import Lenis from "lenis";
-import CustomCursor from "./components/CustomCursor";
 import IntroLoader from "./components/IntroLoader";
 import ScrollProgressBar from "./components/ScrollProgressBar";
 import FloatingDockCyber from "./components/cyber/FloatingDockCyber";
@@ -171,8 +170,6 @@ export default function App() {
       {/* Full-Page Real-time Procedural HTML5 Signature Dumbara Canvas */}
       <CulturalPatternCanvas />
 
-      {/* Custom Glow Cursor (Auto-disabled on mobile) */}
-      <CustomCursor />
 
       {/* Scroll Progress Bar — thin brand gradient at top */}
       <ScrollProgressBar />

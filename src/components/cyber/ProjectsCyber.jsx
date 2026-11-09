@@ -313,53 +313,89 @@ function ProjectDeepDiveModal({ project, onClose }) {
             </p>
           </div>
 
-          {/* Project Real Live Interface / Command Grid Snapshot */}
-          {project.image && (
-            <div className="relative rounded-2xl overflow-hidden border border-cyan-500/30 bg-black/80 shadow-2xl group">
-              {/* Command Grid Status Bar */}
-              <div className="flex items-center justify-between px-3.5 sm:px-4 py-2 sm:py-2.5 bg-black/90 backdrop-blur-md border-b border-white/10 text-xs font-mono">
-                <div className="flex items-center gap-2">
-                  <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500" />
+          {/* Project Real Live Interface / Command Grid / Browser Snapshot */}
+          {project.image && (() => {
+            const isSecurity = project.id === "suspicious-activity-detection";
+            return (
+              <div className="relative rounded-2xl overflow-hidden border border-cyan-500/30 bg-black/80 shadow-2xl group">
+                {/* Header Bar */}
+                {isSecurity ? (
+                  <div className="flex items-center justify-between px-3.5 sm:px-4 py-2 sm:py-2.5 bg-black/90 backdrop-blur-md border-b border-white/10 text-xs font-mono">
+                    <div className="flex items-center gap-2">
+                      <span className="relative flex h-2 w-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500" />
+                      </span>
+                      <span className="text-red-400 font-bold uppercase tracking-wider text-[10px] sm:text-[11px]">
+                        LIVE THREAT FEED // MULTI-CAMERA COMMAND GRID
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2 sm:gap-4 text-[9px] sm:text-[10px] text-slate-400">
+                      <span className="text-cyan-300 hidden sm:inline">Target Re-ID: 99.1% Active</span>
+                      <span className="text-emerald-400 font-bold">12ms • 60 FPS</span>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="flex items-center justify-between px-3.5 sm:px-4 py-2 sm:py-2.5 bg-slate-900/95 dark:bg-black/95 backdrop-blur-md border-b border-white/10 text-xs font-mono">
+                    <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-1.5">
+                        <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80 inline-block" />
+                        <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80 inline-block" />
+                        <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 inline-block" />
+                      </div>
+                      <div className="flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-white/5 border border-white/10 text-[10px] text-slate-300">
+                        <span className="text-emerald-400">https://</span>
+                        <span>{project.id === "movi-coffee" ? "movi-coffee.lk/specialty-roastery" : "interactive-experience.live"}</span>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2 text-[10px] text-slate-300">
+                      <span className="relative flex h-1.5 w-1.5">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                        <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
+                      </span>
+                      <span className="text-emerald-400 font-medium">Editorial UI/UX • Supabase</span>
+                    </div>
+                  </div>
+                )}
+
+                {/* High-res Image */}
+                <div className="relative aspect-[16/9] sm:aspect-[16/8] overflow-hidden bg-black/40">
+                  <picture>
+                    <source srcSet={project.image} type="image/webp" />
+                    <img
+                      src={project.imageFallback || project.image}
+                      alt={project.imageAlt || project.title}
+                      className="w-full h-full object-cover object-top transform group-hover:scale-[1.02] transition-transform duration-500"
+                      loading="lazy"
+                    />
+                  </picture>
+
+                  {/* HUD Surveillance Overlay Brackets - Only for Security Camera Systems */}
+                  {isSecurity && (
+                    <>
+                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                      <div className="pointer-events-none absolute top-2.5 left-2.5 w-3 h-3 border-t-2 border-l-2 border-cyan-400" />
+                      <div className="pointer-events-none absolute top-2.5 right-2.5 w-3 h-3 border-t-2 border-r-2 border-cyan-400" />
+                      <div className="pointer-events-none absolute bottom-2.5 left-2.5 w-3 h-3 border-b-2 border-l-2 border-cyan-400" />
+                      <div className="pointer-events-none absolute bottom-2.5 right-2.5 w-3 h-3 border-b-2 border-r-2 border-cyan-400" />
+                    </>
+                  )}
+                </div>
+
+                {/* Footer Bar */}
+                <div className="px-3.5 sm:px-4 py-2 bg-black/80 backdrop-blur-sm border-t border-white/10 flex items-center justify-between text-[10px] sm:text-[11px] font-mono text-slate-400">
+                  <span className="truncate">
+                    {isSecurity 
+                      ? "AETHRA VISION COMMAND GRID // Multi-Feed Autonomous AI Defense" 
+                      : (project.engineTitle || "MOVI COFFEE SPECIALTY ROASTERY // Bespoke Hospitality Experience")}
                   </span>
-                  <span className="text-red-400 font-bold uppercase tracking-wider text-[10px] sm:text-[11px]">
-                    LIVE THREAT FEED // MULTI-CAMERA COMMAND GRID
+                  <span className="text-cyan-400 shrink-0 font-semibold ml-2">
+                    {isSecurity ? "AES-256 • YOLOv11" : "Next.js 16 • React 19"}
                   </span>
                 </div>
-                <div className="flex items-center gap-2 sm:gap-4 text-[9px] sm:text-[10px] text-slate-400">
-                  <span className="text-cyan-300 hidden sm:inline">Target Re-ID: 99.1% Active</span>
-                  <span className="text-emerald-400 font-bold">12ms • 60 FPS</span>
-                </div>
               </div>
-
-              {/* High-res Image with HUD Brackets */}
-              <div className="relative aspect-[16/9] sm:aspect-[16/8] overflow-hidden bg-black/40">
-                <picture>
-                  <source srcSet={project.image} type="image/webp" />
-                  <img
-                    src={project.imageFallback || project.image}
-                    alt={project.imageAlt || project.title}
-                    className="w-full h-full object-cover object-top transform group-hover:scale-[1.02] transition-transform duration-500"
-                    loading="lazy"
-                  />
-                </picture>
-
-                {/* HUD Surveillance Overlay Brackets */}
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-                <div className="pointer-events-none absolute top-2.5 left-2.5 w-3 h-3 border-t-2 border-l-2 border-cyan-400" />
-                <div className="pointer-events-none absolute top-2.5 right-2.5 w-3 h-3 border-t-2 border-r-2 border-cyan-400" />
-                <div className="pointer-events-none absolute bottom-2.5 left-2.5 w-3 h-3 border-b-2 border-l-2 border-cyan-400" />
-                <div className="pointer-events-none absolute bottom-2.5 right-2.5 w-3 h-3 border-b-2 border-r-2 border-cyan-400" />
-              </div>
-
-              {/* Command Grid Footer Bar */}
-              <div className="px-3.5 sm:px-4 py-2 bg-black/80 backdrop-blur-sm border-t border-white/10 flex items-center justify-between text-[10px] sm:text-[11px] font-mono text-slate-400">
-                <span className="truncate">AETHRA VISION COMMAND GRID // Multi-Feed Autonomous AI Defense</span>
-                <span className="text-cyan-400 shrink-0 font-semibold ml-2">AES-256 • YOLOv11</span>
-              </div>
-            </div>
-          )}
+            );
+          })()}
 
           {/* Metrics Bar */}
           {project.metrics && (
@@ -538,46 +574,75 @@ function ExpandableProjectCard({ project, isExpanded, onSelect, onInspect }) {
             {project.blurb}
           </p>
 
-          {/* Project Real Live Interface / Command Grid Frame */}
-          {project.image && (
-            <div className={`relative rounded-2xl overflow-hidden border border-cyan-500/25 bg-black/70 shadow-lg group/img ${isExpanded ? "my-4" : "my-3"}`}>
-              {/* Surveillance Header Strip */}
-              <div className="flex items-center justify-between px-3 py-1.5 bg-black/85 backdrop-blur-md border-b border-white/10 text-[10px] font-mono">
-                <div className="flex items-center gap-1.5">
-                  <span className="relative flex h-1.5 w-1.5">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
-                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500" />
-                  </span>
-                  <span className="text-red-400 font-semibold tracking-wider">AETHRA VISION // MULTI-FEED ACTIVE</span>
+          {/* Project Real Live Interface / Command Grid Frame / Browser Frame */}
+          {project.image && (() => {
+            const isSecurity = project.id === "suspicious-activity-detection";
+            return (
+              <div className={`relative rounded-2xl overflow-hidden border border-cyan-500/25 bg-black/70 shadow-lg group/img ${isExpanded ? "my-4" : "my-3"}`}>
+                {/* Header Strip */}
+                {isSecurity ? (
+                  <div className="flex items-center justify-between px-3 py-1.5 bg-black/85 backdrop-blur-md border-b border-white/10 text-[10px] font-mono">
+                    <div className="flex items-center gap-1.5">
+                      <span className="relative flex h-1.5 w-1.5">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
+                        <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500" />
+                      </span>
+                      <span className="text-red-400 font-semibold tracking-wider">AETHRA VISION // MULTI-FEED ACTIVE</span>
+                    </div>
+                    <span className="text-cyan-400 text-[9px] uppercase tracking-wider font-semibold">12ms • Armed</span>
+                  </div>
+                ) : (
+                  <div className="flex items-center justify-between px-3 py-1.5 bg-slate-900/90 dark:bg-black/90 backdrop-blur-md border-b border-white/10 text-[10px] font-mono">
+                    <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-1">
+                        <span className="w-2 h-2 rounded-full bg-rose-500/80 inline-block" />
+                        <span className="w-2 h-2 rounded-full bg-amber-500/80 inline-block" />
+                        <span className="w-2 h-2 rounded-full bg-emerald-500/80 inline-block" />
+                      </div>
+                      <span className="text-slate-300 font-medium text-[9px] tracking-wide">
+                        {project.id === "movi-coffee" ? "movi-coffee.lk • Kaduwela" : "Web Experience"}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <span className="relative flex h-1.5 w-1.5">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                        <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
+                      </span>
+                      <span className="text-emerald-400 text-[9px] uppercase tracking-wider font-semibold">Live UI/UX</span>
+                    </div>
+                  </div>
+                )}
+
+                {/* Viewport Frame */}
+                <div className={`relative overflow-hidden ${isExpanded ? "aspect-[16/9] sm:aspect-[21/9]" : "aspect-[16/9]"}`}>
+                  <picture>
+                    <source srcSet={project.image} type="image/webp" />
+                    <img
+                      src={project.imageFallback || project.image}
+                      alt={project.imageAlt || project.title}
+                      className="w-full h-full object-cover object-top transform group-hover/img:scale-105 transition-transform duration-700 ease-out"
+                      loading="lazy"
+                    />
+                  </picture>
+
+                  {/* Corner accents only for security vision systems */}
+                  {isSecurity && (
+                    <>
+                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/25" />
+                      <div className="pointer-events-none absolute top-2 left-2 w-2.5 h-2.5 border-t border-l border-cyan-400/90" />
+                      <div className="pointer-events-none absolute top-2 right-2 w-2.5 h-2.5 border-t border-r border-cyan-400/90" />
+                      <div className="pointer-events-none absolute bottom-2 left-2 w-2.5 h-2.5 border-b border-l border-cyan-400/90" />
+                      <div className="pointer-events-none absolute bottom-2 right-2 w-2.5 h-2.5 border-b border-r border-cyan-400/90" />
+                    </>
+                  )}
+
+                  <div className="absolute bottom-2 right-2 px-2 py-0.5 rounded-md bg-black/85 backdrop-blur-md border border-white/10 text-[9px] font-mono text-cyan-300 font-medium">
+                    {isSecurity ? "Live Feed Snapshot" : "Interactive Preview"}
+                  </div>
                 </div>
-                <span className="text-cyan-400 text-[9px] uppercase tracking-wider font-semibold">12ms • Armed</span>
               </div>
-
-              {/* Viewport Frame with Cyber Accents */}
-              <div className={`relative overflow-hidden ${isExpanded ? "aspect-[16/9] sm:aspect-[21/9]" : "aspect-[16/9]"}`}>
-                <picture>
-                  <source srcSet={project.image} type="image/webp" />
-                  <img
-                    src={project.imageFallback || project.image}
-                    alt={project.imageAlt || project.title}
-                    className="w-full h-full object-cover object-top transform group-hover/img:scale-105 transition-transform duration-700 ease-out"
-                    loading="lazy"
-                  />
-                </picture>
-
-                {/* HUD Vignette & Corner Accents */}
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/25" />
-                <div className="pointer-events-none absolute top-2 left-2 w-2.5 h-2.5 border-t border-l border-cyan-400/90" />
-                <div className="pointer-events-none absolute top-2 right-2 w-2.5 h-2.5 border-t border-r border-cyan-400/90" />
-                <div className="pointer-events-none absolute bottom-2 left-2 w-2.5 h-2.5 border-b border-l border-cyan-400/90" />
-                <div className="pointer-events-none absolute bottom-2 right-2 w-2.5 h-2.5 border-b border-r border-cyan-400/90" />
-
-                <div className="absolute bottom-2 right-2 px-2 py-0.5 rounded-md bg-black/85 backdrop-blur-md border border-cyan-500/30 text-[9px] font-mono text-cyan-300 font-medium">
-                  Live Feed Snapshot
-                </div>
-              </div>
-            </div>
-          )}
+            );
+          })()}
 
           {/* Expanded Live Telemetry Frame */}
           {isExpanded && project.metrics && (

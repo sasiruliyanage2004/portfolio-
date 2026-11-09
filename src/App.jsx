@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Sun, Moon } from "lucide-react";
 import Lenis from "lenis";
 import CustomCursor from "./components/CustomCursor";
-import CursorTrail from "./components/CursorTrail";
 import IntroLoader from "./components/IntroLoader";
 import ScrollProgressBar from "./components/ScrollProgressBar";
 import FloatingDockCyber from "./components/cyber/FloatingDockCyber";
@@ -174,7 +173,6 @@ export default function App() {
 
       {/* Custom Glow Cursor (Auto-disabled on mobile) */}
       <CustomCursor />
-      <CursorTrail />
 
       {/* Scroll Progress Bar — thin brand gradient at top */}
       <ScrollProgressBar />

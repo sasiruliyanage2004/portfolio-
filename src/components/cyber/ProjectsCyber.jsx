@@ -192,7 +192,7 @@ const PROJECTS = [
     id: "movi-coffee",
     title: "Movi Coffee — Specialty Coffee & AI Experience Platform",
     blurb: "Editorial hospitality web experience featuring an interactive table reservation engine, dynamic dietary menu explorer, and an integrated AI barista concierge ('Ask Movi AI').",
-    longDescription: "A bespoke, high-end digital hospitality experience created for Movi Coffee specialty roastery in Kaduwela, Sri Lanka. Moves beyond generic café layouts into warm editorial typography, atmospheric photography reveals, real-time live operational status, Supabase-backed table booking, and a conversational AI concierge for coffee pairings.",
+    longDescription: "A bespoke, high-end digital hospitality experience created for Movi Coffee specialty roastery. Moves beyond generic café layouts into warm editorial typography, atmospheric photography reveals, real-time live operational status, Supabase-backed table booking, and a conversational AI concierge for coffee pairings.",
     category: "UI/UX",
     tech: ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS v4", "Framer Motion", "Supabase", "AI Concierge"],
     live: true,
@@ -337,24 +337,12 @@ function ProjectDeepDiveModal({ project, onClose }) {
                   </div>
                 ) : (
                   <div className="flex items-center justify-between px-3.5 sm:px-4 py-2 sm:py-2.5 bg-slate-900/95 dark:bg-black/95 backdrop-blur-md border-b border-white/10 text-xs font-mono">
-                    <div className="flex items-center gap-3">
-                      <div className="flex items-center gap-1.5">
-                        <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80 inline-block" />
-                        <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80 inline-block" />
-                        <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 inline-block" />
-                      </div>
-                      <div className="flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-white/5 border border-white/10 text-[10px] text-slate-300">
-                        <span className="text-emerald-400">https://</span>
-                        <span>{project.id === "movi-coffee" ? "movi-coffee.lk/specialty-roastery" : "interactive-experience.live"}</span>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2 text-[10px] text-slate-300">
-                      <span className="relative flex h-1.5 w-1.5">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                        <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
-                      </span>
-                      <span className="text-emerald-400 font-medium">Editorial UI/UX • Supabase</span>
-                    </div>
+                    <span className="text-slate-200 font-bold uppercase tracking-wider text-[11px]">
+                      MOVI COFFEE // SPECIALTY ROASTERY & AI PLATFORM
+                    </span>
+                    <span className="text-cyan-400 font-semibold text-[10px] uppercase tracking-wider">
+                      Next.js 16 / Supabase
+                    </span>
                   </div>
                 )}
 
@@ -592,24 +580,13 @@ function ExpandableProjectCard({ project, isExpanded, onSelect, onInspect }) {
                     <span className="text-cyan-400 text-[9px] uppercase tracking-wider font-semibold">12ms • Armed</span>
                   </div>
                 ) : (
-                  <div className="flex items-center justify-between px-3 py-1.5 bg-slate-900/90 dark:bg-black/90 backdrop-blur-md border-b border-white/10 text-[10px] font-mono">
-                    <div className="flex items-center gap-2">
-                      <div className="flex items-center gap-1">
-                        <span className="w-2 h-2 rounded-full bg-rose-500/80 inline-block" />
-                        <span className="w-2 h-2 rounded-full bg-amber-500/80 inline-block" />
-                        <span className="w-2 h-2 rounded-full bg-emerald-500/80 inline-block" />
-                      </div>
-                      <span className="text-slate-300 font-medium text-[9px] tracking-wide">
-                        {project.id === "movi-coffee" ? "movi-coffee.lk • Kaduwela" : "Web Experience"}
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-1.5">
-                      <span className="relative flex h-1.5 w-1.5">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                        <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
-                      </span>
-                      <span className="text-emerald-400 text-[9px] uppercase tracking-wider font-semibold">Live UI/UX</span>
-                    </div>
+                  <div className="flex items-center justify-between px-3.5 py-2 bg-slate-900/95 dark:bg-black/95 backdrop-blur-md border-b border-white/10 text-[10px] font-mono">
+                    <span className="text-slate-200 font-semibold tracking-wider text-[10px]">
+                      MOVI COFFEE // SPECIALTY ROASTERY & AI PLATFORM
+                    </span>
+                    <span className="text-emerald-400 text-[9px] uppercase tracking-wider font-semibold">
+                      Live UI/UX
+                    </span>
                   </div>
                 )}
 

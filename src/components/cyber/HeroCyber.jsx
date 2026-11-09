@@ -121,10 +121,10 @@ function TiltCard({ children, className = "" }) {
 }
 
 const LIVE_STATUSES = [
-  { text: "Available for Hire", icon: CheckCircle2, color: "text-emerald-400", dot: "bg-emerald-500" },
-  { text: "MongoDB Certified (ID: MDBwsxpdpul98)", icon: Sparkles, color: "text-emerald-400", dot: "bg-emerald-500" },
-  { text: "Building: React 19 • Next.js • FastAPI", icon: Activity, color: "text-cyan-400", dot: "bg-cyan-500" },
-  { text: "15+ High-Impact Production Projects", icon: Sparkles, color: "text-indigo-300", dot: "bg-indigo-400" },
+  { text: "Available for Hire", icon: CheckCircle2, color: "text-emerald-500 dark:text-emerald-400", dot: "bg-emerald-500" },
+  { text: "MongoDB Certified (ID: MDBwsxpdpul98)", icon: Sparkles, color: "text-emerald-600 dark:text-emerald-400", dot: "bg-emerald-500" },
+  { text: "Building: React 19 • Next.js • FastAPI", icon: Activity, color: "text-cyan-600 dark:text-cyan-400", dot: "bg-cyan-500" },
+  { text: "15+ High-Impact Production Projects", icon: Sparkles, color: "text-indigo-600 dark:text-indigo-300", dot: "bg-indigo-400" },
 ];
 
 function UnifiedStatusBadge() {
@@ -133,7 +133,7 @@ function UnifiedStatusBadge() {
   useEffect(() => {
     const timer = setInterval(() => {
       setStatusIdx((prev) => (prev + 1) % LIVE_STATUSES.length);
-    }, 3000);
+    }, 3200);
     return () => clearInterval(timer);
   }, []);
 
@@ -141,22 +141,22 @@ function UnifiedStatusBadge() {
   const IconComponent = current.icon;
 
   return (
-    <div className="absolute bottom-4 right-4 max-w-[calc(100%-2rem)] z-20 overflow-hidden rounded-full border border-white/20 bg-black/75 backdrop-blur-xl px-4 py-2 shadow-2xl">
+    <div className="inline-flex items-center overflow-hidden rounded-full border border-slate-200/90 dark:border-white/15 bg-white/90 dark:bg-slate-900/85 backdrop-blur-xl px-4 py-2 shadow-xl dark:shadow-[0_10px_30px_rgba(0,0,0,0.6)]">
       <AnimatePresence mode="wait">
         <motion.div
           key={current.text}
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -12 }}
+          exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.35, ease: "easeOut" }}
-          className="flex items-center gap-2.5 font-mono text-xs font-bold whitespace-nowrap"
+          className="flex items-center gap-2.5 font-mono text-xs font-semibold whitespace-nowrap text-slate-800 dark:text-slate-100"
         >
           <span className="relative flex h-2 w-2">
             <span className={`pulse-dot absolute inline-flex h-full w-full rounded-full ${current.dot}`} />
             <span className={`relative inline-flex h-2 w-2 rounded-full ${current.dot}`} />
           </span>
           <IconComponent className={`h-3.5 w-3.5 ${current.color}`} />
-          <span className={current.color}>{current.text}</span>
+          <span>{current.text}</span>
         </motion.div>
       </AnimatePresence>
     </div>
@@ -244,41 +244,56 @@ export default function HeroCyber({ onOpenResume }) {
             </div>
           </motion.div>
 
-          {/* Right Column — Frameless Modern Portrait Card */}
+          {/* Right Column — 3D Pop-Out Subject with Expansive Diffused Atmosphere */}
           <motion.div
             style={{ scale: avatarScale, y: avatarY, opacity: avatarOpacity }}
             initial={{ opacity: 0, y: 24, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="lg:col-span-5 group relative flex justify-center [perspective:1000px] py-2 px-2 sm:px-4"
+            className="lg:col-span-5 group relative flex flex-col items-center justify-center [perspective:1000px] py-4 px-2 sm:px-4"
           >
-            {/* Ambient Backlight Glow for Frameless Depth */}
+            {/* Expansive Ambient Radial Glow Spreading into the Hero Canvas */}
             <div 
               aria-hidden="true" 
-              className="absolute -inset-1 sm:-inset-2 rounded-[2.5rem] bg-gradient-to-tr from-cyan-500/25 via-emerald-500/15 to-transparent blur-2xl opacity-60 dark:opacity-40 group-hover:opacity-90 transition-opacity duration-700 pointer-events-none" 
+              className="absolute w-[440px] sm:w-[560px] lg:w-[620px] h-[440px] sm:h-[560px] lg:h-[620px] -top-8 rounded-full bg-[radial-gradient(circle_at_50%_45%,rgba(6,182,212,0.28),rgba(16,185,129,0.16),rgba(99,102,241,0.1),transparent_70%)] dark:bg-[radial-gradient(circle_at_50%_45%,rgba(6,182,212,0.38),rgba(16,185,129,0.22),rgba(99,102,241,0.14),transparent_70%)] blur-3xl opacity-80 dark:opacity-70 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" 
             />
 
-            {/* Frameless Modern 3D Tilt Container */}
-            <TiltCard className="relative w-full max-w-[340px] sm:max-w-[420px] h-[350px] sm:h-[460px] lg:h-[500px] overflow-hidden rounded-[2rem] sm:rounded-[2.25rem] border border-white/20 dark:border-white/10 light-theme:border-slate-200/90 shadow-[0_20px_50px_rgba(15,23,42,0.12)] dark:shadow-[0_30px_80px_rgba(0,0,0,0.85)] transition-all duration-500 group-hover:shadow-[0_30px_70px_rgba(6,182,212,0.25)]">
-              {/* Edge-to-Edge Picture without Frame/Bezels */}
-              <picture className="h-full w-full block">
-                <source srcSet="/profile.webp" type="image/webp" />
-                <img
-                  src="/profile.png"
-                  alt="Sasiru Nethvidu Liyanage Portrait"
-                  width={420}
-                  height={500}
-                  loading="eager"
-                  fetchPriority="high"
-                  className="h-full w-full object-cover object-center group-hover:scale-105 transition-all duration-700 ease-out"
-                />
-              </picture>
+            {/* Subtle Futuristic Orbital Tech Halos */}
+            <div 
+              aria-hidden="true"
+              className="absolute w-[340px] sm:w-[420px] lg:w-[460px] h-[340px] sm:h-[420px] lg:h-[460px] -top-4 rounded-full border border-cyan-500/20 dark:border-cyan-400/25 [stroke-dasharray:6_6] pointer-events-none animate-[spin_60s_linear_infinite]"
+            />
+            <div 
+              aria-hidden="true"
+              className="absolute w-[260px] sm:w-[330px] lg:w-[370px] h-[260px] sm:h-[330px] lg:h-[370px] top-4 rounded-full border border-emerald-500/20 dark:border-emerald-400/20 pointer-events-none"
+            />
 
-              {/* Seamless Bottom Vignette for Status Badge Contrast */}
-              <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-black/75 via-black/25 to-transparent pointer-events-none transition-opacity duration-500" />
+            {/* 3D Pop-Out Tilt Wrapper — No Card Box/Frame */}
+            <TiltCard className="relative flex flex-col items-center justify-end w-full max-w-[360px] sm:max-w-[440px] lg:max-w-[480px]">
+              {/* Freely Popping Out Cutout with Natural Torso Bottom Melt */}
+              <div className="relative z-10 w-full flex justify-center">
+                <picture className="block select-none pointer-events-none">
+                  <source srcSet="/profile-cutout.webp" type="image/webp" />
+                  <img
+                    src="/profile-cutout.png"
+                    alt="Sasiru Nethvidu Liyanage"
+                    width={440}
+                    height={472}
+                    loading="eager"
+                    fetchPriority="high"
+                    className="w-auto max-h-[380px] sm:max-h-[460px] lg:max-h-[500px] object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.35)] dark:drop-shadow-[0_25px_50px_rgba(0,0,0,0.85)] filter group-hover:scale-105 transition-transform duration-700 ease-out"
+                    style={{
+                      maskImage: "linear-gradient(to bottom, black 82%, transparent 100%)",
+                      WebkitMaskImage: "linear-gradient(to bottom, black 82%, transparent 100%)",
+                    }}
+                  />
+                </picture>
+              </div>
 
-              {/* Unified Single Dynamic Status Badge */}
-              <UnifiedStatusBadge />
+              {/* Floating Dynamic Status Badge — Free in Space */}
+              <div className="relative -mt-6 sm:-mt-8 z-20">
+                <UnifiedStatusBadge />
+              </div>
             </TiltCard>
           </motion.div>
         </div>

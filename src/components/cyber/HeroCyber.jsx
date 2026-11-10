@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useScroll, useTransform, useMotionValue, useSpring, useInView } from "framer-motion";
-import { ArrowRight, FileText, Sparkles, Activity, CheckCircle2, GraduationCap, ChevronDown } from "lucide-react";
+import { ArrowRight, FileText, Sparkles, Activity, CheckCircle2, GraduationCap, ChevronDown, Code2, Atom, Layers3, Zap } from "lucide-react";
 
 // Animated count-up hook
 function useCountUp(target, inView, duration = 1600) {
@@ -90,16 +90,16 @@ function TiltCard({ children, className = "" }) {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
-  const rx = useSpring(y, { stiffness: 200, damping: 20 });
-  const ry = useSpring(x, { stiffness: 200, damping: 20 });
+  const rx = useSpring(y, { stiffness: 220, damping: 22 });
+  const ry = useSpring(x, { stiffness: 220, damping: 22 });
 
   const handleMove = (e) => {
     if (!ref.current) return;
     const rect = ref.current.getBoundingClientRect();
     const px = (e.clientX - rect.left) / rect.width;
     const py = (e.clientY - rect.top) / rect.height;
-    x.set((px - 0.5) * 14);
-    y.set((0.5 - py) * 14);
+    x.set((px - 0.5) * 12);
+    y.set((0.5 - py) * 12);
   };
 
   const handleLeave = () => {
@@ -112,7 +112,7 @@ function TiltCard({ children, className = "" }) {
       ref={ref}
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
-      style={{ rotateX: rx, rotateY: ry, transformPerspective: 1000 }}
+      style={{ rotateX: rx, rotateY: ry, transformPerspective: 1200, transformStyle: "preserve-3d" }}
       className={className}
     >
       {children}
@@ -165,6 +165,17 @@ function UnifiedStatusBadge() {
 
 export default function HeroCyber({ onOpenResume }) {
   const targetRef = useRef(null);
+  const pointerX = useMotionValue(0);
+  const pointerY = useMotionValue(0);
+  const smoothPointerX = useSpring(pointerX, { stiffness: 70, damping: 22, mass: 0.7 });
+  const smoothPointerY = useSpring(pointerY, { stiffness: 70, damping: 22, mass: 0.7 });
+
+  const handleHeroPointer = (event) => {
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+    const rect = event.currentTarget.getBoundingClientRect();
+    pointerX.set((event.clientX - rect.left - rect.width / 2) * 0.035);
+    pointerY.set((event.clientY - rect.top - rect.height / 2) * 0.035);
+  };
 
   const { scrollYProgress } = useScroll({
     target: targetRef,
@@ -182,8 +193,15 @@ export default function HeroCyber({ onOpenResume }) {
     <section
       ref={targetRef}
       id="home"
-      className="relative min-h-screen w-full overflow-hidden bg-transparent pt-24 pb-16 sm:pt-32 sm:pb-20 lg:pt-40 lg:pb-32 flex items-center justify-center"
+      onPointerMove={handleHeroPointer}
+      onPointerLeave={() => { pointerX.set(0); pointerY.set(0); }}
+      className="hero-cinematic relative min-h-screen w-full overflow-hidden bg-transparent pt-24 pb-20 sm:pt-32 sm:pb-24 lg:pt-32 lg:pb-28 flex items-center justify-center"
     >
+      <div className="hero-grid" aria-hidden="true" />
+      <div className="hero-spotlight" aria-hidden="true" />
+      <motion.div className="hero-ambient hero-ambient-one" style={{ x: smoothPointerX, y: smoothPointerY }} aria-hidden="true" />
+      <motion.div className="hero-ambient hero-ambient-two" style={{ x: smoothPointerX, y: smoothPointerY }} aria-hidden="true" />
+      <div className="hero-scanline" aria-hidden="true" />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10 w-full relative z-10">
         <div className="grid grid-cols-1 items-center gap-8 sm:gap-12 lg:grid-cols-12 lg:gap-8">
           {/* Left Column — Text & CTAs */}
@@ -192,26 +210,41 @@ export default function HeroCyber({ onOpenResume }) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="lg:col-span-7 space-y-5 sm:space-y-6 text-center lg:text-left"
+            className="hero-copy lg:col-span-7 space-y-5 sm:space-y-6 text-center lg:text-left"
           >
             {/* High-Contrast Crisp Tagline Badge */}
-            <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-[#090d16] dark:bg-[#090d16] light-theme:bg-white px-3.5 py-1.5 sm:px-4 sm:py-2 font-mono text-[11px] sm:text-xs font-bold text-cyan-400 dark:text-cyan-300 light-theme:text-cyan-700 shadow-xl backdrop-blur-md max-w-full">
+            <motion.div
+              initial={{ opacity: 0, y: 18, filter: "blur(8px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ duration: 0.75, delay: 0.18 }}
+              className="hero-kicker inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 sm:px-4 sm:py-2 font-mono text-[11px] sm:text-xs font-bold max-w-full"
+            >
               <GraduationCap className="h-4 w-4 text-cyan-400 shrink-0" />
-              <span className="truncate">SLIIT Undergraduate • Full-Stack Engineer</span>
-            </div>
+              <span className="truncate">SLIIT Undergraduate <span className="hero-kicker-dot">•</span> Full-Stack Engineer</span>
+            </motion.div>
 
             {/* Main Headline */}
-            <h1 className="text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-6xl lg:text-7xl leading-[1.1] sm:leading-[1.08]">
-              <span className="sr-only">Sasiru Liyanage — </span>Building interfaces for the <span className="text-gradient">next web</span>
+            <h1 className="hero-title text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-6xl lg:text-[5.15rem] leading-[1.06] sm:leading-[1.04]">
+              <span className="sr-only">Sasiru Liyanage — </span>
+              <span className="hero-title-line"><motion.span initial={{ y: "110%" }} animate={{ y: 0 }} transition={{ duration: 0.85, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}>Building interfaces</motion.span></span>
+              <span className="hero-title-line"><motion.span initial={{ y: "110%" }} animate={{ y: 0 }} transition={{ duration: 0.9, delay: 0.46, ease: [0.22, 1, 0.36, 1] }}>for the <span className="hero-gradient-text">next web<span className="hero-title-underline" /></span></motion.span></span>
             </h1>
 
             {/* Bio Subtitle */}
-            <p className="text-base text-slate-600 dark:text-slate-300 sm:text-xl font-normal leading-relaxed max-w-2xl mx-auto lg:mx-0">
+            <motion.p
+              initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.75, delay: 0.62 }}
+              className="hero-description text-base text-slate-600 dark:text-slate-300 sm:text-xl font-normal leading-relaxed max-w-2xl mx-auto lg:mx-0"
+            >
               Full-stack engineer crafting fast, precise, and quietly futuristic products — fusing modern WebGL architecture with Sri Lankan cultural motifs.
-            </p>
+            </motion.p>
 
             {/* Magnetic Call To Action Buttons */}
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4 pt-2 sm:pt-4">
+            <motion.div
+              initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.78 }}
+              className="flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4 pt-2 sm:pt-4"
+            >
               <MagneticButton
                 href="#projects"
                 style={{ background: "linear-gradient(135deg, var(--grad-start), var(--grad-mid), var(--grad-end))" }}
@@ -236,12 +269,12 @@ export default function HeroCyber({ onOpenResume }) {
                 <FileText className="h-3.5 w-3.5 text-cyan-400" />
                 <span>Resume</span>
               </button>
-            </div>
+            </motion.div>
 
             {/* Animated Count-Up Stats */}
-            <div className="flex justify-center lg:justify-start">
+            <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.92 }} className="flex justify-center lg:justify-start">
               <StatsRow />
-            </div>
+            </motion.div>
           </motion.div>
 
           {/* Right Column — 3D Pop-Out Subject with Expansive Diffused Atmosphere */}
@@ -250,8 +283,24 @@ export default function HeroCyber({ onOpenResume }) {
             initial={{ opacity: 0, y: 24, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="lg:col-span-5 group relative flex flex-col items-center justify-center [perspective:1000px] py-4 px-2 sm:px-4"
+            className="hero-visual lg:col-span-5 group relative flex flex-col items-center justify-center [perspective:1000px] py-4 px-2 sm:px-4"
           >
+            {/* 3 Orbiting Planetary Rings */}
+            <div className="hero-orbit hero-orbit-a" aria-hidden="true"><span /></div>
+            <div className="hero-orbit hero-orbit-b" aria-hidden="true"><span /></div>
+            <div className="hero-orbit hero-orbit-c" aria-hidden="true"><span /></div>
+
+            {/* 3 Floating Tech Satellite Chips */}
+            <motion.div className="hero-tech-chip hero-chip-code" animate={{ y: [0, -12, 0], rotate: [0, 2, 0] }} transition={{ duration: 5.2, repeat: Infinity, ease: "easeInOut" }}>
+              <Code2 /><span><b>Clean Code</b><small>Better Tomorrow</small></span>
+            </motion.div>
+            <motion.div className="hero-tech-chip hero-chip-react" animate={{ y: [0, 10, 0], rotate: [0, -3, 0] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}>
+              <Atom /><span><b>React</b><small>Interactive UI</small></span>
+            </motion.div>
+            <motion.div className="hero-tech-chip hero-chip-stack" animate={{ y: [0, -8, 0], x: [0, 4, 0] }} transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}>
+              <Layers3 /><span><b>Full Stack</b><small>End-to-end craft</small></span>
+            </motion.div>
+
             {/* Expansive Ambient Radial Glow Spreading into the Hero Canvas */}
             <div 
               aria-hidden="true" 
@@ -267,6 +316,7 @@ export default function HeroCyber({ onOpenResume }) {
               aria-hidden="true"
               className="absolute w-[260px] sm:w-[330px] lg:w-[370px] h-[260px] sm:h-[330px] lg:h-[370px] top-4 rounded-full border border-emerald-500/20 dark:border-emerald-400/20 pointer-events-none"
             />
+            <motion.div className="hero-image-aura" animate={{ scale: [0.96, 1.04, 0.96], opacity: [0.55, 0.9, 0.55] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }} />
 
             {/* 3D Pop-Out Tilt Wrapper — No Card Box/Frame */}
             <TiltCard className="relative flex flex-col items-center justify-end w-full max-w-[360px] sm:max-w-[440px] lg:max-w-[480px]">
@@ -281,7 +331,7 @@ export default function HeroCyber({ onOpenResume }) {
                     height={472}
                     loading="eager"
                     fetchPriority="high"
-                    className="w-auto max-h-[380px] sm:max-h-[460px] lg:max-h-[500px] object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.35)] dark:drop-shadow-[0_25px_50px_rgba(0,0,0,0.85)] filter group-hover:scale-105 transition-transform duration-700 ease-out"
+                    className="hero-portrait w-auto max-h-[380px] sm:max-h-[460px] lg:max-h-[500px] object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.35)] dark:drop-shadow-[0_25px_50px_rgba(0,0,0,0.85)] filter group-hover:scale-[1.035] transition-transform duration-700 ease-out"
                     style={{
                       maskImage: "linear-gradient(to bottom, black 82%, transparent 100%)",
                       WebkitMaskImage: "linear-gradient(to bottom, black 82%, transparent 100%)",
@@ -291,13 +341,15 @@ export default function HeroCyber({ onOpenResume }) {
               </div>
 
               {/* Floating Dynamic Status Badge — Free in Space */}
-              <div className="relative -mt-6 sm:-mt-8 z-20">
+              <div className="relative -mt-6 sm:-mt-8 z-20 hero-status-wrap">
                 <UnifiedStatusBadge />
               </div>
             </TiltCard>
           </motion.div>
         </div>
       </div>
+      
+      <div className="hero-bottom-note" aria-hidden="true"><span className="hero-bottom-line" /><Zap size={13} /> Designed to feel different</div>
       
       {/* Scroll Indicator */}
       <motion.div

@@ -443,7 +443,7 @@ export default function SkillsCyber() {
 
   // Filter skills based on tab and search
   const filteredSkills = useMemo(() => {
-    let result = [];
+    let result;
     if (activeGroup === "all") {
       result = allSkills;
     } else if (activeGroup === "certifications") {

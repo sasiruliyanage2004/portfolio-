@@ -1,16 +1,15 @@
 import { useState, useEffect, lazy, Suspense } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Sun, Moon } from "lucide-react";
 import Lenis from "lenis";
 import IntroLoader from "./components/IntroLoader";
 import ScrollProgressBar from "./components/ScrollProgressBar";
 import FloatingDockCyber from "./components/cyber/FloatingDockCyber";
-import SwitchModeToggle from "./components/SwitchModeToggle";
 import CulturalPatternCanvas from "./components/CulturalPatternCanvas";
 import BackToTop from "./components/BackToTop";
 import NoiseOverlay from "./components/NoiseOverlay";
 import HeroCyber from "./components/cyber/HeroCyber";
+import AboutCyber from "./components/cyber/AboutCyber";
 import ProjectsCyber from "./components/cyber/ProjectsCyber";
+import ExperienceCyber from "./components/cyber/ExperienceCyber";
 import EducationCyber from "./components/cyber/EducationCyber";
 import SkillsCyber from "./components/cyber/SkillsCyber";
 import ContactCyber from "./components/cyber/ContactCyber";
@@ -211,7 +210,9 @@ export default function App() {
       {/* Main Portfolio Page Content — Streamlined, Ultra-Clean & Fast Flow */}
       <main className="relative z-10 flex flex-col bg-transparent">
         <HeroCyber onOpenResume={() => setResumeOpen(true)} />
+        <AboutCyber />
         <ProjectsCyber />
+        <ExperienceCyber />
         <EducationCyber />
         <SkillsCyber />
         <ContactCyber />

@@ -267,7 +267,7 @@ export default function HeroCyber({ onOpenResume }) {
                 className="glass-panel inline-flex items-center gap-2 rounded-full px-4 py-3 sm:px-5 sm:py-3.5 font-mono text-xs font-medium text-slate-700 dark:text-slate-300 transition-all hover:border-cyan-400/50 hover:text-cyan-400 cursor-pointer shadow-lg active:scale-95"
               >
                 <FileText className="h-3.5 w-3.5 text-cyan-400" />
-                <span>Resume</span>
+                <span>Download Resume</span>
               </button>
             </motion.div>
 
@@ -290,12 +290,18 @@ export default function HeroCyber({ onOpenResume }) {
             <div className="hero-orbit hero-orbit-b" aria-hidden="true"><span /></div>
             <div className="hero-orbit hero-orbit-c" aria-hidden="true"><span /></div>
 
-            {/* 3 Floating Tech Satellite Chips */}
+            {/* 5 Floating Tech Satellite Chips */}
             <motion.div className="hero-tech-chip hero-chip-code" animate={{ y: [0, -12, 0], rotate: [0, 2, 0] }} transition={{ duration: 5.2, repeat: Infinity, ease: "easeInOut" }}>
-              <Code2 /><span><b>Clean Code</b><small>Better Tomorrow</small></span>
+              <Code2 /><span><b>Clean Code</b><small>Architecture</small></span>
             </motion.div>
             <motion.div className="hero-tech-chip hero-chip-react" animate={{ y: [0, 10, 0], rotate: [0, -3, 0] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}>
               <Atom /><span><b>React</b><small>Interactive UI</small></span>
+            </motion.div>
+            <motion.div className="hero-tech-chip hero-chip-ts hidden sm:flex" animate={{ y: [0, 8, 0], rotate: [0, 2, 0] }} transition={{ duration: 5.8, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}>
+              <Sparkles /><span><b>TypeScript</b><small>Strict Types</small></span>
+            </motion.div>
+            <motion.div className="hero-tech-chip hero-chip-uiux hidden sm:flex" animate={{ y: [0, -10, 0], rotate: [0, -2, 0] }} transition={{ duration: 6.2, repeat: Infinity, ease: "easeInOut", delay: 1 }}>
+              <Zap /><span><b>UI/UX</b><small>Spatial Design</small></span>
             </motion.div>
             <motion.div className="hero-tech-chip hero-chip-stack" animate={{ y: [0, -8, 0], x: [0, 4, 0] }} transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}>
               <Layers3 /><span><b>Full Stack</b><small>End-to-end craft</small></span>

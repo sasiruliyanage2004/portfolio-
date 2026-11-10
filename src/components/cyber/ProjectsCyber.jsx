@@ -3,9 +3,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import {
   Radio,
   ArrowUpRight,
-  Database,
-  ShieldCheck,
-  Activity,
   Layers,
   Cpu,
   X,

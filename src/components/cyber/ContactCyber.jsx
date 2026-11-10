@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { CheckCircle2, Send, Mail, Phone, MapPin, AlertCircle, Copy, Check, Terminal as TerminalIcon } from "lucide-react";
+import { CheckCircle2, Send, Mail, MapPin, AlertCircle, Copy, Check, Terminal as TerminalIcon } from "lucide-react";
 import { LampContainer } from "../LampContainer";
 
 const WhatsAppIcon = (props) => (
@@ -77,7 +77,7 @@ export default function ContactCyber() {
       case "resume":
       case "cv":
       case "cat resume.pdf":
-      case "cat cv":
+      case "cat cv": {
         newHistory.push({
           type: "out",
           text: "Initiating secure download of Sasiru_Liyanage_CV.pdf...",
@@ -87,6 +87,7 @@ export default function ContactCyber() {
         link.download = "Sasiru_Liyanage_CV.pdf";
         link.click();
         break;
+      }
       case "sudo hire sasiru":
       case "hire":
         newHistory.push({

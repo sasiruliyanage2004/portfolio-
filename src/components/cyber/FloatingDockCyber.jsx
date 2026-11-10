@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Home, Layers, Mail, Code2, GraduationCap, Sun, Moon } from "lucide-react";
+import { Home, User, Layers, Briefcase, GraduationCap, Code2, Mail, Sun, Moon } from "lucide-react";
 
-// Complete Navigation Items
+// Complete 7 Navigation Sections
 const NAV_ITEMS = [
   { id: "home", label: "Home", icon: Home },
+  { id: "about", label: "About", icon: User },
   { id: "projects", label: "Projects", icon: Layers },
+  { id: "experience", label: "Experience", icon: Briefcase },
   { id: "education", label: "Education", icon: GraduationCap },
   { id: "skills", label: "Skills", icon: Code2 },
   { id: "contact", label: "Contact", icon: Mail },
@@ -247,14 +249,14 @@ export default function FloatingDockCyber({ theme, toggleTheme, onOpenCommandPal
         initial={{ opacity: 0, y: 30, scale: 0.9 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ type: "spring", stiffness: 400, damping: 30 }}
-        className={`fixed bottom-3.5 left-1/2 z-[60] -translate-x-1/2 flex md:hidden items-center justify-between h-[60px] p-1.5 rounded-2xl border backdrop-blur-xl transition-all duration-300 shadow-2xl w-[94vw] max-w-[420px] ${
+        className={`fixed bottom-3.5 left-1/2 z-[60] -translate-x-1/2 flex md:hidden items-center justify-between h-[56px] px-2 py-1 rounded-2xl border backdrop-blur-xl transition-all duration-300 shadow-2xl w-[95vw] max-w-[420px] ${
           isLightMode
             ? "bg-white/95 border-slate-300 shadow-[0_16px_40px_rgba(15,23,42,0.2)]"
-            : "bg-black/40 border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.95)]"
+            : "bg-black/60 border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.95)]"
         }`}
       >
         {/* Navigation Buttons Group */}
-        <div className="flex items-center justify-between flex-1 gap-1">
+        <div className="flex items-center justify-between flex-1 gap-0.5">
           {NAV_ITEMS.map((item) => {
             const Icon = item.icon;
             const isActive = active === item.id;
@@ -265,7 +267,7 @@ export default function FloatingDockCyber({ theme, toggleTheme, onOpenCommandPal
                 onClick={(e) => handleNavClick(e, item.id)}
                 aria-label={item.label}
                 whileTap={{ scale: 0.92 }}
-                className={`relative flex items-center justify-center h-11 w-11 rounded-xl transition-all duration-200 cursor-pointer select-none shrink-0 ${
+                className={`relative flex items-center justify-center h-9 w-9 sm:h-10 sm:w-10 rounded-xl transition-all duration-200 cursor-pointer select-none shrink-0 ${
                   isActive
                     ? isLightMode
                       ? "text-cyan-700"
@@ -291,7 +293,7 @@ export default function FloatingDockCyber({ theme, toggleTheme, onOpenCommandPal
                 )}
 
                 <Icon
-                  className={`relative z-10 h-5 w-5 transition-transform duration-200 ${
+                  className={`relative z-10 h-4.5 w-4.5 transition-transform duration-200 ${
                     isActive
                       ? isLightMode
                         ? "text-cyan-700 scale-110"
@@ -306,23 +308,23 @@ export default function FloatingDockCyber({ theme, toggleTheme, onOpenCommandPal
 
         {/* Divider */}
         <div
-          className={`mx-1.5 h-6 w-[1px] ${
+          className={`mx-1 h-5 w-[1px] ${
             isLightMode ? "bg-slate-300" : "bg-white/15"
           } shrink-0`}
         />
 
-        {/* ☀️/🌙 Integrated Theme Toggle Button (Matching media_1787592485968.png!) */}
+        {/* ☀️/🌙 Integrated Theme Toggle Button */}
         <motion.button
           whileTap={{ scale: 0.88 }}
           whileHover={{ scale: 1.08 }}
           onClick={toggleTheme}
           aria-label="Toggle Theme"
-          className="relative flex items-center justify-center h-11 w-11 rounded-xl text-slate-400 hover:text-cyan-400 transition-colors cursor-pointer shrink-0"
+          className="relative flex items-center justify-center h-9 w-9 sm:h-10 sm:w-10 rounded-xl text-slate-400 hover:text-cyan-400 transition-colors cursor-pointer shrink-0"
         >
           {isLightMode ? (
-            <Sun className="h-5 w-5 text-amber-500 drop-shadow-[0_0_8px_rgba(245,158,11,0.6)]" />
+            <Sun className="h-4.5 w-4.5 text-amber-500 drop-shadow-[0_0_8px_rgba(245,158,11,0.6)]" />
           ) : (
-            <Moon className="h-5 w-5 text-cyan-400 drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]" />
+            <Moon className="h-4.5 w-4.5 text-cyan-400 drop-shadow-[0_0_8px_rgba(6,182,212,0.8)]" />
           )}
         </motion.button>
       </motion.nav>

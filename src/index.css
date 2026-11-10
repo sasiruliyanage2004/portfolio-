@@ -760,9 +760,11 @@ html:not(.light-theme) .hero-tech-chip svg,
 .dark .hero-tech-chip svg { color:#22d3ee; }
 html:not(.light-theme) .hero-tech-chip small,
 .dark .hero-tech-chip small { color:#94a3b8; }
-.hero-chip-code { top:17%;left:-1%; }
-.hero-chip-react { top:14%;right:-3%; }
-.hero-chip-stack { bottom:20%;left:-6%; }
+.hero-chip-code { top:15%;left:-2%; }
+.hero-chip-react { top:12%;right:-2%; }
+.hero-chip-ts { top:46%;right:-5%; }
+.hero-chip-uiux { top:50%;left:-5%; }
+.hero-chip-stack { bottom:18%;left:-2%; }
 .hero-status-wrap { filter:drop-shadow(0 12px 22px rgba(15,23,42,.12)); }
 .hero-bottom-note { position:absolute;bottom:34px;left:32px;display:flex;align-items:center;gap:8px;font:600 10px/1 ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:#94a3b8;opacity:.72;white-space:nowrap; }
 .hero-bottom-note svg { color:#06b6d4; }

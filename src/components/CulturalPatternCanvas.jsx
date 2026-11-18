@@ -85,12 +85,10 @@ export default function CulturalPatternCanvas() {
       const h = canvas.height;
       ctx.clearRect(0, 0, w, h);
 
-      // Subtle living orbital light on mobile
+      // On touch devices, do not simulate artificial moving spotlights (prevents weird wandering circles and saves battery)
       if (isTouchDevice && !isTouchActive) {
-        const orbitalX = w * 0.5 + Math.cos(time * 0.012) * (w * 0.35);
-        const orbitalY = h * 0.45 + Math.sin(time * 0.018) * (h * 0.28);
-        mouse.targetX = orbitalX;
-        mouse.targetY = orbitalY;
+        mouse.targetX = -1000;
+        mouse.targetY = -1000;
       }
 
       // Smooth lerp coordinates
@@ -199,12 +197,7 @@ export default function CulturalPatternCanvas() {
   }, []);
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden w-full h-full transform-gpu">
-      {/* 🌌 Deep Volumetric Ambient Breathing Mesh Glow Orbs */}
-      <div className="absolute top-[10%] left-[15%] h-[400px] sm:h-[500px] w-[400px] sm:w-[500px] rounded-full bg-cyan-500/10 dark:bg-cyan-500/12 blur-[100px] sm:blur-[140px] pointer-events-none transform-gpu" />
-      <div className="absolute top-[45%] right-[10%] h-[420px] sm:h-[550px] w-[420px] sm:w-[550px] rounded-full bg-indigo-500/8 dark:bg-indigo-500/10 blur-[110px] sm:blur-[160px] pointer-events-none transform-gpu" />
-      <div className="absolute top-[75%] left-[20%] h-[380px] sm:h-[450px] w-[380px] sm:w-[450px] rounded-full bg-emerald-500/8 dark:bg-emerald-500/10 blur-[100px] sm:blur-[140px] pointer-events-none transform-gpu" />
-
+    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden w-full h-full">
       <canvas ref={canvasRef} className="relative z-10 w-full h-full transform-gpu will-change-transform" />
     </div>
   );

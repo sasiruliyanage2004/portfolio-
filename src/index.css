@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* ------------------------------------------------------------------
    DESIGN TOKENS — CULTURAL TECH WORLD-CLASS PALETTE
    Dark Mode: "Kandy Sapphire & Sigiriya Gold Cyber Matrix"
@@ -119,14 +121,7 @@ body.light-theme,
 /* ------------------------------------------------------------------
    LIGHT THEME ABSOLUTE DROP-SHADOW OBLITERATOR (FIXES ALL SMUDGES)
    ------------------------------------------------------------------ */
-.light-theme h1,
-.light-theme h2,
-.light-theme h3,
-.light-theme h4,
-.light-theme p,
-.light-theme span,
-.light-theme div,
-.light-theme [class*="drop-shadow"] {
+.light-theme [class*="drop-shadow-black"] {
   filter: none !important;
   text-shadow: none !important;
 }
@@ -426,9 +421,8 @@ body.light-theme,
   color: #64748b !important;
 }
 
-.light-theme .text-slate-100,
-.light-theme .text-slate-200,
-.light-theme .text-white {
+.light-theme .text-slate-100:not(button *):not(a *),
+.light-theme .text-slate-200:not(button *):not(a *) {
   color: #0f172a !important;
 }
 

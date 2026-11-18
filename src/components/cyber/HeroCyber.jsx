@@ -94,6 +94,7 @@ function TiltCard({ children, className = "" }) {
   const ry = useSpring(x, { stiffness: 220, damping: 22 });
 
   const handleMove = (e) => {
+    if (typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches) return;
     if (!ref.current) return;
     const rect = ref.current.getBoundingClientRect();
     const px = (e.clientX - rect.left) / rect.width;
@@ -285,10 +286,11 @@ export default function HeroCyber({ onOpenResume }) {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="hero-visual lg:col-span-5 group relative flex flex-col items-center justify-center [perspective:1000px] py-4 px-2 sm:px-4"
           >
-            {/* 3 Orbiting Planetary Rings */}
-            <div className="hero-orbit hero-orbit-a" aria-hidden="true"><span /></div>
-            <div className="hero-orbit hero-orbit-b" aria-hidden="true"><span /></div>
-            <div className="hero-orbit hero-orbit-c" aria-hidden="true"><span /></div>
+            {/* Centered Futuristic Ambient Backdrop */}
+            <div 
+              aria-hidden="true" 
+              className="absolute w-[360px] sm:w-[480px] lg:w-[540px] h-[360px] sm:h-[480px] lg:h-[540px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle_at_50%_50%,rgba(6,182,212,0.22),rgba(16,185,129,0.12),transparent_70%)] dark:bg-[radial-gradient(circle_at_50%_50%,rgba(6,182,212,0.32),rgba(16,185,129,0.18),transparent_70%)] blur-2xl opacity-90 pointer-events-none" 
+            />
 
             {/* 5 Floating Tech Satellite Chips */}
             <motion.div className="hero-tech-chip hero-chip-code" animate={{ y: [0, -12, 0], rotate: [0, 2, 0] }} transition={{ duration: 5.2, repeat: Infinity, ease: "easeInOut" }}>
@@ -313,15 +315,6 @@ export default function HeroCyber({ onOpenResume }) {
               className="absolute w-[440px] sm:w-[560px] lg:w-[620px] h-[440px] sm:h-[560px] lg:h-[620px] -top-8 rounded-full bg-[radial-gradient(circle_at_50%_45%,rgba(6,182,212,0.28),rgba(16,185,129,0.16),rgba(99,102,241,0.1),transparent_70%)] dark:bg-[radial-gradient(circle_at_50%_45%,rgba(6,182,212,0.38),rgba(16,185,129,0.22),rgba(99,102,241,0.14),transparent_70%)] blur-3xl opacity-80 dark:opacity-70 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" 
             />
 
-            {/* Subtle Futuristic Orbital Tech Halos */}
-            <div 
-              aria-hidden="true"
-              className="absolute w-[340px] sm:w-[420px] lg:w-[460px] h-[340px] sm:h-[420px] lg:h-[460px] -top-4 rounded-full border border-cyan-500/20 dark:border-cyan-400/25 [stroke-dasharray:6_6] pointer-events-none animate-[spin_60s_linear_infinite]"
-            />
-            <div 
-              aria-hidden="true"
-              className="absolute w-[260px] sm:w-[330px] lg:w-[370px] h-[260px] sm:h-[330px] lg:h-[370px] top-4 rounded-full border border-emerald-500/20 dark:border-emerald-400/20 pointer-events-none"
-            />
             <motion.div className="hero-image-aura" animate={{ scale: [0.96, 1.04, 0.96], opacity: [0.55, 0.9, 0.55] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }} />
 
             {/* 3D Pop-Out Tilt Wrapper — No Card Box/Frame */}

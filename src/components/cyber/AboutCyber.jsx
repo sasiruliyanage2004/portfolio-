@@ -54,7 +54,7 @@ export default function AboutCyber() {
       {/* Subtle Ambient Radial Lighting */}
       <div
         aria-hidden="true"
-        className="absolute top-1/2 left-0 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-[radial-gradient(circle,rgba(6,182,212,0.12),transparent_70%)] blur-3xl pointer-events-none"
+        className="hidden sm:block absolute top-1/2 left-0 -translate-y-1/2 w-[400px] h-[400px] rounded-full bg-[radial-gradient(circle,rgba(6,182,212,0.08),transparent_70%)] blur-3xl pointer-events-none"
       />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10 relative z-10">
@@ -132,12 +132,12 @@ export default function AboutCyber() {
             </div>
 
             {/* Cultural Tech Accent Card */}
-            <div className="relative overflow-hidden rounded-3xl border border-cyan-500/25 bg-gradient-to-br from-cyan-950/20 via-slate-900/40 to-slate-950/80 p-6 sm:p-7 backdrop-blur-xl">
-              <div className="flex items-center gap-2.5 font-mono text-xs font-bold text-cyan-400 mb-2">
-                <Sparkles className="h-4 w-4 text-cyan-400" />
+            <div className="relative overflow-hidden rounded-3xl border border-cyan-500/30 dark:border-cyan-500/25 bg-white/90 dark:bg-gradient-to-br dark:from-cyan-950/20 dark:via-slate-900/40 dark:to-slate-950/80 p-6 sm:p-7 backdrop-blur-xl shadow-lg">
+              <div className="flex items-center gap-2.5 font-mono text-xs font-bold text-cyan-600 dark:text-cyan-400 mb-2">
+                <Sparkles className="h-4 w-4 text-cyan-600 dark:text-cyan-400" />
                 <span>Cultural Tech Synthesis</span>
               </div>
-              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
                 Drawing inspiration from the architectural geometry of Sigiriya and Sri Lankan Dumbara craftsmanship,
                 I infuse modern digital spaces with subtle organic balance, rhythm, and timeless identity.
               </p>
@@ -154,7 +154,7 @@ export default function AboutCyber() {
                   initial={{ opacity: 0, y: 24 }}
                   animate={inView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.6, delay: 0.15 * idx + 0.3 }}
-                  className="group relative flex flex-col justify-between rounded-3xl border border-white/20 dark:border-white/10 bg-white/80 dark:bg-[#0c1424]/75 p-6 sm:p-7 backdrop-blur-xl shadow-lg hover:shadow-cyan-500/10 transition-all duration-300 hover:-translate-y-1"
+                  className="group relative flex flex-col justify-between rounded-3xl border border-slate-200/90 dark:border-white/10 bg-white/95 dark:bg-[#0c1424]/75 p-6 sm:p-7 backdrop-blur-xl shadow-lg hover:shadow-cyan-500/10 transition-all duration-300 hover:-translate-y-1"
                 >
                   {/* Top Hover Gradient Layer */}
                   <div
@@ -163,7 +163,7 @@ export default function AboutCyber() {
 
                   <div className="relative z-10 space-y-3">
                     <div className="flex items-center justify-between">
-                      <div className={`p-2.5 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 ${pillar.accent}`}>
+                      <div className={`p-2.5 rounded-2xl bg-cyan-50 dark:bg-cyan-500/10 border border-cyan-200 dark:border-cyan-500/20 ${pillar.accent}`}>
                         <Icon className="h-5 w-5" />
                       </div>
                       <span className="font-mono text-[10px] font-bold text-slate-500 dark:text-slate-400">
@@ -175,7 +175,7 @@ export default function AboutCyber() {
                       {pillar.title}
                     </h3>
 
-                    <p className="font-body text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                    <p className="font-body text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
                       {pillar.description}
                     </p>
                   </div>

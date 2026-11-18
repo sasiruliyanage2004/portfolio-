@@ -1,5 +1,3 @@
-import React from "react";
-
 /**
  * NoiseOverlay Component
  * Renders a subtle, high-performance SVG film grain / static noise overlay

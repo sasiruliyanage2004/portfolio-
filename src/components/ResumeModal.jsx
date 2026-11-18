@@ -8,7 +8,6 @@ import {
   Phone,
   MapPin,
   Globe,
-  ExternalLink,
 } from "lucide-react";
 
 const GithubIcon = (props) => (
@@ -54,8 +53,6 @@ export default function ResumeModal({ isOpen, onClose }) {
   const handlePrint = () => {
     window.print();
   };
-
-  const isLight = document.documentElement.classList.contains("light-theme");
 
   return (
     <AnimatePresence>

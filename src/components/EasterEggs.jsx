@@ -28,20 +28,6 @@ export default function EasterEggs() {
     };
   }, []);
 
-  // ── Konami Code listener ──────────────────────────────────────────────────
-  useEffect(() => {
-    const handleKey = (e) => {
-      const key = e.key;
-      seqRef.current = [...seqRef.current, key].slice(-KONAMI.length);
-      if (seqRef.current.join(",") === KONAMI.join(",")) {
-        triggerKonami();
-        seqRef.current = [];
-      }
-    };
-    window.addEventListener("keydown", handleKey);
-    return () => window.removeEventListener("keydown", handleKey);
-  }, []);
-
   const triggerKonami = () => {
     setShowSecret(true);
     // Confetti burst — brand colors
@@ -72,6 +58,20 @@ export default function EasterEggs() {
     });
     setTimeout(() => setShowSecret(false), 5000);
   };
+
+  // ── Konami Code listener ──────────────────────────────────────────────────
+  useEffect(() => {
+    const handleKey = (e) => {
+      const key = e.key;
+      seqRef.current = [...seqRef.current, key].slice(-KONAMI.length);
+      if (seqRef.current.join(",") === KONAMI.join(",")) {
+        triggerKonami();
+        seqRef.current = [];
+      }
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, []);
 
   return (
     <>

@@ -712,12 +712,8 @@ export default function ProjectsCyber() {
     return PROJECTS.filter((p) => p.category === cat);
   }, [cat]);
 
-  // When changing category, auto-focus first project in that category if active is hidden
-  useEffect(() => {
-    if (list.length > 0 && !list.find((p) => p.id === activeId)) {
-      setActiveId(list[0].id);
-    }
-  }, [cat, list, activeId]);
+  // Derive the active project smoothly without triggering cascading render side-effects
+  const effectiveActiveId = list.some((p) => p.id === activeId) ? activeId : (list[0]?.id || "");
 
   return (
     <section id="projects" ref={sectionRef} className="relative overflow-hidden bg-transparent px-4 sm:px-6 py-20 sm:py-28 lg:px-10 scroll-mt-20">
@@ -783,7 +779,7 @@ export default function ProjectsCyber() {
               <ExpandableProjectCard
                 key={project.id}
                 project={project}
-                isExpanded={activeId === project.id}
+                isExpanded={effectiveActiveId === project.id}
                 onSelect={(id) => setActiveId(id)}
                 onInspect={(p) => setSelectedProject(p)}
               />

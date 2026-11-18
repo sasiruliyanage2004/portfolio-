@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Sparkles, Radio, Activity, Database, ShieldCheck, Layers, Cpu, Code2, ArrowUpRight } from "lucide-react";
+import { Sparkles } from "lucide-react";
 
 const MARQUEE_CARDS = [
   {

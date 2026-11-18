@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
 import { motion } from "framer-motion";
 
 const TECH_SLUGS = [
@@ -38,8 +38,8 @@ export default function InteractiveIconCloud({ size = 380 }) {
   const isVisibleRef = useRef(false);
 
   // Generate 3D Fibonacci sphere distribution points
-  const points = useRef(
-    TECH_SLUGS.map((tech, idx) => {
+  const points = useMemo(() => {
+    return TECH_SLUGS.map((tech, idx) => {
       const phi = Math.acos(-1 + (2 * idx) / TECH_SLUGS.length);
       const theta = Math.sqrt(TECH_SLUGS.length * Math.PI) * phi;
       return {
@@ -49,8 +49,8 @@ export default function InteractiveIconCloud({ size = 380 }) {
         z: Math.cos(phi),
         imgUrl: `https://cdn.simpleicons.org/${tech.slug}/${tech.color.replace("#", "")}`,
       };
-    })
-  ).current;
+    });
+  }, []);
 
   useEffect(() => {
     let animId;
@@ -116,7 +116,7 @@ export default function InteractiveIconCloud({ size = 380 }) {
     };
   }, [size, points]);
 
-  const handlePointerDown = (e) => {
+  const handlePointerDown = () => {
     isInteracting.current = true;
   };
 

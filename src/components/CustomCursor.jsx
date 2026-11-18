@@ -1,18 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
 const CustomCursor = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  const [isTouch, setIsTouch] = useState(false);
+  const [isTouch] = useState(() => {
+    if (typeof window !== "undefined") {
+      return window.matchMedia("(pointer: coarse)").matches || "ontouchstart" in window;
+    }
+    return false;
+  });
 
   useEffect(() => {
-    // Check if device is touch-primary
-    if (window.matchMedia("(pointer: coarse)").matches || "ontouchstart" in window) {
-      setIsTouch(true);
-      return;
-    }
+    if (isTouch) return;
 
     const updateMousePosition = (e) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
@@ -40,7 +41,7 @@ const CustomCursor = () => {
       document.documentElement.removeEventListener('mouseenter', handleMouseEnter);
       document.documentElement.removeEventListener('mouseleave', handleMouseLeave);
     };
-  }, []);
+  }, [isTouch]);
 
   const variants = {
     default: {

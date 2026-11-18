@@ -132,7 +132,7 @@ export default function AboutCyber() {
             </div>
 
             {/* Cultural Tech Accent Card */}
-            <div className="relative overflow-hidden rounded-3xl border border-cyan-500/30 dark:border-cyan-500/25 bg-white/90 dark:bg-gradient-to-br dark:from-cyan-950/20 dark:via-slate-900/40 dark:to-slate-950/80 p-6 sm:p-7 backdrop-blur-xl shadow-lg">
+            <div className="glass-panel relative overflow-hidden rounded-3xl border border-cyan-500/30 dark:border-cyan-500/20 p-6 sm:p-7 shadow-lg">
               <div className="flex items-center gap-2.5 font-mono text-xs font-bold text-cyan-600 dark:text-cyan-400 mb-2">
                 <Sparkles className="h-4 w-4 text-cyan-600 dark:text-cyan-400" />
                 <span>Cultural Tech Synthesis</span>
@@ -154,7 +154,7 @@ export default function AboutCyber() {
                   initial={{ opacity: 0, y: 24 }}
                   animate={inView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.6, delay: 0.15 * idx + 0.3 }}
-                  className="group relative flex flex-col justify-between rounded-3xl border border-slate-200/90 dark:border-white/10 bg-white/95 dark:bg-[#0c1424]/75 p-6 sm:p-7 backdrop-blur-xl shadow-lg hover:shadow-cyan-500/10 transition-all duration-300 hover:-translate-y-1"
+                  className="glass-panel group relative flex flex-col justify-between rounded-3xl border border-slate-200/90 dark:border-white/10 p-6 sm:p-7 shadow-lg hover:shadow-cyan-500/10 transition-all duration-300 hover:-translate-y-1"
                 >
                   {/* Top Hover Gradient Layer */}
                   <div

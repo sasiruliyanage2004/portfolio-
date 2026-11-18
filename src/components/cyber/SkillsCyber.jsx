@@ -534,14 +534,11 @@ export default function SkillsCyber() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mb-10 sm:mb-12 relative overflow-hidden rounded-3xl border border-emerald-500/40 bg-white/95 dark:bg-gradient-to-r dark:from-emerald-950/40 dark:via-slate-900/80 dark:to-cyan-950/40 p-6 sm:p-8 backdrop-blur-xl shadow-xl dark:shadow-2xl"
+          className="project-card-obsidian noise-overlay mb-10 sm:mb-12 relative overflow-hidden rounded-3xl border border-emerald-500/40 p-6 sm:p-8 shadow-xl dark:shadow-2xl group"
         >
-          <div className="hidden sm:block absolute top-0 right-0 -mr-16 -mt-16 w-48 h-48 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none" />
-          <div className="hidden sm:block absolute bottom-0 left-0 -ml-16 -mb-16 w-48 h-48 bg-cyan-500/10 rounded-full blur-2xl pointer-events-none" />
-
           <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
             <div className="flex items-start gap-4 sm:gap-5">
-              <div className="h-16 w-16 sm:h-20 sm:w-20 rounded-2xl bg-emerald-950 border border-emerald-500/40 p-3 flex items-center justify-center shrink-0 shadow-[0_0_25px_rgba(0,237,100,0.25)]">
+              <div className="h-16 w-16 sm:h-20 sm:w-20 rounded-2xl bg-emerald-950/80 dark:bg-[#001E2B] border border-emerald-500/40 p-3 flex items-center justify-center shrink-0 shadow-[0_0_25px_rgba(0,237,100,0.25)]">
                 <TechIcons.mongodbCert className="h-12 w-12 sm:h-14 sm:w-14" />
               </div>
               <div className="space-y-1">
@@ -560,7 +557,7 @@ export default function SkillsCyber() {
                 </p>
                 <div className="flex flex-wrap items-center gap-2 pt-1 font-mono text-[10px] text-slate-500 dark:text-slate-400">
                   <span className="text-slate-700 dark:text-slate-300 font-medium">Credential ID:</span>
-                  <code className="px-2 py-0.5 rounded bg-slate-100 dark:bg-black/60 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300 font-bold">
+                  <code className="px-2 py-0.5 rounded bg-slate-100 dark:bg-white/5 border border-emerald-500/30 text-emerald-700 dark:text-emerald-400 font-bold">
                     MDBwsxpdpul98
                   </code>
                   <button
